@@ -8,6 +8,12 @@
 import type { Metadata } from 'next';
 import RequireAge from '@/components/RequireAge';
 import styles from '@/styles/AreaTop.module.scss';
+import Footer from '@/components/common/Footer';
+import GroupLogo from '@/assets/images/logo/group.webp';
+import Image from 'next/image';
+import BlockTelop from '@/components/AreaTop/BlockTelop';
+import BlockShopList from '@/components/AreaTop/BlockShopList';
+import BlockPickUp from '@/components/AreaTop/BlockPickUp';
 export const generateMetadata = (): Metadata => {
   return {
     title: '神戸・三宮の風俗｜ファッションヘルス:神戸ホットポイントグループ',
@@ -18,10 +24,25 @@ export const generateMetadata = (): Metadata => {
 export default function AreaTop() {
   return (
     <RequireAge scope="global" authPath="/auth">
-      <main className={styles.top}>
-        <h1 className={styles['top__title']}>エリアTOP</h1>
-        {/* 後で News / Topics / Ranking を追加 */}
+      <main className={styles.areaTop}>
+        <h1>神戸・三宮の風俗｜ファッションヘルス:神戸ホットポイントグループ</h1>
+        <section className={styles.containerHeadTitle}>
+          <Image src={GroupLogo} alt="hot point group" />
+          <p>神戸ホットポイントグループ</p>
+        </section>
+        <section className={styles.containerPickUp}>
+          <BlockPickUp />
+        </section>
+        <section className={styles.containerTelop}>
+          <h2>news</h2>
+          <BlockTelop />
+        </section>
+        <section className={styles.containerShopList}>
+          <h2>hotpoint group kobe area</h2>
+          <BlockShopList />
+        </section>
       </main>
+      <Footer className={styles.areaFooter} />
     </RequireAge>
   );
 }

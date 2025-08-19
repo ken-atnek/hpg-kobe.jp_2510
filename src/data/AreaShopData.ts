@@ -23,7 +23,7 @@ export type Shop = {
 
 export const Shops = [
   {
-    storeId: 'kb-hot',
+    storeId: 'kbHot',
     name: '神戸ホットポイント',
     logo: LogoHot,
     post: '〒650-0012',
@@ -33,7 +33,7 @@ export const Shops = [
     shopColor: '#3da3fc',
   },
   {
-    storeId: 'kb-villa',
+    storeId: 'kbVilla',
     name: 'ホットポイントヴィラ',
     logo: LogoVilla,
     post: '〒650-0012',
@@ -43,7 +43,7 @@ export const Shops = [
     shopColor: '#db3dfc',
   },
   {
-    storeId: 'kb-style',
+    storeId: 'kbStyle',
     name: 'ホットポイント スタイル',
     logo: LogoStyle,
     post: '〒650-0012',

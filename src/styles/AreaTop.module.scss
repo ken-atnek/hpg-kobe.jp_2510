@@ -7,3 +7,293 @@
 /* stylelint-disable keyframes-name-pattern */
 /* stylelint-disable custom-property-pattern */
 // このファイル全体のルールを無効にする
+
+/* =================================
+ * 共通
+ * ------------------------------ */
+.areaTop {
+    display: flex;
+    flex-direction: column;
+    color: $base-white;
+    h1 {
+        background-color: #2e2e2e;
+        text-align: center;
+        font-size: FZ(12);
+        letter-spacing: 0.08em;
+        padding-block: 0.5em;
+    }
+    .containerHeadTitle {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-top: 0.8em;
+        padding-bottom: 1em;
+        background-color: #000;
+        gap: 0.8em 0;
+        img {
+            width: 90%;
+            max-width: 76rem;
+        }
+        p {
+            font-size: FZ(24);
+            letter-spacing: 0.12em;
+            font-weight: 500;
+        }
+    }
+    .containerPickUp {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: #2e2e2e;
+        padding: 2em 2vw 2em;
+        ul {
+            position: relative;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            max-width: $articleMaxWidth;
+            width: 100%;
+            gap: 0 1em;
+            font-size: inherit;
+            --boxAspect: 416/726;
+            li {
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                color: #010101;
+                font-size: inherit;
+                aspect-ratio: var(--boxAspect);
+                .fadeStage {
+                    position: relative;
+                    font-size: inherit;
+                }
+                .fadeItem {
+                    position: absolute;
+                    inset: 0;
+                    opacity: 0;
+                    pointer-events: none;
+                    transition: opacity 1.4s ease;
+                    z-index: 0;
+                }
+                .isActive {
+                    opacity: 1;
+                    pointer-events: auto;
+                    z-index: 1;
+                }
+                .wrapLink {
+                    background-color: $base-white;
+                    display: flex;
+                    flex-direction: column;
+                    border-radius: 1.5rem;
+                    font-size: inherit;
+                    aspect-ratio: var(--boxAspect);
+                    .shopName {
+                        font-size: FZ(18);
+                        text-align: center;
+                        padding-block: 0.5em;
+                    }
+                    .wrapImage {
+                        font-size: inherit;
+                        img {
+                            width: 100%;
+                            aspect-ratio: 51/75;
+                            object-fit: cover;
+                        }
+                    }
+                    .wrapProfile {
+                        font-size: inherit;
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        padding-block: 0.5em;
+                        gap: 0.3em 0;
+                        .castName {
+                            font-size: FZ(21);
+                            font-weight: 500;
+                            letter-spacing: 0.08em;
+                            text-align: center;
+                        }
+                        .castSize {
+                            font-size: inherit;
+                            display: flex;
+                            align-items: center;
+                            gap: 0 0.3em;
+                            span {
+                                @include FuturaCondensedMedium;
+                                font-size: FZ(20);
+                                &.age {
+                                    &::before {
+                                        content: "AGE.";
+                                    }
+                                }
+                                &.tall {
+                                    &::before {
+                                        content: "T.";
+                                    }
+                                }
+                                &.bust {
+                                    &::before {
+                                        content: "B.";
+                                    }
+                                    i {
+                                        font-size: inherit;
+                                        text-transform: uppercase;
+                                        margin-left: 0.1em;
+                                        &::before,
+                                        &::after {
+                                            display: inline-block;
+                                            translate: 0 -0.08em;
+                                        }
+                                        &::before {
+                                            content: "[";
+                                            margin-right: 0.1em;
+                                        }
+                                        &::after {
+                                            content: "]";
+                                            margin-left: 0.1em;
+                                        }
+                                    }
+                                }
+                                &.west {
+                                    &::before {
+                                        content: "W.";
+                                    }
+                                }
+                                &.hip {
+                                    &::before {
+                                        content: "H.";
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .containerTelop {
+        position: relative;
+        padding: 0.5em 2vw;
+        background-image: linear-gradient(
+            rgb(90, 90, 90),
+            rgb(63, 62, 62) 10%,
+            rgb(46, 46, 46)
+        );
+        display: flex;
+        align-items: center;
+        gap: 0 0.5em;
+        h2 {
+            @include BebasNeue;
+            font-size: FZ(24);
+        }
+        .blockTelop {
+            background-color: #000;
+            font-size: 1em;
+            padding: 0.5em 1em;
+            display: flex;
+            flex-grow: 1;
+            align-items: center;
+            color: $base-white;
+            border-radius: 0.5em;
+            overflow: hidden;
+            p {
+                font-size: FZ(14);
+                letter-spacing: 0.04em;
+                padding-left: 90%;
+                white-space: nowrap;
+                animation-name: marquee;
+                animation-timing-function: linear;
+                animation-duration: 20s;
+                animation-iteration-count: infinite;
+                @include sp {
+                    animation-duration: 10s;
+                    // display: -webkit-box;
+                    // -webkit-box-orient: vertical;
+                    // -webkit-line-clamp: 1;
+                    // /* 表示したい行数 */
+                    // overflow: hidden;
+                    // text-overflow: ellipsis;
+                }
+            }
+            @keyframes marquee {
+                from {
+                    transform: translate(0%);
+                }
+                99%,
+                to {
+                    transform: translate(-100%);
+                }
+            }
+        }
+    }
+    .containerShopList {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-size: inherit;
+        background: url(../assets/images/weave_bg.webp) no-repeat center
+            center / cover;
+        background-color: rgb(54, 54, 54);
+        background-blend-mode: hard-light;
+        padding: 2em 2vw;
+        h2 {
+            @include BebasNeue;
+            font-size: FZ(68);
+            text-transform: uppercase;
+        }
+        .blockShopList {
+            position: relative;
+            max-width: $articleMaxWidth;
+            width: 100%;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            font-size: inherit;
+            gap: 0 1.4em;
+            margin-top: 2em;
+            grid-template-rows: 1fr auto auto;
+            li {
+                position: relative;
+                width: 100%;
+                display: grid;
+                grid-template-rows: subgrid;
+                font-size: 1em;
+                grid-row: span 3;
+                .itemImage {
+                    width: 100%;
+                    background-color: $base-white;
+                    display: flex;
+                    justify-content: center;
+                    height: 100%;
+                    padding-block: 1em;
+                    font-size: inherit;
+                    img {
+                        object-fit: contain;
+                        min-width: 60%;
+                    }
+                    &.kbStyle {
+                        img {
+                            min-width: 40%;
+                        }
+                    }
+                }
+                p {
+                    font-size: FZ(18);
+                    text-align: center;
+                    letter-spacing: 0.08em;
+                    font-weight: 500;
+                    margin-top: 0.5em;
+                    display: inline-block;
+                }
+                .itemTel {
+                    font-size: FZ(20);
+                    text-align: center;
+                    font-weight: 500;
+                    letter-spacing: 0.04em;
+                    margin-top: 0.2em;
+                }
+            }
+        }
+    }
+}
+.areaFooter {
+    --base-color: #000;
+}

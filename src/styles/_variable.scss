@@ -24,7 +24,7 @@ $base-vw: calc($tilt * 100);
     }
 }
 
-$articleMaxWidth: 120rem;
+$articleMaxWidth: 128rem;
 
 /* =================================
  * フォント設定
@@ -73,6 +73,13 @@ $articleMaxWidth: 120rem;
 }
 @mixin FuturaCyrillicDemi {
     font-family: "FuturaCyrillicDemi";
+    font-weight: normal;
+    font-style: normal;
+}
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
+
+@mixin BebasNeue {
+    font-family: "Bebas Neue", sans-serif;
     font-weight: normal;
     font-style: normal;
 }
@@ -141,4 +148,11 @@ $sp: 480px;
             @content;
         }
     }
+}
+
+/* =================================
+ * アニメーション他
+ * ------------------------------ */
+@mixin move03 {
+    transition: 0.3s ease-out;
 }
