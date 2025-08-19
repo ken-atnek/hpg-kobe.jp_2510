@@ -1,0 +1,1221 @@
+/* =================================
+ * 	神戸ホットポイントグループ 認証ページ
+ * ------------------------------ */
+@use "variable" as *;
+@use "svg" as *;
+/* stylelint-disable no-descending-specificity */
+/* stylelint-disable keyframes-name-pattern */
+/* stylelint-disable custom-property-pattern */
+// このファイル全体のルールを無効にする
+
+.itemH2 {
+    position: absolute;
+    color: $BaseRed;
+    @include DIN_Condensed_Light;
+    font-size: FZ(20);
+    text-transform: uppercase;
+    writing-mode: vertical-rl; //縦書き
+    text-orientation: upright; //縦書き英数回転
+    font-feature-settings: initial; //左詰め解除
+    letter-spacing: 1em;
+    &::after {
+        content: "";
+        position: absolute;
+        bottom: -0.4em;
+        width: calc(((100vw - $articleMaxWidth) / 2) + 5.2em);
+        height: 4px;
+        background-color: $BaseRed;
+        @media screen and (max-width: 1206px) {
+            width: calc(4.4em + 2vw);
+        }
+        clip-path: inset(0 0 0 100%);
+        transition: 0.8s ease;
+    }
+    &.is-active {
+        &::after {
+            clip-path: inset(0);
+            transition: 0.8s ease;
+        }
+    }
+}
+.linkText {
+    position: relative;
+    display: flex;
+    align-self: flex-end;
+    font-size: FZ(16);
+    letter-spacing: 0.3em;
+    padding-block: 0.5em;
+    position: relative;
+    &::before,
+    &::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        translate: 0 -50%;
+        right: 0;
+    }
+    @include sp {
+        border: 1px solid var(--baseColor);
+        width: 100%;
+        padding-top: 1em;
+        padding-bottom: 1.2em;
+        &::before,
+        &::after {
+            display: none;
+        }
+        span {
+            margin-inline: auto;
+            padding-right: unset !important;
+            letter-spacing: 0.08em !important;
+            &::before,
+            &::after {
+                display: none;
+            }
+        }
+    }
+    &::before {
+        width: 0.6em;
+        aspect-ratio: 1;
+        background-color: var(--baseColor);
+        clip-path: polygon(0 0, 100% 050%, 0 100%);
+    }
+    &::after {
+        content: "";
+        height: 1px;
+        width: 4em;
+        background-color: var(--baseColor);
+    }
+    span {
+        position: relative;
+        padding-right: 6em;
+        &::before,
+        &::after {
+            content: "";
+            position: absolute;
+            right: 0;
+            width: 100%;
+            bottom: -0.8em;
+            height: 1px;
+            background-color: var(--baseColor);
+            opacity: 0.6;
+            transition: transform 0.5s ease-out;
+        }
+        &::before {
+            transform: scale(1, 1);
+            transform-origin: left top;
+        }
+        &::after {
+            transform: scale(0, 1);
+            transform-origin: right top;
+            height: 2px;
+        }
+    }
+    @include hover {
+        span {
+            &::before {
+                transform: scale(0, 1);
+                transform-origin: right top;
+                transition: transform 0.3s ease-out;
+            }
+            &::after {
+                transform: scale(1, 1);
+                transform-origin: left top;
+                transition: transform 0.3s ease-out 0.3s;
+            }
+        }
+    }
+}
+/* =================================
+ * HERO
+ * ------------------------------ */
+.containerHero {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-inline: 2vw;
+    clip-path: inset(0);
+    &::before,
+    &::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: url(../assets/images/top/container-hero_bg.webp) no-repeat
+            center center/cover;
+        z-index: -1;
+        @include sp {
+            background-position: center top;
+            background: url(../assets/images/top/container-hero_bg_sp.webp)
+                no-repeat center center/cover;
+        }
+        @include pc {
+            animation-name: mainMove;
+            animation-duration: 30s;
+            animation-timing-function: ease;
+            animation-direction: alternate;
+            animation-iteration-count: infinite;
+        }
+    }
+    &::after {
+        mask-image: url(../assets/images/logo_mark-text.svg);
+        mask-repeat: no-repeat;
+        mask-position: center clamp(10rem, 65%, 100%);
+        mask-size: clamp(16rem, 34%, 32rem);
+        filter: brightness(220%) contrast(120%);
+        @include sp {
+            mask-position: center 98%;
+            mask-size: 18%;
+        }
+    }
+    @keyframes mainMove {
+        0% {
+            scale: 1;
+        }
+        100% {
+            scale: 1.1;
+        }
+    }
+    article {
+        max-width: $articleMaxWidth;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-top: 6em;
+        padding-bottom: 30em;
+        @include sp {
+            padding-top: 4vw;
+            padding-bottom: 26vw;
+            // padding-left: 8vw;
+        }
+        h1 {
+            width: 20vw;
+            position: relative;
+            max-width: 17rem;
+            font-size: 1em;
+            @include sp {
+                width: 20vw;
+            }
+        }
+        .boxCatch {
+            position: absolute;
+            left: 2em;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1em;
+            color: $base-white;
+            @include DIN_Condensed_Light;
+            text-transform: uppercase;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: fit-content;
+            @include sp {
+                left: 6vw;
+                top: unset;
+                bottom: 4vw;
+                transform: unset;
+            }
+            .head {
+                font-size: FZ(24);
+                letter-spacing: 0.35em;
+                margin-bottom: 1em;
+                opacity: 0;
+
+                @include sp {
+                    margin-bottom: unset;
+                    font-size: 2.6vw;
+                }
+                &.is-active {
+                    opacity: 1;
+                    transition: 1.2s ease-out 0.8s;
+                }
+            }
+            .contents {
+                position: relative;
+                font-size: FZ(33);
+                letter-spacing: 0.35em;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                --object-second: 0.1;
+                --object-number: 0.01;
+                --random-number: 0.1;
+                @include sp {
+                    font-size: 3vw;
+                }
+                &::before,
+                &::after {
+                    content: "";
+                    position: absolute;
+                    top: -0.3em;
+                    width: 0.2em;
+                    @include svg-titleComma("ffffff");
+                    opacity: 0;
+                }
+                &::before {
+                    left: calc(100% + 0.4em);
+                }
+                &::after {
+                    right: calc(100% + 0.7em);
+                    transform: scale(-1, 1);
+                }
+                i {
+                    span {
+                        $BaseRotate: 15deg;
+                        $BaseX: 10px;
+                        $BaseY: 8px;
+                        display: inline-block;
+                        @for $i from 1 through 9 {
+                            &:nth-of-type(#{$i}) {
+                                opacity: 0;
+                                @if $i % 4==0 {
+                                    transform: translate(
+                                            calc(
+                                                (var(--random-number) * $BaseX)
+                                            ),
+                                            calc(
+                                                (var(--random-number) * $BaseY)
+                                            )
+                                        )
+                                        rotate(
+                                            calc(
+                                                (
+                                                    var(--random-number) *
+                                                        $BaseRotate
+                                                )
+                                            )
+                                        )
+                                        scale(
+                                            calc((var(--random-number) * 0.02))
+                                        );
+                                } @else if $i % 3==0 {
+                                    transform: translate(
+                                            calc(
+                                                (
+                                                    var(--random-number) *
+                                                        calc($BaseX * -1)
+                                                )
+                                            ),
+                                            calc(
+                                                (
+                                                    var(--random-number) *
+                                                        calc($BaseY * -1)
+                                                )
+                                            )
+                                        )
+                                        rotate(
+                                            calc(
+                                                (
+                                                    var(--random-number) *
+                                                        $BaseRotate
+                                                )
+                                            )
+                                        )
+                                        scale(
+                                            calc((var(--random-number) * 0.04))
+                                        );
+                                } @else if $i % 2==0 {
+                                    transform: translate(
+                                            calc(
+                                                (var(--random-number) * $BaseX)
+                                            ),
+                                            calc(
+                                                (
+                                                    var(--random-number) *
+                                                        calc($BaseY * -1)
+                                                )
+                                            )
+                                        )
+                                        rotate(
+                                            calc(
+                                                (
+                                                    var(--random-number) *
+                                                        $BaseRotate
+                                                )
+                                            )
+                                        )
+                                        scale(
+                                            calc((var(--random-number) * 0.12))
+                                        );
+                                } @else {
+                                    transform: translate(
+                                            calc(
+                                                (
+                                                    var(--random-number) *
+                                                        calc($BaseX * -1)
+                                                )
+                                            ),
+                                            calc(
+                                                (var(--random-number) * $BaseY)
+                                            )
+                                        )
+                                        rotate(
+                                            calc(
+                                                (
+                                                    var(--random-number) *
+                                                        $BaseRotate
+                                                )
+                                            )
+                                        )
+                                        scale(
+                                            calc((var(--random-number) * 0.06))
+                                        );
+                                }
+                            }
+                        }
+                    }
+                }
+                &.is-active {
+                    &::before,
+                    &::after {
+                        opacity: 1;
+                        transition: 1.2s ease-out 1.6s;
+                    }
+                    i {
+                        span {
+                            transition: 1.2s ease-out;
+                            transform: translate(0) rotate(0) scale(1);
+                            opacity: 1;
+                            transition-delay: calc(
+                                var(--object-second) * var(--object-number) * 1s
+                            );
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+/* =================================
+ * ABOUT
+ * ------------------------------ */
+.containerAbout {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 12em;
+    z-index: +2;
+    @include sp {
+        padding-inline: 4vw;
+        padding-top: 14vw;
+        padding-bottom: 70vw;
+    }
+    article {
+        height: 100%;
+        max-width: $articleMaxWidth;
+        padding: 9em 0 22em 4em;
+        transform: translateY(5em);
+
+        container-type: inline-size;
+        --grayRadius: 10em;
+        @include sp {
+            padding-top: 14vw;
+            transform: unset;
+            padding-left: 8vw;
+            padding-right: 6vw;
+            padding-bottom: 20vw;
+            --grayRadius: 20vw;
+        }
+        .itemH2 {
+            left: 3.2em;
+            bottom: calc(100% - 3em);
+            &::after {
+                right: -0.6em;
+                @include sp {
+                    right: -2vw;
+                }
+            }
+            @include sp {
+                left: 2vw;
+                bottom: calc(100% - 6em);
+            }
+        }
+        &::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-color: $lightGray;
+            z-index: -1;
+            border-top-right-radius: var(--grayRadius);
+            border-bottom-left-radius: var(--grayRadius);
+        }
+        .boxText {
+            font-size: 1em;
+            display: flex;
+            flex-direction: column;
+            p {
+                font-size: FZ(18);
+                letter-spacing: 0.12em;
+                line-height: 2.4em;
+                @include sp {
+                    font-size: FZ(16);
+                    line-height: 1.8em;
+                }
+            }
+            .linkText {
+                align-self: flex-start;
+                margin-top: 3em;
+                --baseColor: #000;
+                @include sp {
+                    position: absolute;
+                    left: 50%;
+                    translate: -50%;
+                    top: calc(100% + 16vw);
+                }
+            }
+        }
+        .boxImage {
+            position: absolute;
+            right: 6em;
+            bottom: 2em;
+            font-size: 1em;
+            width: 49em;
+            aspect-ratio: 1;
+            @include sp {
+                right: -2vw;
+                bottom: unset;
+                top: 65%;
+                width: 55vw;
+                display: block;
+            }
+            &::before {
+                content: "";
+                position: absolute;
+                inset: 0;
+                background-color: #ff3c3c;
+                border-radius: calc(infinity * 1px);
+                z-index: -1;
+                @include sp {
+                    aspect-ratio: 1;
+                }
+            }
+            &::after {
+                content: "";
+                top: 6em;
+                left: 50%;
+                position: absolute;
+                transform: scale(-1, -1);
+                width: 60%;
+                aspect-ratio: 1.71;
+                background: url(../assets/images/cloud.webp) no-repeat center
+                    center/contain;
+                animation-name: moveCloud;
+                animation-duration: 40s;
+                animation-direction: alternate;
+                animation-iteration-count: infinite;
+                --moveX: 10em;
+                @include sp {
+                    --moveX: 8vw;
+                    top: 4vw;
+                }
+            }
+            @keyframes moveCloud {
+                0% {
+                    transform: translate(0, 0) scale(-1, -1);
+                }
+                100% {
+                    transform: translate(var(--moveX), 0) scale(-1, -1);
+                }
+            }
+            .itemCloud {
+                position: relative;
+                width: 100%;
+                height: 100%;
+                font-size: 1em;
+                &::before,
+                &::after {
+                    content: "";
+                    position: absolute;
+                    width: 26%;
+                    @include svg-cloudBgObject("C19B48");
+                    mix-blend-mode: screen;
+                    @include sp {
+                        width: 34%;
+                    }
+                }
+                &::before {
+                    left: 0;
+                    bottom: 6em;
+                    @include sp {
+                        bottom: 4vw;
+                    }
+                }
+                &::after {
+                    top: 10em;
+                    right: 2em;
+                    transform: scale(-1, -1);
+                    @include sp {
+                        top: 10vw;
+                        right: 2vw;
+                    }
+                }
+            }
+            .boxObject {
+                position: absolute;
+                left: 60%;
+                transform: translateX(-50%);
+                bottom: 4em;
+                width: 85%;
+                @include sp {
+                    bottom: 4vw;
+                    width: 90%;
+                }
+            }
+        }
+        &.is-active {
+            transform: translateY(0);
+            transition: 1.6s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+    }
+}
+/* =================================
+ * ARTISAN
+ * ------------------------------ */
+.containerArtisan {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 6em;
+    padding-inline: 2vw;
+    @include sp {
+        padding-inline: 4vw;
+    }
+    &::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        height: calc(100% + 6em);
+        background-color: $DarkRed;
+    }
+    article {
+        display: flex;
+        max-width: $articleMaxWidth;
+        color: #fff;
+        padding-top: 40em;
+        gap: 0 3em;
+        @include sp {
+            flex-direction: column;
+            padding-top: 80vw;
+        }
+        .itemH2 {
+            color: #fff;
+            right: 3.2em;
+            top: 2.4em;
+            @include sp {
+                right: 2vw;
+                top: unset;
+                bottom: calc(100% - 20vw);
+            }
+            &::after {
+                left: -0.6em;
+                background-color: #fff;
+                clip-path: inset(0 100% 0 0);
+                @include sp {
+                    left: -2vw;
+                }
+            }
+            &.is-active {
+                &::after {
+                    clip-path: inset(0);
+                    transition: 0.8s ease;
+                }
+            }
+        }
+        .boxPhoto {
+            position: relative;
+            font-size: 1em;
+            flex: 1;
+            @include sp {
+                flex: unset;
+                margin-right: 20vw;
+            }
+            ul {
+                position: absolute;
+                bottom: 0;
+                right: 0;
+                width: max-content;
+                display: flex;
+                flex-direction: row-reverse;
+                font-size: 1em;
+                gap: 0 1em;
+                li {
+                    position: relative;
+                    font-size: 1em;
+                    width: 24em;
+                    max-width: 39rem;
+                    @include sp {
+                        max-width: unset;
+                        width: 50vw;
+                    }
+                    .wrapTextEn {
+                        position: absolute;
+                        bottom: calc(100% - 0.5em);
+                        left: 5em;
+                        font-size: 1em;
+                        z-index: +1;
+                        @include TrajanPro-Regular;
+                        font-size: FZ(36);
+                        color: rgba(#fff, 0.35);
+                        letter-spacing: 0.6em;
+                        line-height: 1.8em;
+                        rotate: 90deg;
+                        transform-origin: left top;
+                        @include sp {
+                            font-size: FZ(21);
+                            line-height: 1.4em;
+                            bottom: calc(100% - 2vw);
+                        }
+                    }
+                    img {
+                        filter: saturate(0);
+                        clip-path: inset(0 100% 0 0);
+                        transition: 0.3s ease-out;
+                        translate: -10rem;
+                        opacity: 0;
+                    }
+                }
+                &.is-active {
+                    li {
+                        img {
+                            clip-path: inset(0);
+                            transition: 1.8s cubic-bezier(0.25, 1, 0.5, 1);
+                            translate: 0;
+                            opacity: 1;
+                        }
+                        &:nth-of-type(1) {
+                            img {
+                                transition-delay: 0.4s;
+                            }
+                        }
+                        &:nth-of-type(2) {
+                            img {
+                                transition-delay: 0.2s;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .boxText {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            font-size: 1em;
+            max-width: 53rem;
+            padding-bottom: 10em;
+            padding-right: 1em;
+            @include sp {
+                max-width: unset;
+                padding-bottom: 8vw;
+                padding-right: unset;
+                margin-top: 10vw;
+            }
+            p {
+                font-size: FZ(16);
+                text-align: justify;
+                line-height: 2em;
+                letter-spacing: 0.12em;
+            }
+            .linkText {
+                --baseColor: #fff;
+                margin-top: 3em;
+            }
+        }
+    }
+}
+/* =================================
+ * ITEM
+ * ------------------------------ */
+.containerItem {
+    padding: 5em 2vw 3em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 5em;
+    @include sp {
+        padding-inline: 0;
+        padding-top: 30vw;
+    }
+    article {
+        max-width: $articleMaxWidth;
+        background-color: #f7f7f7;
+        padding-top: 10em;
+        padding-bottom: 8em;
+        display: flex;
+        flex-direction: column;
+        transform: translateY(5em);
+
+        @include sp {
+            padding-bottom: 10vw;
+            padding-top: 14vw;
+        }
+        h2 {
+            left: 3.2em;
+            bottom: calc(100% - 8em);
+            &::after {
+                right: -0.6em;
+                @include sp {
+                    right: -2vw;
+                }
+            }
+            @include sp {
+                left: 6vw;
+                bottom: calc(100% - 8vw);
+            }
+        }
+        .boxTop {
+            position: relative;
+            width: 100%;
+            font-size: 1em;
+            padding-inline: 6em;
+            @include sp {
+                padding-inline: 1vw;
+            }
+            &::before {
+                content: "";
+                position: absolute;
+                left: 50%;
+                translate: -50%;
+                top: -1.4em;
+                width: 70%;
+                aspect-ratio: 1.7;
+                border-radius: 50%;
+                background-image: linear-gradient(
+                    to top,
+                    rgba(#ecf2f2, 1),
+                    rgba(#ecf2f2, 1) 30%,
+                    rgba(#9aa6a8, 1)
+                );
+                opacity: 0.7;
+                z-index: -1;
+            }
+            .itemBg {
+                position: absolute;
+                left: 50%;
+                translate: -50%;
+                bottom: -3em;
+                width: 100vw;
+                font-size: 1em;
+                height: 10em;
+                z-index: -1;
+                @include sp {
+                    height: 12vw;
+                    bottom: -4vw;
+                }
+                &::before,
+                &::after {
+                    content: "";
+                    position: absolute;
+                    top: 0;
+                    width: 50vw;
+                    height: 100%;
+                    background-size: 22em;
+                    background-image: url(../assets/images/top/container-item_line-bg.webp);
+                    background-repeat: repeat-x;
+                    @include sp {
+                        background-size: 24vw;
+                    }
+                }
+                &::before {
+                    right: 50%;
+                    background-position: right center;
+                }
+                &::after {
+                    left: 50%;
+                    background-position: left center;
+                }
+            }
+        }
+        .boxBottom {
+            display: flex;
+            justify-content: space-between;
+            font-size: 1em;
+            padding-left: 6em;
+            align-items: flex-end;
+            margin-top: 8em;
+            gap: 0 2em;
+            @include sp {
+                flex-direction: column;
+                justify-content: unset;
+                padding-left: unset;
+                gap: 8vw 0;
+                padding-inline: 4vw;
+                margin-top: 10vw;
+            }
+            .wrapText {
+                font-size: 1em;
+                p {
+                    font-size: FZ(16);
+                    letter-spacing: 0.12em;
+                    line-height: 2.2em;
+                    text-align: justify;
+                    max-width: 45em;
+                    @include sp {
+                        line-height: 2em;
+                        width: unset;
+                    }
+                }
+            }
+            .linkText {
+                --baseColor: #000;
+                min-width: 16em;
+                span {
+                    padding-right: 8em;
+                }
+            }
+        }
+        &.is-active {
+            transform: translateY(0);
+            transition: 1.6s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+    }
+}
+/* =================================
+ * NEWS
+ * ------------------------------ */
+.containerNews {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-inline: 2vw;
+    margin-bottom: 8em;
+    @include sp {
+        padding-inline: 4vw;
+        margin-bottom: 6vw;
+    }
+    article {
+        max-width: $articleMaxWidth;
+        padding: 5em 0;
+        gap: 0 3em;
+        display: flex;
+        flex-direction: column;
+        @include sp {
+            // flex-direction: unset;
+            gap: 8vw 0;
+            padding: 10vw 0 2vw;
+        }
+        h2 {
+            right: 3.2em;
+            top: 1em;
+            @include sp {
+                right: 2vw;
+                top: -12vw;
+            }
+            &::after {
+                left: -0.6em;
+                clip-path: inset(0 100% 0 0);
+                @include sp {
+                    left: -2vw;
+                }
+            }
+            &.is-active {
+                &::after {
+                    clip-path: inset(0);
+                    transition: 0.8s ease;
+                }
+            }
+        }
+        .boxHead {
+            position: relative;
+            display: flex;
+            justify-content: space-between;
+            font-size: inherit;
+
+            @include sp {
+                display: contents;
+            }
+            .listNews {
+                position: relative;
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1em;
+                font-size: 1em;
+                @include sp {
+                    grid-template-columns: unset;
+                    grid-auto-flow: row;
+                    padding-inline: 2vw;
+                }
+                li {
+                    position: relative;
+                    width: 100%;
+                    max-width: 40rem;
+                    font-size: 1em;
+                    display: flex;
+                    flex-direction: column;
+                    @include sp {
+                        max-width: unset;
+                        @include SunSerif;
+                        &:nth-of-type(n + 2) {
+                            display: none;
+                        }
+                    }
+                    a {
+                        position: absolute;
+                        inset: 0;
+                        z-index: +2;
+                    }
+                    time {
+                        @include SunSerif;
+                        font-size: FZ(12);
+                        letter-spacing: 0.04em;
+                        @include sp {
+                            padding-left: 38vw;
+                        }
+                    }
+                    .wrapContents {
+                        position: relative;
+                        font-size: 1em;
+                        clip-path: url(#maskNews01);
+                        @include sp {
+                            clip-path: unset;
+                            &::before,
+                            &::after {
+                                display: none;
+                            }
+                        }
+                        // &::before {
+                        //     content: "";
+                        //     position: absolute;
+                        //     inset: 0;
+                        //     background-image: linear-gradient(
+                        //         to top,
+                        //         rgba($BaseRed, 1),
+                        //         rgba($BaseRed, 1)
+                        //     );
+                        //     opacity: 0;
+                        //     transition: 0.3s ease-out;
+                        // }
+                        // &::after {
+                        //     content: "";
+                        //     position: absolute;
+                        //     inset: 0;
+                        //     background-image: linear-gradient(
+                        //         to top,
+                        //         rgba($BaseRed, 1),
+                        //         rgba($BaseRed, 0) 50%
+                        //     );
+                        //     opacity: 0.7;
+                        //     transition: 0.3s ease-out;
+                        // }
+                        img {
+                            aspect-ratio: 4/3;
+                            object-fit: cover;
+                            @include sp {
+                                position: absolute;
+                                top: 0;
+                                left: 0;
+                                width: 35vw;
+                                clip-path: url(#maskNews01);
+                            }
+                        }
+                        .itemText {
+                            position: absolute;
+                            font-size: 1em;
+                            inset: 0;
+                            margin: auto;
+                            color: #fff;
+                            display: flex;
+                            flex-direction: column;
+                            width: 78%;
+                            height: 100%;
+                            justify-content: flex-end;
+                            z-index: +1;
+                            padding-bottom: 4em;
+                            @include sp {
+                                position: relative;
+                                color: #000;
+                                height: unset;
+                                width: 100%;
+                                padding-bottom: unset;
+                                justify-content: flex-start;
+                                padding-bottom: unset;
+                            }
+                            h3 {
+                                font-size: FZ(20);
+                                letter-spacing: 0.08em;
+                                line-height: 1.6em;
+                                text-align: justify;
+                                @include sp {
+                                    padding-left: 38vw;
+                                    display: flex;
+                                    align-items: flex-end;
+                                    aspect-ratio: 3.1;
+                                    padding-bottom: 0.3em;
+                                }
+                            }
+                            .content {
+                                display: none;
+                                @include sp {
+                                    display: block;
+                                    font-size: FZ(18);
+                                    letter-spacing: 0.04em;
+                                    line-height: 1.8em;
+                                    margin-top: 1em;
+                                    //  NOTE 3行固定
+                                    display: -webkit-box;
+                                    -webkit-box-orient: vertical;
+                                    -webkit-line-clamp: 3;
+                                    overflow: hidden;
+                                }
+                            }
+                            .link_text {
+                                font-size: FZ(16);
+                                --baseColor: #fff;
+                                width: 100%;
+                                margin-top: 0.8em;
+                                max-height: 0;
+                                height: 0;
+                                opacity: 0;
+                                transition: 0.5s ease-out;
+                                @include sp {
+                                    display: none;
+                                }
+                                span {
+                                    padding-right: unset;
+                                    width: 100%;
+                                    &::after {
+                                        clip-path: inset(0 50% 0 50%);
+                                        transition: 0.3s ease-out;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    &:nth-of-type(2) {
+                        time {
+                            align-self: flex-end;
+                        }
+                        .wrapContents {
+                            clip-path: url(#maskNews02);
+                        }
+                    }
+                    &:nth-of-type(3) {
+                        flex-direction: column-reverse;
+                        .wrapContents {
+                            clip-path: url(#maskNews02);
+                        }
+                    }
+                    &:nth-of-type(4) {
+                        flex-direction: column-reverse;
+                        time {
+                            align-self: flex-end;
+                        }
+                    }
+                    @include pc {
+                        &:hover {
+                            .wrapContents {
+                                &::before {
+                                    opacity: 0.7;
+                                    transition: 0.3s ease-out;
+                                }
+                                &::after {
+                                    opacity: 0;
+                                    transition: 0.3s ease-out;
+                                }
+                                .item_text {
+                                    .link_text {
+                                        max-height: 100%;
+                                        height: 2.4em;
+                                        opacity: 1;
+                                        transition: 0.3s ease-out;
+                                        span {
+                                            &::after {
+                                                clip-path: inset(0);
+                                                transition: 0.3s ease-out;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            .boxObject {
+                position: relative;
+                font-size: 1em;
+                align-self: flex-end;
+                margin-bottom: 1em;
+                padding-right: 5em;
+                @include sp {
+                    display: none;
+                }
+                &::after {
+                    content: "";
+                    position: absolute;
+                    top: -2em;
+                    right: 0;
+                    width: 10em;
+                    @include svg-cloudBgObject("C19B48");
+                    scale: -1 -1;
+                }
+                svg {
+                    aspect-ratio: 1/1.06;
+                    font-size: 1em;
+                    width: 12em;
+                    fill: $BaseRed;
+                }
+            }
+        }
+        .linkText {
+            align-self: flex-start;
+            margin-top: 5em;
+            --baseColor: #000;
+            @include sp {
+                margin-top: 0;
+            }
+        }
+    }
+}
+/* =================================
+ * SLIDE
+ * ------------------------------ */
+.containerSlide {
+    display: flex;
+    padding: 5em 0 3em;
+    overflow: hidden;
+    --slideSpeed: 500s; /* 大きいほどゆっくり（調整可） */
+    --seamFix: -0.5px; /* サブピクセル誤差補正（±で微調整） */
+    --slideHeight: 34rem;
+    ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        width: max-content;
+        min-width: max-content;
+        will-change: transform;
+        backface-visibility: hidden;
+        transform: translateZ(0);
+        contain: paint;
+        animation: slide-marquee var(--slideSpeed) linear infinite;
+        li {
+            flex-shrink: 0;
+            width: fit-content;
+            height: var(--slideHeight);
+            img {
+                height: 100%;
+                width: auto; /* アスペクト比保持（歪み防止） */
+                object-fit: cover;
+                display: block;
+            }
+        }
+    }
+    &:hover ul {
+        animation-play-state: paused;
+    }
+    @media (prefers-reduced-motion: reduce) {
+        ul {
+            animation: none;
+        }
+    }
+    @keyframes slide-marquee {
+        0% {
+            transform: translate3d(0, 0, 0);
+        }
+        100% {
+            transform: translate3d(calc(-50% + var(--seamFix)), 0, 0);
+        }
+    }
+}
