@@ -1,0 +1,186 @@
+@use "variable" as *;
+@use "svg" as *;
+/* stylelint-disable no-descending-specificity */
+/* stylelint-disable keyframes-name-pattern */
+/* stylelint-disable custom-property-pattern */
+// このファイル全体のルールを無効にする
+.containerHeader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 100;
+    article {
+        position: relative;
+        color: #fff;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: rgba(#000, 0.9);
+        clip-path: inset(0 0 100% 0);
+        transition: 0.3s ease-out;
+        max-height: 0;
+        nav {
+            width: 100%;
+            position: relative;
+            font-size: 1em;
+            display: flex;
+            flex-direction: column;
+            margin-left: 2em;
+            max-width: $articleMaxWidth;
+            padding: 8em 0 10em;
+            @include sp {
+                max-width: unset;
+                padding: 18vw 0 0;
+                margin-left: unset;
+                min-height: 100vh;
+                min-height: 100dvh;
+            }
+            a {
+                position: relative;
+                font-size: FZ(22);
+                display: flex;
+                flex-direction: column;
+                padding-block: 0.8em;
+                border-bottom: 1px solid #3e3e3e;
+                padding-left: 7em;
+                letter-spacing: 0.2em;
+                @include sp {
+                    font-size: FZ(18);
+                    letter-spacing: 0.12em;
+                    padding-left: 24vw;
+                    &:last-of-type {
+                        border-bottom: unset;
+                    }
+                }
+                &::before {
+                    content: "";
+                    position: absolute;
+                    left: 0;
+                    top: 50%;
+                    translate: 0 -50%;
+                    width: 5em;
+                    @include svg-arrowMenu("989898");
+                    transition: 0.5s ease-out;
+                    @include sp {
+                        width: 20vw;
+                    }
+                }
+                span {
+                    color: $BaseRed;
+                    @include URWClassico-Regular;
+                    font-size: 1.82em;
+                    text-transform: uppercase;
+                    letter-spacing: 0.4em;
+                    @include sp {
+                        letter-spacing: 0.3em;
+                    }
+                }
+                @include hover {
+                    &::before {
+                        transition: 0.3s ease-out;
+                        transform: translate(1em, 0);
+                        @include svg-arrowMenu("E72012");
+                    }
+                }
+            }
+        }
+        &.is-open {
+            max-height: 100%;
+            clip-path: inset(0);
+            transition: 0.3s ease-out;
+        }
+        &.closing {
+            transition: 0.3s ease-out;
+            clip-path: inset(0 0 100% 0);
+            max-height: 0;
+        }
+    }
+}
+.hamburgerButton {
+    font-size: inherit;
+    position: fixed;
+    left: 0.8rem;
+    --boxSize: 3em;
+    width: var(--boxSize);
+    top: calc(50vh - (var(--boxSize) / 2));
+    top: calc(50dvh - (var(--boxSize) / 2));
+    aspect-ratio: 1;
+    z-index: 100;
+    transition: 0.8s ease-out;
+    font-size: 1em;
+    border-radius: 0.5rem;
+    mix-blend-mode: difference;
+    @include sp {
+        display: flex;
+        width: 8vw;
+        top: 4vw;
+        left: 4vw;
+    }
+    &::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: calc(100% + 0.5em);
+        translate: 0 -50%;
+        width: 1px;
+        height: 100vh;
+        height: 100dvh;
+        background-color: #fff;
+        opacity: 0.5;
+        transition: 0.3s ease-out;
+        @include sp {
+            display: none;
+        }
+    }
+    span {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 60%;
+        height: 2px;
+        background-color: $base-white;
+        transition: 0.5s ease-out;
+        @include sp {
+            width: 100%;
+        }
+        &:nth-of-type(1) {
+            transform: translate(-50%, calc(-50% - 10px));
+            @include pc {
+                transform: translate(-50%, calc(-50% - 1rem));
+            }
+        }
+        &:nth-of-type(2) {
+            transform: translate(-50%, -50%);
+            transition-delay: 0.3s;
+        }
+        &:nth-of-type(3) {
+            transform: translate(-50%, calc(-50% + 10px));
+            @include pc {
+                transform: translate(-50%, calc(-50% + 1rem));
+            }
+        }
+    }
+    &.is-open {
+        &::after {
+            opacity: 0;
+            transition: 0.3s ease-out;
+        }
+        span {
+            transition: 0.3s ease-out;
+            background-color: $base-white;
+            &:nth-of-type(1) {
+                transform: translate(-50%, -50%) rotate(135deg);
+            }
+            &:nth-of-type(2) {
+                transform: translate(-100%, -50%);
+                opacity: 0;
+            }
+            &:nth-of-type(3) {
+                transform: translate(-50%, -50%) rotate(-135deg);
+            }
+        }
+    }
+}
