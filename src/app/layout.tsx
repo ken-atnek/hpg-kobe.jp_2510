@@ -55,7 +55,7 @@ export const metadata: Metadata = {
         type: 'image/svg+xml',
       },
       {
-        url: '/favicon/favicon-dark.svg',
+        url: '/favicon/favicon-light.svg',
         media: '(prefers-color-scheme: dark)',
         type: 'image/svg+xml',
       },

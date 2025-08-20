@@ -14,6 +14,8 @@ import Image from 'next/image';
 import BlockTelop from '@/components/AreaTop/BlockTelop';
 import BlockShopList from '@/components/AreaTop/BlockShopList';
 import BlockPickUp from '@/components/AreaTop/BlockPickUp';
+import AreaLeftBannerGroup from '@/components/common/AreaLeftBannerGroup';
+
 export const generateMetadata = (): Metadata => {
   return {
     title: '神戸・三宮の風俗｜ファッションヘルス:神戸ホットポイントグループ',
@@ -40,6 +42,36 @@ export default function AreaTop() {
         <section className={styles.containerShopList}>
           <h2>hotpoint group kobe area</h2>
           <BlockShopList />
+        </section>
+        <section className={styles.containerContents}>
+          <article>
+            <div className={styles.boxLeftBan}>
+              <h2>
+                <span>topics</span>トピックス
+              </h2>
+              <AreaLeftBannerGroup
+                jsonPath="/data/area-top/areaTopLeftBanGroup.json"
+                title="kobe area event"
+                className={styles.boxGroup}
+              />
+              <AreaLeftBannerGroup
+                jsonPath="/data/area-top/areaTopLeftBanHot.json"
+                title="kobe hotpoint event"
+                className={styles.boxHot}
+              />
+              <AreaLeftBannerGroup
+                jsonPath="/data/area-top/areaTopLeftBanVilla.json"
+                title="hotpoint villa event"
+                className={styles.boxVilla}
+              />
+              <AreaLeftBannerGroup
+                jsonPath="/data/area-top/areaTopLeftBanRecruit.json"
+                title="recruit"
+                className={styles.boxRecruit}
+              />
+            </div>
+            <div className={styles.boxMainContents}></div>
+          </article>
         </section>
       </main>
       <Footer className={styles.areaFooter} />

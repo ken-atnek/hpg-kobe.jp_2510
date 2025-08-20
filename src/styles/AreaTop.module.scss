@@ -293,6 +293,121 @@
             }
         }
     }
+    .containerContents {
+        display: flex;
+        justify-content: center;
+        padding: 0 2vw;
+        article {
+            display: grid;
+            grid-template-columns: 25% 1fr;
+            gap: 0 1em;
+            .boxLeftBan {
+                font-size: inherit;
+                display: flex;
+                flex-direction: column;
+                padding-top: 1em;
+                gap: 1em 0;
+                h2 {
+                    position: relative;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    font-size: FZ(14);
+                    padding-left: 2em;
+                    padding: 0.7em 0.5em 0.6em 2.6em;
+                    background-color: #000;
+                    border-radius: 0.5em;
+                    font-weight: 500;
+                    letter-spacing: 0.08em;
+                    span {
+                        position: relative;
+                        @include BebasNeue;
+                        font-size: 2em;
+                        &::before {
+                            content: "";
+                            position: absolute;
+                            top: 50%;
+                            transform: translateY(-60%);
+                            right: calc(100% + 0.2em);
+                            width: 0.6em;
+                            @include svg-icon-antenna("ff002f");
+                        }
+                    }
+                }
+                .boxBanGroup {
+                    position: relative;
+                    display: flex;
+                    flex-direction: column;
+                    font-size: inherit;
+                    ul {
+                        display: grid;
+                        grid-auto-flow: row;
+                        font-size: inherit;
+                        gap: 0.5em 0;
+                        li {
+                            width: 100%;
+                            img {
+                                width: 100%;
+                            }
+                        }
+                    }
+                    &.boxGroup,
+                    &.boxHot,
+                    &.boxVilla {
+                        border-top-left-radius: 0.8em;
+                        border-top-right-radius: 0.8em;
+                        padding: 0.8em 0.5em 0.5em;
+                        gap: 0.5em 0;
+                        h3 {
+                            color: #000;
+                            text-align: center;
+                            @include BebasNeue;
+                            font-size: FZ(28);
+                        }
+                    }
+                    &.boxGroup {
+                        background-color: #e8e8e8;
+                    }
+                    &.boxHot {
+                        background-color: rgba($shop-hot, 0.3);
+                    }
+                    &.boxVilla {
+                        background-color: rgba($shop-villa, 0.3);
+                    }
+                    &.boxRecruit {
+                        margin-top: 1em;
+                        gap: 0.8em 0;
+                        h3 {
+                            color: #767676;
+                            @include FuturaCondensedMedium;
+                            font-size: FZ(24);
+                            text-transform: uppercase;
+                            border: 1px solid;
+                            text-align: center;
+                            letter-spacing: 0.2em;
+                            padding-block: 0.3em;
+                        }
+                    }
+                    .modalOverlay {
+                        position: fixed;
+                        inset: 0;
+                        background: rgba(0, 0, 0, 0.7);
+                        z-index: 1000;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        font-size: inherit;
+                        .modalContent {
+                            background: #fff;
+                            padding: 1em;
+                            border-radius: 0.5em;
+                            cursor: pointer;
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
 .areaFooter {
     --base-color: #000;
