@@ -14,7 +14,8 @@ import Image from 'next/image';
 import BlockTelop from '@/components/AreaTop/BlockTelop';
 import BlockShopList from '@/components/AreaTop/BlockShopList';
 import BlockPickUp from '@/components/AreaTop/BlockPickUp';
-import AreaLeftBannerGroup from '@/components/common/AreaLeftBannerGroup';
+import BannerGroup from '@/components/common/BannerGroup';
+import BlockNewFace from '@/components/AreaTop/BlockNewFace';
 
 export const generateMetadata = (): Metadata => {
   return {
@@ -49,28 +50,40 @@ export default function AreaTop() {
               <h2>
                 <span>topics</span>トピックス
               </h2>
-              <AreaLeftBannerGroup
+              <BannerGroup
                 jsonPath="/data/area-top/areaTopLeftBanGroup.json"
                 title="kobe area event"
                 className={styles.boxGroup}
               />
-              <AreaLeftBannerGroup
+              <BannerGroup
                 jsonPath="/data/area-top/areaTopLeftBanHot.json"
                 title="kobe hotpoint event"
                 className={styles.boxHot}
               />
-              <AreaLeftBannerGroup
+              <BannerGroup
                 jsonPath="/data/area-top/areaTopLeftBanVilla.json"
                 title="hotpoint villa event"
                 className={styles.boxVilla}
               />
-              <AreaLeftBannerGroup
+              <BannerGroup
                 jsonPath="/data/area-top/areaTopLeftBanRecruit.json"
                 title="recruit"
                 className={styles.boxRecruit}
               />
             </div>
-            <div className={styles.boxMainContents}></div>
+            <div className={styles.boxMainContents}>
+              <BannerGroup
+                jsonPath="/data/area-top/areaTopMainHead.json"
+                className={styles.wrapMainBanHead}
+              />
+              <div className={styles.wrapNewFace}>
+                <h2 className={styles.itemH2}>
+                  <span>new face</span>
+                  新人情報
+                </h2>
+                <BlockNewFace />
+              </div>
+            </div>
           </article>
         </section>
       </main>

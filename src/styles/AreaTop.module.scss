@@ -298,14 +298,17 @@
         justify-content: center;
         padding: 0 2vw;
         article {
+            max-width: $articleMaxWidth;
             display: grid;
             grid-template-columns: 25% 1fr;
             gap: 0 1em;
+            box-shadow: 0.5rem -3rem 3rem rgba(1, 1, 1, 0.1);
+            padding-top: 1em;
+            padding-bottom: 3em;
             .boxLeftBan {
                 font-size: inherit;
                 display: flex;
                 flex-direction: column;
-                padding-top: 1em;
                 gap: 1em 0;
                 h2 {
                     position: relative;
@@ -402,6 +405,227 @@
                             padding: 1em;
                             border-radius: 0.5em;
                             cursor: pointer;
+                        }
+                    }
+                }
+            }
+            .boxMainContents {
+                font-size: inherit;
+                display: flex;
+                flex-direction: column;
+                gap: 1em 0;
+                .itemH2 {
+                    position: relative;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    font-size: FZ(14);
+                    border-radius: 0.5em;
+                    font-weight: 500;
+                    letter-spacing: 0.08em;
+                    span {
+                        position: relative;
+                        @include BebasNeue;
+                        font-size: 2em;
+                        padding-left: 1em;
+                        &::before {
+                            content: "";
+                            position: absolute;
+                            top: 50%;
+                            translate: 0 -50%;
+                            left: 0;
+                            width: 0.8em;
+                        }
+                    }
+                }
+                .wrapMainBanHead {
+                    font-size: inherit;
+                    position: relative;
+                    ul {
+                        width: 100%;
+                        font-size: inherit;
+                        display: grid;
+                        grid-auto-flow: row;
+                        gap: 0.8em 0;
+                        li {
+                            width: 100%;
+                            img {
+                                width: 100%;
+                            }
+                        }
+                    }
+                }
+                .wrapNewFace {
+                    font-size: inherit;
+                    display: flex;
+                    flex-direction: column;
+                    padding: 2em;
+                    background-color: #171717;
+                    background-image: repeating-linear-gradient(
+                        135deg,
+                        transparent,
+                        transparent 3px,
+                        rgb(52, 52, 52) 3px,
+                        rgb(52, 52, 52) 6px
+                    );
+                    .itemH2 {
+                        span {
+                            &::before {
+                                @include svg-icon-new-face("ff002f");
+                            }
+                        }
+                    }
+                    .blockNewFace {
+                        position: relative;
+                        display: grid;
+                        grid-template-columns: repeat(2, 1fr);
+                        width: 100%;
+                        gap: 0 1em;
+                        font-size: inherit;
+                        --boxAspect: 51/75;
+                        li {
+                            width: 100%;
+                            display: flex;
+                            flex-direction: column;
+                            color: #010101;
+                            font-size: inherit;
+                            aspect-ratio: var(--boxAspect);
+                            &.hot {
+                                .wrapProfile {
+                                    background-color: rgba($shop-hot, 0.7);
+                                }
+                            }
+                            &.villa {
+                                .wrapProfile {
+                                    background-color: rgba($shop-villa, 0.7);
+                                }
+                            }
+                            .fadeStage {
+                                position: relative;
+                                font-size: inherit;
+                            }
+                            .fadeItem {
+                                position: absolute;
+                                inset: 0;
+                                opacity: 0;
+                                pointer-events: none;
+                                transition: opacity 1.4s ease;
+                                z-index: 0;
+                            }
+                            .isActive {
+                                opacity: 1;
+                                pointer-events: auto;
+                                z-index: 1;
+                            }
+                            .wrapLink {
+                                display: flex;
+                                flex-direction: column;
+                                border-radius: 1.5rem;
+                                font-size: inherit;
+                                aspect-ratio: var(--boxAspect);
+                                .shopName {
+                                    font-size: FZ(18);
+                                    text-align: center;
+                                    padding-block: 0.5em;
+                                }
+                                .wrapImage {
+                                    font-size: inherit;
+                                    overflow: hidden;
+                                    img {
+                                        width: 100%;
+                                        aspect-ratio: 51/75;
+                                        object-fit: cover;
+                                        animation-name: image-scale;
+                                        animation-timing-function: ease;
+                                        animation-duration: 6s;
+                                        scale: 1;
+                                        animation-iteration-count: infinite;
+                                    }
+                                    @keyframes image-scale {
+                                        0% {
+                                            scale: 1;
+                                        }
+                                        50% {
+                                            scale: 1.03;
+                                        }
+                                        100% {
+                                            scale: 1;
+                                        }
+                                    }
+                                }
+                                .wrapProfile {
+                                    font-size: inherit;
+                                    width: 100%;
+                                    display: flex;
+                                    flex-direction: column;
+                                    align-items: center;
+                                    padding-block: 0.5em;
+                                    gap: 0.3em 0;
+                                    position: absolute;
+                                    left: 0;
+                                    bottom: 0;
+                                    color: $base-white;
+                                    .castName {
+                                        font-size: FZ(21);
+                                        font-weight: 500;
+                                        letter-spacing: 0.08em;
+                                        text-align: center;
+                                    }
+                                    .castSize {
+                                        font-size: inherit;
+                                        display: flex;
+                                        align-items: center;
+                                        gap: 0 0.3em;
+                                        span {
+                                            @include FuturaCondensedMedium;
+                                            font-size: FZ(20);
+                                            &.age {
+                                                &::before {
+                                                    content: "AGE.";
+                                                }
+                                            }
+                                            &.tall {
+                                                &::before {
+                                                    content: "T.";
+                                                }
+                                            }
+                                            &.bust {
+                                                &::before {
+                                                    content: "B.";
+                                                }
+                                                i {
+                                                    font-size: inherit;
+                                                    text-transform: uppercase;
+                                                    margin-left: 0.1em;
+                                                    &::before,
+                                                    &::after {
+                                                        display: inline-block;
+                                                        translate: 0 -0.08em;
+                                                    }
+                                                    &::before {
+                                                        content: "[";
+                                                        margin-right: 0.1em;
+                                                    }
+                                                    &::after {
+                                                        content: "]";
+                                                        margin-left: 0.1em;
+                                                    }
+                                                }
+                                            }
+                                            &.west {
+                                                &::before {
+                                                    content: "W.";
+                                                }
+                                            }
+                                            &.hip {
+                                                &::before {
+                                                    content: "H.";
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
                         }
                     }
                 }

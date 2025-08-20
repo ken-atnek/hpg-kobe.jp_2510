@@ -1,7 +1,7 @@
 /* =======================================
  * 共通バナーグループコンポーネント
  * - エリア・店舗・イベント等のLEFTバナー表示に対応
- * URL: src/components/common/AreaLeftBannerGroup.tsx
+ * URL: src/components/common/BannerGroup.tsx
  * Usage: src/app/page.tsx 他
  * Created: 2025-08-20
  * Last updated: 2025-08-20
