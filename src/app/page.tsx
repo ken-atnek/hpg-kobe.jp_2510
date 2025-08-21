@@ -26,7 +26,7 @@ export const generateMetadata = (): Metadata => {
 };
 export default function AreaTop() {
   return (
-    <RequireAge scope="global" authPath="/auth">
+    <RequireAge scope="group" authPath="/auth">
       <main className={styles.areaTop}>
         <h1>神戸・三宮の風俗｜ファッションヘルス:神戸ホットポイントグループ</h1>
         <section className={styles.containerHeadTitle}>

@@ -1,0 +1,21 @@
+/* =================================
+ * 	店舗 Common
+ * ------------------------------ */
+@use "variable" as *;
+@use "svg" as *;
+/* stylelint-disable no-descending-specificity */
+/* stylelint-disable keyframes-name-pattern */
+/* stylelint-disable custom-property-pattern */
+// このファイル全体のルールを無効にする
+
+/* =================================
+ * ClientWrapper
+ * ------------------------------ */
+.bodyContents {
+    position: relative;
+    font-size: inherit;
+    width: 100%;
+}
+/* =================================
+ * Main
+ * ------------------------------ */

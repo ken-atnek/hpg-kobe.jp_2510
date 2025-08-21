@@ -21,15 +21,25 @@ export default function RequireAge({
   children: React.ReactNode;
 }) {
   const router = useRouter();
-  const [ok, setOk] = useState<boolean | null>(null);
+  const [verified, setVerified] = useState<boolean | null>(null);
 
   useEffect(() => {
-    const verified = isAgeVerified(scope);
-    setOk(verified);
-    if (!verified) router.replace(authPath);
-  }, [router, scope, authPath]);
+    const isOk = isAgeVerified(scope);
+    setVerified(isOk);
 
-  if (ok === null) return null;
-  if (!ok) return null;
+    if (!isOk) {
+      router.replace(authPath);
+    }
+  }, [scope, authPath, router]);
+
+  // 初期状態：判定中
+  if (verified === null) {
+    return <div style={{ display: 'none' }} />; // SSRで何も表示されないように
+  }
+
+  // 認証NG：すでに router.replace で遷移済み
+  if (!verified) return null;
+
+  // 認証OK
   return <>{children}</>;
 }

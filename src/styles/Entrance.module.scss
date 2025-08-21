@@ -129,6 +129,7 @@ $entrance-max-width: 96rem;
             gap: 1em 0;
             img {
                 font-size: inherit;
+                width: 100%;
                 max-width: 9.5em;
             }
             h2 {
@@ -136,6 +137,11 @@ $entrance-max-width: 96rem;
                 color: $base-white;
                 @include Serif;
                 letter-spacing: 0.12em;
+            }
+            &.hot {
+                img {
+                    filter: brightness(100);
+                }
             }
         }
         .itemButton {

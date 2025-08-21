@@ -10,22 +10,30 @@ import { useRouter } from 'next/navigation';
 import { setAgeVerifiedAsync, type AgeScope } from '@/lib/age';
 import styles from '@/styles/Entrance.module.scss';
 import EntranceCastList from '@/components/Entrance/CastList';
-import GroupLogo from '@/assets/images/logo/group_hot.webp';
 import Image from 'next/image';
 import EntranceAreaShopList from '@/components/Entrance/AreaShopList';
 import EntranceGroupShopList from '@/components/Entrance/GroupShopList';
+import type { StaticImport } from 'next/dist/shared/lib/get-img-props';
 export default function Entrance({
   scope,
   backPath,
+  headingText,
+  logoSrc,
+  classNameAnnounce,
+  excludeStoreId,
 }: {
   scope: AgeScope;
   backPath: string;
+  headingText?: string;
+  logoSrc: string | StaticImport;
+  classNameAnnounce?: keyof typeof styles;
+  excludeStoreId?: string;
 }) {
   const router = useRouter();
 
   return (
     <main className={styles.containerEntrance}>
-      <h1>神戸・三宮の風俗｜ファッションヘルス:神戸ホットポイントグループ</h1>
+      <h1>{headingText}</h1>
       <section className={styles.blockCastList}>
         <EntranceCastList />
       </section>
@@ -40,8 +48,16 @@ export default function Entrance({
         >
           yes
         </button>
-        <div className={styles.boxAnnounce}>
-          <Image src={GroupLogo} alt="HOT POINT GROUP" />
+        <div
+          className={`${styles.boxAnnounce} ${classNameAnnounce ? styles[classNameAnnounce] : ''}`}
+        >
+          <Image
+            src={logoSrc}
+            width={100}
+            height={60}
+            alt="HOT POINT GROUP"
+            priority
+          />
           <h2>あなたは18歳以上ですか？</h2>
         </div>
         <a
@@ -54,7 +70,7 @@ export default function Entrance({
       </section>
       <section className={styles.blockAreaShop}>
         <h3 className={styles.itemH3}>area shop</h3>
-        <EntranceAreaShopList />
+        <EntranceAreaShopList excludeStoreId={excludeStoreId} />
       </section>
       <section className={styles.blockGroupShop}>
         <h3 className={styles.itemH3}>group shop list</h3>

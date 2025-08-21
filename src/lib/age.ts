@@ -5,7 +5,7 @@
  * Last updated: 2025-08-19
  * ======================================= */
 
-export type AgeScope = 'global';
+export type AgeScope = 'global' | 'hot' | 'villa' | 'group'; // 必要なスコープを列挙
 
 // 保存形式（将来拡張も見据えて version を持たせる）
 type StoredFlag = { exp: number; v: 1 };
