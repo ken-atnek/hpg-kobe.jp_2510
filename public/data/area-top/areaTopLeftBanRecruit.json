@@ -3,7 +3,7 @@
     "banId": "001",
     "banTitle": "体験入店でスグに稼げます♪",
     "banImage": "/images/area/ban/1645082609.jpg",
-    "link": true,
+    "status": 3,
     "linkTarget": true,
     "linkUrl": "https://www.girlsheaven-job.net/fukuoka/ma-83/sa-326/hp_villa/"
   },
@@ -11,7 +11,7 @@
     "banId": "002",
     "banTitle": "福岡HOT求人",
     "banImage": "/images/area/ban/1630125318.jpg",
-    "link": true,
+    "status": 3,
     "linkTarget": true,
     "linkUrl": "https://www.girlsheaven-job.net/fukuoka/ma-83/sa-326/hotpoint/?op=newc"
   },
@@ -19,7 +19,6 @@
     "banId": "003",
     "banTitle": "WIFI",
     "banImage": "/images/area/ban/1741256409.jpg",
-    "link": false,
-    "linkUrl": "https://www.girlsheaven-job.net/fukuoka/ma-83/sa-326/hotpoint/?op=newc"
+    "status": 1
   }
 ]

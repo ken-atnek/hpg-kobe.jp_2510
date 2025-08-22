@@ -15,7 +15,7 @@ import EntranceAreaShopList from '@/components/Entrance/AreaShopList';
 import EntranceGroupShopList from '@/components/Entrance/GroupShopList';
 import type { StaticImport } from 'next/dist/shared/lib/get-img-props';
 export default function Entrance({
-  scope,
+  // scope,
   backPath,
   headingText,
   logoSrc,
@@ -42,7 +42,12 @@ export default function Entrance({
           type="button"
           className={styles.itemButton}
           onClick={async () => {
-            await setAgeVerifiedAsync(scope);
+            await Promise.all([
+              setAgeVerifiedAsync('group'),
+              setAgeVerifiedAsync('hot'),
+              setAgeVerifiedAsync('villa'),
+              setAgeVerifiedAsync('global'),
+            ]);
             router.replace(backPath);
           }}
         >

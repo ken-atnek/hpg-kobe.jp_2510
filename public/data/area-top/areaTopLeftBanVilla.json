@@ -3,7 +3,7 @@
     "banId": "001",
     "banTitle": "net予約",
     "banImage": "/images/area/ban/1628645827.jpg",
-    "link": true,
+    "status": 3,
     "linkTarget": true,
     "linkUrl": "https://www.cityheaven.net/fukuoka/A4001/A400102/hotpoint/A6ShopReservation/"
   },
@@ -11,7 +11,7 @@
     "banId": "002",
     "banTitle": "初めてのお客様へ",
     "banImage": "/images/area/ban/1732058578.jpg",
-    "link": true,
+    "status": 3,
     "linkTarget": true,
     "linkUrl": "https://www.cityheaven.net/fukuoka/A4001/A400102/hp_villa/shopevent/"
   }

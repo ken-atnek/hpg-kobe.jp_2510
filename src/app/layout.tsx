@@ -7,6 +7,7 @@
 
 import type { Metadata } from 'next';
 import '@/styles/globals.scss';
+import SvgDefs from '@/components/SvgDefs';
 import { Noto_Sans_JP, Roboto } from 'next/font/google';
 const notoSans = Noto_Sans_JP({
   subsets: ['latin'],
@@ -72,7 +73,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ja" className={`${notoSans.className} ${roboto.className}`}>
-      <body>{children}</body>
+      <body>
+        <SvgDefs />
+        {children}
+      </body>
     </html>
   );
 }

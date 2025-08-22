@@ -19,7 +19,7 @@ const key = (scope: AgeScope) => `age-ok:${scope}`;
 //     "global": { "ttlHours": 24 }
 //   }
 // }
-const CONFIG_URL = './age.config.json';
+const CONFIG_URL = '/age.config.json';
 const DEFAULT_TTL_HOURS = 24; // JSONが無い/壊れている場合のデフォルト
 
 // 開発環境では 6時間で再認証（NODE_ENV=development）

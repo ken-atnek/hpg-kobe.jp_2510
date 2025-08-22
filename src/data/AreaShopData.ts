@@ -13,6 +13,7 @@ import { StaticImageData } from 'next/image';
 export type Shop = {
   storeId: string;
   name: string;
+  nameEn: string;
   post: string;
   address: string;
   logo: StaticImageData;
@@ -25,6 +26,7 @@ export const Shops = [
   {
     storeId: 'kbHot',
     name: '神戸ホットポイント',
+    nameEn: 'kobe hotpoint',
     logo: LogoHot,
     post: '〒650-0012',
     address: '兵庫県神戸市中央区北長狭通２丁目１−４',
@@ -35,6 +37,7 @@ export const Shops = [
   {
     storeId: 'kbVilla',
     name: 'ホットポイントヴィラ',
+    nameEn: 'hotpoint villa',
     logo: LogoVilla,
     post: '〒650-0012',
     address: '兵庫県神戸市中央区北長狭通１丁目１０−１３',

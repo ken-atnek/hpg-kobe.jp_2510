@@ -3,7 +3,7 @@
     "banId": "001",
     "banTitle": "WEB予約",
     "banImage": "/images/area/ban/1629117035.jpg",
-    "link": true,
+    "status": 3,
     "linkTarget": true,
     "linkUrl": "https://www.cityheaven.net/fukuoka/A4001/A400102/hotpoint/A6ShopReservation/"
   },
@@ -11,7 +11,7 @@
     "banId": "002",
     "banTitle": "フーコレ口コミ",
     "banImage": "/images/area/ban/1629116894.jpg",
-    "link": true,
+    "status": 3,
     "linkTarget": true,
     "linkUrl": "https://www.cityheaven.net/fukuoka/A4001/A400102/hotpoint/shopevent/"
   },
@@ -19,7 +19,7 @@
     "banId": "003",
     "banTitle": "新人割",
     "banImage": "/images/area/ban/1628645680.jpg",
-    "link": true,
+    "status": 3,
     "linkTarget": true,
     "linkUrl": "https://www.cityheaven.net/fukuoka/A4001/A400102/hotpoint/shopevent/"
   }

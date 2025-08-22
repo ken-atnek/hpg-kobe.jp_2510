@@ -12,7 +12,8 @@ import { usePathname } from 'next/navigation';
 import RequireAge from '@/components/RequireAge';
 import Footer from '@/components/common/Footer';
 import styles from '@/styles/ShopCommon.module.scss';
-
+import Header from '@/components/common/ShopHeader';
+import { navMenu } from '@/data/hot/navMenuData'; // 必要に応じて別店舗に切り替え
 export default function ClientWrapper({
   children,
 }: {
@@ -22,12 +23,20 @@ export default function ClientWrapper({
   const isAuthPage = pathname.startsWith('/hot/auth');
 
   return (
-    <div className={styles.bodyContents}>
+    <div
+      className={styles.bodyContents}
+      style={{ '--baseColor': '#3da3fc' } as React.CSSProperties}
+    >
       {isAuthPage ? (
         children
       ) : (
         <RequireAge scope="hot" authPath="/hot/auth">
           <>
+            <Header
+              className={styles.shopHotHeader}
+              title="神戸・三宮の風俗｜ファッションヘルス:神戸ホットポイント"
+              navMenu={navMenu}
+            />
             <main className={styles.shopTop}>{children}</main>
             <Footer className={styles.shopHotFooter} />
           </>
