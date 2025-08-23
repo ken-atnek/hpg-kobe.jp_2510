@@ -11,7 +11,7 @@
 'use client';
 import Image from 'next/image';
 import Link from 'next/link';
-import styles from '@/styles/AreaTop.module.scss';
+import styles from '@/styles/ShopCommon.module.scss';
 import { ReactNode, useEffect, useState } from 'react';
 export type BannerItem = {
   banId: string;

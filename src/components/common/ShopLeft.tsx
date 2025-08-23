@@ -1,9 +1,9 @@
 'use client';
 /* =======================================
- *神戸ホットポイント 店舗Left
+ * 店舗 LEFTコンテンツ
  * URL: src/components/common/ShopLeft.tsx
  * Created: 2025-08-22
- * Last updated: 2025-08-22
+ * Last updated: 2025-08-23
  * ======================================= */
 import { usePathname } from 'next/navigation';
 import styles from '@/styles/ShopCommon.module.scss';

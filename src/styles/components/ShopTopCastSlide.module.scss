@@ -1,0 +1,94 @@
+/* =================================
+ * 	店舗 TOP キャストスライド
+ * ------------------------------ */
+@use "../variable" as *;
+@use "../svg" as *;
+@use "../mixin" as *;
+/* stylelint-disable no-descending-specificity */
+/* stylelint-disable keyframes-name-pattern */
+/* stylelint-disable custom-property-pattern */
+// このファイル全体のルールを無効にする
+
+.boxCastSlide {
+    position: relative;
+    font-size: inherit;
+    padding: 9em 3em 1.6em 3em;
+    background: url(../../assets/images/pickup_bg.webp) no-repeat center
+        center / cover;
+    width: 100%;
+    .titleObject {
+        @include object-title;
+    }
+    .wrapSlideList {
+        position: relative;
+        width: 100%;
+        font-size: inherit;
+        overflow: hidden;
+        height: 29rem;
+        .slideTrack {
+            display: flex;
+            width: max-content;
+            animation: slide-left 80s linear infinite;
+            position: absolute;
+            top: 0;
+            left: 0;
+            gap: 0 0.8rem;
+            font-size: inherit;
+            .itemCast {
+                position: relative;
+                width: 21rem;
+                flex-shrink: 0;
+                font-size: inherit;
+                a {
+                    font-size: inherit;
+                }
+                .image {
+                    aspect-ratio: 3/4;
+                    position: relative;
+                    width: 100%;
+                    img {
+                        width: 100%;
+                        object-fit: cover;
+                    }
+                }
+                .castName {
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
+                    width: 100%;
+                    background-color: rgba(1, 1, 1, 0.3);
+                    color: $base-white;
+                    font-size: FZ(14);
+                    text-align: center;
+                    padding-block: 0.5em;
+                    letter-spacing: 0.08em;
+                }
+                // &.newFace {
+                // }
+                // &.photoUp {
+                // }
+            }
+        }
+        @keyframes slide-left {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+    }
+    &.kbHot {
+        background-color: hsl(196, 100%, 88%);
+        background-blend-mode: soft-light;
+        .wrapTitle {
+            @include contents-title(#000000);
+        }
+        .titleObject {
+            &::before {
+                filter: brightness(105%) hue-rotate(206deg) saturate(142%)
+                    drop-shadow(0.5rem 0.5rem 0.5rem rgba(1, 1, 1, 0.3));
+            }
+        }
+    }
+}

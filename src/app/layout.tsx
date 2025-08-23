@@ -73,6 +73,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ja" className={`${notoSans.className} ${roboto.className}`}>
+      <head>
+        <link
+          href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Reenie+Beanie&display=swap"
+          rel="stylesheet"
+        />
+      </head>
       <body>
         <SvgDefs />
         {children}

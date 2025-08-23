@@ -4,9 +4,9 @@
  * Created: 2025-08-20
  * Last updated: 2025-08-20
  * ======================================= */
+import styles from '@/styles/ShopTop.module.scss';
 import ShopLeft from '@/components/common/ShopLeft';
 import ShopTopMain from '@/components/common/ShopTopMain';
-import styles from '@/styles/ShopTop.module.scss';
 
 export default function HotTop() {
   return (

@@ -78,10 +78,15 @@ $articleMaxWidth: 128rem;
 }
 @import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
 
+@import url("https://fonts.googleapis.com/css2?family=Reenie+Beanie&display=swap");
+
 @mixin BebasNeue {
     font-family: "Bebas Neue", sans-serif;
     font-weight: normal;
     font-style: normal;
+}
+@mixin Reenie {
+    font-family: "Reenie Beanie", cursive;
 }
 
 /* =================================
