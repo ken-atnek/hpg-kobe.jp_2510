@@ -1,0 +1,38 @@
+[
+  {
+    "banId": "001",
+    "banTitle": "愛川みこ",
+    "banImage": "/images/hot/292.jpg",
+    "status": 2,
+    "url": "/hot/cast/"
+  },
+  {
+    "banId": "002",
+    "banTitle": "柊しゅり",
+    "banImage": "/images/hot/301.jpg",
+    "status": 3,
+    "linkTarget": true,
+    "url": "https://hpg-kobe.jp/hot/model_profile802.html"
+  },
+  {
+    "banId": "003",
+    "banTitle": "ポイント10倍デー",
+    "banImage": "/images/hot/291.jpg",
+    "status": 1
+  },
+  {
+    "banId": "004",
+    "banTitle": "『毎週日曜日限定』お客様感謝デー開催！！",
+    "banImage": "/images/hot/301.jpg",
+    "status": 3,
+    "linkTarget": false,
+    "url": "https://www.cityheaven.net/hyogo/A2802/A280201/koubehp/shopevent/"
+  },
+  {
+    "banId": "005",
+    "banTitle": "モーダルテスト",
+    "banImage": "/images/hot/307.jpg",
+    "status": 4,
+    "popUpImage": "/images/area/ban/1749005623_pop.jpg"
+  }
+]

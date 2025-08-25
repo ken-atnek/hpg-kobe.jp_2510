@@ -1,0 +1,49 @@
+/* =================================
+ * 	店舗 TOP ピックアップ
+ * ------------------------------ */
+@use "variable" as *;
+@use "svg" as *;
+/* stylelint-disable no-descending-specificity */
+/* stylelint-disable keyframes-name-pattern */
+/* stylelint-disable custom-property-pattern */
+// このファイル全体のルールを無効にする
+.boxTopPickUp {
+    position: relative;
+    width: 100%;
+    font-size: inherit;
+    .wrapImageList {
+        position: relative;
+        font-size: inherit;
+        width: 100%;
+        .aspectWrapper {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 942 / 471;
+            // overflow: hidden;
+        }
+    }
+
+    :global {
+        .swiper-pagination {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            gap: 0 1.4em;
+            font-size: inherit;
+            padding-block: 1em;
+        }
+        .swiper-pagination-bullet {
+            width: 1.2rem;
+            aspect-ratio: 1;
+            background-color: #bfbfbf;
+            border-radius: 50%;
+            transition: opacity 0.3s;
+            z-index: 100;
+            cursor: pointer;
+        }
+
+        .swiper-pagination-bullet-active {
+            background-color: #404040;
+        }
+    }
+}

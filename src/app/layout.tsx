@@ -7,6 +7,7 @@
 
 import type { Metadata } from 'next';
 import '@/styles/globals.scss';
+import SvgDefs from '@/components/SvgDefs';
 import { Noto_Sans_JP, Roboto } from 'next/font/google';
 const notoSans = Noto_Sans_JP({
   subsets: ['latin'],
@@ -55,7 +56,7 @@ export const metadata: Metadata = {
         type: 'image/svg+xml',
       },
       {
-        url: '/favicon/favicon-dark.svg',
+        url: '/favicon/favicon-light.svg',
         media: '(prefers-color-scheme: dark)',
         type: 'image/svg+xml',
       },
@@ -72,7 +73,16 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ja" className={`${notoSans.className} ${roboto.className}`}>
-      <body>{children}</body>
+      <head>
+        <link
+          href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Reenie+Beanie&display=swap"
+          rel="stylesheet"
+        />
+      </head>
+      <body>
+        <SvgDefs />
+        {children}
+      </body>
     </html>
   );
 }

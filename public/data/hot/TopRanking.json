@@ -1,0 +1,154 @@
+[
+  {
+    "titleId": "1",
+    "title": "総合ランキング",
+    "casts": [
+      {
+        "rankID": "01",
+        "rank": "1",
+        "castId": "759",
+        "castName": "有村かずは",
+        "castImage": "/images/cast/hot/hot-kazuha01.jpg",
+        "age": "26",
+        "tall": "166",
+        "bust": "85",
+        "cup": "d",
+        "west": "57",
+        "hip": "85",
+        "castUrl": "/hot/"
+      },
+      {
+        "rankID": "02",
+        "rank": "2",
+        "castId": "795",
+        "castName": "若宮のえる",
+        "castImage": "/images/cast/hot/hot-noeru01.jpg",
+        "age": "21",
+        "tall": "158",
+        "bust": "86",
+        "cup": "f",
+        "west": "57",
+        "hip": "85",
+        "castUrl": "/villa/"
+      },
+      {
+        "rankID": "03",
+        "rank": "3",
+        "castId": "581",
+        "castName": "平野れの",
+        "castImage": "/images/cast/style/style-reno01.jpg",
+        "age": "25",
+        "tall": "150",
+        "bust": "83",
+        "cup": "c",
+        "west": "56",
+        "hip": "84",
+        "castUrl": "/style/"
+      },
+      {
+        "rankID": "04",
+        "rank": "4",
+        "castId": "261",
+        "castName": "雪平あきほ",
+        "castImage": "/images/cast/style/style-akiho01.jpg",
+        "age": "24",
+        "tall": "157",
+        "bust": "88",
+        "cup": "d",
+        "west": "55",
+        "hip": "86",
+        "castUrl": "/style/"
+      },
+      {
+        "rankID": "05",
+        "rank": "5",
+        "castId": "426",
+        "castName": "彩咲みわこ",
+        "castImage": "/images/cast/villa/villa-miwako01.jpg",
+        "age": "38",
+        "tall": "154",
+        "bust": "88",
+        "cup": "d",
+        "west": "58",
+        "hip": "85",
+        "castUrl": "/villa/"
+      }
+    ]
+  },
+  {
+    "titleId": "2",
+    "title": "指名ランキング",
+    "casts": [
+      {
+        "rankID": "01",
+        "rank": "1",
+        "castId": "423",
+        "castName": "竹田やな",
+        "castImage": "/images/cast/villa/villa-yana01.jpg",
+        "age": "41",
+        "tall": "160",
+        "bust": "84",
+        "cup": "e",
+        "west": "57",
+        "hip": "84",
+        "castUrl": "/villa/"
+      },
+      {
+        "rankID": "02",
+        "rank": "2",
+        "castId": "759",
+        "castName": "有村かずは",
+        "castImage": "/images/cast/hot/hot-kazuha01.jpg",
+        "age": "26",
+        "tall": "166",
+        "bust": "85",
+        "cup": "d",
+        "west": "57",
+        "hip": "85",
+        "castUrl": "/hot/"
+      },
+      {
+        "rankID": "03",
+        "rank": "3",
+        "castId": "795",
+        "castName": "若宮のえる",
+        "castImage": "/images/cast/hot/hot-noeru01.jpg",
+        "age": "21",
+        "tall": "158",
+        "bust": "86",
+        "cup": "f",
+        "west": "57",
+        "hip": "85",
+        "castUrl": "/villa/"
+      },
+      {
+        "rankID": "04",
+        "rank": "4",
+        "castId": "581",
+        "castName": "平野れの",
+        "castImage": "/images/cast/style/style-reno01.jpg",
+        "age": "25",
+        "tall": "150",
+        "bust": "83",
+        "cup": "c",
+        "west": "56",
+        "hip": "84",
+        "castUrl": "/style/"
+      },
+      {
+        "rankID": "05",
+        "rank": "5",
+        "castId": "261",
+        "castName": "雪平あきほ",
+        "castImage": "/images/cast/style/style-akiho01.jpg",
+        "age": "24",
+        "tall": "157",
+        "bust": "88",
+        "cup": "d",
+        "west": "55",
+        "hip": "86",
+        "castUrl": "/style/"
+      }
+    ]
+  }
+]

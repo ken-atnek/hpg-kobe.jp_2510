@@ -13,6 +13,7 @@ import { StaticImageData } from 'next/image';
 export type Shop = {
   storeId: string;
   name: string;
+  nameEn: string;
   post: string;
   address: string;
   logo: StaticImageData;
@@ -23,8 +24,9 @@ export type Shop = {
 
 export const Shops = [
   {
-    storeId: 'kb-hot',
+    storeId: 'kbHot',
     name: '神戸ホットポイント',
+    nameEn: 'kobe hotpoint',
     logo: LogoHot,
     post: '〒650-0012',
     address: '兵庫県神戸市中央区北長狭通２丁目１−４',
@@ -33,8 +35,9 @@ export const Shops = [
     shopColor: '#3da3fc',
   },
   {
-    storeId: 'kb-villa',
+    storeId: 'kbVilla',
     name: 'ホットポイントヴィラ',
+    nameEn: 'hotpoint villa',
     logo: LogoVilla,
     post: '〒650-0012',
     address: '兵庫県神戸市中央区北長狭通１丁目１０−１３',
@@ -43,7 +46,7 @@ export const Shops = [
     shopColor: '#db3dfc',
   },
   {
-    storeId: 'kb-style',
+    storeId: 'kbStyle',
     name: 'ホットポイント スタイル',
     logo: LogoStyle,
     post: '〒650-0012',

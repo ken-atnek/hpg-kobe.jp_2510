@@ -1,0 +1,17 @@
+[
+  {
+    "banId": "001",
+    "banTitle": "夏の陣フォースステージ結果発表！",
+    "banImage": "/images/area/ban/1754985803.jpg",
+    "status": 3,
+    "linkTarget": true,
+    "linkUrl": "https://contest2025-summer.hot-point.jp/"
+  },
+  {
+    "banId": "002",
+    "banTitle": "夏の陣フォースステージ結果発表！",
+    "banImage": "/images/area/ban/1749005623.jpg",
+    "popUpImage": "/images/area/ban/1749005623_pop.jpg",
+    "status": 4
+  }
+]

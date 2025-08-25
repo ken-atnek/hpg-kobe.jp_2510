@@ -5,305 +5,74 @@
 /* stylelint-disable custom-property-pattern */
 // このファイル全体のルールを無効にする
 .containerFooter {
-    background-color: $BaseRed;
-    color: $base-white;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-inline: 2vw;
-    padding: 7em 0 3em 0;
-    gap: 15em 0;
-    @include sp {
-        padding: 13vw 0 4vw 0;
-        gap: 6vw 0;
-    }
-    article {
+    --base-color: #000;
+    .listArea {
+        position: relative;
+        font-size: inherit;
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        width: 100%;
         max-width: $articleMaxWidth;
-        @include sp {
+        color: var(--base-color);
+        .itemLink {
             position: relative;
-            max-width: unset;
-            width: 100%;
-        }
-    }
-    .inner_top {
-        display: flex;
-        justify-content: flex-end;
-        padding-right: 5em;
-        gap: 0 10em;
-        @include sp {
-            gap: unset;
-            padding-right: unset;
-            justify-content: flex-start;
-        }
-        nav {
-            position: relative;
-            font-size: 1em;
-            display: flex;
-            flex-direction: row-reverse;
-            gap: 0 3.6em;
-            padding-top: 4em;
-            @include sp {
-                display: none;
-            }
-            a {
-                position: relative;
-                @include Serif;
-                font-size: FZ(18);
-                writing-mode: vertical-rl;
-                letter-spacing: 0.4em;
-                // NOTE 縦書き調整
-                text-orientation: upright;
-                font-feature-settings: initial;
-                height: fit-content;
-                &::before {
-                    content: "";
-                    position: absolute;
-                    top: 0;
-                    right: -0.4em;
-                    width: 1px;
-                    height: 100%;
-                    background-color: #fff;
-                    transition: 0.5s ease-out;
-                    transform: scale(1, 0);
-                    transform-origin: center top;
-                }
-                @include hover {
-                    &::before {
-                        transition: 0.3s ease-out;
-                        transform: scale(1, 1);
-                    }
-                }
-            }
-        }
-        .box_title {
-            position: relative;
-            font-size: 1em;
+            font-size: inherit;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 1em 0;
-            align-self: flex-start;
-            @include sp {
-                width: 100%;
-                align-items: flex-start;
+            width: 100%;
+            border-left: solid 1px;
+            padding: 1em 0 2em;
+            margin-bottom: 1em;
+            &:last-child {
+                border-right: solid 1px;
             }
-            .wrap_logo {
-                font-size: 1em;
-                width: 6.2em;
-                padding-right: 0.1em;
-                @include sp {
-                    position: absolute;
-                    right: 2vw;
-                    width: 16vw;
-                    bottom: -7vw;
-                }
-                .logoSvg {
-                    width: 100%;
-                    fill: white;
-                    aspect-ratio: 1/1.373;
-                }
-            }
-            .wrap_en {
-                position: relative;
-                font-size: 1em;
-                color: $base-white;
-                @include DIN_Condensed_Light;
+            .nameEn {
+                @include BebasNeue;
+                font-size: FZ(32);
                 text-transform: uppercase;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                width: fit-content;
-                padding-left: 0.2em;
-                @include sp {
-                    display: none;
-                }
-                .head {
-                    font-size: FZ(12);
-                    letter-spacing: 0.35em;
-                    margin-bottom: 1em;
-                    @include sp {
-                        margin-bottom: unset;
-                        font-size: 2.6vw;
-                    }
-                }
-                .contents {
-                    position: relative;
-                    font-size: FZ(16);
-                    letter-spacing: 0.35em;
-                    display: flex;
-                    flex-direction: column;
-                    align-items: center;
-                    @include sp {
-                        font-size: 3vw;
-                    }
-                    &::before,
-                    &::after {
-                        content: "";
-                        position: absolute;
-                        top: -0.3em;
-                        width: 0.2em;
-                        @include svg-titleComma("ffffff");
-                    }
-                    &::before {
-                        left: calc(100% + 0.4em);
-                    }
-                    &::after {
-                        right: calc(100% + 0.7em);
-                        transform: scale(-1, 1);
-                    }
+            }
+            .nameJp {
+                font-size: FZ(18);
+                font-weight: 500;
+                letter-spacing: 0.08em;
+                position: relative;
+                &::after {
+                    content: "";
+                    position: absolute;
+                    left: 50%;
+                    translate: -50%;
+                    top: calc(100% + 0.3em);
+                    width: 0.6em;
+                    aspect-ratio: 1;
+                    border-bottom: 3px solid;
+                    border-right: 3px solid;
+                    rotate: 45deg;
+                    border-color: var(--base-color);
+                    @include move03;
                 }
             }
-            .title {
-                font-size: FZ(16);
-                position: absolute;
-                left: 50%;
-                translate: -50%;
-                top: calc(100% + 2em);
-                writing-mode: vertical-rl;
-                width: max-content;
-                height: max-content;
-                letter-spacing: 0.6em;
-                text-orientation: upright;
-                font-feature-settings: initial;
-                @include sp {
-                    letter-spacing: 0.2em;
-                    font-size: 4.4vw;
-                    position: relative;
-                    top: unset;
-                    left: unset;
-                    translate: unset;
-                    writing-mode: unset;
-                    padding-left: 4vw;
-                    width: unset;
-                    height: unset;
-                    text-orientation: unset;
-                    font-feature-settings: unset;
+            @include hover {
+                .nameJp {
+                    &::after {
+                        translate: -50% 0.3em;
+                    }
                 }
             }
         }
     }
-    .inner_bottom {
-        flex-direction: column;
-        & > div {
-            position: relative;
-            width: fit-content;
-            font-size: 1em;
-            display: flex;
-            flex-direction: column;
-            @include sp {
-                padding-left: 4vw;
-            }
-            &::after {
-                content: "";
-                position: absolute;
-                right: 0;
-                bottom: calc(100% + 1.5em);
-                width: 69vw;
-                height: 1px;
-                background-color: $base-white;
-                @media screen and (max-width: 1206px) {
-                    width: 80vw;
-                }
-                @include sp {
-                    width: 80vw;
-                    right: unset;
-                    left: 0;
-                    bottom: calc(100% + 3vw);
-                }
-            }
-        }
-        dl {
-            position: relative;
-            font-size: 1em;
-            display: grid;
-            grid-template-columns: auto 1fr;
-            gap: 0.2em 0;
-            @include sp {
-                gap: 1vw 0;
-            }
-            div {
-                grid-column: span 2;
-                font-size: 1em;
-                display: grid;
-                grid-template-columns: subgrid;
-                dt,
-                dd {
-                    font-size: FZ(14);
-                    letter-spacing: 0.2em;
-                    @include sp {
-                        font-size: 2.8vw;
-                        letter-spacing: 0.12em;
-                    }
-                }
-                dt {
-                    display: flex;
-                    justify-content: space-between;
-                    &::after {
-                        content: "：";
-                        margin-left: 0.2em;
-                    }
-                }
-                dd {
-                    padding-left: 0.2em;
-                }
-            }
-        }
-        .bottom {
-            font-size: FZ(14);
-            margin-top: 0.5em;
-            letter-spacing: 0.14em;
-            @include sp {
-                font-size: 2.8vw;
-                letter-spacing: 0.04em;
-            }
-        }
-        a {
-            // display: inline-block;
-            align-self: flex-start;
-            font-size: FZ(14);
-            padding-bottom: 0.1em;
-            margin-top: 0.8em;
-            @include SunSerif;
-            font-weight: 500;
-            border-bottom: 1px solid;
-            @include sp {
-                font-size: 3vw;
-            }
-        }
-    }
-    .fixedLinkTop {
-        position: fixed;
-        right: 4vw;
-        z-index: 100;
-        bottom: 10vw;
-        font-size: 1em;
-        width: 4em;
-        aspect-ratio: 1;
-        background-color: #2e2e2e;
-        border-radius: 50%;
-        @include sp {
-            width: 14vw;
-            right: 2vw;
-        }
-        &::before {
-            content: "";
-            position: absolute;
-            left: 50%;
-            translate: -50%;
-            width: 1px;
-            height: 50%;
-            bottom: 0;
-            background-color: #fff;
-        }
-        &::after {
-            content: "";
-            position: absolute;
-            inset: 0;
-            margin: auto;
-            width: 0.6em;
-            aspect-ratio: 1;
-            clip-path: polygon(0 100%, 100% 100%, 50% 0);
-            background-color: #fff;
-        }
+
+    .copyRight {
+        background-color: #000;
+        color: $base-white;
+        font-size: FZ(12);
+        letter-spacing: 0.08em;
+        width: 100%;
+        text-align: center;
+        padding: 0.5em 0;
+        display: inline-block;
     }
 }

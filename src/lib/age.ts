@@ -5,7 +5,7 @@
  * Last updated: 2025-08-19
  * ======================================= */
 
-export type AgeScope = 'global';
+export type AgeScope = 'global' | 'hot' | 'villa' | 'group'; // 必要なスコープを列挙
 
 // 保存形式（将来拡張も見据えて version を持たせる）
 type StoredFlag = { exp: number; v: 1 };
@@ -19,11 +19,11 @@ const key = (scope: AgeScope) => `age-ok:${scope}`;
 //     "global": { "ttlHours": 24 }
 //   }
 // }
-const CONFIG_URL = './age.config.json';
+const CONFIG_URL = '/age.config.json';
 const DEFAULT_TTL_HOURS = 24; // JSONが無い/壊れている場合のデフォルト
 
-// 開発環境では 5 秒で再認証（NODE_ENV=development）
-const DEV_TTL_SECONDS = 5;
+// 開発環境では 6時間で再認証（NODE_ENV=development）
+const DEV_TTL_SECONDS = 21600;
 const isDev =
   typeof process !== 'undefined' && process.env?.NODE_ENV === 'development';
 

@@ -24,7 +24,7 @@ $base-vw: calc($tilt * 100);
     }
 }
 
-$articleMaxWidth: 120rem;
+$articleMaxWidth: 128rem;
 
 /* =================================
  * フォント設定
@@ -76,6 +76,18 @@ $articleMaxWidth: 120rem;
     font-weight: normal;
     font-style: normal;
 }
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
+
+@import url("https://fonts.googleapis.com/css2?family=Reenie+Beanie&display=swap");
+
+@mixin BebasNeue {
+    font-family: "Bebas Neue", sans-serif;
+    font-weight: normal;
+    font-style: normal;
+}
+@mixin Reenie {
+    font-family: "Reenie Beanie", cursive;
+}
 
 /* =================================
  * カラー変数
@@ -83,11 +95,13 @@ $articleMaxWidth: 120rem;
 
 $base-white: #fdfdfd;
 $base-black: #615757;
-$font-black: #352c2c;
+$font-black: #231815;
 $lightGray: #e5e8ea;
 $base-pink: #f0bacc;
 $BaseRed: #e72012;
 $DarkRed: #b41a0f;
+$shop-hot: #3da3fc;
+$shop-villa: #db3dfc;
 
 /* =================================
  * レスポンシブ設定
@@ -141,4 +155,11 @@ $sp: 480px;
             @content;
         }
     }
+}
+
+/* =================================
+ * アニメーション他
+ * ------------------------------ */
+@mixin move03 {
+    transition: 0.3s ease-out;
 }

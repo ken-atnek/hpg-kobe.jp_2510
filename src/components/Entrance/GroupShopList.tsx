@@ -8,7 +8,6 @@
 'use client';
 import ExternalLink from '@/components/common/ExternalLink';
 import styles from '@/styles/Entrance.module.scss';
-import Link from 'next/link';
 import {
   useState,
   useEffect,

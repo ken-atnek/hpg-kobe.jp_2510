@@ -64,10 +64,7 @@ export const GroupShops = [
     storeId: 'kb_hot',
     name: '神戸ホットポイント',
     area: 'kobe',
-    logo: '/images/logo/kobe-hot.webp',
-    phone: '078-332-0388',
     url: 'http://www.hpg-kobe.jp/hot/',
-    shopColor: '#D9C796',
   },
   {
     storeId: 'kb_style',

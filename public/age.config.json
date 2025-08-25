@@ -2,6 +2,9 @@
   "_comment": "グローバル認証のTTL（時間単位）: 168h = 1週間",
   "ttlHours": 168,
   "scopes": {
-    "global": { "ttlHours": 168 }
+    "global": { "ttlHours": 168 },
+    "group": { "ttlHours": 168 },
+    "hot": { "ttlHours": 168 },
+    "villa": { "ttlHours": 168 }
   }
 }

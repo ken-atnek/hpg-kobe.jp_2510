@@ -10,10 +10,14 @@ import { Shops } from '@/data/AreaShopData';
 import Image from 'next/image';
 import Link from 'next/link';
 
-const EntranceAreaShopList = () => {
+const EntranceAreaShopList = ({
+  excludeStoreId,
+}: {
+  excludeStoreId?: string;
+}) => {
   return (
     <ul className={styles.listAreaShop}>
-      {Shops.map((shop) => (
+      {Shops.filter((shop) => shop.storeId !== excludeStoreId).map((shop) => (
         <li key={shop.storeId}>
           <Link href={shop.url}></Link>
           <Image src={shop.logo} alt={shop.name} width={120} height={60} />

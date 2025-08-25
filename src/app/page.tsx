@@ -8,6 +8,15 @@
 import type { Metadata } from 'next';
 import RequireAge from '@/components/RequireAge';
 import styles from '@/styles/AreaTop.module.scss';
+import Footer from '@/components/common/Footer';
+import GroupLogo from '@/assets/images/logo/group.webp';
+import Image from 'next/image';
+import BlockTelop from '@/components/AreaTop/BlockTelop';
+import BlockShopList from '@/components/AreaTop/BlockShopList';
+import BlockPickUp from '@/components/AreaTop/BlockPickUp';
+import BannerGroup from '@/components/common/BannerGroup';
+import BlockNewFace from '@/components/AreaTop/BlockNewFace';
+
 export const generateMetadata = (): Metadata => {
   return {
     title: '神戸・三宮の風俗｜ファッションヘルス:神戸ホットポイントグループ',
@@ -17,11 +26,68 @@ export const generateMetadata = (): Metadata => {
 };
 export default function AreaTop() {
   return (
-    <RequireAge scope="global" authPath="/auth">
-      <main className={styles.top}>
-        <h1 className={styles['top__title']}>エリアTOP</h1>
-        {/* 後で News / Topics / Ranking を追加 */}
+    <RequireAge scope="group" authPath="/auth">
+      <main className={styles.areaTop}>
+        <h1>神戸・三宮の風俗｜ファッションヘルス:神戸ホットポイントグループ</h1>
+        <section className={styles.containerHeadTitle}>
+          <Image src={GroupLogo} alt="hot point group" />
+          <p>神戸ホットポイントグループ</p>
+        </section>
+        <section className={styles.containerPickUp}>
+          <BlockPickUp />
+        </section>
+        <section className={styles.containerTelop}>
+          <h2>news</h2>
+          <BlockTelop />
+        </section>
+        <section className={styles.containerShopList}>
+          <h2>hotpoint group kobe area</h2>
+          <BlockShopList />
+        </section>
+        <section className={styles.containerContents}>
+          <article>
+            <div className={styles.boxLeftBan}>
+              <h2>
+                <span>topics</span>トピックス
+              </h2>
+              <BannerGroup
+                jsonPath="/data/area-top/areaTopLeftBanGroup.json"
+                title="kobe area event"
+                className={styles.boxGroup}
+              />
+              <BannerGroup
+                jsonPath="/data/area-top/areaTopLeftBanHot.json"
+                title="kobe hotpoint event"
+                className={styles.boxHot}
+              />
+              <BannerGroup
+                jsonPath="/data/area-top/areaTopLeftBanVilla.json"
+                title="hotpoint villa event"
+                className={styles.boxVilla}
+              />
+              <BannerGroup
+                jsonPath="/data/area-top/areaTopLeftBanRecruit.json"
+                title="recruit"
+                className={styles.boxRecruit}
+              />
+            </div>
+            <div className={styles.boxMainContents}>
+              <BannerGroup
+                jsonPath="/data/area-top/areaTopMainHead.json"
+                className={styles.wrapMainBanHead}
+              />
+              <div className={styles.wrapNewFace}>
+                <h2 className={styles.itemH2}>
+                  <span>new face</span>
+                  新人情報
+                </h2>
+                <BlockNewFace />
+              </div>
+            </div>
+          </article>
+        </section>
       </main>
+      <Footer className={styles.areaFooter} />
     </RequireAge>
   );
 }
