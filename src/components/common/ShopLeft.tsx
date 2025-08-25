@@ -42,7 +42,7 @@ const ShopLeft = ({ logoUrl, photoDiaryUrl }: ShopLeftProps) => {
             <svg
               className={styles.logoSvg}
               width="200"
-              height="auto"
+              height="50"
               aria-hidden="true"
             >
               <use href={logoUrl} />

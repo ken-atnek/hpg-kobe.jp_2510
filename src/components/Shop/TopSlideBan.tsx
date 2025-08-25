@@ -1,43 +1,49 @@
 /* =======================================
  *店舗 TOP PICK UP
- * URL: src/components/Shop/TopPickUp.tsx
+ * URL: src/components/Shop/TopSlideBan.tsx
  * Referenced in: src/components/common/ShopTopMain.tsx
  * Created: 2025-08-22
  * Last updated: 2025-08-22
  * ======================================= */
 'use client';
-import styles from '@/styles/components/ShopTopPickUp.module.scss';
+import styles from '@/styles/components/ShopTopSlideBan.module.scss';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay, Pagination } from 'swiper/modules';
+import { Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import { usePathname } from 'next/navigation';
 import { renderBannerItem, useBannerItems } from '@/lib/renderBannerItem';
 import Image from 'next/image';
 import 'swiper/css';
-const TopPickUp = () => {
+const TopSlideBan = () => {
   const pathname = usePathname();
   const path = pathname.split('/')[1];
   // 🔽 JSON パスを店舗別に切り替え
   const jsonBasePath = `/data/${path}`;
-  const jsonPathPickUp = `${jsonBasePath}/topPickUp.json`;
+  const jsonPathPickUp = `${jsonBasePath}/topSlideBan.json`;
   const [items, setModalImage, modalImage] = useBannerItems(jsonPathPickUp);
 
+  // スライド数が足りないときは複製してループ対応
+  const minSlideCount = 8;
+  const visibleItems =
+    items.length < minSlideCount
+      ? [...items, ...items, ...items] // 3倍に増やす（元の構造を壊さず）
+      : items;
+
   return (
-    <div className={styles.boxTopPickUp}>
+    <div className={styles.boxTopSlideBan}>
       <div className={styles.wrapImageList}>
         <Swiper
-          slidesPerView={'auto'}
-          spaceBetween={0}
-          autoplay={{ delay: 3000, disableOnInteraction: false }}
+          slidesPerView={2.5}
+          centeredSlides={true}
           loop={true}
-          modules={[Autoplay, Pagination]}
-          speed={800}
-          pagination={{ clickable: true }}
+          autoplay={{ delay: 6000, disableOnInteraction: false }}
+          modules={[Autoplay]}
+          speed={1400}
         >
-          {items.map((item, index) => (
-            <SwiperSlide key={item.banId} style={{ width: '100%' }}>
+          {visibleItems.map((item) => (
+            <SwiperSlide key={`${item.banId}-${Math.random()}`}>
               <div className={styles.aspectWrapper}>
-                {renderBannerItem(item, setModalImage, index === 0)}
+                {renderBannerItem(item, setModalImage)}
               </div>
             </SwiperSlide>
           ))}
@@ -61,4 +67,4 @@ const TopPickUp = () => {
     </div>
   );
 };
-export default TopPickUp;
+export default TopSlideBan;

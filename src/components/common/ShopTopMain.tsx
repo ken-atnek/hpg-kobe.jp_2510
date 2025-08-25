@@ -10,26 +10,34 @@ import TopPickUp from '@/components/Shop/TopPickUp';
 import CastSlide from '@/components/Shop/TopCastSlide';
 import { usePathname } from 'next/navigation';
 import CastRanking from '@/components/Shop/TopCastRanking';
-
+import TopSlideBan from '@/components/Shop/TopSlideBan';
+import BannerGroup from '@/components/common/BannerGroup';
 const ShopTopMain = () => {
   const pathname = usePathname();
   const store = pathname.split('/')[1];
+
+  // 🔽 JSON パスを店舗別に切り替え
+  const jsonBasePath = `/data/${store}`;
+  const jsonPathBanMain = `${jsonBasePath}/TopMainBan01.json`;
+
   return (
     <section className={styles.containerShopTopMain}>
       <TopPickUp />
-
       <CastSlide
         titleJp="新人紹介"
         titleEn="new face"
         titleEnSub="cast"
         jsonPath={`/data/${store}/TopNewFace.json`}
       />
+
       <CastRanking
         titleJp="キャストランキング"
         titleEn="cast"
         titleEnSub="ranking"
         jsonPath={`/data/${store}/TopRanking.json`}
       />
+      <TopSlideBan />
+      <BannerGroup jsonPath={jsonPathBanMain} className={styles.boxBanMain} />
     </section>
   );
 };

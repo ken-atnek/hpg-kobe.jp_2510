@@ -3,6 +3,7 @@
  * ------------------------------ */
 @use "variable" as *;
 @use "svg" as *;
+@use "mixin" as *;
 /* stylelint-disable no-descending-specificity */
 /* stylelint-disable keyframes-name-pattern */
 /* stylelint-disable custom-property-pattern */
@@ -225,74 +226,7 @@
             }
         }
     }
-    .containerShopList {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        font-size: inherit;
-        background: url(../assets/images/weave_bg.webp) no-repeat center
-            center / cover;
-        background-color: rgb(54, 54, 54);
-        background-blend-mode: hard-light;
-        padding: 2em 2vw;
-        h2 {
-            @include BebasNeue;
-            font-size: FZ(68);
-            text-transform: uppercase;
-        }
-        .blockShopList {
-            position: relative;
-            max-width: $articleMaxWidth;
-            width: 100%;
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            font-size: inherit;
-            gap: 0 1.4em;
-            margin-top: 2em;
-            grid-template-rows: 1fr auto auto;
-            li {
-                position: relative;
-                width: 100%;
-                display: grid;
-                grid-template-rows: subgrid;
-                font-size: 1em;
-                grid-row: span 3;
-                .itemImage {
-                    width: 100%;
-                    background-color: $base-white;
-                    display: flex;
-                    justify-content: center;
-                    height: 100%;
-                    padding-block: 1em;
-                    font-size: inherit;
-                    img {
-                        object-fit: contain;
-                        min-width: 60%;
-                    }
-                    &.kbStyle {
-                        img {
-                            min-width: 40%;
-                        }
-                    }
-                }
-                p {
-                    font-size: FZ(18);
-                    text-align: center;
-                    letter-spacing: 0.08em;
-                    font-weight: 500;
-                    margin-top: 0.5em;
-                    display: inline-block;
-                }
-                .itemTel {
-                    font-size: FZ(20);
-                    text-align: center;
-                    font-weight: 500;
-                    letter-spacing: 0.04em;
-                    margin-top: 0.2em;
-                }
-            }
-        }
-    }
+
     .containerContents {
         display: flex;
         justify-content: center;
@@ -624,6 +558,211 @@
                                             }
                                         }
                                     }
+                                }
+                            }
+                        }
+                    }
+                }
+                .wrapRealTime {
+                    position: relative;
+                    font-size: inherit;
+                    display: flex;
+                    flex-direction: column;
+                    width: 100%;
+                    .itemH2 {
+                        width: 100%;
+                        padding: 0.8em 1em 0.5em 2em;
+                        border-top-right-radius: unset;
+                        border-top-left-radius: 2rem;
+                        border-bottom-left-radius: unset;
+                        border-bottom-right-radius: unset;
+                        background-image: linear-gradient(
+                            to right,
+                            rgba(#6d022f, 1),
+                            rgba(#98003f, 1)
+                        );
+                        span {
+                            &::before {
+                                @include svg-icon-new-face("ff002f");
+                            }
+                        }
+                    }
+                    .contentsRealtime {
+                        position: relative;
+                        font-size: inherit;
+                        background-color: #f8f8f8;
+                        padding: 1em;
+                        .listRealTime {
+                            position: relative;
+                            font-size: inherit;
+                            display: grid;
+                            grid-template-columns: repeat(4, 1fr);
+                            gap: 2em 0.7em;
+                            @media (max-width: 1242px) {
+                                grid-template-columns: repeat(3, 1fr);
+                            }
+                            li {
+                                position: relative;
+                                font-size: inherit;
+                                display: flex;
+                                flex-direction: column;
+                                background-color: #fff;
+                                box-shadow: 0 4px 4px rgba(#000, 0.25);
+                                color: $font-black;
+                                .realTImeDetail {
+                                    position: relative;
+                                    font-size: FZ(14);
+                                    color: $base-white;
+                                    text-align: center;
+                                    padding-block: 0.4em;
+                                    letter-spacing: 0.04em;
+                                    background-color: var(--shopColor);
+                                    &.statusNa {
+                                        background-color: #eaeaea;
+                                        color: var(--shopColor);
+                                        &::before {
+                                            content: "";
+                                            position: absolute;
+                                            left: 0;
+                                            top: 0;
+                                            width: 0.5rem;
+                                            height: 100%;
+                                            background-color: var(--shopColor);
+                                        }
+                                    }
+                                }
+                                .wrapTodayTime {
+                                    font-size: inherit;
+                                    display: flex;
+                                    justify-content: center;
+                                    padding-block: 0.3em;
+                                    span {
+                                        display: flex;
+                                        font-size: FZ(16);
+                                        @include FuturaCyrillicBook;
+                                        align-items: center;
+                                        letter-spacing: 0.12em;
+                                        &:nth-of-type(2) {
+                                            &::before {
+                                                display: inline-block;
+                                                content: "";
+                                                width: 0.4em;
+                                                aspect-ratio: 0.85;
+                                                background-color: $font-black;
+                                                margin-inline: 0.56em;
+                                                clip-path: polygon(
+                                                    0 0,
+                                                    100% 50%,
+                                                    0 100%
+                                                );
+                                            }
+                                        }
+                                    }
+                                }
+                                a {
+                                    position: relative;
+                                    font-size: inherit;
+                                    display: flex;
+                                    flex-direction: column;
+                                    .wrapPhoto {
+                                        @include cast-wrap-photo;
+                                        aspect-ratio: 3/4;
+                                        .gradeLabel {
+                                            font-size: FZ(16);
+                                        }
+                                        &:not(.grade9) {
+                                            img {
+                                                clip-path: inset(0.5em);
+                                            }
+                                        }
+                                        img {
+                                            object-fit: cover;
+                                        }
+                                    }
+                                }
+                                .castProfile {
+                                    font-size: inherit;
+                                    display: flex;
+                                    flex-direction: column;
+                                    justify-content: space-between;
+                                    padding: 0.5em;
+                                    gap: 0.5em 0;
+                                    .wrapName {
+                                        font-size: inherit;
+                                        display: flex;
+                                        justify-content: space-between;
+                                        align-items: center;
+                                        .castName {
+                                            font-size: FZ(18);
+                                            letter-spacing: 0.12em;
+                                        }
+                                        .shopName {
+                                            color: var(--shopColor);
+                                            font-size: FZ(18);
+                                            letter-spacing: 0.12em;
+                                            @include FuturaCyrillicDemi;
+                                        }
+                                    }
+                                    .castSize {
+                                        font-size: inherit;
+                                        display: flex;
+                                        align-items: center;
+                                        gap: 0 0.1em;
+                                        justify-content: center;
+                                        span {
+                                            @include FuturaCyrillicBook;
+                                            font-size: FZ(14);
+                                            &.age {
+                                                &::before {
+                                                    content: "Age.";
+                                                }
+                                            }
+                                            &.tall {
+                                                &::before {
+                                                    content: "T.";
+                                                }
+                                            }
+                                            &.bust {
+                                                &::before {
+                                                    content: "B.";
+                                                }
+                                                i {
+                                                    font-size: inherit;
+                                                    text-transform: uppercase;
+                                                    margin-left: 0.05em;
+                                                    &::before,
+                                                    &::after {
+                                                        display: inline-block;
+                                                        translate: 0 -0.08em;
+                                                    }
+                                                    &::before {
+                                                        content: "[";
+                                                        margin-right: 0.1em;
+                                                    }
+                                                    &::after {
+                                                        content: "]";
+                                                        margin-left: 0.05em;
+                                                    }
+                                                }
+                                            }
+                                            &.west {
+                                                &::before {
+                                                    content: "W.";
+                                                }
+                                            }
+                                            &.hip {
+                                                &::before {
+                                                    content: "H.";
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                                &.hot {
+                                    --shopColor: #3da4fc;
+                                }
+                                &.villa {
+                                    --shopColor: #da3dfc;
                                 }
                             }
                         }

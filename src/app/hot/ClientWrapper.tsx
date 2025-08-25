@@ -14,6 +14,8 @@ import Footer from '@/components/common/Footer';
 import styles from '@/styles/ShopCommon.module.scss';
 import Header from '@/components/common/ShopHeader';
 import { navMenu } from '@/data/hot/navMenuData'; // 必要に応じて別店舗に切り替え
+import ContainerShopList from '@/components/common/ContainerShopList';
+import ShopFooterMenu from '@/components/common/ShopFooterMenu';
 export default function ClientWrapper({
   children,
 }: {
@@ -38,6 +40,11 @@ export default function ClientWrapper({
               navMenu={navMenu}
             />
             <main className={styles.shopTop}>{children}</main>
+            <ShopFooterMenu
+              navMenu={navMenu}
+              className={styles.shopHotFooterMenu}
+            />
+            <ContainerShopList />
             <Footer className={styles.shopHotFooter} />
           </>
         </RequireAge>
