@@ -12,6 +12,7 @@ import { usePathname } from 'next/navigation';
 import CastRanking from '@/components/Shop/TopCastRanking';
 import TopSlideBan from '@/components/Shop/TopSlideBan';
 import BannerGroup from '@/components/common/BannerGroup';
+import ShopNews from '@/components/Shop/TopNews';
 const ShopTopMain = () => {
   const pathname = usePathname();
   const store = pathname.split('/')[1];
@@ -29,7 +30,11 @@ const ShopTopMain = () => {
         titleEnSub="cast"
         jsonPath={`/data/${store}/TopNewFace.json`}
       />
-
+      <ShopNews
+        titleJp="新着情報・トピックス"
+        titleEn="news"
+        jsonPath={`/data/${store}/TopNews.json`}
+      />
       <CastRanking
         titleJp="キャストランキング"
         titleEn="cast"

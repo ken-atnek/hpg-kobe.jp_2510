@@ -13,8 +13,8 @@
     position: relative;
     font-size: inherit;
     padding: 9em 3em 1.6em 3em;
-    background: url(../../assets/images/contents-bg.webp) no-repeat center
-        center / cover;
+    // background: url(../../assets/images/contents-bg.webp) no-repeat center
+    //     center / cover;
     width: 100%;
     .titleObject {
         @include object-title;
