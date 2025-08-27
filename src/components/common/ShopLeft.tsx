@@ -6,7 +6,7 @@
  * Last updated: 2025-08-23
  * ======================================= */
 import { usePathname } from 'next/navigation';
-import styles from '@/styles/ShopCommon.module.scss';
+import styles from '@/styles/ShopLeft.module.scss';
 import BannerGroup from '@/components/common/BannerGroup';
 import clsx from 'clsx';
 import { Shops } from '@/data/AreaShopData';

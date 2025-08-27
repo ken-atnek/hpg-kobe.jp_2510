@@ -272,10 +272,8 @@
                     }
                 }
                 .boxBanGroup {
-                    position: relative;
                     display: flex;
                     flex-direction: column;
-                    font-size: inherit;
                     ul {
                         display: grid;
                         grid-auto-flow: row;

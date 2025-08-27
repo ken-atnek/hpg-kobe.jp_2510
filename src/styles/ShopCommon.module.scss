@@ -29,25 +29,22 @@
 /* =================================
  * Main
  * ------------------------------ */
-.shopTop {
+.bodyContents {
     display: flex;
-    // padding: 0 2vw;
-    article {
-        align-self: center;
-        max-width: $articleMaxWidth;
-        gap: 0 1em;
-        box-shadow: 0.5rem -3rem 3rem rgba(1, 1, 1, 0.1);
-    }
+    align-items: center;
+    flex-direction: column;
 }
+
 /* =================================
  * ShopTopMain
  * ------------------------------ */
-.containerShopTopMain {
-    display: flex;
-    flex-direction: column;
+.shopMainContainer {
+    display: grid;
+    grid-auto-flow: row;
+    max-width: $articleMaxWidth;
+    box-shadow: 0.5rem -3rem 3rem rgba(1, 1, 1, 0.1);
+
     .boxBanMain {
-        position: relative;
-        font-size: inherit;
         padding-top: 1rem;
         ul {
             position: relative;
@@ -56,95 +53,14 @@
             gap: 1rem 0;
         }
     }
-}
-/* =================================
- * ShopLeft
- * ------------------------------ */
-.containerShopLeft {
-    display: flex;
-    flex-direction: column;
-    padding-left: 1em;
-    background-color: #fff;
-    .boxHead {
-        font-size: inherit;
-        display: flex;
-        flex-direction: column;
-        align-items: flex-end;
-        padding: 3em 1em 1em;
-        .itemLogo {
-            position: relative;
-            font-size: inherit;
-        }
-        .sidebarH2 {
-            font-size: FZ(34);
-            @include BebasNeue;
-            color: var(--baseColor);
-        }
-        h2 {
-            font-size: FZ(14);
-            font-weight: 600;
-            letter-spacing: 0.08em;
-        }
-        .itemTel {
-            @include FuturaCyrillicDemi;
-            font-size: FZ(24);
-            letter-spacing: 0.04em;
-            margin-top: 0.2em;
-        }
-    }
-    .boxPhotoDiary {
-        width: 100%;
-        position: relative;
-        font-size: inherit;
-        padding-top: 8em;
-        &::before {
-            content: "";
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: 100%;
-            aspect-ratio: 524/246;
-            z-index: +1;
-            background: url(../assets/images/objects/photo-diary-hot.webp)
-                no-repeat center center / contain;
-        }
-        .wrapContents {
-            font-size: inherit;
-            iframe {
-                aspect-ratio: 326/497;
-            }
-        }
-    }
-    .boxBanTop,
-    .boxBanBottom {
-        font-size: inherit;
-        display: flex;
-        flex-direction: column;
-        gap: 0.5em 0;
-        ul {
-            position: relative;
-            width: 100%;
-            display: grid;
-            grid-auto-flow: row;
-            gap: 0.5em 0;
-        }
-    }
-    .boxBanBottom {
-        margin-top: 1em;
-    }
-    &.kbHot {
-        .itemLogo {
-            width: 100%;
-            margin-bottom: 1em;
-            svg {
-                width: 100%;
-                aspect-ratio: 500/176;
-                stroke: unset;
-                fill: $shop-hot;
-            }
-        }
+    &.isLeftActive {
+        grid-auto-flow: unset;
+        grid-template-columns: 25% 1fr;
+        padding-bottom: 3em;
+        gap: 0 1em;
     }
 }
+
 /* =================================
  * ShopFooterMenu
  * ------------------------------ */

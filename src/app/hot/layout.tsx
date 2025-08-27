@@ -5,7 +5,6 @@
  * Last updated: 2025-08-20
  * ======================================= */
 import ClientWrapper from '@/app/hot/ClientWrapper';
-import '@/styles/globals.scss';
 
 export default function RootLayout({
   children,

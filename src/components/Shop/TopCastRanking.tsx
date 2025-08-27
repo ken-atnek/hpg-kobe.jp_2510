@@ -82,7 +82,7 @@ const CastRanking = ({
   };
 
   return (
-    <div className={clsx(styles.boxCastRanking, styles[storeId])}>
+    <article className={clsx(styles.boxCastRanking, styles[storeId])}>
       <div className={styles.wrapTitle}>
         <h2>
           <span>
@@ -177,7 +177,7 @@ const CastRanking = ({
           </ul>
         </div>
       </div>
-    </div>
+    </article>
   );
 };
 export default CastRanking;

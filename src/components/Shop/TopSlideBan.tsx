@@ -30,7 +30,7 @@ const TopSlideBan = () => {
       : items;
 
   return (
-    <div className={styles.boxTopSlideBan}>
+    <article className={styles.boxTopSlideBan}>
       <div className={styles.wrapImageList}>
         <Swiper
           slidesPerView={2.5}
@@ -64,7 +64,7 @@ const TopSlideBan = () => {
           </div>
         )}
       </div>
-    </div>
+    </article>
   );
 };
 export default TopSlideBan;

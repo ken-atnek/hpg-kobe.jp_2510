@@ -23,7 +23,7 @@ const TopPickUp = () => {
   const [items, setModalImage, modalImage] = useBannerItems(jsonPathPickUp);
 
   return (
-    <div className={styles.boxTopPickUp}>
+    <article className={styles.boxTopPickUp}>
       <div className={styles.wrapImageList}>
         <Swiper
           slidesPerView={'auto'}
@@ -58,7 +58,7 @@ const TopPickUp = () => {
           </div>
         )}
       </div>
-    </div>
+    </article>
   );
 };
 export default TopPickUp;

@@ -73,7 +73,7 @@ const ShopNews = ({
   if (visibleItems.length === 0) return null;
 
   return (
-    <div className={clsx(styles.boxTopNews, styles[storeId])}>
+    <article className={clsx(styles.boxTopNews, styles[storeId])}>
       <div className={styles.wrapTitle}>
         <h2>
           <span>
@@ -114,7 +114,7 @@ const ShopNews = ({
           </li>
         ))}
       </ul>
-    </div>
+    </article>
   );
 };
 

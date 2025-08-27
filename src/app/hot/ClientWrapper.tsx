@@ -16,13 +16,17 @@ import Header from '@/components/common/ShopHeader';
 import { navMenu } from '@/data/hot/navMenuData'; // 必要に応じて別店舗に切り替え
 import ContainerShopList from '@/components/common/ContainerShopList';
 import ShopFooterMenu from '@/components/common/ShopFooterMenu';
+import ShopLeft from '@/components/common/ShopLeft';
 export default function ClientWrapper({
   children,
 }: {
   children: React.ReactNode;
 }) {
   const pathname = usePathname();
+  const isLeftActive = ['/hot/', '/hot/system/'].includes(pathname);
   const isAuthPage = pathname.startsWith('/hot/auth');
+
+  // `/hot` or `/hot/system` のときだけ ShopLeft を main 内に表示
 
   return (
     <div
@@ -39,7 +43,19 @@ export default function ClientWrapper({
               title="神戸・三宮の風俗｜ファッションヘルス:神戸ホットポイント"
               navMenu={navMenu}
             />
-            <main className={styles.shopTop}>{children}</main>
+            <main
+              className={`${styles.shopMainContainer} ${
+                isLeftActive ? styles.isLeftActive : ''
+              }`}
+            >
+              {isLeftActive && (
+                <ShopLeft
+                  logoUrl="#svg_logoKobeHot"
+                  photoDiaryUrl="https://blogparts.cityheaven.net/widget/?shopId=4973&mode=2&type=14&limitedKind=0&num=12&col=3&color=6&fontsize=14"
+                />
+              )}
+              {children}
+            </main>
             <ShopFooterMenu
               navMenu={navMenu}
               className={styles.shopHotFooterMenu}
