@@ -1,0 +1,417 @@
+/* =================================
+ * 	店舗 システムページ
+ * ------------------------------ */
+@use "variable" as *;
+@use "svg" as *;
+/* stylelint-disable no-descending-specificity */
+/* stylelint-disable keyframes-name-pattern */
+/* stylelint-disable custom-property-pattern */
+// このファイル全体のルールを無効にする
+
+.containerSystemMain {
+    display: flex;
+    flex-direction: column;
+    padding-top: 2em;
+    padding-inline: 2em;
+    box-shadow: 0.5rem -3rem 3rem rgba(1, 1, 1, 0.1);
+}
+/* =================================
+ * 平日・土日祝 料金変わらず営業中
+ * ------------------------------ */
+.blockTopAnnounce {
+    background-color: #000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-block: 1.14em;
+    font-size: inherit;
+    color: #fff;
+    border-radius: 0.3em;
+    margin-top: 2em;
+    gap: 0.8em 0;
+    h3 {
+        font-size: FZ(30);
+        font-weight: 700;
+        letter-spacing: 0.04em;
+    }
+    p {
+        font-size: FZ(18);
+        background-color: #fff;
+        padding: 0.3em 1em;
+        font-weight: 500;
+        border-radius: 0.2em;
+        display: flex;
+        align-items: center;
+        time {
+            font-weight: 600;
+            font-size: 1.4em;
+            margin-inline: 0.2em;
+        }
+    }
+    &.kbHot {
+        background-color: $shop-hot;
+        p {
+            color: $shop-hot;
+        }
+    }
+}
+/* =================================
+ * 料金表
+ * ------------------------------ */
+.blockPriceList {
+    position: relative;
+    font-size: inherit;
+    display: flex;
+    flex-direction: column;
+    gap: 3em 0;
+    margin-top: 3em;
+    .wrapPricePlan {
+        position: relative;
+        font-size: inherit;
+        h3 {
+            font-size: FZ(28);
+            font-weight: 500;
+            letter-spacing: 0.08em;
+            text-align: center;
+            color: #fff;
+            padding-block: 1em;
+            background-color: rgba(var(--shopColor), 1);
+        }
+        ul {
+            position: relative;
+            font-size: inherit;
+            display: grid;
+            border-top: 1px solid;
+            border-left: 1px solid;
+            border-color: rgba(var(--shopColor), 1);
+            li {
+                font-size: inherit;
+                display: grid;
+                grid-template-columns: subgrid;
+                div {
+                    position: relative;
+                    font-size: inherit;
+                }
+                &.header {
+                    background-color: rgba(var(--shopColor), 0.5);
+                    border-bottom: 1px solid;
+                    border-color: rgba(var(--shopColor), 1);
+                    div {
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        gap: 0.3em;
+                        padding-block: 0.8em;
+                        border-right: 1px solid;
+                        border-color: rgba(var(--shopColor), 1);
+                        h4 {
+                            font-size: FZ(20);
+                            font-weight: 500;
+                        }
+                        p {
+                            @include FuturaCyrillicBook;
+                            font-size: FZ(20);
+                        }
+                        &:first-of-type {
+                            grid-column-start: 2;
+                        }
+                    }
+                }
+                &.row {
+                    div {
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        padding-block: 0.8em;
+                        border-right: 1px solid;
+                        border-bottom: 1px solid;
+                        border-color: rgba(var(--shopColor), 1);
+                    }
+                    .min {
+                        align-items: flex-end;
+                        padding-inline: 2em;
+                        background-color: rgba(var(--shopColor), 0.7);
+                        color: #fff;
+                        span {
+                            @include FuturaCyrillicBook;
+                            font-size: FZ(24);
+                            &::after {
+                                content: "min";
+                                font-size: 0.8em;
+                            }
+                        }
+                    }
+                    .price {
+                        span {
+                            @include FuturaCyrillicBook;
+                            font-size: FZ(26);
+                            &::before {
+                                content: "¥";
+                                font-size: 0.8em;
+                                margin-right: 0.2em;
+                            }
+                        }
+                    }
+                    &:nth-of-type(2n) {
+                        background-color: #f3f3f3;
+                    }
+                }
+            }
+            &.rates2 {
+                grid-template-columns: auto 1fr;
+                li {
+                    grid-column: span 2;
+                }
+            }
+            &.rates3 {
+                grid-template-columns: auto 1fr 1fr;
+                li {
+                    grid-column: span 3;
+                }
+            }
+            &.rates4 {
+                grid-template-columns: auto 1fr 1fr 1fr;
+                li {
+                    grid-column: span 4;
+                }
+            }
+        }
+    }
+    .notice {
+        font-size: FZ(14);
+        text-align: center;
+    }
+    &.kbHot {
+        --shopColor: #{$shop-color-hot-number};
+    }
+}
+/* =================================
+ * 指名料
+ * ------------------------------ */
+.blockRequestFee {
+    border: 1px solid;
+    font-size: inherit;
+    align-self: center;
+    margin-top: 2em;
+    display: flex;
+    align-items: center;
+    padding: 0.8em 8em;
+    h3 {
+        font-size: FZ(18);
+        margin-right: 0.5em;
+    }
+    .price {
+        @include FuturaCyrillicBook;
+        font-size: FZ(24);
+        &::before {
+            content: "¥";
+            font-size: 0.8em;
+            margin-right: 0.1em;
+        }
+        &::after {
+            content: "〜";
+            font-size: 0.8em;
+            margin-left: 0.2em;
+        }
+    }
+}
+/* =================================
+ * ご予約方法
+ * ------------------------------ */
+.blockReservationGuide {
+    display: flex;
+    flex-direction: column;
+    font-size: inherit;
+    margin-top: 8em;
+    ul {
+        position: relative;
+        font-size: inherit;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        margin-top: 3em;
+        gap: 0 2em;
+        li {
+            position: relative;
+            font-size: inherit;
+            grid-row: span 3;
+            display: grid;
+            grid-template-rows: subgrid;
+            background-color: #000;
+            padding-bottom: 1em;
+            border-radius: 1em;
+            .wrapTitle {
+                display: grid;
+                place-content: center;
+                padding-block: 3em;
+                font-size: inherit;
+                h3 {
+                    background-color: #fff;
+                    font-size: FZ(24);
+                    font-weight: 600;
+                    padding-block: 0.5em;
+                    width: 11em;
+                    text-align: center;
+                    border-radius: 100vmax;
+                    letter-spacing: 0.04em;
+                    &.tel {
+                        color: #15ae54;
+                    }
+                    &.web {
+                        color: #ff6b11;
+                    }
+                }
+            }
+            .wrapContentsBottom,
+            .wrapContentsHead {
+                display: flex;
+                flex-direction: column;
+                font-size: inherit;
+                background-color: #eeeeee;
+            }
+            .wrapContentsHead {
+                align-items: center;
+                padding-block: 1em;
+                p {
+                    font-size: FZ(20);
+                    font-weight: 600;
+                    text-align: center;
+                    letter-spacing: 0.08em;
+                    line-height: 1.2em;
+                    margin-top: 1em;
+                }
+                .itemLogo {
+                    position: relative;
+                    font-size: inherit;
+                }
+                .itemTel {
+                    @include FuturaCyrillicDemi;
+                    font-size: FZ(36);
+                    letter-spacing: 0.04em;
+                }
+                h5 {
+                    font-size: FZ(30);
+                    font-weight: 700;
+                    line-height: 1.2em;
+                    letter-spacing: 0.08em;
+                    text-align: center;
+                    margin-bottom: 0.5em;
+                }
+                img {
+                    width: 40%;
+                }
+            }
+            .wrapContentsBottom {
+                padding-inline: 1em;
+                padding-bottom: 2em;
+                h4 {
+                    border: 1px solid;
+                    display: flex;
+                    justify-content: center;
+                    font-size: FZ(16);
+                    font-weight: 600;
+                    padding-block: 0.5em;
+                    letter-spacing: 0.08em;
+                    margin-bottom: 1.4em;
+                }
+                i {
+                    color: #ff0000;
+                }
+                a {
+                    font-size: inherit;
+                }
+                p {
+                    font-size: FZ(16);
+                    text-align: justify;
+                    letter-spacing: 0.08em;
+                    line-height: 1.4em;
+                    &.innerTel {
+                        position: relative;
+                        padding-left: 1em;
+                        font-weight: 600;
+                        &::before {
+                            content: "・";
+                            position: absolute;
+                            left: 0;
+                            top: 0.1em;
+                        }
+                        &:not(:first-of-type) {
+                            margin-top: 1em;
+                        }
+                    }
+                    &.innerWeb {
+                        font-weight: 600;
+                        &:not(:first-of-type) {
+                            margin-top: 1em;
+                        }
+                    }
+                }
+                small {
+                    font-size: FZ(14);
+                    font-weight: 500;
+                    letter-spacing: 0.04em;
+                }
+            }
+        }
+    }
+    &.kbHot {
+        .itemLogo {
+            width: 60%;
+            margin-bottom: 1em;
+            margin-top: 2em;
+            svg {
+                width: 100%;
+                aspect-ratio: 500/176;
+                stroke: unset;
+                fill: $shop-hot;
+            }
+        }
+    }
+}
+/* =================================
+ * WEB予約バナー
+ * ------------------------------ */
+.blockReserveBan {
+    font-size: inherit;
+    display: flex;
+    justify-content: center;
+    padding-block: 3em;
+    font-size: inherit;
+}
+/* =================================
+ * アクセスマップ
+ * ------------------------------ */
+.blockAccess {
+    position: relative;
+    font-size: inherit;
+    display: flex;
+    flex-direction: column;
+    margin-top: 4em;
+    .wrapText {
+        font-size: inherit;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 1em;
+        margin-top: 3em;
+        gap: 0 1em;
+        address {
+            font-size: FZ(16);
+        }
+        a {
+            font-size: FZ(16);
+        }
+        p {
+            font-size: FZ(16);
+            span {
+                margin-right: 0.5em;
+            }
+        }
+    }
+    .wrapMap {
+        position: relative;
+        width: 100%;
+        iframe {
+            aspect-ratio: 2;
+        }
+    }
+}
