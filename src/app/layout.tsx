@@ -5,13 +5,12 @@
  * Last updated: 2025-08-18
  * ======================================= */
 
-import type { Metadata } from 'next';
 import '@/styles/globals.scss';
+import type { Metadata } from 'next';
 import SvgDefs from '@/components/SvgDefs';
 import { Noto_Sans_JP, Roboto } from 'next/font/google';
-// layout.tsx 上部で
 import { Bebas_Neue, Reenie_Beanie } from 'next/font/google';
-
+import { isRealProduction } from '@/lib/env';
 const bebasNeue = Bebas_Neue({
   subsets: ['latin'],
   weight: ['400'],
@@ -32,8 +31,6 @@ const roboto = Roboto({
   weight: ['100', '300', '400', '500', '700', '900'],
   display: 'swap',
 });
-// 実際の本番環境かどうかを判定
-const isRealProduction = process.env.NEXT_PUBLIC_IS_REAL_PROD === 'true';
 
 // 本番のみ metadataBase を設定
 const metadataBase = isRealProduction
@@ -56,10 +53,6 @@ export const metadata: Metadata = {
       ],
     },
   }),
-  title: '神戸・三宮の風俗｜ファッションヘルス:神戸ホットポイントグループ',
-  description: isRealProduction
-    ? '神戸 風俗のホットポイントグループは２０年以上連続、エリアシェアＮｏ.１の三宮の風俗店（ファッションヘルス）です。神戸・三宮でトップクラスの美女達と熱いお時間をお過ごしください。'
-    : undefined,
   robots: isRealProduction ? 'index, follow' : 'noindex, nofollow',
   icons: {
     icon: [

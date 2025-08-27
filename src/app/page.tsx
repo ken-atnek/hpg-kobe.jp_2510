@@ -17,12 +17,13 @@ import BannerGroup from '@/components/common/BannerGroup';
 import BlockNewFace from '@/components/AreaTop/BlockNewFace';
 import ContainerShopList from '@/components/common/ContainerShopList';
 import BlockRealTIme from '@/components/AreaTop/BlockRealTIme';
-
+import { isRealProduction } from '@/lib/env';
 export const generateMetadata = (): Metadata => {
   return {
     title: '神戸・三宮の風俗｜ファッションヘルス:神戸ホットポイントグループ',
-    description:
-      '神戸 風俗のホットポイントグループは２０年以上連続、エリアシェアＮｏ.１の三宮の風俗店（ファッションヘルス）です。神戸・三宮でトップクラスの美女達と熱いお時間をお過ごしください。',
+    description: isRealProduction
+      ? '神戸 風俗のホットポイントグループは２０年以上連続、エリアシェアＮｏ.１の三宮の風俗店（ファッションヘルス）です。神戸・三宮でトップクラスの美女達と熱いお時間をお過ごしください。'
+      : undefined,
   };
 };
 export default function AreaTop() {

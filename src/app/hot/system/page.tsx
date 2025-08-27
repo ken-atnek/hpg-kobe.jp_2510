@@ -7,7 +7,15 @@
 import styles from '@/styles/ShopTop.module.scss';
 import ShopLeft from '@/components/common/ShopLeft';
 import SystemMain from '@/components/Shop/Hot/SystemMain';
-
+import type { Metadata } from 'next';
+import { isRealProduction } from '@/lib/env';
+export const metadata: Metadata = {
+  title:
+    '料金システム｜神戸・三宮の風俗｜ファッションヘルス:神戸ホットポイント',
+  description: isRealProduction
+    ? '神戸ホットポイントの料金システムをご案内。コース料金・指名料・延長・割引情報に加え、最寄駅からのアクセスマップも掲載。'
+    : undefined,
+};
 export default function HotSystem() {
   return (
     <>
