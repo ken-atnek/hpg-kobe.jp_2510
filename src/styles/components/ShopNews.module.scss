@@ -1,0 +1,128 @@
+/* =================================
+ * 	店舗 TOP キャストランキング
+ * ------------------------------ */
+@use "../variable" as *;
+@use "../svg" as *;
+@use "../mixin" as *;
+/* stylelint-disable no-descending-specificity */
+/* stylelint-disable keyframes-name-pattern */
+/* stylelint-disable custom-property-pattern */
+// このファイル全体のルールを無効にする
+
+.boxTopNews {
+    position: relative;
+    font-size: inherit;
+    padding: 9em 3em 1.6em 3em;
+
+    width: 100%;
+    .titleObject {
+        @include object-title;
+    }
+    .listNews {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        font-size: inherit;
+
+        li {
+            position: relative;
+            grid-column: span 2;
+            display: grid;
+            grid-template-columns: subgrid;
+            font-size: inherit;
+            border-top: 1px solid;
+            padding-block: 2em;
+            gap: 0 2em;
+            .wrapThumb {
+                position: relative;
+                font-size: inherit;
+                width: 13em;
+                img {
+                    width: 100%;
+                    object-fit: contain;
+                }
+            }
+            .wrapText {
+                display: flex;
+                flex-direction: column;
+                font-size: inherit;
+                justify-content: space-between;
+                .itemDate {
+                    font-size: FZ(16);
+                    align-self: flex-end;
+                    @include FuturaCyrillicDemi;
+                }
+                .itemTitle {
+                    font-size: FZ(20);
+                    letter-spacing: 0.08em;
+                    font-weight: 500;
+                    margin-top: 0.3em;
+                    margin-bottom: 0.5em;
+                }
+                p {
+                    font-size: FZ(14);
+                    text-align: justify;
+                    letter-spacing: 0.04em;
+                    line-height: 1.6em;
+                    flex: 1;
+                }
+                .linkMore {
+                    display: inline-block;
+                    font-size: FZ(14);
+                    align-self: flex-end;
+                    font-weight: 500;
+                    color: Blue;
+                }
+            }
+            &:last-of-type {
+                border-bottom: 1px solid;
+            }
+        }
+    }
+    &.kbHot {
+        background-color: rgba(248, 248, 248, 0.9);
+        background-blend-mode: soft-light;
+        .wrapTitle {
+            @include contents-title(#000000);
+        }
+        .titleObject {
+            &::before {
+                filter: brightness(105%) hue-rotate(206deg) saturate(142%)
+                    drop-shadow(0.5rem 0.5rem 0.5rem rgba(1, 1, 1, 0.3));
+            }
+        }
+        .rankingContents {
+            nav {
+                button {
+                    span {
+                        &::before {
+                            @include svg-icon-crown("3da3fc");
+                        }
+                    }
+                    &.isActive {
+                        span {
+                            &::before {
+                                @include svg-icon-crown("231815");
+                            }
+                        }
+                    }
+                }
+            }
+            .wrapRankList {
+                .rankIcon {
+                    &.rank1 {
+                        background-image: url(../../assets/images/hot/icon/rank-01.webp);
+                    }
+                    &.rank2 {
+                        background-image: url(../../assets/images/hot/icon/rank-02.webp);
+                    }
+                    &.rank3 {
+                        background-image: url(../../assets/images/hot/icon/rank-03.webp);
+                    }
+                    &:not(.rank1, .rank2, .rank3) {
+                        background-image: url(../../assets/images/hot/icon/rank-04.webp);
+                    }
+                }
+            }
+        }
+    }
+}

@@ -25,7 +25,8 @@ export type BannerItem = {
 
 export const renderBannerItem = (
   item: BannerItem,
-  setModalImage: (url: string) => void
+  setModalImage: (url: string) => void,
+  isPriority?: boolean
 ): ReactNode => {
   switch (item.status) {
     case 1:
@@ -36,6 +37,7 @@ export const renderBannerItem = (
             alt={item.banTitle}
             width={325}
             height={119}
+            {...(isPriority ? { priority: true } : {})}
           />
         </div>
       );
@@ -47,6 +49,7 @@ export const renderBannerItem = (
             alt={item.banTitle}
             width={325}
             height={119}
+            {...(isPriority ? { priority: true } : {})}
           />
         </Link>
       );
@@ -63,6 +66,7 @@ export const renderBannerItem = (
             alt={item.banTitle}
             width={325}
             height={119}
+            {...(isPriority ? { priority: true } : {})}
           />
         </a>
       );
@@ -78,6 +82,7 @@ export const renderBannerItem = (
             alt={item.banTitle}
             width={325}
             height={119}
+            {...(isPriority ? { priority: true } : {})}
           />
         </button>
       );

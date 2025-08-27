@@ -72,6 +72,15 @@ const CastRanking = ({
   const listHead = selectedRanking.casts.slice(0, 3); // Rank 1〜3
   const listMiddle = selectedRanking.casts.slice(3, 5); // Rank 4〜5
 
+  const [isFading, setIsFading] = useState(false);
+  const handleRankingChange = (index: number) => {
+    setIsFading(true);
+    setTimeout(() => {
+      setSelectedIndex(index);
+      setIsFading(false);
+    }, 200); // 300ms だけフェード時間
+  };
+
   return (
     <div className={clsx(styles.boxCastRanking, styles[storeId])}>
       <div className={styles.wrapTitle}>
@@ -100,28 +109,23 @@ const CastRanking = ({
               className={
                 index === selectedIndex ? styles.isActive : styles.style
               }
-              onClick={() => setSelectedIndex(index)}
+              onClick={() => handleRankingChange(index)}
             >
               <span>{item.title}</span>
             </button>
           ))}
         </nav>
-        <div className={styles.wrapRankList}>
+        <div className={clsx(styles.wrapRankList, { [styles.fade]: isFading })}>
           <ul className={styles.listHead}>
             {listHead.map((cast) => (
               <li key={cast.castId}>
                 <div
-                  className={`${styles.rankIcon} ${styles['rank' + cast.rank]}`}
+                  className={clsx(styles.rankIcon, styles['rank' + cast.rank])}
                 >
                   <span>No.{cast.rank}</span>
                 </div>
                 <a href={cast.castUrl}>
-                  <Image
-                    src={cast.castImage}
-                    alt={cast.castName}
-                    width={130}
-                    height={170}
-                  />
+                  <Image src={cast.castImage} alt={cast.castName} fill />
                 </a>
                 <div className={styles.textProfile}>
                   <p className={styles.castName}>{cast.castName}</p>
@@ -143,7 +147,7 @@ const CastRanking = ({
             {listMiddle.map((cast) => (
               <li key={cast.castId}>
                 <div
-                  className={`${styles.rankIcon} ${styles['rank' + cast.rank]}`}
+                  className={clsx(styles.rankIcon, styles['rank' + cast.rank])}
                 >
                   <span>No.{cast.rank}</span>
                 </div>

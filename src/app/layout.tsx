@@ -9,6 +9,19 @@ import type { Metadata } from 'next';
 import '@/styles/globals.scss';
 import SvgDefs from '@/components/SvgDefs';
 import { Noto_Sans_JP, Roboto } from 'next/font/google';
+// layout.tsx 上部で
+import { Bebas_Neue, Reenie_Beanie } from 'next/font/google';
+
+const bebasNeue = Bebas_Neue({
+  subsets: ['latin'],
+  weight: ['400'],
+  display: 'swap',
+});
+const reenineBeanie = Reenie_Beanie({
+  subsets: ['latin'],
+  weight: ['400'],
+  display: 'swap',
+});
 const notoSans = Noto_Sans_JP({
   subsets: ['latin'],
   weight: ['100', '300', '400', '500', '700', '900'],
@@ -72,11 +85,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="ja" className={`${notoSans.className} ${roboto.className}`}>
+    <html
+      lang="ja"
+      className={`${notoSans.className} ${roboto.className} ${bebasNeue.className} ${reenineBeanie.className}`}
+    >
       <head>
-        <link
-          href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Reenie+Beanie&display=swap"
-          rel="stylesheet"
+        <meta
+          name="format-detection"
+          content="telephone=no, address=no, email=no"
+        />
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
         />
       </head>
       <body>
