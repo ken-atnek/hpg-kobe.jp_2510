@@ -37,10 +37,12 @@ const Header = ({ className, title, navMenu }: HeaderProps) => {
 
   return (
     <header className={clsx(styles.containerHeader, className)}>
-      <div className={styles.boxHead}>
-        <p>hot point group kobe area</p>
-        <h1>{title}</h1>
-      </div>
+      <article className={styles.headerTop}>
+        <div className={styles.boxHead}>
+          <p>hot point group kobe area</p>
+          <h1>{title}</h1>
+        </div>
+      </article>
       <div className={styles.boxNav}>
         <nav>
           {navMenu.map((item, index) =>

@@ -1,0 +1,279 @@
+/* =================================
+ * 	店舗 リアルタイムページ
+ * ------------------------------ */
+@use "../variable" as *;
+@use "../mixin" as *;
+/* stylelint-disable no-descending-specificity */
+/* stylelint-disable keyframes-name-pattern */
+/* stylelint-disable custom-property-pattern */
+// このファイル全体のルールを無効にする
+
+.containerRealtime {
+    max-width: $articleMaxWidth;
+    justify-self: center;
+    padding: 2em 2em 3em;
+    display: flex;
+    flex-direction: column;
+    gap: 2em 0;
+    box-shadow: 0.5rem -3rem 3rem rgba(1, 1, 1, 0.1);
+    .boxUpDateTime {
+        align-self: center;
+        font-size: inherit;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.8em 0;
+        .itemTime {
+            font-size: inherit;
+            display: flex;
+            border: 1px solid #4d4d4d;
+            background-color: #4d4d4d;
+            span {
+                color: $base-white;
+                display: grid;
+                place-content: center;
+                padding-inline: 0.5em;
+                font-size: FZ(14);
+            }
+            time {
+                background-color: $base-white;
+                @include FuturaCyrillicBook;
+                font-size: FZ(36);
+                padding: 0.1em 0.3em;
+            }
+        }
+        p {
+            font-size: FZ(12);
+            letter-spacing: 0.04em;
+        }
+    }
+    article {
+        display: flex;
+        flex-direction: column;
+        h3 {
+            color: $base-white;
+            text-align: center;
+            font-size: FZ(24);
+            font-weight: 500;
+            padding-block: 0.4em;
+            letter-spacing: 0.12em;
+            border-top-left-radius: 1rem;
+            border-top-right-radius: 1rem;
+            background-image: linear-gradient(
+                rgba(var(--status-color)),
+                rgba(var(--status-color)) 40%,
+                rgba(var(--status-color))
+            );
+        }
+        ul {
+            position: relative;
+            font-size: 1em;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            background-color: #ececec;
+            padding: 1em 1em 2em;
+            gap: 1em;
+            border-bottom-left-radius: 1rem;
+            border-bottom-right-radius: 1rem;
+            li {
+                position: relative;
+                font-size: inherit;
+                display: grid;
+                grid-template-columns: auto 1fr;
+                background-color: #fcfcfc;
+                padding: 0.5em;
+                border-radius: 0.5em;
+                gap: 0.5em;
+                container: inline-size;
+                width: 100%;
+                .boxImage {
+                    position: relative;
+                    font-size: inherit;
+                    display: flex;
+                    flex-direction: column;
+                    width: 10cqw;
+                    max-width: 9em;
+                    .wrapPhoto {
+                        @include cast-wrap-photo;
+                        aspect-ratio: 1;
+                        .gradeLabel {
+                            font-size: FZ(16);
+                        }
+                        &:not(.grade9) {
+                            img {
+                                clip-path: inset(0.5em);
+                            }
+                        }
+                        img {
+                            object-fit: cover;
+                            object-position: center top;
+                        }
+                    }
+                }
+                .boxDetails {
+                    position: relative;
+                    font-size: inherit;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                    .realTImeDetail {
+                        display: flex;
+                        justify-content: center;
+                        border: 1px solid rgba(var(--status-color), 1);
+                        font-size: FZ(14);
+                        font-weight: 600;
+                        letter-spacing: 0.04em;
+                        padding: 0.3em 0;
+                        border-radius: 0.3em;
+                        color: rgba(var(--status-color), 1);
+                    }
+                    .castProfile {
+                        font-size: inherit;
+                        flex: 1;
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: flex-end;
+                        margin-bottom: 0.3em;
+                        .wrapName {
+                            font-size: inherit;
+                            display: flex;
+                            align-items: center;
+                            justify-content: space-between;
+                            .castName {
+                                font-size: clamp(14px, 1.7cqw, 21px);
+                                font-weight: 600;
+                                letter-spacing: 0.08em;
+                            }
+                            .age {
+                                @include FuturaCyrillicBook;
+                                font-size: FZ(18);
+                                &::before {
+                                    font-size: 0.8em;
+                                    content: "Age.";
+                                }
+                            }
+                        }
+                        .castSize {
+                            font-size: inherit;
+                            display: flex;
+                            align-items: center;
+                            gap: 0 0.3em;
+                            margin-top: 0.2em;
+                            span {
+                                @include FuturaCyrillicBook;
+                                font-size: clamp(14px, 1.2cqw, 18px);
+                                &.tall {
+                                    &::before {
+                                        content: "T.";
+                                    }
+                                }
+                                &.bust {
+                                    &::before {
+                                        content: "B.";
+                                    }
+                                    i {
+                                        font-size: inherit;
+                                        text-transform: uppercase;
+                                        margin-left: 0.05em;
+                                        &::before,
+                                        &::after {
+                                            display: inline-block;
+                                            translate: 0 -0.08em;
+                                        }
+                                        &::before {
+                                            content: "[";
+                                            margin-right: 0.1em;
+                                        }
+                                        &::after {
+                                            content: "]";
+                                            margin-left: 0.05em;
+                                        }
+                                    }
+                                }
+                                &.west {
+                                    &::before {
+                                        content: "W.";
+                                    }
+                                }
+                                &.hip {
+                                    &::before {
+                                        content: "H.";
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    .wrapTodayTime {
+                        display: flex;
+                        background-color: #000;
+                        color: $base-white;
+                        font-size: inherit;
+                        h4 {
+                            font-size: FZ(12);
+                            background-color: #ff0066;
+                            padding-inline: 0.5em;
+                            display: grid;
+                            place-content: center;
+                        }
+                        .innerTime {
+                            font-size: inherit;
+                            display: flex;
+                            justify-content: center;
+                            align-self: center;
+                            flex: 1;
+                            padding-block: 0.2em;
+                            span {
+                                @include FuturaCyrillicBook;
+                                font-size: clamp(14px, 1.3cqw, 16px);
+                                letter-spacing: 0.08em;
+                                &:first-of-type {
+                                    &::after {
+                                        content: "~";
+                                        margin: 0 0.2em;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                .boxComment {
+                    grid-column: span 2;
+                    font-size: inherit;
+                    p {
+                        font-size: FZ(12);
+                        text-align: justify;
+                        letter-spacing: 0.08em;
+                        line-height: 1.4em;
+                    }
+                }
+            }
+            @media screen and (max-width: 1030px) {
+                grid-template-columns: repeat(2, 1fr);
+                li {
+                    .boxImage {
+                        width: 14cqw;
+                        max-width: unset;
+                    }
+                }
+            }
+        }
+        &.status1 {
+            --status-color: 255, 0, 102;
+        }
+        &.status2 {
+            --status-color: 230, 0, 17;
+        }
+        &.status3 {
+            --status-color: 0, 160, 233;
+        }
+        &.status4 {
+            --status-color: 69, 70, 205;
+        }
+        &.status5 {
+            --status-color: 134, 0, 228;
+        }
+        &.status6 {
+            --status-color: 98, 98, 98;
+        }
+    }
+}

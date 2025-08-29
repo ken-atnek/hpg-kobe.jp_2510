@@ -109,8 +109,8 @@ br {
     font-size: FZ(16);
     letter-spacing: 0.08em;
     span {
-        @include FuturaCyrillicBook;
         font-size: 3.6em;
+        @include FuturaCyrillicBook;
         text-transform: uppercase;
         letter-spacing: 0.04em;
     }

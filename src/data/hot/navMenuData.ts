@@ -11,7 +11,7 @@ export const navMenu = [
     label: 'ネット予約',
     target: true,
   },
-  { href: '/', label: 'リアルタイム' },
+  { href: '/hot/realtime/', label: 'リアルタイム' },
   { href: '/', label: '出勤情報' },
   { href: '/', label: '在籍一覧' },
   {

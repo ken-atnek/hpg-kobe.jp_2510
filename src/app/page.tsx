@@ -44,7 +44,7 @@ export default function AreaTop() {
         </section>
         <ContainerShopList />
         <section className={styles.containerContents}>
-          <article>
+          <article className={styles.innerContainerContents}>
             <div className={styles.boxLeftBan}>
               <h2>
                 <span>topics</span>トピックス

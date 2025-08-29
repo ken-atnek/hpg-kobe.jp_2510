@@ -38,11 +38,17 @@
 /* =================================
  * ShopTopMain
  * ------------------------------ */
+.innerMain {
+    font-size: inherit;
+    padding-inline: 2vw;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
 .shopMainContainer {
     display: grid;
     grid-auto-flow: row;
     max-width: $articleMaxWidth;
-    box-shadow: 0.5rem -3rem 3rem rgba(1, 1, 1, 0.1);
 
     .boxBanMain {
         padding-top: 1rem;
@@ -54,6 +60,7 @@
         }
     }
     &.isLeftActive {
+        box-shadow: 0.5rem -3rem 3rem rgba(1, 1, 1, 0.1);
         grid-auto-flow: unset;
         grid-template-columns: 25% 1fr;
         padding-bottom: 3em;

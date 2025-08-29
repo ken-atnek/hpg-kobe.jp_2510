@@ -10,26 +10,12 @@ import { usePathname } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import clsx from 'clsx';
 import Image from 'next/image';
-
-type Cast = {
-  rankID: string;
-  rank: string;
-  castId: string;
-  castName: string;
-  castImage: string;
-  age: string;
-  tall: string;
-  bust: string;
-  cup: string;
-  west: string;
-  hip: string;
-  castUrl: string;
-};
+import type { CastDetail } from '@/types/CastDetails';
 
 type Ranking = {
   titleId: string;
   title: string;
-  casts: Cast[];
+  casts: CastDetail[];
 };
 
 type ContentsProps = {
