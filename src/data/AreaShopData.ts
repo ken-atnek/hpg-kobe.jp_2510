@@ -7,7 +7,7 @@
 
 import LogoHot from '@/assets/images/logo/kobe-hot.webp';
 import LogoVilla from '@/assets/images/logo/kobe-villa.webp';
-import LogoStyle from '@/assets/images/logo/kobe-style.webp';
+// import LogoStyle from '@/assets/images/logo/kobe-style.webp';
 import { StaticImageData } from 'next/image';
 
 export type Shop = {
@@ -17,6 +17,7 @@ export type Shop = {
   post: string;
   address: string;
   logo: StaticImageData;
+  svgLogo: string;
   phone: string;
   url: string;
   shopColor?: string;
@@ -28,6 +29,7 @@ export const Shops = [
     name: '神戸ホットポイント',
     nameEn: 'kobe hotpoint',
     logo: LogoHot,
+    svgLogo: '#svg_logoKobeHot',
     post: '〒650-0012',
     address: '兵庫県神戸市中央区北長狭通２丁目１−４',
     phone: '078-332-0388',
@@ -39,20 +41,21 @@ export const Shops = [
     name: 'ホットポイントヴィラ',
     nameEn: 'hotpoint villa',
     logo: LogoVilla,
+    svgLogo: '#svg_logoKobeVilla',
     post: '〒650-0012',
     address: '兵庫県神戸市中央区北長狭通１丁目１０−１３',
     phone: '078-332-3666',
     url: '/villa/',
     shopColor: '#db3dfc',
   },
-  {
-    storeId: 'kbStyle',
-    name: 'ホットポイント スタイル',
-    logo: LogoStyle,
-    post: '〒650-0012',
-    address: '兵庫県神戸市中央区北長狭通２丁目１−５',
-    phone: '078-332-5088',
-    url: '/style/',
-    shopColor: '#ff558b',
-  },
+  // {
+  //   storeId: 'kbStyle',
+  //   name: 'ホットポイント スタイル',
+  //   logo: LogoStyle,
+  //   post: '〒650-0012',
+  //   address: '兵庫県神戸市中央区北長狭通２丁目１−５',
+  //   phone: '078-332-5088',
+  //   url: '/style/',
+  //   shopColor: '#ff558b',
+  // },
 ];

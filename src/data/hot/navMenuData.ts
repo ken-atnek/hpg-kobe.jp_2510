@@ -12,7 +12,7 @@ export const navMenu = [
     target: true,
   },
   { href: '/hot/realtime/', label: 'リアルタイム' },
-  { href: '/', label: '出勤情報' },
+  { href: '/hot/schedule/', label: '出勤情報' },
   { href: '/', label: '在籍一覧' },
   {
     href: 'https://www.cityheaven.net/hyogo/A2802/A280201/koubehp/diarylist/?of=y',

@@ -32,15 +32,15 @@ export type PickUpItem = {
 const BlockPickUp = () => {
   const [grouped, setGrouped] = useState<{
     hot: PickUpItem[];
-    style: PickUpItem[];
+    // style: PickUpItem[];
     villa: PickUpItem[];
   } | null>(null);
 
   const [activeIndices, setActiveIndices] = useState<{
-    [key in 'hot' | 'style' | 'villa']: number;
+    [key in 'hot' | 'villa']: number;
   }>({
     hot: 0,
-    style: 0,
+    // style: 0,
     villa: 0,
   });
 
@@ -70,7 +70,7 @@ const BlockPickUp = () => {
     const timers: NodeJS.Timeout[] = [];
 
     let delay = 0;
-    (['hot', 'style', 'villa'] as const).forEach((shop) => {
+    (['hot', 'villa'] as const).forEach((shop) => {
       const timer = setTimeout(() => {
         setInterval(() => {
           setActiveIndices((prev) => {
@@ -92,7 +92,7 @@ const BlockPickUp = () => {
 
   return (
     <ul className={styles.blockPickUp}>
-      {(['hot', 'style', 'villa'] as const).map((shop) => {
+      {(['hot', 'villa'] as const).map((shop) => {
         if (!grouped || !grouped[shop] || grouped[shop].length === 0)
           return <li key={shop}></li>;
         const activeIndex = activeIndices[shop];

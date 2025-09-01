@@ -1,0 +1,68 @@
+{
+  "date": "2025-09-01",
+  "casts": [
+    {
+      "castId": "759",
+      "castName": "有村かずは",
+      "castImage": "/images/cast/hot/hot-kazuha01.jpg",
+      "castImageSquare": "/images/cast/hot/hot-kazuha02.jpg",
+      "gradeId": 3,
+      "age": "26",
+      "tall": "166",
+      "bust": "85",
+      "cup": "d",
+      "west": "57",
+      "hip": "85",
+      "castUrl": "/hot/"
+    },
+    {
+      "castId": "795",
+      "castName": "若宮のえる",
+      "shopName": "神戸ホットポイント",
+      "castImage": "/images/cast/hot/hot-noeru01.jpg",
+      "gradeId": 6,
+      "age": "21",
+      "tall": "158",
+      "bust": "100",
+      "cup": "f",
+      "west": "57",
+      "hip": "85",
+      "castUrl": "/villa/"
+    },
+    {
+      "castId": "581",
+      "castName": "平野れの",
+      "shopName": "神戸ホットポイント",
+      "castImage": "/images/cast/style/style-reno01.jpg",
+      "realTimeStatus": 2,
+      "gradeId": 6,
+      "age": "21",
+      "tall": "158",
+      "bust": "100",
+      "cup": "f",
+      "west": "57",
+      "hip": "85",
+      "castUrl": "/villa/",
+      "startTime": "18:00",
+      "endTime": "23:59"
+    },
+    {
+      "castId": "424",
+      "castName": "竹田やな",
+      "shopId": "hot",
+      "shopName": "ホットポイントヴィラ",
+      "castImage": "/images/cast/villa/villa-yana01.jpg",
+      "realTimeStatus": 2,
+      "gradeId": 9,
+      "age": "41",
+      "tall": "160",
+      "bust": "84",
+      "cup": "e",
+      "west": "57",
+      "hip": "84",
+      "castUrl": "/villa/",
+      "startTime": "8:00",
+      "endTime": "13:59"
+    }
+  ]
+}

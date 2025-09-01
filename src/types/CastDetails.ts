@@ -4,6 +4,7 @@ export type CastDetail = {
   castId: string;
   castName: string;
   castImage: string;
+  castImageSquare?: string;
   age: string;
   tall: string;
   bust: string;

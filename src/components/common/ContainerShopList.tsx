@@ -8,7 +8,6 @@
 'use client';
 import styles from '@/styles/components/common/ContainerShopList.module.scss';
 import { Shops } from '@/data/AreaShopData';
-import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import ExternalLink from '@/components/common/ExternalLink';
@@ -23,25 +22,28 @@ const ContainerShopList = () => {
     villa: 'kbVilla',
   };
 
-  const storeId = storeIdMap[path];
+  const activeStoreClass = storeIdMap[path];
 
   return (
-    <section className={clsx(styles.containerShopList, styles[storeId])}>
+    <section
+      className={clsx(styles.containerShopList, styles[activeStoreClass])}
+    >
       <h2>hotpoint group kobe area</h2>
       <ul>
         {Shops.map((shop) => (
           <li key={shop.storeId}>
-            <Link href={shop.url} className={styles.itemLogo}>
-              <div
-                className={`${styles.itemImage} ${styles[shop.storeId] ?? ''}`}
+            <Link
+              href={shop.url}
+              className={clsx(styles.itemLogo, styles[shop.storeId])}
+            >
+              <svg
+                className={styles.logoSvg}
+                width="200"
+                height="50"
+                aria-hidden="true"
               >
-                <Image
-                  src={shop.logo}
-                  alt={shop.name}
-                  width={120}
-                  height={60}
-                />
-              </div>
+                <use href={shop.svgLogo} />
+              </svg>
             </Link>
             <p>{shop.name}</p>
             <ExternalLink href={`tel:${shop.phone}`} className={styles.itemTel}>

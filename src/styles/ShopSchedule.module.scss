@@ -1,0 +1,420 @@
+/* =================================
+ * 	店舗 スケジュール
+ * ------------------------------ */
+@use "variable" as *;
+@use "svg" as *;
+/* stylelint-disable no-descending-specificity */
+/* stylelint-disable keyframes-name-pattern */
+/* stylelint-disable custom-property-pattern */
+// このファイル全体のルールを無効にする
+
+.containerContents {
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0.5rem -3rem 3rem rgba(1, 1, 1, 0.1);
+    padding-bottom: 3em;
+}
+
+/* =================================
+ * 店舗切替部分
+ * ------------------------------ */
+.containerHead {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding-top: 1em;
+    gap: 0 1em;
+    z-index: +2;
+    background-color: $base-white;
+    .linkByDay,
+    .linkByPeriod {
+        display: flex;
+        justify-content: center;
+        background-color: #00a173;
+        font-size: FZ(16);
+        padding: 0.5em 2em;
+        font-weight: 500;
+        border-radius: 0.3em;
+        color: $base-white;
+        letter-spacing: 0.04em;
+    }
+    .linkByPeriod {
+        align-self: center;
+        margin-bottom: 0.5em;
+    }
+    .boxPeriod {
+        font-size: inherit;
+        display: flex;
+        margin-right: auto;
+        time {
+            @include FuturaCyrillicBook;
+            font-size: FZ(30);
+            span {
+                font-size: 0.6em;
+                &::before {
+                    content: "（";
+                }
+                &::after {
+                    content: "）";
+                }
+            }
+            &:first-of-type {
+                &::after {
+                    content: "~";
+                    margin-inline: 0.2em;
+                }
+            }
+        }
+        p {
+            font-size: FZ(18);
+            display: inline-block;
+            align-self: flex-end;
+            padding-bottom: 0.1em;
+            margin-left: 0.2em;
+        }
+    }
+    nav {
+        font-size: inherit;
+        display: flex;
+        gap: 0 0.8em;
+        a {
+            position: relative;
+            font-size: FZ(14);
+            color: #8e8e8e;
+            width: 12em;
+            display: flex;
+            justify-content: center;
+            padding: 0.8em 0 0.5em;
+            transition: 0.3s ease-out;
+            &::before {
+                content: "";
+                position: absolute;
+                inset: 0;
+                z-index: -1;
+                border-radius: 0.5em 0.5em 0 0;
+                border: 1px solid #c2c2c2;
+                border-bottom: unset;
+                transform: perspective(1em) rotateX(2deg);
+                background-color: #e6e6e6;
+                transform-origin: right;
+                transition: 0.3s ease-out;
+            }
+            &.isActive {
+                color: $base-white;
+                &::before {
+                    background-color: rgba(var(--shop-color), 0.9);
+                }
+            }
+            @include hover {
+                color: $base-white;
+                &::before {
+                    background-color: rgba(var(--shop-color), 0.9);
+                }
+            }
+            &.shopHot {
+                --shop-color: #{$shop-color-hot-number};
+            }
+            &.shopVilla {
+                --shop-color: #{$shop-color-villa-number};
+            }
+        }
+    }
+}
+/* =================================
+ * 週間出勤一覧
+ * ------------------------------ */
+.blockPeriod {
+    margin-top: 2em;
+    padding-inline: 2em;
+    .scheduleList {
+        position: relative;
+        display: grid;
+        font-size: inherit;
+        border-top: 1px solid;
+        border-left: 1px solid;
+        border-color: rgba(var(--shop-color), 1);
+        grid-template-columns: auto 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+        li {
+            display: grid;
+            grid-template-columns: subgrid;
+            font-size: inherit;
+            border-bottom: 1px solid;
+            border-color: rgba(var(--shop-color), 1);
+            grid-column: span 8;
+            & > div {
+                padding: 0.5em;
+                font-size: inherit;
+                border-right: 1px solid;
+                border-right: 1px solid;
+                border-color: rgba(var(--shop-color), 1);
+            }
+            &.rowHeader {
+                background-color: rgba(var(--shop-color), 0.8);
+                color: $base-white;
+                div {
+                    display: grid;
+                    place-content: center;
+                }
+                .cellCastHeader {
+                    font-size: FZ(18);
+                }
+                .cellDate {
+                    time {
+                        @include FuturaCyrillicBook;
+                        font-size: FZ(24);
+                        span {
+                            font-size: 0.7em;
+                            font-weight: 500;
+                            &::before {
+                                content: "（";
+                            }
+                            &::after {
+                                content: "）";
+                            }
+                        }
+                    }
+                }
+            }
+            .boxCastInfo {
+                position: relative;
+                display: grid;
+                grid-template-columns: auto 1fr;
+                font-size: inherit;
+                gap: 0 0.5em;
+                .wrapImage {
+                    position: relative;
+                    aspect-ratio: 1;
+                    width: 9rem;
+                    img {
+                        object-fit: cover;
+                        object-position: center top;
+                    }
+                }
+                .castProfile {
+                    font-size: inherit;
+                    flex: 1;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: flex-end;
+                    margin-bottom: 0.3em;
+                    .wrapName {
+                        font-size: inherit;
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-between;
+                        .castName {
+                            font-size: FZ(16);
+                            font-weight: 600;
+                            letter-spacing: 0.08em;
+                        }
+                        .age {
+                            @include FuturaCyrillicBook;
+                            font-size: FZ(18);
+                            &::before {
+                                font-size: 0.8em;
+                                content: "Age.";
+                            }
+                        }
+                    }
+                    .castSize {
+                        font-size: inherit;
+                        display: flex;
+                        align-items: center;
+                        gap: 0 0.3em;
+                        margin-top: 0.2em;
+                        span {
+                            @include FuturaCyrillicBook;
+                            font-size: FZ(16);
+                            &.tall {
+                                &::before {
+                                    content: "T.";
+                                }
+                            }
+                            &.bust {
+                                &::before {
+                                    content: "B.";
+                                }
+                                i {
+                                    font-size: inherit;
+                                    text-transform: uppercase;
+                                    margin-left: 0.05em;
+                                    &::before,
+                                    &::after {
+                                        display: inline-block;
+                                        translate: 0 -0.08em;
+                                    }
+                                    &::before {
+                                        content: "[";
+                                        margin-right: 0.1em;
+                                    }
+                                    &::after {
+                                        content: "]";
+                                        margin-left: 0.05em;
+                                    }
+                                }
+                            }
+                            &.west {
+                                &::before {
+                                    content: "W.";
+                                }
+                            }
+                            &.hip {
+                                &::before {
+                                    content: "H.";
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            .wrapDate {
+                font-size: inherit;
+                display: grid;
+                place-content: center;
+                display: flex;
+                align-items: center;
+                time {
+                    @include FuturaCyrillicBook;
+                    font-size: FZ(16);
+                    &:first-of-type {
+                        &::after {
+                            content: "~";
+                            margin-inline: 0.2em;
+                        }
+                    }
+                }
+            }
+            &:not(:first-of-type) {
+                &:nth-of-type(2n - 1) {
+                    background-color: rgba(var(--shop-color), 0.1);
+                }
+            }
+        }
+        // 3日表示スタイル
+        &--3 {
+            grid-template-columns: auto 1fr 1fr 1fr;
+            li {
+                grid-column: span 4;
+            }
+        }
+        // 5日表示スタイル
+        &--5 {
+            grid-template-columns: auto 1fr 1fr 1fr 1fr 1fr;
+            li {
+                grid-column: span 6;
+            }
+        }
+    }
+}
+.containerContents {
+    &.kbHot {
+        --shop-color: #{$shop-color-hot-number};
+    }
+}
+/* =================================
+ * 日別表示
+ * ------------------------------ */
+.blockByDay {
+    display: flex;
+    flex-direction: column;
+    nav {
+        z-index: 2;
+        position: relative;
+        display: grid;
+        font-size: inherit;
+        grid-template-columns: repeat(3, 1fr);
+        padding-block: 5px;
+
+        &::before,
+        &::after {
+            content: "";
+            position: absolute;
+            width: 100vw;
+            height: 100%;
+            left: 50%;
+            translate: -50%;
+            top: 0;
+        }
+        &::before {
+            background-color: #000;
+        }
+        &::after {
+            background-image: linear-gradient(
+                to top,
+                rgba(var(--shop-color), 0.4),
+                rgba(var(--shop-color), 0.8) 70%,
+                rgba(var(--shop-color), 1) 95%,
+                rgba(var(--shop-color), 0.8)
+            );
+        }
+        div {
+            font-size: inherit;
+            z-index: +1;
+            position: relative;
+            padding-inline: 5px;
+            &::before,
+            &::after {
+                content: "";
+                position: absolute;
+                top: 50%;
+                height: 60%;
+                width: 1px;
+                translate: 0 -50%;
+            }
+            &::after {
+                right: 0;
+                background-color: $base-white;
+            }
+            button {
+                position: relative;
+                font-size: FZ(20);
+                color: $base-white;
+                @include FuturaCyrillicBook;
+                display: flex;
+                align-items: center;
+                gap: 0 0.2em;
+                padding-block: 0.7em;
+                width: 100%;
+                display: flex;
+                span {
+                    font-size: 0.8em;
+                    font-weight: 500;
+                    display: inline-block;
+                    translate: 0 0.08em;
+                }
+            }
+            &:first-of-type {
+                &::before {
+                    left: 0;
+                    background-color: $base-white;
+                }
+            }
+            &.isActive {
+                button {
+                    background-color: $base-white;
+                    color: rgba(var(--shop-color), 1);
+                    @include FuturaCyrillicDemi;
+                    border-radius: 3px;
+                }
+            }
+        }
+    }
+    .castList {
+        position: relative;
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        padding: 2em;
+        font-size: inherit;
+        gap: 0 1em;
+        li {
+            position: relative;
+            font-size: inherit;
+            display: flex;
+            flex-direction: column;
+            .imageWrap {
+                position: relative;
+                aspect-ratio: 3/4;
+            }
+        }
+    }
+}

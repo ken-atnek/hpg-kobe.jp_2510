@@ -39,7 +39,6 @@
             }
         }
     }
-
     .boxNav {
         display: flex;
         justify-content: center;
@@ -56,6 +55,7 @@
             width: 100%;
             max-width: $articleMaxWidth;
             a {
+                position: relative;
                 flex-grow: 1;
                 border-right: 1px solid var(--baseColor);
                 padding: 0 1em;
@@ -65,6 +65,31 @@
                 font-size: FZ(16);
                 &:first-of-type {
                     border-left: 1px solid var(--baseColor);
+                }
+                &::before {
+                    content: "";
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    width: 80%;
+                    height: calc(100% + 0.5em);
+                    background-color: var(--baseColor);
+                    z-index: -1;
+                    transition: 0.5s ease-out;
+                    clip-path: inset(0 50% 0 50%);
+                    border-radius: 0.3rem;
+                    opacity: 0;
+                }
+                @include pc {
+                    &:hover {
+                        transition: 0.3s ease-out;
+                        &::before {
+                            transition: 0.3s ease-out;
+                            clip-path: inset(0);
+                            opacity: 0.3;
+                        }
+                    }
                 }
             }
         }

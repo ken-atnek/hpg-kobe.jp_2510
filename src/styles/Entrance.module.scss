@@ -205,12 +205,21 @@ $entrance-max-width: 96rem;
                     z-index: 1;
                     inset: 0;
                 }
-                img {
-                    width: fit-content;
-                    flex: 1;
-                    display: flex;
-                    align-items: center;
-                    object-fit: contain;
+                &.kbHot {
+                    svg {
+                        width: 85%;
+                        aspect-ratio: 500/176;
+                        stroke: unset;
+                        fill: $shop-hot;
+                    }
+                }
+                &.kbVilla {
+                    svg {
+                        width: 85%;
+                        aspect-ratio: 500/161;
+                        stroke: unset;
+                        fill: $shop-villa;
+                    }
                 }
                 h4 {
                     font-size: FZ(14);
