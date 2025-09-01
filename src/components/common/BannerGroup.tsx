@@ -24,7 +24,7 @@ const BannerGroup = ({ jsonPath, title, className }: Props) => {
   const [items, setModalImage, modalImage] = useBannerItems(jsonPath);
 
   return (
-    <div className={clsx(styles.boxBanGroup, className)}>
+    <article className={clsx(styles.boxBanGroup, className)}>
       {title && <h3>{title}</h3>}
       <ul>
         {items.map((item) => (
@@ -46,7 +46,7 @@ const BannerGroup = ({ jsonPath, title, className }: Props) => {
           </div>
         </div>
       )}
-    </div>
+    </article>
   );
 };
 

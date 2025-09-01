@@ -59,7 +59,7 @@ const CastSlide = ({
   }, [jsonPath]);
 
   return (
-    <div className={clsx(styles.boxCastSlide, styles[storeId])}>
+    <article className={clsx(styles.boxCastSlide, styles[storeId])}>
       <div className={styles.wrapTitle}>
         <h2>
           <span>
@@ -104,7 +104,7 @@ const CastSlide = ({
           ))}
         </div>
       </div>
-    </div>
+    </article>
   );
 };
 export default CastSlide;

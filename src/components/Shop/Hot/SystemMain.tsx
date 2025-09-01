@@ -33,23 +33,23 @@ const SystemMain = () => {
       </h2>
       <BlockTopAnnounce />
       <BlockPriceList jsonPath={`/data/hot/Price.json`} />
-      <div className={styles.blockRequestFee}>
+      <article className={styles.blockRequestFee}>
         <h3>指名料</h3>
         {requestFee !== null ? (
           <span className={styles.price}>{requestFee.toLocaleString()}</span>
         ) : (
           <span>読み込み中...</span>
         )}
-      </div>
+      </article>
       <BlockReservationGuide
         logoUrl="#svg_logoKobeHot"
         reserveUrl="https://www.cityheaven.net/hyogo/A2802/A280201/koubehp/S6ShopReservation/?pcmode=sp"
       />
-      <div className={styles.blockReserveBan}>
+      <article className={styles.blockReserveBan}>
         <ExternalLink href="https://www.cityheaven.net/hyogo/A2802/A280201/koubehp/S6ShopReservation/?pcmode=sp">
           <Image src={ImageWebReserve} alt="WEB予約" />
         </ExternalLink>
-      </div>
+      </article>
       <BlockAccess mapUrl="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d205.03222338293656!2d135.19077178090814!3d34.6921737674493!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f60.!3m3!1m2!1s0x60008f7b0fbf9cd9%3A0xfe2ecc533108053d!2z56We5oi444Ob44OD44OI44Od44Kk44Oz44OI5pys5bqX!5e0!3m2!1sja!2sjp!4v1750246830699!5m2!1sja!2sjp" />
     </section>
   );

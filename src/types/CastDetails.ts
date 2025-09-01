@@ -1,0 +1,22 @@
+export type CastDetail = {
+  rankID: string;
+  rank: string;
+  castId: string;
+  castName: string;
+  castImage: string;
+  age: string;
+  tall: string;
+  bust: string;
+  cup: string;
+  west: string;
+  hip: string;
+  castUrl: string;
+  shopId: string;
+  shopName: string;
+  realTimeStatus: number;
+  realTimeDetail: string;
+  realTimeComment: string;
+  startTime: string;
+  endTime: string;
+  gradeId: number;
+};

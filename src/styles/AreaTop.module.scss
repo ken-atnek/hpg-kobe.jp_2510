@@ -231,7 +231,7 @@
         display: flex;
         justify-content: center;
         padding: 0 2vw;
-        article {
+        .innerContainerContents {
             max-width: $articleMaxWidth;
             display: grid;
             grid-template-columns: 25% 1fr;
@@ -272,10 +272,8 @@
                     }
                 }
                 .boxBanGroup {
-                    position: relative;
                     display: flex;
                     flex-direction: column;
-                    font-size: inherit;
                     ul {
                         display: grid;
                         grid-auto-flow: row;
@@ -348,6 +346,7 @@
                 display: flex;
                 flex-direction: column;
                 gap: 1em 0;
+                width: 100%;
                 .itemH2 {
                     position: relative;
                     display: flex;
@@ -375,6 +374,7 @@
                 .wrapMainBanHead {
                     font-size: inherit;
                     position: relative;
+                    width: 100%;
                     ul {
                         width: 100%;
                         font-size: inherit;
