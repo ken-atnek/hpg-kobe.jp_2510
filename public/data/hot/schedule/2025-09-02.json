@@ -1,0 +1,54 @@
+{
+  "date": "2025-09-02",
+  "casts": [
+    {
+      "castId": "759",
+      "castName": "有村かずは",
+      "castImage": "/images/cast/hot/hot-kazuha01.jpg",
+      "castImageSquare": "/images/cast/hot/hot-kazuha02.jpg",
+      "gradeId": 3,
+      "age": "26",
+      "tall": "166",
+      "bust": "85",
+      "cup": "d",
+      "west": "57",
+      "hip": "85",
+      "castUrl": "/hot/",
+      "startTime": "13:00",
+      "endTime": "17:00"
+    },
+    {
+      "castId": "795",
+      "castName": "若宮のえる",
+      "shopName": "神戸ホットポイント",
+      "castImage": "/images/cast/hot/hot-noeru01.jpg",
+      "gradeId": 6,
+      "age": "21",
+      "tall": "158",
+      "bust": "100",
+      "cup": "f",
+      "west": "57",
+      "hip": "85",
+      "castUrl": "/villa/",
+      "startTime": "13:00",
+      "endTime": "23:59"
+    },
+    {
+      "castId": "581",
+      "castName": "平野れの",
+      "shopName": "神戸ホットポイント",
+      "castImage": "/images/cast/style/style-reno01.jpg",
+      "realTimeStatus": 2,
+      "gradeId": 6,
+      "age": "21",
+      "tall": "158",
+      "bust": "100",
+      "cup": "f",
+      "west": "57",
+      "hip": "85",
+      "castUrl": "/villa/",
+      "startTime": "16:00",
+      "endTime": "22:00"
+    }
+  ]
+}

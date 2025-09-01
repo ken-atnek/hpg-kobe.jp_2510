@@ -33,7 +33,7 @@
         max-width: $articleMaxWidth;
         width: 100%;
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(2, 1fr);
         font-size: inherit;
         gap: 0 1.4em;
         margin-top: 2em;
@@ -45,7 +45,8 @@
             grid-template-rows: subgrid;
             font-size: 1em;
             grid-row: span 3;
-            .itemImage {
+            .itemLogo {
+                position: relative;
                 width: 100%;
                 background-color: $base-white;
                 display: flex;
@@ -53,13 +54,20 @@
                 height: 100%;
                 padding-block: 1em;
                 font-size: inherit;
-                img {
-                    object-fit: contain;
-                    min-width: 60%;
+                &.kbHot {
+                    svg {
+                        width: 50%;
+                        aspect-ratio: 500/176;
+                        stroke: unset;
+                        fill: #000;
+                    }
                 }
-                &.kbStyle {
-                    img {
-                        min-width: 40%;
+                &.kbVilla {
+                    svg {
+                        width: 50%;
+                        aspect-ratio: 500/161;
+                        stroke: unset;
+                        fill: #000;
                     }
                 }
             }

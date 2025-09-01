@@ -109,13 +109,14 @@
                 z-index: -1;
                 opacity: 0;
                 transition: 0.5s ease-out;
+                background-color: var(--baseColor);
             }
             @include pc {
                 &:hover {
                     transition: 0.3s ease-out;
                     &::before {
                         transition: 0.3s ease-out;
-                        opacity: 1;
+                        opacity: 0.3;
                         clip-path: inset(0);
                     }
                 }

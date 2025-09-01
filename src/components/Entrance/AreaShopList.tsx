@@ -7,7 +7,6 @@
  * ======================================= */
 import styles from '@/styles/Entrance.module.scss';
 import { Shops } from '@/data/AreaShopData';
-import Image from 'next/image';
 import Link from 'next/link';
 
 const EntranceAreaShopList = ({
@@ -18,9 +17,19 @@ const EntranceAreaShopList = ({
   return (
     <ul className={styles.listAreaShop}>
       {Shops.filter((shop) => shop.storeId !== excludeStoreId).map((shop) => (
-        <li key={shop.storeId}>
+        <li
+          key={shop.storeId}
+          className={styles[shop.storeId as keyof typeof styles]}
+        >
           <Link href={shop.url}></Link>
-          <Image src={shop.logo} alt={shop.name} width={120} height={60} />
+          <svg
+            className={styles.logoSvg}
+            width="200"
+            height="50"
+            aria-hidden="true"
+          >
+            <use href={shop.svgLogo} />
+          </svg>
           <h4 style={{ color: shop.shopColor }}>{shop.name}</h4>
         </li>
       ))}

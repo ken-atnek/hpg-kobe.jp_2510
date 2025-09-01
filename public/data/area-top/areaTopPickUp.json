@@ -28,34 +28,6 @@
     "castUrl": "/villa/"
   },
   {
-    "castId": "581",
-    "castName": "平野れの",
-    "shopId": "style",
-    "shopName": "ホットポイントスタイル",
-    "castImage": "/images/cast/style/style-reno01.jpg",
-    "age": "25",
-    "tall": "150",
-    "bust": "83",
-    "cup": "c",
-    "west": "56",
-    "hip": "84",
-    "castUrl": "/style/"
-  },
-  {
-    "castId": "261",
-    "castName": "雪平あきほ",
-    "shopId": "style",
-    "shopName": "ホットポイントスタイル",
-    "castImage": "/images/cast/style/style-akiho01.jpg",
-    "age": "24",
-    "tall": "157",
-    "bust": "88",
-    "cup": "d",
-    "west": "55",
-    "hip": "86",
-    "castUrl": "/style/"
-  },
-  {
     "castId": "426",
     "castName": "彩咲みわこ",
     "shopId": "villa",

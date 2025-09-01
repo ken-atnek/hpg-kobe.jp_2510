@@ -38,7 +38,7 @@ const BlockPriceList = ({ jsonPath }: ContentsProps) => {
     villa: 'kbVilla',
   };
 
-  const storeId = storeIdMap[path];
+  const activeStoreClass = storeIdMap[path];
 
   const [pricePlans, setPricePlans] = useState<PricePlan[]>([]);
 
@@ -51,7 +51,7 @@ const BlockPriceList = ({ jsonPath }: ContentsProps) => {
   }, [jsonPath]);
 
   return (
-    <div className={clsx(styles.blockPriceList, styles[storeId])}>
+    <div className={clsx(styles.blockPriceList, styles[activeStoreClass])}>
       {pricePlans.map((plan, i) => (
         <div key={i} className={styles.wrapPricePlan}>
           {plan.title_display !== false && (

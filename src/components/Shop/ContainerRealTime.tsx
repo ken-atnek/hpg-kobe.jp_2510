@@ -15,6 +15,11 @@ import Image from 'next/image';
 import type { CastDetail } from '@/types/CastDetails';
 import Link from 'next/link';
 import { gradeMap } from '@/components/castGradeMap';
+
+type RealTimeProps = {
+  jsonPath: string;
+};
+
 // realTimeStatus に対応するラベル
 const STATUS_LABELS: Record<string, string> = {
   '1': '現在受付中',
@@ -29,7 +34,7 @@ type CastWithStatus = CastDetail & {
   realTimeStatus: string | number;
 };
 
-const ContainerRealtime = () => {
+const ContainerRealtime = ({ jsonPath }: RealTimeProps) => {
   const pathname = usePathname();
   const path = pathname.split('/')[1];
 
@@ -43,7 +48,7 @@ const ContainerRealtime = () => {
   const [updateTime, setUpdateTime] = useState<string>('');
 
   useEffect(() => {
-    fetch('/data/hot/RealTime.json')
+    fetch(jsonPath)
       .then((res) => res.json())
       .then((data) => {
         if (Array.isArray(data) && data.length > 0) {
@@ -51,7 +56,7 @@ const ContainerRealtime = () => {
           setUpdateTime(data[0].upDateTime || '');
         }
       });
-  }, []);
+  }, [jsonPath]);
 
   const realTimeStatus = castData.reduce(
     (acc: Record<string, CastWithStatus[]>, item) => {
