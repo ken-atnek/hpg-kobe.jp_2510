@@ -19,5 +19,6 @@ export type CastDetail = {
   realTimeComment: string;
   startTime: string;
   endTime: string;
+  scheduleStatus: string;
   gradeId: number;
 };
