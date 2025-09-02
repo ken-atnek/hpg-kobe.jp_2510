@@ -1,0 +1,53 @@
+[
+  {
+    "castId": "685",
+    "castName": "野崎りおん",
+    "castImage": "/images/cast/hot/hot-rion01.jpg",
+    "startTime": "10:00",
+    "endTime": "20:00",
+    "gradeId": 4,
+    "type": [1, 3, 5, 8],
+    "age": "23",
+    "tall": "157",
+    "bust": "82",
+    "cup": "b",
+    "west": "58",
+    "hip": "84",
+    "castUrl": "/villa/",
+    "badges": ["trial", "hot"]
+  },
+  {
+    "castId": "759",
+    "castName": "有村かずは",
+    "castImage": "/images/cast/hot/hot-kazuha01.jpg",
+    "startTime": "10:00",
+    "endTime": "20:00",
+    "gradeId": 6,
+    "type": [1, 3, 5, 8],
+    "age": "26",
+    "tall": "166",
+    "bust": "85",
+    "cup": "d",
+    "west": "57",
+    "hip": "85",
+    "castUrl": "/hot/",
+    "badges": ["hot"]
+  },
+  {
+    "castId": "43",
+    "castName": "佐藤アユミ",
+    "castImage": "/images/cast/hot/hot-ayumi01.jpg",
+    "startTime": "",
+    "endTime": "",
+    "scheduleStatus": "TEL確認",
+    "gradeId": 7,
+    "type": [1, 3, 5, 8],
+    "age": "28",
+    "tall": "162",
+    "bust": "82",
+    "cup": "c",
+    "west": "58",
+    "hip": "87",
+    "castUrl": "/hot/"
+  }
+]

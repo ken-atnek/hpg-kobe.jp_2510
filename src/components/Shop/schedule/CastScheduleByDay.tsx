@@ -15,7 +15,7 @@ import { useEffect, useState } from 'react';
 import type { CastDetail } from '@/types/CastDetails';
 import { loadScheduleConfig } from '@/lib/loadScheduleConfig';
 import { getDateList } from '@/lib/getScheduleDataList';
-import { gradeMap } from '@/components/castGradeMap';
+import { gradeMap } from '@/constants/castGradeMap';
 type ScheduleData = {
   date: string;
   casts: CastDetail[];
@@ -154,8 +154,36 @@ const CastScheduleByDay = () => {
                         </p>
                       )}
                     </div>
-
                     <Link href={cast.castUrl}>
+                      <div className={styles.wrapBadge}>
+                        {/* 新人さん or 体験入店（どちらか一方） */}
+                        {cast.badges?.includes('trial') ? (
+                          <span
+                            className={`${styles.labelBadge} ${styles.badgeTrial}`}
+                          >
+                            体験
+                            <br />
+                            入店
+                          </span>
+                        ) : cast.badges?.includes('new') ? (
+                          <span
+                            className={`${styles.labelBadge} ${styles.badgeNew}`}
+                          >
+                            新人さん
+                          </span>
+                        ) : null}
+
+                        {/* 人気急上昇は常に表示 */}
+                        {cast.badges?.includes('hot') && (
+                          <span
+                            className={`${styles.labelBadge} ${styles.badgeHot}`}
+                          >
+                            人気
+                            <br />
+                            急上昇
+                          </span>
+                        )}
+                      </div>
                       <div
                         className={`${styles.wrapPhoto} ${gradeClassName ? styles[gradeClassName] : ''}`}
                       >

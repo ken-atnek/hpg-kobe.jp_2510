@@ -14,7 +14,7 @@ import { usePathname } from 'next/navigation';
 import Image from 'next/image';
 import type { CastDetail } from '@/types/CastDetails';
 import Link from 'next/link';
-import { gradeMap } from '@/components/castGradeMap';
+import { gradeMap } from '@/constants/castGradeMap';
 
 type RealTimeProps = {
   jsonPath: string;

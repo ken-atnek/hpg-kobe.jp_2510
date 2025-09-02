@@ -21,4 +21,6 @@ export type CastDetail = {
   endTime: string;
   scheduleStatus: string;
   gradeId: number;
+  type: number[];
+  badges?: string[];
 };
