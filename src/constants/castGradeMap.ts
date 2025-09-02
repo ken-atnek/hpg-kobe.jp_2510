@@ -2,10 +2,10 @@
  * キャストのグレード情報マッピング
  * 各 gradeId に対して表示ラベルとCSSクラス名を対応させる
  * 例: 1 → GRAND VIP, grade1
- * URL:src/components/castGradeMap.ts
+ * URL:src/constants/castGradeMap.ts
  * Referenced in: /app/page.tsx
  * Created: 2025-08-25
- * Last updated: 2025-08-25
+ * Last updated: 2025-09-02
  * ======================================= */
 
 export const gradeMap: Record<number, { label: string; className: string }> = {

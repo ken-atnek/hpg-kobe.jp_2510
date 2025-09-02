@@ -32,7 +32,7 @@ const PageTitle = ({ titleJp, titleEn }: PageTitleProps) => {
 
   return (
     <section className={clsx(styles.containerPageTitle, styles[storeId])}>
-      <article>
+      <article className={styles.innerPageTitle}>
         <div className={styles.boxH2}>
           <span className={styles.sidebarH2}>{titleEn}</span>
           <h2>{titleJp}</h2>

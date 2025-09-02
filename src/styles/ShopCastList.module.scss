@@ -1,0 +1,275 @@
+/* =================================
+ * 	店舗 キャスト一覧
+ * ------------------------------ */
+@use "variable" as *;
+@use "svg" as *;
+@use "mixin" as *;
+/* stylelint-disable no-descending-specificity */
+/* stylelint-disable keyframes-name-pattern */
+/* stylelint-disable custom-property-pattern */
+// このファイル全体のルールを無効にする
+
+/* =================================
+ * 一覧表示
+ * ------------------------------ */
+.containerList {
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0.5rem -3rem 3rem rgba(1, 1, 1, 0.1);
+    &.kbHot {
+        --shop-color: #{$shop-color-hot-number};
+    }
+    .groupBlock {
+        display: flex;
+        flex-direction: column;
+        padding-bottom: 4em;
+        h2 {
+            position: relative;
+            color: $base-white;
+            @include FuturaCyrillicBook;
+            font-size: FZ(32);
+            text-align: center;
+            letter-spacing: 0.1em;
+            padding-block: 0.4em;
+            &::before {
+                content: "";
+                position: absolute;
+                left: 50%;
+                translate: -50%;
+                top: 0;
+                width: 100vw;
+                height: 100%;
+                font-size: FZ(36);
+                background-color: var(--grade-color);
+                z-index: -1;
+            }
+        }
+        .castList {
+            position: relative;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            font-size: inherit;
+            gap: 0 1.4em;
+            margin-top: 3em;
+            padding-inline: 2em;
+            .boxCast {
+                position: relative;
+                font-size: inherit;
+                display: grid;
+                background-color: #fff;
+                box-shadow: 1px 1px 5px rgba(#6a6a6a, 0.2);
+                color: $font-black;
+                grid-row: span 4;
+                grid-template-rows: subgrid;
+
+                .wrapTodayTime {
+                    font-size: inherit;
+                    display: flex;
+                    justify-content: center;
+                    padding-block: 0.3em;
+                    background-color: rgba(var(--shop-color), 0.1);
+                    span {
+                        display: flex;
+                        font-size: FZ(16);
+                        @include FuturaCyrillicBook;
+                        align-items: center;
+                        letter-spacing: 0.12em;
+                        &:nth-of-type(2) {
+                            &::before {
+                                display: inline-block;
+                                content: "";
+                                width: 0.4em;
+                                aspect-ratio: 0.85;
+                                background-color: $font-black;
+                                margin-inline: 0.56em;
+                                clip-path: polygon(0 0, 100% 50%, 0 100%);
+                            }
+                        }
+                    }
+                    .scheduleStatus {
+                        font-size: FZ(14);
+                        letter-spacing: 0.04em;
+                    }
+                }
+                a {
+                    position: relative;
+                    font-size: inherit;
+                    display: flex;
+                    flex-direction: column;
+                    .wrapBadge {
+                        position: absolute;
+                        right: 0;
+                        top: 1em;
+                        display: grid;
+                        grid-auto-flow: row;
+                        font-size: inherit;
+                        gap: 5px 0;
+                        .labelBadge {
+                            position: relative;
+                            display: grid;
+                            place-content: center;
+                            font-size: FZ(12);
+                            width: 5em;
+                            height: 3.6em;
+                            z-index: 1;
+                            color: $base-white;
+                            padding: 0.5em 0.5em 0.5em 1em;
+                            line-height: 1.2em;
+                            &::before {
+                                content: "";
+                                position: absolute;
+                                inset: 0;
+                                background-color: var(--badge-color);
+                                z-index: -1;
+                                clip-path: polygon(
+                                    0 0,
+                                    100% 0,
+                                    100% 100%,
+                                    0 100%,
+                                    0.8em 50%
+                                );
+                            }
+                            &.badgeTrial {
+                                --badge-color: #03c275;
+                            }
+                            &.badgeHot {
+                                --badge-color: #c20356;
+                                text-align: center;
+                            }
+                        }
+                    }
+                    .wrapPhoto {
+                        @include cast-wrap-photo;
+                        aspect-ratio: 3/4;
+                        .gradeLabel {
+                            font-size: FZ(18);
+                        }
+                        &:not(.grade9) {
+                            img {
+                                clip-path: inset(0.8em);
+                            }
+                        }
+                        img {
+                            object-fit: cover;
+                        }
+                    }
+                }
+                .castProfile {
+                    font-size: inherit;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                    padding: 0.5em;
+                    gap: 0.2em 0;
+                    .wrapName {
+                        font-size: inherit;
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        .castName {
+                            font-size: FZ(20);
+                            letter-spacing: 0.12em;
+                        }
+                        .age {
+                            @include FuturaCyrillicBook;
+                            font-size: FZ(20);
+                            &::before {
+                                font-size: 0.8em;
+                                content: "Age.";
+                            }
+                        }
+                    }
+                    .castSize {
+                        font-size: inherit;
+                        display: flex;
+                        align-items: center;
+                        gap: 0 0.1em;
+                        span {
+                            @include FuturaCyrillicBook;
+                            font-size: FZ(16);
+                            &.tall {
+                                &::before {
+                                    content: "T.";
+                                }
+                            }
+                            &.bust {
+                                &::before {
+                                    content: "B.";
+                                }
+                                i {
+                                    font-size: inherit;
+                                    text-transform: uppercase;
+                                    margin-left: 0.05em;
+                                    &::before,
+                                    &::after {
+                                        display: inline-block;
+                                        translate: 0 -0.08em;
+                                    }
+                                    &::before {
+                                        content: "[";
+                                        margin-right: 0.1em;
+                                    }
+                                    &::after {
+                                        content: "]";
+                                        margin-left: 0.05em;
+                                    }
+                                }
+                            }
+                            &.west {
+                                &::before {
+                                    content: "W.";
+                                }
+                            }
+                            &.hip {
+                                &::before {
+                                    content: "H.";
+                                }
+                            }
+                        }
+                    }
+                }
+                .listType {
+                    font-size: inherit;
+                    display: grid;
+                    grid-template-columns: repeat(2, 1fr);
+                    gap: 0.3em;
+                    padding-inline: 0.5em;
+                    padding-bottom: 0.5em;
+                    li {
+                        background-color: #ede6e2;
+                        font-size: FZ(14);
+                        text-align: center;
+                        padding-block: 0.4em;
+                    }
+                }
+                &:nth-of-type(n + 6) {
+                    margin-top: 3em;
+                }
+            }
+        }
+        &.grade2 {
+            --grade-color: #c90e0e;
+        }
+        &.grade3 {
+            --grade-color: #9e2ce5;
+        }
+        &.grade4 {
+            --grade-color: #2a3fb6;
+        }
+        &.grade5 {
+            --grade-color: #65cda2;
+        }
+        &.grade6 {
+            --grade-color: #d2a74a;
+        }
+        &.grade7 {
+            --grade-color: #636363;
+        }
+        &.grade8 {
+            --grade-color: #d68762;
+        }
+        &.grade9 {
+            --grade-color: #66c3e0;
+        }
+    }
+}

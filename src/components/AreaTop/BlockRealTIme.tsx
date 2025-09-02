@@ -11,7 +11,7 @@ import styles from '@/styles/AreaTop.module.scss';
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { gradeMap } from '@/components/castGradeMap';
+import { gradeMap } from '@/constants/castGradeMap';
 type CastItem = {
   castId: string;
   castName: string;
