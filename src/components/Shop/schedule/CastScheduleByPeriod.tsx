@@ -193,8 +193,11 @@ const CastScheduleByPeriod = () => {
                           <time>{match.startTime}</time>
                           <time>{match.endTime}</time>
                         </>
-                      ) : (
-                        ''
+                      ) : null}
+                      {match?.scheduleStatus && (
+                        <p className={styles.scheduleStatus}>
+                          {match.scheduleStatus}
+                        </p>
                       )}
                     </div>
                   );

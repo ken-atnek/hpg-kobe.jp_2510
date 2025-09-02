@@ -3,6 +3,7 @@
  * ------------------------------ */
 @use "variable" as *;
 @use "svg" as *;
+@use "mixin" as *;
 /* stylelint-disable no-descending-specificity */
 /* stylelint-disable keyframes-name-pattern */
 /* stylelint-disable custom-property-pattern */
@@ -283,6 +284,10 @@
                         }
                     }
                 }
+                .scheduleStatus {
+                    font-size: FZ(14);
+                    letter-spacing: 0.04em;
+                }
             }
             &:not(:first-of-type) {
                 &:nth-of-type(2n - 1) {
@@ -405,15 +410,169 @@
         grid-template-columns: repeat(5, 1fr);
         padding: 2em;
         font-size: inherit;
-        gap: 0 1em;
+        gap: 0 1.4em;
         li {
             position: relative;
             font-size: inherit;
-            display: flex;
-            flex-direction: column;
-            .imageWrap {
+            display: grid;
+            background-color: #fff;
+            box-shadow: 0 4px 4px rgba(#000, 0.25);
+            color: $font-black;
+            grid-row: span 4;
+            grid-template-rows: subgrid;
+
+            .realTImeDetail {
                 position: relative;
-                aspect-ratio: 3/4;
+                font-size: FZ(14);
+                color: $base-white;
+                text-align: center;
+                padding-block: 0.4em;
+                letter-spacing: 0.04em;
+                background-color: rgba(var(--shop-color), 1);
+                &.statusNa {
+                    background-color: #eaeaea;
+                    color: var(--shopColor);
+                    &::before {
+                        content: "";
+                        position: absolute;
+                        left: 0;
+                        top: 0;
+                        width: 0.5rem;
+                        height: 100%;
+                        background-color: rgba(var(--shop-color), 1);
+                    }
+                }
+            }
+            .wrapTodayTime {
+                font-size: inherit;
+                display: flex;
+                justify-content: center;
+                padding-block: 0.3em;
+                background-color: rgba(var(--shop-color), 0.1);
+                border-top: 2px solid rgba(var(--shop-color), 1);
+                span {
+                    display: flex;
+                    font-size: FZ(16);
+                    @include FuturaCyrillicBook;
+                    align-items: center;
+                    letter-spacing: 0.12em;
+                    &:nth-of-type(2) {
+                        &::before {
+                            display: inline-block;
+                            content: "";
+                            width: 0.4em;
+                            aspect-ratio: 0.85;
+                            background-color: $font-black;
+                            margin-inline: 0.56em;
+                            clip-path: polygon(0 0, 100% 50%, 0 100%);
+                        }
+                    }
+                }
+                .scheduleStatus {
+                    font-size: FZ(14);
+                    letter-spacing: 0.04em;
+                }
+            }
+            a {
+                position: relative;
+                font-size: inherit;
+                display: flex;
+                flex-direction: column;
+                .wrapPhoto {
+                    @include cast-wrap-photo;
+                    aspect-ratio: 3/4;
+                    .gradeLabel {
+                        font-size: FZ(16);
+                    }
+                    &:not(.grade9) {
+                        img {
+                            clip-path: inset(0.5em);
+                        }
+                    }
+                    img {
+                        object-fit: cover;
+                    }
+                }
+            }
+            .castProfile {
+                font-size: inherit;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                padding: 0.5em;
+                gap: 0.2em 0;
+                .wrapName {
+                    font-size: inherit;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    .castName {
+                        font-size: FZ(18);
+                        letter-spacing: 0.12em;
+                    }
+                    .age {
+                        @include FuturaCyrillicBook;
+                        font-size: FZ(20);
+                        &::before {
+                            font-size: 0.8em;
+                            content: "Age.";
+                        }
+                    }
+                }
+                .castSize {
+                    font-size: inherit;
+                    display: flex;
+                    align-items: center;
+                    gap: 0 0.1em;
+                    span {
+                        @include FuturaCyrillicBook;
+                        font-size: FZ(16);
+                        &.tall {
+                            &::before {
+                                content: "T.";
+                            }
+                        }
+                        &.bust {
+                            &::before {
+                                content: "B.";
+                            }
+                            i {
+                                font-size: inherit;
+                                text-transform: uppercase;
+                                margin-left: 0.05em;
+                                &::before,
+                                &::after {
+                                    display: inline-block;
+                                    translate: 0 -0.08em;
+                                }
+                                &::before {
+                                    content: "[";
+                                    margin-right: 0.1em;
+                                }
+                                &::after {
+                                    content: "]";
+                                    margin-left: 0.05em;
+                                }
+                            }
+                        }
+                        &.west {
+                            &::before {
+                                content: "W.";
+                            }
+                        }
+                        &.hip {
+                            &::before {
+                                content: "H.";
+                            }
+                        }
+                    }
+                }
+            }
+            &:not(:has(.realTImeDetail)) {
+                grid-row: span 3;
+            }
+            &:nth-of-type(n + 6) {
+                margin-top: 3em;
             }
         }
     }
