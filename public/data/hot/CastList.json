@@ -14,7 +14,7 @@
     "west": "58",
     "hip": "84",
     "castUrl": "/villa/",
-    "badges": ["trial", "hot"]
+    "badges": ["trial", "spotlight"]
   },
   {
     "castId": "759",
@@ -31,7 +31,7 @@
     "west": "57",
     "hip": "85",
     "castUrl": "/hot/",
-    "badges": ["hot"]
+    "badges": ["spotlight"]
   },
   {
     "castId": "43",

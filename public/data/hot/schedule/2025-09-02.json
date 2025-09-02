@@ -18,7 +18,7 @@
       "endTime": "17:00",
       "realTimeStatus": 1,
       "realTimeDetail": "待ち時間なし",
-      "badges": ["trial", "hot"]
+      "badges": ["trial", "spotlight"]
     },
     {
       "castId": "795",
@@ -38,7 +38,7 @@
       "scheduleStatus": "TEL確認",
       "realTimeStatus": 2,
       "realTimeDetail": "20:30より案内可能",
-      "badges": ["hot"]
+      "badges": ["spotlight"]
     },
     {
       "castId": "581",

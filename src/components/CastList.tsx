@@ -125,7 +125,7 @@ const CastList = () => {
                         ) : null}
 
                         {/* 人気急上昇は常に表示 */}
-                        {cast.badges?.includes('hot') && (
+                        {cast.badges?.includes('spotlight') && (
                           <span
                             className={`${styles.labelBadge} ${styles.badgeHot}`}
                           >
