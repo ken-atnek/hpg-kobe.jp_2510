@@ -10,12 +10,85 @@
 // このファイル全体のルールを無効にする
 
 /* =================================
+ * ソートエリア
+ * ------------------------------ */
+.containerSearch {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-block: 1em;
+    gap: 0 1.4em;
+    z-index: 2;
+    &::before {
+        content: "";
+        position: absolute;
+        left: 50%;
+        translate: -50%;
+        top: 0;
+        width: 100vw;
+        height: 100%;
+        background-color: $base-white;
+        z-index: -1;
+    }
+    h3 {
+        position: relative;
+        @include FuturaCyrillicBook;
+        font-size: FZ(20);
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        padding-left: 1em;
+        &::before {
+            content: "";
+            position: absolute;
+            width: 0.8em;
+            aspect-ratio: 1;
+            left: 0;
+            top: 50%;
+            translate: 0 -50%;
+            background-color: #000;
+        }
+    }
+    ul {
+        font-size: inherit;
+        display: grid;
+        gap: 0 0.3em;
+        grid-template-columns: repeat(6, 7em);
+        li {
+            font-size: inherit;
+            background-image: linear-gradient(to bottom, #dddddd, #bababa);
+            font-size: FZ(16);
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            .filterBtn {
+                width: 100%;
+                max-width: 4.2em;
+                padding-block: 0.8em;
+                font-size: FZ(16);
+                display: flex;
+                justify-content: space-between;
+                // padding-inline: 1em;
+                i {
+                    display: inline-block;
+                }
+                &.btnReset {
+                    display: grid;
+                    place-content: center;
+                }
+            }
+        }
+    }
+}
+
+/* =================================
  * 一覧表示
  * ------------------------------ */
 .containerList {
     display: flex;
     flex-direction: column;
     box-shadow: 0.5rem -3rem 3rem rgba(1, 1, 1, 0.1);
+    padding-bottom: 3em;
     &.kbHot {
         --shop-color: #{$shop-color-hot-number};
     }
@@ -44,209 +117,7 @@
                 z-index: -1;
             }
         }
-        .castList {
-            position: relative;
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            font-size: inherit;
-            gap: 0 1.4em;
-            margin-top: 3em;
-            padding-inline: 2em;
-            .boxCast {
-                position: relative;
-                font-size: inherit;
-                display: grid;
-                background-color: #fff;
-                box-shadow: 1px 1px 5px rgba(#6a6a6a, 0.2);
-                color: $font-black;
-                grid-row: span 4;
-                grid-template-rows: subgrid;
 
-                .wrapTodayTime {
-                    font-size: inherit;
-                    display: flex;
-                    justify-content: center;
-                    padding-block: 0.3em;
-                    background-color: rgba(var(--shop-color), 0.1);
-                    span {
-                        display: flex;
-                        font-size: FZ(16);
-                        @include FuturaCyrillicBook;
-                        align-items: center;
-                        letter-spacing: 0.12em;
-                        &:nth-of-type(2) {
-                            &::before {
-                                display: inline-block;
-                                content: "";
-                                width: 0.4em;
-                                aspect-ratio: 0.85;
-                                background-color: $font-black;
-                                margin-inline: 0.56em;
-                                clip-path: polygon(0 0, 100% 50%, 0 100%);
-                            }
-                        }
-                    }
-                    .scheduleStatus {
-                        font-size: FZ(14);
-                        letter-spacing: 0.04em;
-                    }
-                }
-                a {
-                    position: relative;
-                    font-size: inherit;
-                    display: flex;
-                    flex-direction: column;
-                    .wrapBadge {
-                        position: absolute;
-                        right: 0;
-                        top: 1em;
-                        display: grid;
-                        grid-auto-flow: row;
-                        font-size: inherit;
-                        gap: 5px 0;
-                        .labelBadge {
-                            position: relative;
-                            display: grid;
-                            place-content: center;
-                            font-size: FZ(12);
-                            width: 5em;
-                            height: 3.6em;
-                            z-index: 1;
-                            color: $base-white;
-                            padding: 0.5em 0.5em 0.5em 1em;
-                            line-height: 1.2em;
-                            &::before {
-                                content: "";
-                                position: absolute;
-                                inset: 0;
-                                background-color: var(--badge-color);
-                                z-index: -1;
-                                clip-path: polygon(
-                                    0 0,
-                                    100% 0,
-                                    100% 100%,
-                                    0 100%,
-                                    0.8em 50%
-                                );
-                            }
-                            &.badgeTrial {
-                                --badge-color: #03c275;
-                            }
-                            &.badgeHot {
-                                --badge-color: #c20356;
-                                text-align: center;
-                            }
-                        }
-                    }
-                    .wrapPhoto {
-                        @include cast-wrap-photo;
-                        aspect-ratio: 3/4;
-                        .gradeLabel {
-                            font-size: FZ(18);
-                        }
-                        &:not(.grade9) {
-                            img {
-                                clip-path: inset(0.8em);
-                            }
-                        }
-                        img {
-                            object-fit: cover;
-                        }
-                    }
-                }
-                .castProfile {
-                    font-size: inherit;
-                    display: flex;
-                    flex-direction: column;
-                    justify-content: space-between;
-                    padding: 0.5em;
-                    gap: 0.2em 0;
-                    .wrapName {
-                        font-size: inherit;
-                        display: flex;
-                        justify-content: space-between;
-                        align-items: center;
-                        .castName {
-                            font-size: FZ(20);
-                            letter-spacing: 0.12em;
-                        }
-                        .age {
-                            @include FuturaCyrillicBook;
-                            font-size: FZ(20);
-                            &::before {
-                                font-size: 0.8em;
-                                content: "Age.";
-                            }
-                        }
-                    }
-                    .castSize {
-                        font-size: inherit;
-                        display: flex;
-                        align-items: center;
-                        gap: 0 0.1em;
-                        span {
-                            @include FuturaCyrillicBook;
-                            font-size: FZ(16);
-                            &.tall {
-                                &::before {
-                                    content: "T.";
-                                }
-                            }
-                            &.bust {
-                                &::before {
-                                    content: "B.";
-                                }
-                                i {
-                                    font-size: inherit;
-                                    text-transform: uppercase;
-                                    margin-left: 0.05em;
-                                    &::before,
-                                    &::after {
-                                        display: inline-block;
-                                        translate: 0 -0.08em;
-                                    }
-                                    &::before {
-                                        content: "[";
-                                        margin-right: 0.1em;
-                                    }
-                                    &::after {
-                                        content: "]";
-                                        margin-left: 0.05em;
-                                    }
-                                }
-                            }
-                            &.west {
-                                &::before {
-                                    content: "W.";
-                                }
-                            }
-                            &.hip {
-                                &::before {
-                                    content: "H.";
-                                }
-                            }
-                        }
-                    }
-                }
-                .listType {
-                    font-size: inherit;
-                    display: grid;
-                    grid-template-columns: repeat(2, 1fr);
-                    gap: 0.3em;
-                    padding-inline: 0.5em;
-                    padding-bottom: 0.5em;
-                    li {
-                        background-color: #ede6e2;
-                        font-size: FZ(14);
-                        text-align: center;
-                        padding-block: 0.4em;
-                    }
-                }
-                &:nth-of-type(n + 6) {
-                    margin-top: 3em;
-                }
-            }
-        }
         &.grade2 {
             --grade-color: #c90e0e;
         }
@@ -271,5 +142,212 @@
         &.grade9 {
             --grade-color: #66c3e0;
         }
+    }
+    .castList {
+        position: relative;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        font-size: inherit;
+        gap: 0 1.4em;
+        margin-top: 3em;
+        padding-inline: 2em;
+    }
+}
+/* =================================
+ * キャストボックス
+ * ------------------------------ */
+.boxCast {
+    position: relative;
+    font-size: inherit;
+    display: grid;
+    background-color: #fff;
+    box-shadow: 1px 1px 5px rgba(#6a6a6a, 0.2);
+    color: $font-black;
+    grid-row: span 4;
+    grid-template-rows: subgrid;
+
+    .wrapTodayTime {
+        font-size: inherit;
+        display: flex;
+        justify-content: center;
+        padding-block: 0.3em;
+        background-color: rgba(var(--shop-color), 0.1);
+        span {
+            display: flex;
+            font-size: FZ(16);
+            @include FuturaCyrillicBook;
+            align-items: center;
+            letter-spacing: 0.12em;
+            &:nth-of-type(2) {
+                &::before {
+                    display: inline-block;
+                    content: "";
+                    width: 0.4em;
+                    aspect-ratio: 0.85;
+                    background-color: $font-black;
+                    margin-inline: 0.56em;
+                    clip-path: polygon(0 0, 100% 50%, 0 100%);
+                }
+            }
+        }
+        .scheduleStatus {
+            font-size: FZ(14);
+            letter-spacing: 0.04em;
+        }
+    }
+    a {
+        position: relative;
+        font-size: inherit;
+        display: flex;
+        flex-direction: column;
+        .wrapBadge {
+            position: absolute;
+            right: 0;
+            top: 1em;
+            display: grid;
+            grid-auto-flow: row;
+            font-size: inherit;
+            gap: 5px 0;
+            .labelBadge {
+                position: relative;
+                display: grid;
+                place-content: center;
+                font-size: FZ(12);
+                width: 5em;
+                height: 3.6em;
+                z-index: 1;
+                color: $base-white;
+                padding: 0.5em 0.5em 0.5em 1em;
+                line-height: 1.2em;
+                &::before {
+                    content: "";
+                    position: absolute;
+                    inset: 0;
+                    background-color: var(--badge-color);
+                    z-index: -1;
+                    clip-path: polygon(
+                        0 0,
+                        100% 0,
+                        100% 100%,
+                        0 100%,
+                        0.8em 50%
+                    );
+                }
+                &.badgeTrial,
+                &.badgeNew {
+                    --badge-color: #03c275;
+                }
+                &.badgeHot {
+                    --badge-color: #c20356;
+                    text-align: center;
+                }
+            }
+        }
+        .wrapPhoto {
+            @include cast-wrap-photo;
+            aspect-ratio: 3/4;
+            .gradeLabel {
+                font-size: FZ(18);
+            }
+            &:not(.grade9) {
+                img {
+                    clip-path: inset(0.8em);
+                }
+            }
+            img {
+                object-fit: cover;
+            }
+        }
+    }
+    .castProfile {
+        font-size: inherit;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 0.5em;
+        gap: 0.2em 0;
+        .wrapName {
+            font-size: inherit;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            .castName {
+                font-size: FZ(20);
+                letter-spacing: 0.12em;
+            }
+            .age {
+                @include FuturaCyrillicBook;
+                font-size: FZ(20);
+                &::before {
+                    font-size: 0.8em;
+                    content: "Age.";
+                }
+            }
+        }
+        .castSize {
+            font-size: inherit;
+            display: flex;
+            align-items: center;
+            gap: 0 0.1em;
+            span {
+                @include FuturaCyrillicBook;
+                font-size: FZ(16);
+                &.tall {
+                    &::before {
+                        content: "T.";
+                    }
+                }
+                &.bust {
+                    &::before {
+                        content: "B.";
+                    }
+                    i {
+                        font-size: inherit;
+                        text-transform: uppercase;
+                        margin-left: 0.05em;
+                        &::before,
+                        &::after {
+                            display: inline-block;
+                            translate: 0 -0.08em;
+                        }
+                        &::before {
+                            content: "[";
+                            margin-right: 0.1em;
+                        }
+                        &::after {
+                            content: "]";
+                            margin-left: 0.05em;
+                        }
+                    }
+                }
+                &.west {
+                    &::before {
+                        content: "W.";
+                    }
+                }
+                &.hip {
+                    &::before {
+                        content: "H.";
+                    }
+                }
+            }
+        }
+    }
+    .listType {
+        font-size: inherit;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.3em;
+        padding-inline: 0.5em;
+        padding-bottom: 0.5em;
+        li {
+            background-color: #ede6e2;
+            font-size: FZ(14);
+            text-align: center;
+            padding-block: 0.4em;
+        }
+    }
+    &:nth-of-type(n + 5) {
+        margin-top: 3em;
     }
 }

@@ -9,20 +9,14 @@
 import styles from '@/styles/ShopCastList.module.scss';
 import { usePathname } from 'next/navigation';
 import clsx from 'clsx';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import type { CastDetail } from '@/types/CastDetails';
-import Link from 'next/link';
-import Image from 'next/image';
+import ItemCastList from './Shop/ItemCastList';
 import { gradeMap } from '@/constants/castGradeMap';
-import { typeLabels } from '@/constants/castTypeLabels';
 type CastGroup = {
   rank: string;
   casts: CastDetail[];
 };
-
-function getTypeLabels(typeArray: number[]): string[] {
-  return typeArray.map((type) => typeLabels[type]).filter(Boolean);
-}
 
 function groupByGrade(casts: CastDetail[]): CastGroup[] {
   const map = new Map<string, CastDetail[]>();
@@ -38,6 +32,14 @@ function groupByGrade(casts: CastDetail[]): CastGroup[] {
     casts,
   }));
 }
+
+const filters = [
+  { id: 'today', label: '本日出勤' },
+  { id: 'age', label: '年齢' },
+  { id: 'height', label: '身長' },
+  { id: 'cup', label: 'カップ' },
+  { id: 'new', label: '新人' },
+];
 
 const CastList = () => {
   const pathname = usePathname();
@@ -60,109 +62,128 @@ const CastList = () => {
       });
   }, []);
 
+  const [activeFilter, setActiveFilter] = useState<string | null>(null);
+  const [sortTrigger, setSortTrigger] = useState(0); // ソートトリガー
+  const handleFilterClick = (filterId: string) => {
+    setActiveFilter(filterId);
+    setSortTrigger((prev) => prev + 1); // トリガーを更新
+  };
+
+  const filteredGroups = useMemo(() => {
+    if (activeFilter === 'today') {
+      const allCasts = castGroups.flatMap((group) => group.casts);
+      const filteredCasts = allCasts.filter(
+        (cast) => cast.scheduleStatus || cast.startTime || cast.endTime
+      );
+      return [{ rank: '', casts: filteredCasts }];
+    } else if (activeFilter === 'new') {
+      const allCasts = castGroups.flatMap((group) => group.casts);
+      const filteredCasts = allCasts.filter(
+        (cast) => cast.badges?.includes('new') || cast.badges?.includes('trial')
+      );
+      return [{ rank: '', casts: filteredCasts }];
+    } else if (['age', 'height', 'cup'].includes(activeFilter ?? '')) {
+      const allCasts = castGroups.flatMap((group) => group.casts);
+
+      const sortedCasts = [...allCasts].sort((a, b) => {
+        switch (activeFilter) {
+          case 'age':
+            return a.age - b.age;
+          case 'height':
+            return a.tall - b.tall;
+          case 'cup': {
+            const cupOrder = [
+              'a',
+              'b',
+              'c',
+              'd',
+              'e',
+              'f',
+              'g',
+              'h',
+              'i',
+              'j',
+              'k',
+            ];
+            const aCup = (a.cup || '').toLowerCase();
+            const bCup = (b.cup || '').toLowerCase();
+            const aIndex = cupOrder.indexOf(aCup);
+            const bIndex = cupOrder.indexOf(bCup);
+            const safeA = aIndex === -1 ? 999 : aIndex;
+            const safeB = bIndex === -1 ? 999 : bIndex;
+            return safeB - safeA;
+          }
+        }
+        return 0;
+      });
+
+      return [{ rank: '', casts: sortedCasts }];
+    }
+
+    return castGroups;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activeFilter, castGroups, sortTrigger]);
+
   return (
     <>
       <section
         className={clsx(styles.containerSearch, styles[activeStoreClass])}
-      ></section>
-      <section className={clsx(styles.containerList, styles[activeStoreClass])}>
-        {castGroups.map((group) => (
-          <article
-            key={group.rank}
-            className={clsx(
-              styles.groupBlock,
-              styles[gradeMap[group.casts[0].gradeId]?.className ?? '']
-            )}
-          >
-            <h2 className={styles.rankTitle}>{group.rank}</h2>
-            <ul className={styles.castList}>
-              {group.casts.map((cast) => {
-                const gradeClassName = gradeMap[cast.gradeId]?.className;
-
-                return (
-                  <li key={cast.castId} className={styles.boxCast}>
-                    <div className={styles.wrapTodayTime}>
-                      {cast.startTime && cast.endTime && (
-                        <>
-                          <span>{cast.startTime}</span>
-                          <span>{cast.endTime}</span>
-                        </>
-                      )}
-                      {cast.scheduleStatus && (
-                        <p className={styles.scheduleStatus}>
-                          {cast.scheduleStatus}
-                        </p>
-                      )}
-                    </div>
-                    <Link href={cast.castUrl}>
-                      <div
-                        className={`${styles.wrapPhoto} ${gradeClassName ? styles[gradeClassName] : ''}`}
-                      >
-                        {cast.gradeId >= 1 && cast.gradeId <= 8 && (
-                          <div className={styles.gradeFrame}></div>
-                        )}
-                        <span className={styles.gradeLabel}>
-                          {gradeMap[cast.gradeId]?.label}
-                        </span>
-                        <Image src={cast.castImage} alt={cast.castName} fill />
-                      </div>
-                      <div className={styles.wrapBadge}>
-                        {/* 新人さん or 体験入店（どちらか一方） */}
-                        {cast.badges?.includes('trial') ? (
-                          <span
-                            className={`${styles.labelBadge} ${styles.badgeTrial}`}
-                          >
-                            体験
-                            <br />
-                            入店
-                          </span>
-                        ) : cast.badges?.includes('new') ? (
-                          <span
-                            className={`${styles.labelBadge} ${styles.badgeNew}`}
-                          >
-                            新人さん
-                          </span>
-                        ) : null}
-
-                        {/* 人気急上昇は常に表示 */}
-                        {cast.badges?.includes('spotlight') && (
-                          <span
-                            className={`${styles.labelBadge} ${styles.badgeHot}`}
-                          >
-                            人気
-                            <br />
-                            急上昇
-                          </span>
-                        )}
-                      </div>
-                    </Link>
-                    <div className={styles.castProfile}>
-                      <div className={styles.wrapName}>
-                        <p className={styles.castName}>{cast.castName}</p>
-                        <span className={styles.age}>{cast.age}</span>
-                      </div>
-                      <div className={styles.castSize}>
-                        <span className={styles.tall}>{cast.tall}</span>
-                        <span className={styles.bust}>
-                          {cast.bust}
-                          <i>{cast.cup}</i>
-                        </span>
-                        <span className={styles.west}>{cast.west}</span>
-                        <span className={styles.hip}>{cast.hip}</span>
-                      </div>
-                    </div>
-                    <ul className={styles.listType}>
-                      {cast.type.map((typeId, i) => {
-                        const label = typeLabels[typeId];
-                        return label ? <li key={i}>{label}</li> : null;
-                      })}
-                    </ul>
-                  </li>
-                );
+      >
+        <h3>more search</h3>
+        <ul className={styles.filterList}>
+          {filters.map((filter) => (
+            <li key={filter.id}>
+              <button
+                type="button"
+                className={clsx(styles.filterBtn, {
+                  [styles.isActive]: activeFilter === filter.id,
+                })}
+                onClick={() => handleFilterClick(filter.id)}
+              >
+                {filter.label.split('').map((char, index) => (
+                  <i key={index}>{char}</i>
+                ))}
+              </button>
+            </li>
+          ))}
+          <li>
+            <button
+              type="button"
+              className={clsx(styles.btnReset, {
+                [styles.isActive]: activeFilter === null,
               })}
-            </ul>
-          </article>
-        ))}
+              onClick={() => setActiveFilter(null)}
+            >
+              リセット
+            </button>
+          </li>
+        </ul>
+      </section>
+      <section className={clsx(styles.containerList, styles[activeStoreClass])}>
+        {activeFilter === null ? (
+          filteredGroups.map((group) => (
+            <article
+              key={group.rank}
+              className={clsx(
+                styles.groupBlock,
+                styles[gradeMap[group.casts[0]?.gradeId]?.className ?? '']
+              )}
+            >
+              <h2 className={styles.rankTitle}>{group.rank}</h2>
+              <ul className={styles.castList}>
+                {group.casts.map((cast) => (
+                  <ItemCastList key={cast.castId} cast={cast} />
+                ))}
+              </ul>
+            </article>
+          ))
+        ) : (
+          <ul className={styles.castList}>
+            {filteredGroups[0]?.casts.map((cast) => (
+              <ItemCastList key={cast.castId} cast={cast} />
+            ))}
+          </ul>
+        )}
       </section>
     </>
   );
