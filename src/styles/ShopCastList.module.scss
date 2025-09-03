@@ -169,30 +169,57 @@
     .wrapTodayTime {
         font-size: inherit;
         display: flex;
-        justify-content: center;
-        padding-block: 0.3em;
-        background-color: rgba(var(--shop-color), 0.1);
-        span {
+        justify-content: space-between;
+        h3 {
+            display: grid;
+            place-content: center;
+            font-size: FZ(14);
+            padding-inline: 0.8em;
+            background-color: rgba(var(--shop-color), 1);
+            color: $base-white;
+            font-weight: 500;
+        }
+        .itemTime {
+            padding-block: 0.3em;
+            font-size: inherit;
             display: flex;
-            font-size: FZ(16);
-            @include FuturaCyrillicBook;
             align-items: center;
-            letter-spacing: 0.12em;
-            &:nth-of-type(2) {
-                &::before {
-                    display: inline-block;
-                    content: "";
-                    width: 0.4em;
-                    aspect-ratio: 0.85;
-                    background-color: $font-black;
-                    margin-inline: 0.56em;
-                    clip-path: polygon(0 0, 100% 50%, 0 100%);
+            justify-content: center;
+            background-color: rgba(var(--shop-color), 0.1);
+            flex: 1;
+            border-top: 1px solid rgba(var(--shop-color), 1);
+            border-right: 1px solid rgba(var(--shop-color), 1);
+            span {
+                display: flex;
+                font-size: FZ(16);
+                @include FuturaCyrillicBook;
+                align-items: center;
+                letter-spacing: 0.12em;
+                &:nth-of-type(2) {
+                    &::before {
+                        display: inline-block;
+                        content: "";
+                        width: 0.4em;
+                        aspect-ratio: 0.85;
+                        background-color: $font-black;
+                        margin-inline: 0.56em;
+                        clip-path: polygon(0 0, 100% 50%, 0 100%);
+                    }
                 }
             }
         }
+
         .scheduleStatus {
             font-size: FZ(14);
             letter-spacing: 0.04em;
+            background-color: rgba(var(--shop-color), 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-top: 1px solid rgba(var(--shop-color), 1);
+            border-right: 1px solid rgba(var(--shop-color), 1);
+
+            flex: 1;
         }
     }
     a {
@@ -347,6 +374,7 @@
             padding-block: 0.4em;
         }
     }
+
     &:nth-of-type(n + 5) {
         margin-top: 3em;
     }

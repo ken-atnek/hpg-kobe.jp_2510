@@ -101,5 +101,23 @@
     "hip": 86,
     "badges": ["new"],
     "castUrl": "/hot/"
+  },
+  {
+    "castId": "824",
+    "castName": "上葉 るる",
+    "castImage": "/images/cast/hot/hot-ruru01.jpg",
+    "startTime": "15:00",
+    "endTime": "19:00",
+    "scheduleStatus": "",
+    "gradeId": 8,
+    "type": [2, 7, 16, 27],
+    "age": 27,
+    "tall": 150,
+    "bust": 85,
+    "cup": "d",
+    "west": 58,
+    "hip": 86,
+    "badges": ["spotlight"],
+    "castUrl": "/hot/"
   }
 ]
