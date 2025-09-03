@@ -54,13 +54,16 @@ const CastList = () => {
   const [castGroups, setCastGroups] = useState<CastGroup[]>([]);
 
   useEffect(() => {
-    fetch('/data/hot/CastList.json')
+    const path = pathname.split('/')[1]; // 例: "hot", "villa"
+    const jsonPath = `/data/${path}/CastList.json`;
+
+    fetch(jsonPath)
       .then((res) => res.json())
       .then((data: CastDetail[]) => {
         const grouped = groupByGrade(data);
         setCastGroups(grouped);
       });
-  }, []);
+  }, [pathname]);
 
   const [activeFilter, setActiveFilter] = useState<string | null>(null);
   const [sortTrigger, setSortTrigger] = useState(0); // ソートトリガー
