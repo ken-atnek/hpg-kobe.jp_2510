@@ -5,12 +5,12 @@ export type CastDetail = {
   castName: string;
   castImage: string;
   castImageSquare?: string;
-  age: string;
-  tall: string;
-  bust: string;
+  age: number;
+  tall: number;
+  bust: number;
   cup: string;
-  west: string;
-  hip: string;
+  west: number;
+  hip: number;
   castUrl: string;
   shopId: string;
   shopName: string;
