@@ -22,12 +22,17 @@ const ItemCastList = ({ cast }: Props) => {
   return (
     <li key={cast.castId} className={styles.boxCast}>
       <div className={styles.wrapTodayTime}>
+        {(cast.startTime && cast.endTime) || cast.scheduleStatus ? (
+          <h3>本日出勤</h3>
+        ) : null}
+
         {cast.startTime && cast.endTime && (
-          <>
+          <div className={styles.itemTime}>
             <span>{cast.startTime}</span>
             <span>{cast.endTime}</span>
-          </>
+          </div>
         )}
+
         {cast.scheduleStatus && (
           <p className={styles.scheduleStatus}>{cast.scheduleStatus}</p>
         )}
@@ -48,7 +53,6 @@ const ItemCastList = ({ cast }: Props) => {
               さん
             </span>
           ) : null}
-
           {/* 人気急上昇は常に表示 */}
           {cast.badges?.includes('spotlight') && (
             <span className={`${styles.labelBadge} ${styles.badgeHot}`}>
