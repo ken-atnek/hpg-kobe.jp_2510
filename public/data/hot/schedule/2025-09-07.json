@@ -16,8 +16,7 @@
       "castUrl": "/hot/",
       "startTime": "13:00",
       "endTime": "17:00",
-      "realTimeStatus": 1,
-      "realTimeDetail": "待ち時間なし",
+
       "badges": ["trial", "spotlight"]
     },
     {
@@ -36,8 +35,7 @@
       "startTime": "",
       "endTime": "",
       "scheduleStatus": "TEL確認",
-      "realTimeStatus": 2,
-      "realTimeDetail": "20:30より案内可能",
+
       "badges": ["spotlight"]
     },
     {
@@ -45,8 +43,7 @@
       "castName": "平野れの",
       "shopName": "神戸ホットポイント",
       "castImage": "/images/cast/style/style-reno01.jpg",
-      "realTimeStatus": 2,
-      "realTimeDetail": "17:00より案内可能",
+
       "gradeId": 6,
       "age": "21",
       "tall": "158",

@@ -144,12 +144,12 @@ a:not([class]) {
 
 /* 無効化されたボタンには無効化されたカーソルを表示 */
 :where(
-        button,
-        button[type],
-        input[type="button"],
-        input[type="submit"],
-        input[type="reset"]
-    )[disabled] {
+    button,
+    button[type],
+    input[type="button"],
+    input[type="submit"],
+    input[type="reset"]
+)[disabled] {
     cursor: not-allowed;
 }
 time {
@@ -183,7 +183,9 @@ button {
     appearance: none;
     cursor: pointer;
 }
-
+svg {
+    stroke: unset;
+}
 /* ==========================================================
 	formタグ
 ========================================================== */

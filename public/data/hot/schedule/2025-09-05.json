@@ -13,7 +13,12 @@
       "cup": "f",
       "west": "57",
       "hip": "85",
-      "castUrl": "/villa/"
+      "castUrl": "/villa/",
+      "realTimeStatus": 2,
+      "realTimeDetail": "待ち時間なし",
+      "badges": ["trial", "spotlight"],
+      "startTime": "18:00",
+      "endTime": "23:59"
     },
     {
       "castId": "581",
@@ -21,6 +26,7 @@
       "shopName": "神戸ホットポイント",
       "castImage": "/images/cast/style/style-reno01.jpg",
       "realTimeStatus": 2,
+      "realTimeDetail": "待ち時間なし",
       "gradeId": 6,
       "age": "21",
       "tall": "158",
@@ -39,6 +45,7 @@
       "shopName": "ホットポイントヴィラ",
       "castImage": "/images/cast/villa/villa-yana01.jpg",
       "realTimeStatus": 2,
+      "realTimeDetail": "待ち時間なし",
       "gradeId": 9,
       "age": "41",
       "tall": "160",

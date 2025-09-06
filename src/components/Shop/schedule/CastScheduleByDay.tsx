@@ -16,6 +16,7 @@ import type { CastDetail } from '@/types/CastDetails';
 import { loadScheduleConfig } from '@/lib/loadScheduleConfig';
 import { getDateList } from '@/lib/getScheduleDataList';
 import { gradeMap } from '@/constants/castGradeMap';
+import { getShopFromPath, getStoreClass } from '@/lib/shopUtils';
 type ScheduleData = {
   date: string;
   casts: CastDetail[];
@@ -23,13 +24,8 @@ type ScheduleData = {
 
 const CastScheduleByDay = () => {
   const pathname = usePathname();
-  const path = pathname.split('/')[1];
-
-  const storeIdMap: Record<string, string> = {
-    hot: 'kbHot',
-    villa: 'kbVilla',
-  };
-  const activeStoreClass = storeIdMap[path];
+  const shop = getShopFromPath(pathname);
+  const activeStoreClass = getStoreClass(shop);
 
   const [schedules, setSchedules] = useState<ScheduleData[]>([]);
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
@@ -37,9 +33,9 @@ const CastScheduleByDay = () => {
 
   useEffect(() => {
     const loadSchedules = async () => {
-      const config = await loadScheduleConfig(path);
+      const config = await loadScheduleConfig(shop);
       const dateList = getDateList(config.switchHour, config.days);
-      const basePath = `/data/${path}/schedule`;
+      const basePath = `/data/${shop}/schedule`;
       const fetched = await Promise.all(
         dateList.map(async (date) => {
           const res = await fetch(`${basePath}/${date}.json`);
@@ -52,7 +48,7 @@ const CastScheduleByDay = () => {
     };
 
     loadSchedules();
-  }, [path]);
+  }, [shop]);
 
   useEffect(() => {
     if (schedules.length > 0 && !selectedDate) {
@@ -64,7 +60,7 @@ const CastScheduleByDay = () => {
     <>
       <section className={clsx(styles.containerHead, styles[activeStoreClass])}>
         <Link
-          href={`/${path}/weekly-schedule/`}
+          href={`/${shop}/weekly-schedule/`}
           className={styles.linkByPeriod}
         >
           一覧表示はコチラ
@@ -72,7 +68,7 @@ const CastScheduleByDay = () => {
         <nav>
           <Link
             href="/hot/weekly-schedule/"
-            className={clsx(styles.shopHot, path === 'hot' && styles.isActive)}
+            className={clsx(styles.shopHot, shop === 'hot' && styles.isActive)}
           >
             神戸ホットポイント
           </Link>
@@ -80,7 +76,7 @@ const CastScheduleByDay = () => {
             href="/villa/weekly-schedule/"
             className={clsx(
               styles.shopVilla,
-              path === 'villa' && styles.isActive
+              shop === 'villa' && styles.isActive
             )}
           >
             ホットポイント VILLA
@@ -153,7 +149,7 @@ const CastScheduleByDay = () => {
                         </p>
                       )}
                     </div>
-                    <Link href={cast.castUrl}>
+                    <Link href={`/${shop}/profile/?id=${cast.castId}`}>
                       <div className={styles.wrapBadge}>
                         {/* 新人さん or 体験入店（どちらか一方） */}
                         {cast.badges?.includes('trial') ? (
