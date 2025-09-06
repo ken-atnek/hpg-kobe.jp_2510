@@ -1,0 +1,78 @@
+/* =================================
+ * 	店舗 キャスト詳細
+ * ------------------------------ */
+@use "variable" as *;
+@use "svg" as *;
+@use "mixin" as *;
+/* stylelint-disable no-descending-specificity */
+/* stylelint-disable keyframes-name-pattern */
+/* stylelint-disable custom-property-pattern */
+// このファイル全体のルールを無効にする
+
+.containerSystemMain {
+    display: flex;
+    flex-direction: column;
+    padding-top: 2em;
+    padding-inline: 2em;
+}
+/* =================================
+ * 店舗タイトル
+ * ------------------------------ */
+.containerHead {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-block: 2em;
+    padding-inline: 2em;
+    box-shadow: 0.5rem -3rem 3rem rgba(1, 1, 1, 0.1);
+
+    .itemLogo {
+        font-size: inherit;
+    }
+    .linkList {
+        color: #8a6f60;
+        font-size: FZ(14);
+        border: 1px solid;
+        width: 20rem;
+        height: 5rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 1rem;
+        background-color: #fff;
+        box-shadow: 0 2px 5px rgba(#242424, 0.2);
+    }
+    &.kbHot {
+        .itemLogo {
+            width: 16em;
+            svg {
+                width: 100%;
+                aspect-ratio: 500/176;
+                stroke: unset;
+                fill: $shop-hot;
+            }
+        }
+    }
+}
+/* =================================
+ * プロフィールコンテンツ
+ * ------------------------------ */
+.containerContents {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    .itemHeadImage {
+        @include cast-wrap-photo;
+        aspect-ratio: 3/4;
+        font-size: inherit;
+        &:not(.grade9) {
+            img {
+                clip-path: inset(1em);
+            }
+        }
+        img {
+            width: 100%;
+            aspect-ratio: 683/911;
+            object-fit: cover;
+        }
+    }
+}

@@ -50,10 +50,7 @@ export default function ClientWrapper({
                 }`}
               >
                 {isLeftActive && (
-                  <ShopLeft
-                    logoUrl="#svg_logoKobeHot"
-                    photoDiaryUrl="https://blogparts.cityheaven.net/widget/?shopId=4973&mode=2&type=14&limitedKind=0&num=12&col=3&color=6&fontsize=14"
-                  />
+                  <ShopLeft photoDiaryUrl="https://blogparts.cityheaven.net/widget/?shopId=4973&mode=2&type=14&limitedKind=0&num=12&col=3&color=6&fontsize=14" />
                 )}
                 {children}
               </main>

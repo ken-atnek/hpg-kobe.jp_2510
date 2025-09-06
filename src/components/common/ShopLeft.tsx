@@ -11,53 +11,53 @@ import BannerGroup from '@/components/common/BannerGroup';
 import clsx from 'clsx';
 import { Shops } from '@/data/AreaShopData';
 import ExternalLink from '@/components/common/ExternalLink';
+import { getShopFromPath, getStoreClass, getLogoHref } from '@/lib/shopUtils';
 
 type ShopLeftProps = {
-  logoUrl?: string;
   photoDiaryUrl?: string;
 };
 
-const ShopLeft = ({ logoUrl, photoDiaryUrl }: ShopLeftProps) => {
+const ShopLeft = ({ photoDiaryUrl }: ShopLeftProps) => {
   const pathname = usePathname();
-  const path = pathname.split('/')[1];
-
-  const storeIdMap: Record<string, string> = {
-    hot: 'kbHot',
-    villa: 'kbVilla',
-  };
-
-  const storeId = storeIdMap[path];
-  const shopData = Shops.find((shop) => shop.storeId === storeId);
+  const shop = getShopFromPath(pathname);
+  const activeStoreClass = getStoreClass(shop);
+  const logoHref = getLogoHref(shop);
+  const storeId = getStoreClass(shop); // 'kbHot' など
+  const shopData = Shops.find((item) => item.storeId === storeId);
 
   // 🔽 JSON パスを店舗別に切り替え
-  const jsonBasePath = `/data/${path}`;
+  const jsonBasePath = `/data/${shop}`;
   const jsonPathTop = `${jsonBasePath}/LeftBan01.json`;
   const jsonPathBottom = `${jsonBasePath}/LeftBan02.json`;
 
   return (
-    <section className={clsx(styles.containerShopLeft, styles[storeId])}>
-      {shopData && (
-        <div className={styles.boxHead}>
-          <div className={styles.itemLogo}>
-            <svg
-              className={styles.logoSvg}
-              width="200"
-              height="50"
-              aria-hidden="true"
-            >
-              <use href={logoUrl} />
-            </svg>
-          </div>
-          <div className={styles.sidebarH2}>{shopData.nameEn}</div>
-          <h2>{shopData.name}</h2>
-          <ExternalLink
-            href={`tel:${shopData.phone}`}
-            className={styles.itemTel}
+    <section
+      className={clsx(styles.containerShopLeft, styles[activeStoreClass])}
+    >
+      <div className={styles.boxHead}>
+        <div className={styles.itemLogo}>
+          <svg
+            className={styles.logoSvg}
+            width="200"
+            height="50"
+            aria-hidden="true"
           >
-            {shopData.phone}
-          </ExternalLink>
+            <use href={logoHref} />
+          </svg>
         </div>
-      )}
+        {shopData && (
+          <>
+            <div className={styles.sidebarH2}>{shopData.nameEn}</div>
+            <h2>{shopData.name}</h2>
+            <ExternalLink
+              href={`tel:${shopData.phone}`}
+              className={styles.itemTel}
+            >
+              {shopData.phone}
+            </ExternalLink>
+          </>
+        )}
+      </div>
       <div className={styles.boxPhotoDiary}>
         <div className={styles.wrapContents}>
           <iframe src={photoDiaryUrl} />

@@ -8,6 +8,7 @@
 import styles from '@/styles/components/common/PageTitle.module.scss';
 import { usePathname } from 'next/navigation';
 import clsx from 'clsx';
+import { getShopFromPath, getStoreClass, getLogoHref } from '@/lib/shopUtils';
 type PageTitleProps = {
   titleJp: string;
   titleEn: string;
@@ -15,23 +16,14 @@ type PageTitleProps = {
 
 const PageTitle = ({ titleJp, titleEn }: PageTitleProps) => {
   const pathname = usePathname();
-  const path = pathname.split('/')[1];
-
-  const storeIdMap: Record<string, string> = {
-    hot: 'kbHot',
-    villa: 'kbVilla',
-  };
-
-  const logoHrefMap: Record<string, string> = {
-    hot: '#svg_logoKobeHot',
-    villa: '#svg_logoVilla',
-  };
-
-  const storeId = storeIdMap[path];
-  const logoHref = logoHrefMap[path] || '#svg_logoKobeHot';
+  const shop = getShopFromPath(pathname);
+  const activeStoreClass = getStoreClass(shop);
+  const logoHref = getLogoHref(shop);
 
   return (
-    <section className={clsx(styles.containerPageTitle, styles[storeId])}>
+    <section
+      className={clsx(styles.containerPageTitle, styles[activeStoreClass])}
+    >
       <article className={styles.innerPageTitle}>
         <div className={styles.boxH2}>
           <span className={styles.sidebarH2}>{titleEn}</span>

@@ -249,16 +249,28 @@
  8: { label: 'BRONZE', className: 'grade8' }
  9: { label: 'NORMAL', className: 'grade9' }
   * --------------------------------------------------------- */
+    &.grade2 {
+        --grade-color: 201, 14, 14;
+    }
+    &.grade3 {
+        --grade-color: 158, 44, 229;
+    }
+    &.grade4 {
+        --grade-color: 42, 63, 182;
+    }
+    &.grade5 {
+        --grade-color: 101, 205, 162;
+    }
     &.grade6 {
-        --grade-color: 201, 142, 14;
+        --grade-color: 210, 167, 74;
     }
     &.grade7 {
         --grade-color: 99, 99, 99;
     }
     &.grade8 {
-        --grade-color: 229, 103, 44;
+        --grade-color: 214, 135, 98;
     }
     &.grade9 {
-        --grade-color: 125, 37, 96;
+        --grade-color: 102, 195, 224;
     }
 }
