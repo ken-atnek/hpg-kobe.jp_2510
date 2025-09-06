@@ -126,7 +126,6 @@ const CastScheduleByDay = () => {
             >
               {selectedSchedule.casts.map((cast) => {
                 const gradeClassName = gradeMap[cast.gradeId]?.className;
-
                 return (
                   <li key={cast.castId} className={styles.castItem}>
                     {cast.realTimeStatus && (
