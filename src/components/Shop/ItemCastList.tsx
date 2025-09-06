@@ -12,13 +12,16 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { gradeMap } from '@/constants/castGradeMap';
 import { typeLabels } from '@/constants/castTypeLabels';
+import { usePathname } from 'next/navigation';
+import { getShopFromPath } from '@/lib/shopUtils';
 type Props = {
   cast: CastDetail;
 };
 
 const ItemCastList = ({ cast }: Props) => {
   const gradeClassName = gradeMap[cast.gradeId]?.className;
-
+  const pathname = usePathname();
+  const shop = getShopFromPath(pathname);
   return (
     <li key={cast.castId} className={styles.boxCast}>
       <div className={styles.wrapTodayTime}>
@@ -37,7 +40,7 @@ const ItemCastList = ({ cast }: Props) => {
           <p className={styles.scheduleStatus}>{cast.scheduleStatus}</p>
         )}
       </div>
-      <Link href={cast.castUrl}>
+      <Link href={`/${shop}/profile/?id=${cast.castId}`}>
         <div className={styles.wrapBadge}>
           {/* 新人さん or 体験入店（どちらか一方） */}
           {cast.badges?.includes('trial') ? (

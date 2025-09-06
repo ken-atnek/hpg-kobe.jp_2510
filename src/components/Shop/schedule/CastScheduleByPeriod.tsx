@@ -15,7 +15,7 @@ import { useEffect, useState } from 'react';
 import type { CastDetail } from '@/types/CastDetails';
 import { loadScheduleConfig } from '@/lib/loadScheduleConfig';
 import { getDateList } from '@/lib/getScheduleDataList';
-
+import { getShopFromPath, getStoreClass } from '@/lib/shopUtils';
 type ScheduleData = {
   date: string;
   casts: CastDetail[];
@@ -23,21 +23,16 @@ type ScheduleData = {
 
 const CastScheduleByPeriod = () => {
   const pathname = usePathname();
-  const path = pathname.split('/')[1];
-
-  const storeIdMap: Record<string, string> = {
-    hot: 'kbHot',
-    villa: 'kbVilla',
-  };
-  const activeStoreClass = storeIdMap[path];
+  const shop = getShopFromPath(pathname);
+  const activeStoreClass = getStoreClass(shop);
 
   const [schedules, setSchedules] = useState<ScheduleData[]>([]);
 
   useEffect(() => {
     const loadSchedules = async () => {
-      const config = await loadScheduleConfig(path);
+      const config = await loadScheduleConfig(shop);
       const dateList = getDateList(config.switchHour, config.days);
-      const basePath = `/data/${path}/schedule`;
+      const basePath = `/data/${shop}/schedule`;
       const fetched = await Promise.all(
         dateList.map(async (date) => {
           const res = await fetch(`${basePath}/${date}.json`);
@@ -50,7 +45,7 @@ const CastScheduleByPeriod = () => {
     };
 
     loadSchedules();
-  }, [path]);
+  }, [shop]);
 
   const uniqueCasts = (() => {
     const map = new Map<string, CastDetail>();
@@ -68,7 +63,7 @@ const CastScheduleByPeriod = () => {
   return (
     <>
       <section className={clsx(styles.containerHead, styles[activeStoreClass])}>
-        <Link href={`/${path}/schedule/`} className={styles.linkByDay}>
+        <Link href={`/${shop}/schedule/`} className={styles.linkByDay}>
           日別表示はコチラ
         </Link>
         {schedules.length > 0 && (
@@ -103,7 +98,7 @@ const CastScheduleByPeriod = () => {
         <nav>
           <Link
             href="/hot/schedule/"
-            className={clsx(styles.shopHot, path === 'hot' && styles.isActive)}
+            className={clsx(styles.shopHot, shop === 'hot' && styles.isActive)}
           >
             神戸ホットポイント
           </Link>
@@ -111,7 +106,7 @@ const CastScheduleByPeriod = () => {
             href="/villa/schedule/"
             className={clsx(
               styles.shopVilla,
-              path === 'villa' && styles.isActive
+              shop === 'villa' && styles.isActive
             )}
           >
             ホットポイント VILLA
@@ -154,7 +149,10 @@ const CastScheduleByPeriod = () => {
               <li key={cast.castId} className={styles.row}>
                 {/* キャスト情報 */}
                 <div className={styles.boxCastInfo}>
-                  <Link href={cast.castUrl} className={styles.wrapImage}>
+                  <Link
+                    href={`/${shop}/profile/?id=${cast.castId}`}
+                    className={styles.wrapImage}
+                  >
                     <Image
                       src={cast.castImageSquare || cast.castImage}
                       alt={cast.castName}
