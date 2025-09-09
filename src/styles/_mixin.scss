@@ -229,9 +229,9 @@
         left: 0;
         width: 100%;
         height: 100%;
-        background: url(../assets/images/grade-frame.webp) no-repeat center
-            center / cover;
-        background-blend-mode: hard-light;
+        // background: url(../assets/images/grade-frame.webp) no-repeat center
+        //     center / cover;
+        // background-blend-mode: hard-light;
         background-color: rgb(var(--grade-color));
     }
     // &:not(.grade9) {
@@ -240,9 +240,10 @@
     //     }
     // }
     /* =========================================================
+    4: { label: 'DIAMOND', className: 'grade4' }
+    3: { label: 'PREMIUM', className: 'grade3' }
  2: { label: 'GRAND VIP', className: 'grade2' }
- 3: { label: 'PREMIUM', className: 'grade3' }
- 4: { label: 'DIAMOND', className: 'grade4' }
+ : { label: '筆頭 VIP', className: 'grade2' }
  5: { label: 'VIP', className: 'grade5' }
  6: { label: 'GOLD', className: 'grade6' }
  7: { label: 'SILVER', className: 'grade7' }
