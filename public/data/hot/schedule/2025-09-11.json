@@ -1,5 +1,5 @@
 {
-  "date": "2025-09-08",
+  "date": "2025-09-11",
   "casts": [
     {
       "castId": "795",
@@ -14,19 +14,13 @@
       "west": "57",
       "hip": "85",
       "castUrl": "/villa/",
-      "realTimeStatus": 2,
-      "realTimeDetail": "待ち時間なし",
-      "badges": ["trial", "spotlight"],
-      "startTime": "18:00",
-      "endTime": "23:59"
+      "scheduleStatus": "TEL確認"
     },
     {
       "castId": "581",
       "castName": "平野れの",
       "shopName": "神戸ホットポイント",
       "castImage": "/images/cast/style/style-reno01.jpg",
-      "realTimeStatus": 2,
-      "realTimeDetail": "待ち時間なし",
       "gradeId": 6,
       "age": "21",
       "tall": "158",
@@ -44,8 +38,6 @@
       "shopId": "hot",
       "shopName": "ホットポイントヴィラ",
       "castImage": "/images/cast/villa/villa-yana01.jpg",
-      "realTimeStatus": 2,
-      "realTimeDetail": "待ち時間なし",
       "gradeId": 9,
       "age": "41",
       "tall": "160",

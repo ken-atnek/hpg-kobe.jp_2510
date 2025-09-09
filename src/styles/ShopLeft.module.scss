@@ -48,6 +48,7 @@
         position: relative;
         font-size: inherit;
         padding-top: 8em;
+        padding-bottom: 1em;
         &::before {
             content: "";
             position: absolute;
@@ -62,7 +63,7 @@
         .wrapContents {
             font-size: inherit;
             iframe {
-                aspect-ratio: 326/497;
+                aspect-ratio: 1;
             }
         }
     }

@@ -526,9 +526,20 @@
                     .gradeLabel {
                         font-size: FZ(16);
                     }
-                    &:not(.grade9) {
+                    &.grade1,
+                    &.grade2,
+                    &.grade3,
+                    &.grade4,
+                    &.grade5 {
                         img {
                             clip-path: inset(0.5em);
+                        }
+                    }
+                    &.grade6,
+                    &.grade7,
+                    &.grade8 {
+                        img {
+                            clip-path: inset(0.3em);
                         }
                     }
                     img {

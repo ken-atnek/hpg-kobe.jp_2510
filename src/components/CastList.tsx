@@ -12,26 +12,6 @@ import clsx from 'clsx';
 import { useEffect, useMemo, useState } from 'react';
 import type { CastDetail } from '@/types/CastDetails';
 import ItemCastList from './Shop/ItemCastList';
-import { gradeMap } from '@/constants/castGradeMap';
-type CastGroup = {
-  rank: string;
-  casts: CastDetail[];
-};
-
-function groupByGrade(casts: CastDetail[]): CastGroup[] {
-  const map = new Map<string, CastDetail[]>();
-
-  casts.forEach((cast) => {
-    const label = gradeMap[cast.gradeId]?.label ?? '未設定';
-    if (!map.has(label)) map.set(label, []);
-    map.get(label)!.push(cast);
-  });
-
-  return Array.from(map.entries()).map(([label, casts]) => ({
-    rank: label,
-    casts,
-  }));
-}
 
 const filters = [
   { id: 'today', label: '本日出勤' },
@@ -51,7 +31,7 @@ const CastList = () => {
   };
   const activeStoreClass = storeIdMap[path];
 
-  const [castGroups, setCastGroups] = useState<CastGroup[]>([]);
+  const [castGroups, setCastGroups] = useState<{ rank: string; casts: CastDetail[]; }[]>([]);
 
   useEffect(() => {
     const path = pathname.split('/')[1]; // 例: "hot", "villa"
@@ -60,72 +40,55 @@ const CastList = () => {
     fetch(jsonPath)
       .then((res) => res.json())
       .then((data: CastDetail[]) => {
-        const grouped = groupByGrade(data);
-        setCastGroups(grouped);
+        setCastGroups([{ rank: '', casts: data }]);
       });
   }, [pathname]);
 
   const [activeFilter, setActiveFilter] = useState<string | null>(null);
-  const [sortTrigger, setSortTrigger] = useState(0); // ソートトリガー
   const handleFilterClick = (filterId: string) => {
     setActiveFilter(filterId);
-    setSortTrigger((prev) => prev + 1); // トリガーを更新
   };
 
-  const filteredGroups = useMemo(() => {
+  const displayCasts = useMemo(() => {
+    const allCasts = castGroups.flatMap((group) => group.casts);
+
+    let filtered = allCasts;
     if (activeFilter === 'today') {
-      const allCasts = castGroups.flatMap((group) => group.casts);
-      const filteredCasts = allCasts.filter(
+      filtered = allCasts.filter(
         (cast) => cast.scheduleStatus || cast.startTime || cast.endTime
       );
-      return [{ rank: '', casts: filteredCasts }];
     } else if (activeFilter === 'new') {
-      const allCasts = castGroups.flatMap((group) => group.casts);
-      const filteredCasts = allCasts.filter(
-        (cast) => cast.badges?.includes('new') || cast.badges?.includes('trial')
+      filtered = allCasts.filter(
+        (cast) =>
+          cast.badges?.includes('new') || cast.badges?.includes('trial')
       );
-      return [{ rank: '', casts: filteredCasts }];
-    } else if (['age', 'height', 'cup'].includes(activeFilter ?? '')) {
-      const allCasts = castGroups.flatMap((group) => group.casts);
-
-      const sortedCasts = [...allCasts].sort((a, b) => {
-        switch (activeFilter) {
-          case 'age':
-            return a.age - b.age;
-          case 'height':
-            return a.tall - b.tall;
-          case 'cup': {
-            const cupOrder = [
-              'a',
-              'b',
-              'c',
-              'd',
-              'e',
-              'f',
-              'g',
-              'h',
-              'i',
-              'j',
-              'k',
-            ];
-            const aCup = (a.cup || '').toLowerCase();
-            const bCup = (b.cup || '').toLowerCase();
-            const aIndex = cupOrder.indexOf(aCup);
-            const bIndex = cupOrder.indexOf(bCup);
-            const safeA = aIndex === -1 ? 999 : aIndex;
-            const safeB = bIndex === -1 ? 999 : bIndex;
-            return safeB - safeA;
-          }
-        }
-        return 0;
-      });
-
-      return [{ rank: '', casts: sortedCasts }];
     }
 
-    return castGroups;
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [activeFilter, castGroups, sortTrigger]);
+    switch (activeFilter) {
+      case 'age':
+        filtered.sort((a, b) => a.age - b.age);
+        break;
+      case 'height':
+        filtered.sort((a, b) => a.tall - b.tall);
+        break;
+      case 'cup': {
+        const cupOrder = ['a','b','c','d','e','f','g','h','i','j','k'];
+        filtered.sort((a, b) => {
+          const aIndex = cupOrder.indexOf((a.cup || '').toLowerCase());
+          const bIndex = cupOrder.indexOf((b.cup || '').toLowerCase());
+          const safeA = aIndex === -1 ? 999 : aIndex;
+          const safeB = bIndex === -1 ? 999 : bIndex;
+          return safeB - safeA;
+        });
+        break;
+      }
+      default:
+        filtered.sort((a, b) => a.gradeId - b.gradeId);
+        break;
+    }
+
+    return filtered;
+  }, [activeFilter, castGroups]);
 
   return (
     <>
@@ -163,30 +126,11 @@ const CastList = () => {
         </ul>
       </section>
       <section className={clsx(styles.containerList, styles[activeStoreClass])}>
-        {activeFilter === null ? (
-          filteredGroups.map((group) => (
-            <article
-              key={group.rank}
-              className={clsx(
-                styles.groupBlock,
-                styles[gradeMap[group.casts[0]?.gradeId]?.className ?? '']
-              )}
-            >
-              <h2 className={styles.rankTitle}>{group.rank}</h2>
-              <ul className={styles.castList}>
-                {group.casts.map((cast) => (
-                  <ItemCastList key={cast.castId} cast={cast} />
-                ))}
-              </ul>
-            </article>
-          ))
-        ) : (
-          <ul className={styles.castList}>
-            {filteredGroups[0]?.casts.map((cast) => (
-              <ItemCastList key={cast.castId} cast={cast} />
-            ))}
-          </ul>
-        )}
+        <ul className={styles.castList}>
+          {displayCasts.map((cast) => (
+            <ItemCastList key={cast.castId} cast={cast} />
+          ))}
+        </ul>
       </section>
     </>
   );
