@@ -16,20 +16,12 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding-block: 1em;
+    padding: 2em 0 0;
     gap: 0 1.4em;
     z-index: 2;
-    &::before {
-        content: "";
-        position: absolute;
-        left: 50%;
-        translate: -50%;
-        top: 0;
-        width: 100vw;
-        height: 100%;
-        background-color: $base-white;
-        z-index: -1;
-    }
+    box-shadow: 0.5rem -3rem 3rem rgba(1, 1, 1, 0.1);
+    background-color: $base-white;
+
     h3 {
         position: relative;
         @include FuturaCyrillicBook;
@@ -89,6 +81,7 @@
     flex-direction: column;
     box-shadow: 0.5rem -3rem 3rem rgba(1, 1, 1, 0.1);
     padding-bottom: 3em;
+
     &.kbHot {
         --shop-color: #{$shop-color-hot-number};
     }
@@ -118,6 +111,9 @@
             }
         }
 
+        &.grade1 {
+            --grade-color: #373636;
+        }
         &.grade2 {
             --grade-color: #c90e0e;
         }
@@ -276,9 +272,20 @@
             .gradeLabel {
                 font-size: FZ(18);
             }
-            &:not(.grade9) {
+            &.grade1,
+            &.grade2,
+            &.grade3,
+            &.grade4,
+            &.grade5 {
                 img {
                     clip-path: inset(0.8em);
+                }
+            }
+            &.grade6,
+            &.grade7,
+            &.grade8 {
+                img {
+                    clip-path: inset(0.3em);
                 }
             }
             img {

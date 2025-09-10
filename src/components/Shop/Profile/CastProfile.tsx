@@ -9,7 +9,7 @@
 
 import styles from '@/styles/ShopCastProfile.module.scss';
 import Image from 'next/image';
-import Link from 'next/link';
+// import Link from 'next/link';
 import clsx from 'clsx';
 import { usePathname, useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';

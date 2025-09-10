@@ -9,12 +9,13 @@
  * ======================================= */
 
 export const gradeMap: Record<number, { label: string; className: string }> = {
-  2: { label: 'GRAND VIP', className: 'grade2' },
-  3: { label: 'PREMIUM', className: 'grade3' },
-  4: { label: 'DIAMOND', className: 'grade4' },
-  5: { label: 'VIP', className: 'grade5' },
-  6: { label: 'GOLD', className: 'grade6' },
-  7: { label: 'SILVER', className: 'grade7' },
-  8: { label: 'BRONZE', className: 'grade8' },
-  9: { label: 'NORMAL', className: 'grade9' },
+ 1: { label: 'DIAMOND', className: 'grade1' },
+ 2: { label: 'PREMIUM', className: 'grade2' },
+ 3: { label: 'GRAND VIP', className: 'grade3' },
+ 4: { label: '筆頭 VIP', className: 'grade4' },
+ 5: { label: 'VIP', className: 'grade5' },
+ 6: { label: 'GOLD', className: 'grade6' },
+ 7: { label: 'SILVER', className: 'grade7' },
+ 8: { label: 'BRONZE', className: 'grade8' },
+ 9: { label: 'NORMAL', className: 'grade9' },
 };
