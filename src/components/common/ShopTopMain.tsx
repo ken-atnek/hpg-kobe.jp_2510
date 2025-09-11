@@ -3,7 +3,7 @@
  *店舗 TOP MAIN
  * URL: src/components/common/ShopTopMain.tsx
  * Created: 2025-08-22
- * Last updated: 2025-08-22
+ * Last updated: 2025-09-11
  * ======================================= */
 import styles from '@/styles/ShopCommon.module.scss';
 import TopPickUp from '@/components/Shop/TopPickUp';

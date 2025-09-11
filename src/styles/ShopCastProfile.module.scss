@@ -19,8 +19,9 @@
     padding-block: 2em;
     padding-inline: 2em;
     box-shadow: 0.5rem -3rem 3rem rgba(1, 1, 1, 0.1);
-    background-color: $base-white;
+    background-color: #f8f8f8;
     z-index: 2;
+
     .itemLogo {
         font-size: inherit;
     }
@@ -79,6 +80,7 @@
     grid-template-columns: repeat(2, 1fr);
     box-shadow: 0.5rem -3rem 3rem rgba(1, 1, 1, 0.1);
     color: #070707;
+    background-color: #f8f8f8;
     padding-bottom: 2em;
 }
 /* =================================
@@ -433,11 +435,15 @@
  * Q & A
  * ------------------------------ */
 .boxQuestions {
+    position: relative;
     font-size: inherit;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    overflow: hidden;
+
     ul {
+        position: relative;
         width: 100%;
         @include box-size(left);
         align-self: flex-end;
@@ -446,6 +452,26 @@
         flex: 1;
         padding-block: 2em;
         gap: 0 2em;
+        &::before,
+        &::after {
+            content: "";
+            position: absolute;
+            z-index: -1;
+        }
+        &::before {
+            top: 1em;
+            right: 60%;
+            width: 24em;
+            @include svg-text-q("fff");
+            z-index: -1;
+        }
+        &::after {
+            bottom: 1em;
+            left: 60%;
+            width: 22em;
+            @include svg-text-a("fff");
+            z-index: -1;
+        }
         li {
             position: relative;
             font-size: inherit;
@@ -554,6 +580,7 @@
     flex-direction: column;
     align-items: center;
     padding-block: 2em;
+
     .scheduleList {
         position: relative;
         display: grid;
@@ -667,6 +694,7 @@
 .boxCastMessage {
     font-size: inherit;
     display: flex;
+
     .boxInner {
         @include box-size(right);
         margin-top: 2em;
@@ -697,6 +725,7 @@
     font-size: inherit;
     display: flex;
     justify-content: flex-end;
+
     .boxInner {
         @include box-size(left);
         margin-top: 2em;
@@ -722,6 +751,24 @@
     }
 }
 /* =================================
+ * お客様の声(REVIEW)
+ * ------------------------------ */
+.boxReview {
+    font-size: inherit;
+    display: flex;
+    background-color: #ede6e2;
+    .boxInner {
+        @include box-size(right);
+        margin-top: 2em;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+    }
+    // ShopCastReview.module.scssに記載
+}
+/* =================================
  * 動画
  * ------------------------------ */
 .boxMovie {
@@ -730,6 +777,7 @@
     grid-column: span 2;
     font-size: inherit;
     padding-block: 2em;
+
     .itemMovie {
         font-size: inherit;
         width: 100%;

@@ -1,6 +1,6 @@
 export type RatingItem = {
   label: string;
-  score: number; 
+  score: number;
 };
 
 export type QAItem = {
@@ -24,7 +24,6 @@ export type CastDetail = {
   cup: string;
   west: number;
   hip: number;
-  // castUrl: string;
   shopId: string;
   shopName: string;
   realTimeStatus: number;

@@ -3,7 +3,7 @@
  * URL: src/components/Shop/TopNews.tsx
  * Referenced in: src/components/common/ShopTopMain.tsx
  * Created: 2025-08-23
- * Last updated: 2025-08-26
+ * Last updated: 2025-09-11
  * ======================================= */
 import styles from '@/styles/components/ShopNews.module.scss';
 import { usePathname } from 'next/navigation';

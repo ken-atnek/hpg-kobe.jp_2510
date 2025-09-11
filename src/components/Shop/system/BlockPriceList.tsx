@@ -4,7 +4,7 @@
  * URL: src/components/Shop/system/BlockPriceList.tsx
  * Referenced in: src/components/Shop/Hot/SystemMain.tsx
  * Created: 2025-08-27
- * Last updated: 2025-08-27
+ * Last updated: 2025-09-11
  * ======================================= */
 import styles from '@/styles/ShopSystem.module.scss';
 import { usePathname } from 'next/navigation';

@@ -23,6 +23,8 @@ import type { CastDetail } from '@/types/CastDetails';
 import ProfileContainerHead from '@/components/Shop/Profile/ProfileContainerHead';
 import ExternalLink from '@/components/common/ExternalLink';
 import CastSchedule from '@/components/Shop/Profile/CastSchedule';
+import CastReviewList from '@/components/Shop/Profile/CastReviewList';
+import CastReviewForm from '@/components/Shop/Profile/CastReviewForm';
 
 export default function CastProfile() {
   const pathname = usePathname();
@@ -388,7 +390,14 @@ export default function CastProfile() {
             </div>
           )}
         </div>
-        <div className={styles.boxReview}></div>
+        <div className={styles.boxReview}>
+          <div className={styles.boxInner}>
+            <span className={styles.sidebarH2}>REVIEW</span>
+            <h2 className={styles.itemH2}>お客様の声</h2>
+            <CastReviewList castId={cast.castId} shop={shop} />
+            <CastReviewForm />
+          </div>
+        </div>
         {cast.movie && (
           <div className={styles.boxMovie}>
             <div className={styles.itemMovie}>

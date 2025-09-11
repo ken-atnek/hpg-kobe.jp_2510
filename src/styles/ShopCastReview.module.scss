@@ -1,0 +1,202 @@
+/* =================================
+ * 	店舗 キャスト詳細
+ * ------------------------------ */
+@use "variable" as *;
+@use "svg" as *;
+@use "mixin" as *;
+/* stylelint-disable no-descending-specificity */
+/* stylelint-disable keyframes-name-pattern */
+/* stylelint-disable custom-property-pattern */
+// このファイル全体のルールを無効にする
+
+/* =================================
+ * レビューリスト
+ * ------------------------------ */
+.innerReviewList {
+    flex: 1;
+    width: 100%;
+    position: relative;
+    font-size: inherit;
+    margin-top: 2em;
+    overflow: scroll;
+
+    ul {
+        position: absolute;
+        left: 0;
+        top: 0;
+        font-size: inherit;
+
+        li {
+            font-size: inherit;
+            border-bottom: 1px solid;
+            padding-block: 0.58em;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5em 0;
+            .wrapHead {
+                display: grid;
+                grid-template-columns: auto auto;
+                font-size: inherit;
+                justify-content: space-between;
+                .reviewRating {
+                    grid-row: span 2;
+                    display: grid;
+                    grid-template-columns: repeat(5, 1fr);
+                    font-size: inherit;
+                    align-self: center;
+                    gap: 0.3em;
+                    svg {
+                        font-size: inherit;
+                        width: 1.87em;
+                        aspect-ratio: 30/28;
+                        fill: #f8f8f8;
+                        &.active {
+                            fill: #ff8400;
+                        }
+                    }
+                }
+                time {
+                    color: #8a6f60;
+                    text-align: right;
+                    @include FuturaCyrillicBook;
+                    font-size: FZ(16);
+                }
+                span {
+                    font-size: FZ(14);
+                }
+            }
+            .reviewComment {
+                font-size: FZ(14);
+                text-align: justify;
+                letter-spacing: 0.04em;
+                line-height: 1.4em;
+            }
+        }
+    }
+}
+
+/* =================================
+ * 入力フォーム
+ * ------------------------------ */
+.innerForm {
+    position: relative;
+    font-size: inherit;
+    width: 100%;
+    margin-top: 2em;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 1em;
+    input,
+    textarea {
+        margin: 0;
+        padding: 0;
+        background: none;
+        border: none;
+        border-radius: 0;
+        outline: none;
+        appearance: none;
+    }
+    ul {
+        position: relative;
+        display: grid;
+        grid-template-columns: auto 1fr;
+        font-size: inherit;
+        gap: 0.8em 0;
+        li {
+            font-size: inherit;
+            grid-column: span 2;
+            display: grid;
+            grid-template-columns: subgrid;
+            gap: 0 1em;
+            & > label {
+                font-size: FZ(14);
+                padding-top: 0.7em;
+            }
+            .contents {
+                font-size: inherit;
+                display: flex;
+                flex-direction: column;
+                .note {
+                    font-size: FZ(12);
+                    color: #dc0000;
+                    margin-top: 0.2em;
+                }
+            }
+            input[type="text"],
+            input[type="email"],
+            textarea {
+                font-size: FZ(14);
+                padding: 0.8em 1em;
+                background-color: #fff;
+                border: 1px solid #8a6f60;
+                &::placeholder {
+                    color: rgba(#726b6299, 0.6);
+                }
+            }
+            .ratingStars {
+                display: grid;
+                grid-template-columns: repeat(5, auto);
+                font-size: inherit;
+                align-self: center;
+                justify-content: start;
+                gap: 0 0.3em;
+                align-items: center;
+                label {
+                    display: block;
+                    font-size: inherit;
+                    position: relative;
+                    & > input {
+                        position: absolute;
+                        inset: 0;
+                        z-index: +1;
+                        font-size: inherit;
+                    }
+                    svg {
+                        width: 1.87em;
+                        aspect-ratio: 30/28;
+                        font-size: inherit;
+                        fill: #f8f8f8;
+                        cursor: pointer;
+                        &.active {
+                            fill: #ff8400;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .submitButton {
+        position: relative;
+        font-size: inherit;
+        color: #8a6f60;
+        background-color: #ffefd9;
+        border: 1px solid;
+        border-radius: 1rem;
+        align-self: flex-end;
+        margin-top: 1em;
+        padding: 1.4em 2em;
+        width: 100%;
+        max-width: 27rem;
+        transition: 0.3s ease-out;
+        &::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            translate: 0 -50%;
+            right: 2em;
+            width: 0.6em;
+            aspect-ratio: 1;
+            border-top: 1px solid;
+            border-right: 1px solid;
+            rotate: 45deg;
+        }
+        p {
+            font-size: FZ(16);
+            letter-spacing: 0.04em;
+        }
+        @include hover {
+            background-color: #8a6f60;
+            color: #f8f8f8;
+        }
+    }
+}

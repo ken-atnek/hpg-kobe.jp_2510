@@ -3,7 +3,7 @@
  * URL: src/components/Shop/TopSlideBan.tsx
  * Referenced in: src/components/common/ShopTopMain.tsx
  * Created: 2025-08-22
- * Last updated: 2025-08-22
+ * Last updated: 2025-09-11
  * ======================================= */
 'use client';
 import styles from '@/styles/components/ShopTopSlideBan.module.scss';
