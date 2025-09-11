@@ -39,7 +39,6 @@ export default function ClientWrapper({
         <RequireAge scope="hot" authPath="/hot/auth">
           <>
             <Header
-              className={styles.shopHotHeader}
               title="神戸・三宮の風俗｜ファッションヘルス:神戸ホットポイント"
               navMenu={navMenu}
             />
@@ -57,7 +56,6 @@ export default function ClientWrapper({
             </div>
             <ShopFooterMenu
               navMenu={navMenu}
-              className={styles.shopHotFooterMenu}
             />
             <ContainerShopList />
             <Footer className={styles.shopHotFooter} />

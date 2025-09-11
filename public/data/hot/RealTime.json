@@ -21,25 +21,6 @@
         "castUrl": "/hot/"
       },
       {
-        "castId": "795",
-        "castName": "若宮のえる",
-        "shopId": "villa",
-        "shopName": "神戸ホットポイント",
-        "castImage": "/images/cast/hot/hot-noeru01.jpg",
-        "realTimeStatus": 2,
-        "realTimeDetail": "20:30より案内可能",
-        "startTime": "10:00",
-        "endTime": "20:00",
-        "gradeId": 6,
-        "age": "21",
-        "tall": "158",
-        "bust": "100",
-        "cup": "f",
-        "west": "57",
-        "hip": "85",
-        "castUrl": "/villa/"
-      },
-      {
         "castId": "581",
         "castName": "平野れの",
         "shopId": "hot",
@@ -57,6 +38,25 @@
         "west": "56",
         "hip": "84",
         "castUrl": "/style/"
+      },
+      {
+        "castId": "795",
+        "castName": "若宮のえる",
+        "shopId": "villa",
+        "shopName": "神戸ホットポイント",
+        "castImage": "/images/cast/hot/hot-noeru01.jpg",
+        "realTimeStatus": 2,
+        "realTimeDetail": "20:30より案内可能",
+        "startTime": "10:00",
+        "endTime": "20:00",
+        "gradeId": 6,
+        "age": "21",
+        "tall": "158",
+        "bust": "100",
+        "cup": "f",
+        "west": "57",
+        "hip": "85",
+        "castUrl": "/villa/"
       },
 
       {

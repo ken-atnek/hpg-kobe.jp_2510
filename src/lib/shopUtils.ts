@@ -19,3 +19,8 @@ export function getStoreClass(shop: string): string {
 export function getLogoHref(shop: string): string {
   return logoHrefMap[shop] || logoHrefMap['hot'];
 }
+
+export const platinumMailUrlMap: Record<string, string> = {
+  hot: 'https://www.cityheaven.net/hyogo/A2802/A280201/koubehp/platinummail/?of=y',
+  villa:'https://www.cityheaven.net/hyogo/A2802/A280201/koube_hp_part3/platinummail/?of=y',
+};

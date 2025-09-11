@@ -2,12 +2,14 @@
  *店舗 FOOTER MENU
  * URL: src/components/common/ShopFooterMenu.tsx
  * Created: 2025-08-21
- * Last updated: 2025-08-21
+ * Last updated: 2025-09-11
  * ======================================= */
 import styles from '@/styles/ShopCommon.module.scss';
 import clsx from 'clsx';
 import Link from 'next/link';
 import ExternalLink from '@/components/common/ExternalLink';
+import { usePathname } from 'next/navigation';
+import { getShopFromPath, getStoreClass } from '@/lib/shopUtils';
 type NavItem = {
   href: string;
   label: string;
@@ -19,9 +21,12 @@ type ShopFooterMenuProps = {
   navMenu: NavItem[];
 };
 
-const ShopFooterMenu = ({ className, navMenu }: ShopFooterMenuProps) => {
+const ShopFooterMenu = ({ navMenu }: ShopFooterMenuProps) => {
+  const pathname = usePathname();
+  const shop = getShopFromPath(pathname);
+  const activeStoreClass = getStoreClass(shop);
   return (
-    <section className={clsx(styles.shopFooterMenu, className)}>
+    <section className={clsx(styles.shopFooterMenu, styles[activeStoreClass])}>
       <nav>
         {navMenu.map((item, index) =>
           item.target ? (

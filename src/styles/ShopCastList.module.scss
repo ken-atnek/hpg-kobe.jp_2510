@@ -112,16 +112,16 @@
         }
 
         &.grade1 {
-            --grade-color: #373636;
-        }
-        &.grade2 {
-            --grade-color: #c90e0e;
-        }
-        &.grade3 {
             --grade-color: #9e2ce5;
         }
-        &.grade4 {
+        &.grade2 {
             --grade-color: #2a3fb6;
+        }
+        &.grade3 {
+            --grade-color: #c90e0e;
+        }
+        &.grade4 {
+            --grade-color: #e40b69;
         }
         &.grade5 {
             --grade-color: #65cda2;

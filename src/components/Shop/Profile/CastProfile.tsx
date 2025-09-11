@@ -3,20 +3,26 @@
  * URL: src/components/Shop/Profile/CastProfile.tsx
  * Referenced in: src/app/hot/profile/page.tsx
  * Created: 2025-09-06
- * Last updated: 2025-09-06
+ * Last updated: 2025-09-10
  * ======================================= */
 'use client';
 
 import styles from '@/styles/ShopCastProfile.module.scss';
 import Image from 'next/image';
-// import Link from 'next/link';
+import Link from 'next/link';
 import clsx from 'clsx';
 import { usePathname, useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { gradeMap } from '@/constants/castGradeMap';
+import { typeLabels } from '@/constants/castTypeLabels';
 import { getShopFromPath, getStoreClass } from '@/lib/shopUtils';
+import { platinumMailUrlMap } from '@/lib/shopUtils';
+import { convertRemToPx } from '@/lib/convertRemToPx';
+
 import type { CastDetail } from '@/types/CastDetails';
 import ProfileContainerHead from '@/components/Shop/Profile/ProfileContainerHead';
+import ExternalLink from '@/components/common/ExternalLink';
+import CastSchedule from '@/components/Shop/Profile/CastSchedule';
 
 export default function CastProfile() {
   const pathname = usePathname();
@@ -27,6 +33,40 @@ export default function CastProfile() {
 
   const shop = getShopFromPath(pathname);
   const activeStoreClass = getStoreClass(shop);
+  const mailUrl = platinumMailUrlMap[shop] || '#';
+
+  const [prevCastId, setPrevCastId] = useState<string | null>(null);
+  const [nextCastId, setNextCastId] = useState<string | null>(null);
+  const [prevCastName, setPrevCastName] = useState<string | null>(null);
+  const [nextCastName, setNextCastName] = useState<string | null>(null);
+  useEffect(() => {
+    try {
+      const castOrderStr = sessionStorage.getItem('castOrder');
+      if (!castOrderStr) return;
+
+      type CastOrderItem = {
+        id: string;
+        name: string;
+      };
+      const castOrder = JSON.parse(castOrderStr) as CastOrderItem[];
+      const queryParams = new URLSearchParams(window.location.search);
+      const currentId = queryParams.get('id');
+      if (!currentId) return;
+
+      const currentIndex = castOrder.findIndex((c) => c.id === currentId);
+      if (currentIndex === -1) return;
+
+      const prev = castOrder[currentIndex - 1];
+      const next = castOrder[currentIndex + 1];
+
+      setPrevCastId(prev?.id || null);
+      setNextCastId(next?.id || null);
+      setPrevCastName(prev?.name || null);
+      setNextCastName(next?.name || null);
+    } catch (err) {
+      console.error('castOrder 読み込みエラー:', err);
+    }
+  }, []);
 
   useEffect(() => {
     if (cast) {
@@ -77,10 +117,9 @@ export default function CastProfile() {
   if (!cast) return <p>読み込み中...</p>;
 
   const gradeClassName =
-    cast.gradeId && gradeMap[cast.gradeId]
+    cast?.gradeId && gradeMap[cast.gradeId]
       ? gradeMap[cast.gradeId].className
       : '';
-
   return (
     <>
       <ProfileContainerHead />
@@ -107,13 +146,288 @@ export default function CastProfile() {
             height={773}
           />
         </div>
-        <div className={styles.boxProfile}>
-          <h1>{cast.castName}さんのプロフィール</h1>
-          <p>年齢：{cast.age}</p>
-          <p>身長：{cast.tall}cm</p>
-          <p>
-            スリーサイズ：{cast.bust}-{cast.west}-{cast.hip}（{cast.cup}カップ）
-          </p>
+        <div
+          className={clsx(
+            styles.boxProfile,
+            gradeClassName && styles[gradeClassName]
+          )}
+        >
+          <div className={styles.wrapHead}>
+            <div className={styles.innerBadge}>
+              {/* 新人さん or 体験入店（どちらか一方） */}
+              {cast.badges?.includes('trial') ? (
+                <span className={`${styles.labelBadge} ${styles.badgeTrial}`}>
+                  体験入店
+                </span>
+              ) : cast.badges?.includes('new') ? (
+                <span className={`${styles.labelBadge} ${styles.badgeNew}`}>
+                  新人さん
+                </span>
+              ) : null}
+              {/* 人気急上昇は常に表示 */}
+              {cast.badges?.includes('spotlight') && (
+                <span className={`${styles.labelBadge} ${styles.badgeHot}`}>
+                  人気急上昇
+                </span>
+              )}
+            </div>
+            <div className={styles.castName}>
+              {cast.castName}
+              <span>{cast.castNameEn}</span>
+              {cast.ranking != null && (
+                <div className={styles.itemRanking}>
+                  <Image
+                    src={`/images/rank/rank${String(cast.ranking).padStart(2, '0')}.webp`}
+                    alt={`ランキング${cast.ranking}`}
+                    width={50}
+                    height={50}
+                  />
+                </div>
+              )}
+            </div>
+            <div className={styles.wrapSize}>
+              <span className={styles.age}>{cast.age}</span>
+              <div className={styles.size}>
+                <span className={styles.tall}>{cast.tall}</span>
+                <span className={styles.bust}>
+                  {cast.bust}
+                  <i>{cast.cup}</i>
+                </span>
+                <span className={styles.west}>{cast.west}</span>
+                <span className={styles.hip}>{cast.hip}</span>
+              </div>
+            </div>
+            <ul className={styles.listType}>
+              {cast.type.map((typeId, i) => {
+                const label = typeLabels[typeId];
+                return label ? <li key={i}>{label}</li> : null;
+              })}
+            </ul>
+          </div>
+          <div className={styles.itemRank}>
+            <span className={styles.title}>rank:</span>
+            <span className={styles.label}>
+              {gradeMap[cast.gradeId]?.label}
+            </span>
+          </div>
+          {cast.ratings && cast.ratings.length > 0 && (
+            <ul className={styles.ratingList}>
+              {cast.ratings.map((item, index) => (
+                <li key={index}>
+                  <span className={styles.label}>
+                    <i></i>
+                    {item.label}
+                  </span>
+                  <div className={styles.bar}>
+                    {[...Array(7)].map((_, i) => (
+                      <span
+                        key={i}
+                        className={clsx(
+                          styles.barBlock,
+                          i < item.score ? styles.active : styles.inactive
+                        )}
+                      />
+                    ))}
+                  </div>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+        <div className={styles.boxQuestions}>
+          <ul>
+            {cast.questions?.map((item, index) => (
+              <li key={index}>
+                <span className={styles.labelQuestion}>{item.question}</span>
+                <span className={styles.labelAnswer}>{item.answer}</span>
+              </li>
+            ))}
+          </ul>
+          <nav className={styles.wrapLink}>
+            <ExternalLink href={mailUrl} className={styles.linkMail}>
+              <span>PLATINUM MAIL</span>
+              <h2>プラチナメール</h2>
+              <p>登録はこちらから</p>
+            </ExternalLink>
+            {cast.photoBlogUrl && (
+              <ExternalLink
+                href={cast.photoBlogUrl}
+                className={styles.photoBlog}
+              >
+                <span>PHOTO BLOG</span>
+                <h2>写メ日記</h2>
+              </ExternalLink>
+            )}
+          </nav>
+        </div>
+        <div className={styles.itemImage}>
+          <Image
+            src={
+              cast.profileImages && cast.profileImages.length > 1
+                ? cast.profileImages[1]
+                : `/images/cast/${shop}/no-image.webp`
+            }
+            alt={`${cast.castName}の画像1`}
+            width={580}
+            height={773}
+          />
+        </div>
+        <div className={styles.boxSchedule}>
+          <span className={styles.sidebarH2}>schedule</span>
+          <h2 className={styles.itemH2}>週間スケジュール</h2>
+          {cast && <CastSchedule castId={cast.castId} shop={shop} />}
+          {cast.reservationUrl && (
+            <ExternalLink
+              href={cast.reservationUrl}
+              className={styles.linkReservation}
+            >
+              <h3>ご予約はこちら</h3>
+              <p>{cast.castName}さんの予約状況を確認</p>
+            </ExternalLink>
+          )}
+        </div>
+        <div className={styles.itemImage}>
+          <Image
+            src={
+              cast.profileImages && cast.profileImages.length > 2
+                ? cast.profileImages[2]
+                : `/images/cast/${shop}/no-image.webp`
+            }
+            alt={`${cast.castName}の画像1`}
+            width={580}
+            height={773}
+          />
+        </div>
+        <div className={styles.boxCastMessage}>
+          <div className={styles.boxInner}>
+            <span className={styles.sidebarH2}>cast message</span>
+            <h2 className={styles.itemH2}>メッセージ</h2>
+            <div className={styles.wrapCastMessage}>
+              {cast.castMessage && (
+                <div
+                  className={styles.castMessage}
+                  dangerouslySetInnerHTML={{
+                    __html: convertRemToPx(cast.castMessage),
+                  }}
+                />
+              )}
+            </div>
+          </div>
+        </div>
+        {cast.profileImages?.slice(5, 8).filter(Boolean).length > 0 && (
+          <div className={styles.wrapImageMiddle}>
+            {[5, 6, 7].map((i, idx) => {
+              const src = cast.profileImages[i];
+              return (
+                <Image
+                  key={idx}
+                  src={src ? src : `/images/cast/${shop}/no-image.webp`}
+                  alt={`${cast.castName}の画像${i + 1}`}
+                  width={580}
+                  height={773}
+                />
+              );
+            })}
+          </div>
+        )}
+        <div className={styles.boxShopComment}>
+          <div className={styles.boxInner}>
+            <span className={styles.sidebarH2}>SHOP COMMENT</span>
+            <h2 className={styles.itemH2}>ショップコメント</h2>
+            <div className={styles.wrapShopComment}>
+              {cast.shopComment && (
+                <div
+                  className={styles.shopComment}
+                  dangerouslySetInnerHTML={{
+                    __html: convertRemToPx(cast.shopComment),
+                  }}
+                />
+              )}
+            </div>
+          </div>
+        </div>
+        <div className={styles.itemImage}>
+          <Image
+            src={
+              cast.profileImages && cast.profileImages.length > 3
+                ? cast.profileImages[3]
+                : `/images/cast/${shop}/no-image.webp`
+            }
+            alt={`${cast.castName}の画像1`}
+            width={580}
+            height={773}
+          />
+        </div>
+        <div className={styles.wrapImageBottom}>
+          <div className={styles.itemImageFirst}>
+            <Image
+              src={
+                cast.profileImages && cast.profileImages.length > 4
+                  ? cast.profileImages[4]
+                  : `/images/cast/${shop}/no-image.webp`
+              }
+              alt={`${cast.castName}の画像1`}
+              width={580}
+              height={773}
+            />
+          </div>
+          {cast.profileImages?.slice(8, 9).filter(Boolean).length > 0 && (
+            <div className={styles.itemImageBottom}>
+              {[8, 9].map((i, idx) => {
+                const src = cast.profileImages[i];
+                return (
+                  <Image
+                    key={idx}
+                    src={src ? src : `/images/cast/${shop}/no-image.webp`}
+                    alt={`${cast.castName}の画像${i + 1}`}
+                    width={580}
+                    height={773}
+                  />
+                );
+              })}
+            </div>
+          )}
+        </div>
+        <div className={styles.boxReview}></div>
+        {cast.movie && (
+          <div className={styles.boxMovie}>
+            <div className={styles.itemMovie}>
+              <video
+                src={cast.movie}
+                controls
+                preload="metadata"
+                width="100%"
+                height="auto"
+              />
+            </div>
+          </div>
+        )}
+        <div className={styles.boxCastNav}>
+          <nav>
+            {prevCastId ? (
+              <Link
+                href={`/${shop}/profile?id=${prevCastId}`}
+                className={styles.linkCastDetail}
+              >
+                {prevCastName}さんのページへ
+              </Link>
+            ) : (
+              <div></div>
+            )}
+            <Link href={`/${shop}/cast/`} className={styles.linkCastList}>
+              在籍一覧へ
+            </Link>
+            {nextCastId ? (
+              <Link
+                href={`/${shop}/profile?id=${nextCastId}`}
+                className={styles.linkCastDetail}
+              >
+                {nextCastName}さんのページへ
+              </Link>
+            ) : (
+              <div></div>
+            )}
+          </nav>
         </div>
       </section>
     </>

@@ -9,37 +9,42 @@ import styles from '@/styles/ShopCommon.module.scss';
 import TopPickUp from '@/components/Shop/TopPickUp';
 import CastSlide from '@/components/Shop/TopCastSlide';
 import { usePathname } from 'next/navigation';
+import clsx from 'clsx';
 import CastRanking from '@/components/Shop/TopCastRanking';
 import TopSlideBan from '@/components/Shop/TopSlideBan';
 import BannerGroup from '@/components/common/BannerGroup';
 import ShopNews from '@/components/Shop/TopNews';
+import { getShopFromPath, getStoreClass } from '@/lib/shopUtils';
 const ShopTopMain = () => {
   const pathname = usePathname();
-  const store = pathname.split('/')[1];
+  const shop = getShopFromPath(pathname);
+  const activeStoreClass = getStoreClass(shop);
 
   // 🔽 JSON パスを店舗別に切り替え
-  const jsonBasePath = `/data/${store}`;
+  const jsonBasePath = `/data/${shop}`;
   const jsonPathBanMain = `${jsonBasePath}/TopMainBan01.json`;
 
   return (
-    <section className={styles.containerShopTopMain}>
+    <section
+      className={clsx(styles.containerShopTopMain, styles[activeStoreClass])}
+    >
       <TopPickUp />
       <CastSlide
         titleJp="新人紹介"
         titleEn="new face"
         titleEnSub="cast"
-        jsonPath={`/data/${store}/TopNewFace.json`}
+        jsonPath={`/data/${shop}/TopNewFace.json`}
       />
       <ShopNews
         titleJp="新着情報・トピックス"
         titleEn="news"
-        jsonPath={`/data/${store}/TopNews.json`}
+        jsonPath={`/data/${shop}/TopNews.json`}
       />
       <CastRanking
         titleJp="キャストランキング"
         titleEn="cast"
         titleEnSub="ranking"
-        jsonPath={`/data/${store}/TopRanking.json`}
+        jsonPath={`/data/${shop}/TopRanking.json`}
       />
       <TopSlideBan />
       <BannerGroup jsonPath={jsonPathBanMain} className={styles.boxBanMain} />

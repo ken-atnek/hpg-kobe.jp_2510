@@ -10,7 +10,7 @@ import styles from '@/styles/ShopSystem.module.scss';
 import { usePathname } from 'next/navigation';
 import clsx from 'clsx';
 import { useEffect, useState } from 'react';
-
+import { getShopFromPath, getStoreClass } from '@/lib/shopUtils';
 type ContentsProps = {
   jsonPath: string;
 };
@@ -31,14 +31,8 @@ type PricePlan = {
 
 const BlockPriceList = ({ jsonPath }: ContentsProps) => {
   const pathname = usePathname();
-  const path = pathname.split('/')[1];
-
-  const storeIdMap: Record<string, string> = {
-    hot: 'kbHot',
-    villa: 'kbVilla',
-  };
-
-  const activeStoreClass = storeIdMap[path];
+  const shop = getShopFromPath(pathname);
+  const activeStoreClass = getStoreClass(shop);
 
   const [pricePlans, setPricePlans] = useState<PricePlan[]>([]);
 

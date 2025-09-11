@@ -12,14 +12,15 @@ import { Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import { usePathname } from 'next/navigation';
 import { renderBannerItem, useBannerItems } from '@/lib/renderBannerItem';
+import { getShopFromPath } from '@/lib/shopUtils';
 import Image from 'next/image';
 import 'swiper/css';
 const TopSlideBan = () => {
   const pathname = usePathname();
-  const path = pathname.split('/')[1];
+  const shop = getShopFromPath(pathname);
+
   // 🔽 JSON パスを店舗別に切り替え
-  const jsonBasePath = `/data/${path}`;
-  const jsonPathPickUp = `${jsonBasePath}/topSlideBan.json`;
+  const jsonPathPickUp = `/data/${shop}/topSlideBan.json`;
   const [items, setModalImage, modalImage] = useBannerItems(jsonPathPickUp);
 
   // スライド数が足りないときは複製してループ対応

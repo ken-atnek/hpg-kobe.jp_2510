@@ -9,19 +9,15 @@
 import styles from '@/styles/ShopSystem.module.scss';
 import { usePathname } from 'next/navigation';
 import clsx from 'clsx';
+import { getShopFromPath, getStoreClass } from '@/lib/shopUtils';
 
 const BlockTopAnnounce = () => {
   const pathname = usePathname();
-  const path = pathname.split('/')[1];
-
-  const storeIdMap: Record<string, string> = {
-    hot: 'kbHot',
-    villa: 'kbVilla',
-  };
-  const storeId = storeIdMap[path];
+  const shop = getShopFromPath(pathname);
+  const activeStoreClass = getStoreClass(shop);
 
   return (
-    <div className={clsx(styles.blockTopAnnounce, styles[storeId])}>
+    <div className={clsx(styles.blockTopAnnounce, styles[activeStoreClass])}>
       <h3>平日・土日祝 料金変わらず営業中</h3>
       <p>
         ※最終受付時間は<time dateTime="23:20">23:20</time>

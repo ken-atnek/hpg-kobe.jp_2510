@@ -12,6 +12,8 @@ import clsx from 'clsx';
 import { Shops } from '@/data/AreaShopData';
 import ExternalLink from '@/components/common/ExternalLink';
 import ImageWebReserve from '@/assets/images/objects/web-reserve.webp';
+import { getShopFromPath, getStoreClass } from '@/lib/shopUtils';
+
 import Image from 'next/image';
 type ShopDetails = {
   logoUrl?: string;
@@ -20,17 +22,14 @@ type ShopDetails = {
 
 const BlockReservationGuide = ({ logoUrl, reserveUrl }: ShopDetails) => {
   const pathname = usePathname();
-  const path = pathname.split('/')[1];
+  const shop = getShopFromPath(pathname);
+  const activeStoreClass = getStoreClass(shop);
 
-  const storeIdMap: Record<string, string> = {
-    hot: 'kbHot',
-    villa: 'kbVilla',
-  };
-  const storeId = storeIdMap[path];
-  const shopData = Shops.find((shop) => shop.storeId === storeId);
-
+  const shopData = Shops.find((s) => s.storeId === activeStoreClass);
   return (
-    <div className={clsx(styles.blockReservationGuide, styles[storeId])}>
+    <div
+      className={clsx(styles.blockReservationGuide, styles[activeStoreClass])}
+    >
       <h2 className="pageH2">
         <span>Reservation Guide</span>
         ご予約方法

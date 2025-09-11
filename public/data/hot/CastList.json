@@ -14,8 +14,7 @@
     "cup": "d",
     "west": 58,
     "hip": 86,
-    "badges": ["spotlight"],
-    "castUrl": "/hot/"
+    "badges": ["spotlight"]
   },
   {
     "castId": "685",
@@ -31,7 +30,6 @@
     "cup": "b",
     "west": 58,
     "hip": 84,
-    "castUrl": "/villa/",
     "badges": ["trial", "spotlight"]
   },
   {
@@ -48,7 +46,6 @@
     "cup": "d",
     "west": 57,
     "hip": 85,
-    "castUrl": "/hot/",
     "badges": ["spotlight"]
   },
   {
@@ -65,8 +62,7 @@
     "bust": 82,
     "cup": "c",
     "west": 58,
-    "hip": 87,
-    "castUrl": "/hot/"
+    "hip": 87
   },
   {
     "castId": "829",
@@ -82,8 +78,7 @@
     "bust": 82,
     "cup": "c",
     "west": 58,
-    "hip": 87,
-    "castUrl": "/hot/"
+    "hip": 87
   },
   {
     "castId": "806",
@@ -99,8 +94,7 @@
     "bust": 82,
     "cup": "c",
     "west": 56,
-    "hip": 81,
-    "castUrl": "/hot/"
+    "hip": 81
   },
   {
     "castId": "838",
@@ -117,8 +111,7 @@
     "cup": "f",
     "west": 57,
     "hip": 86,
-    "badges": ["new"],
-    "castUrl": "/hot/"
+    "badges": ["new"]
   }
 
 ]

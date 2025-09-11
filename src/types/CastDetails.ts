@@ -1,9 +1,21 @@
+export type RatingItem = {
+  label: string;
+  score: number; 
+};
+
+export type QAItem = {
+  question: string;
+  answer: string;
+};
+
 export type CastDetail = {
-  rankID: string;
-  rank: string;
+  rankID?: string;
+  rank?: string;
   castId: string;
   castName: string;
+  castNameEn: string;
   castImage: string;
+  movie?: string;
   castImageSquare?: string;
   profileImages: string[];
   age: number;
@@ -12,16 +24,23 @@ export type CastDetail = {
   cup: string;
   west: number;
   hip: number;
-  castUrl: string;
+  // castUrl: string;
   shopId: string;
   shopName: string;
   realTimeStatus: number;
   realTimeDetail: string;
   realTimeComment: string;
-  startTime: string;
-  endTime: string;
-  scheduleStatus: string;
+  startTime?: string;
+  endTime?: string;
+  scheduleStatus?: string;
   gradeId: number;
+  ranking?: number;
   type: number[];
   badges?: string[];
+  ratings?: RatingItem[];
+  photoBlogUrl?: string;
+  reservationUrl?: string;
+  castMessage?: string;
+  shopComment?: string;
+  questions?: QAItem[];
 };

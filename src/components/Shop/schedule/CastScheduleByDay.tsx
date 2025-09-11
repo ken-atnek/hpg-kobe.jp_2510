@@ -3,9 +3,10 @@
  * URL:src/components/Shop/schedule/CastScheduleByDay.tsx
  * Referenced in: :src/app/hot/weekly-schedule/page.tsx
  * Created: 2025-09-01
- * Last updated: 2025-09-01
+ * Last updated: 2025-09-11
  * ======================================= */
 'use client';
+
 import styles from '@/styles/ShopSchedule.module.scss';
 import { usePathname } from 'next/navigation';
 import clsx from 'clsx';
@@ -17,6 +18,7 @@ import { loadScheduleConfig } from '@/lib/loadScheduleConfig';
 import { getDateList } from '@/lib/getScheduleDataList';
 import { gradeMap } from '@/constants/castGradeMap';
 import { getShopFromPath, getStoreClass } from '@/lib/shopUtils';
+
 type ScheduleData = {
   date: string;
   casts: CastDetail[];
@@ -29,13 +31,17 @@ const CastScheduleByDay = () => {
 
   const [schedules, setSchedules] = useState<ScheduleData[]>([]);
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
-  const selectedSchedule = schedules.find((s) => s.date === selectedDate);
 
+  // 日付に対応するスケジュールを取得
+  const dailyScheduleList = schedules.find((s) => s.date === selectedDate);
+
+  // スケジュールの読み込み
   useEffect(() => {
     const loadSchedules = async () => {
       const config = await loadScheduleConfig(shop);
       const dateList = getDateList(config.switchHour, config.days);
       const basePath = `/data/${shop}/schedule`;
+
       const fetched = await Promise.all(
         dateList.map(async (date) => {
           const res = await fetch(`${basePath}/${date}.json`);
@@ -50,11 +56,23 @@ const CastScheduleByDay = () => {
     loadSchedules();
   }, [shop]);
 
+  // 初回ロード時、最初の日付を自動で選択
   useEffect(() => {
     if (schedules.length > 0 && !selectedDate) {
       setSelectedDate(schedules[0].date);
     }
   }, [schedules, selectedDate]);
+
+  // 表示キャスト順を sessionStorage に保存
+  useEffect(() => {
+    if (dailyScheduleList?.casts?.length) {
+      const castOrder = dailyScheduleList.casts.map((c) => ({
+        id: c.castId,
+        name: c.castName,
+      }));
+      sessionStorage.setItem('castOrder', JSON.stringify(castOrder));
+    }
+  }, [dailyScheduleList]);
 
   return (
     <>
@@ -65,6 +83,8 @@ const CastScheduleByDay = () => {
         >
           一覧表示はコチラ
         </Link>
+
+        {/* 店舗切替タブ */}
         <nav>
           <Link
             href="/hot/weekly-schedule/"
@@ -83,10 +103,12 @@ const CastScheduleByDay = () => {
           </Link>
         </nav>
       </section>
+
       <section
         className={clsx(styles.containerContents, styles[activeStoreClass])}
       >
         <article className={styles.blockByDay}>
+          {/* 日付タブ */}
           <nav>
             {schedules.map((schedule) => {
               const dateObj = new Date(schedule.date);
@@ -114,16 +136,19 @@ const CastScheduleByDay = () => {
               );
             })}
           </nav>
-          {selectedSchedule && (
+
+          {/* キャスト一覧 */}
+          {dailyScheduleList && (
             <ul
               className={clsx(styles.castList, {
                 [styles.isToday]: selectedDate === schedules[0]?.date,
               })}
             >
-              {selectedSchedule.casts.map((cast) => {
+              {dailyScheduleList.casts.map((cast) => {
                 const gradeClassName = gradeMap[cast.gradeId]?.className;
                 return (
                   <li key={cast.castId} className={styles.castItem}>
+                    {/* リアルタイム状態 */}
                     {cast.realTimeStatus && (
                       <div
                         className={`${styles.realTImeDetail} ${
@@ -136,6 +161,7 @@ const CastScheduleByDay = () => {
                       </div>
                     )}
 
+                    {/* 出勤時間またはステータス */}
                     <div className={styles.wrapTodayTime}>
                       {cast.startTime && cast.endTime && (
                         <>
@@ -149,9 +175,11 @@ const CastScheduleByDay = () => {
                         </p>
                       )}
                     </div>
+
+                    {/* キャストリンク */}
                     <Link href={`/${shop}/profile/?id=${cast.castId}`}>
+                      {/* バッジ表示 */}
                       <div className={styles.wrapBadge}>
-                        {/* 新人さん or 体験入店（どちらか一方） */}
                         {cast.badges?.includes('trial') ? (
                           <span
                             className={`${styles.labelBadge} ${styles.badgeTrial}`}
@@ -168,7 +196,6 @@ const CastScheduleByDay = () => {
                           </span>
                         ) : null}
 
-                        {/* 人気急上昇は常に表示 */}
                         {cast.badges?.includes('spotlight') && (
                           <span
                             className={`${styles.labelBadge} ${styles.badgeHot}`}
@@ -179,18 +206,24 @@ const CastScheduleByDay = () => {
                           </span>
                         )}
                       </div>
+
+                      {/* 画像・グレード */}
                       <div
                         className={`${styles.wrapPhoto} ${gradeClassName ? styles[gradeClassName] : ''}`}
                       >
-                        {cast.gradeId >= 1 && cast.gradeId <= 8 && (
-                          <div className={styles.gradeFrame}></div>
-                        )}
+                        {cast.gradeId &&
+                          cast.gradeId >= 1 &&
+                          cast.gradeId <= 8 && (
+                            <div className={styles.gradeFrame}></div>
+                          )}
                         <span className={styles.gradeLabel}>
                           {gradeMap[cast.gradeId]?.label}
                         </span>
                         <Image src={cast.castImage} alt={cast.castName} fill />
                       </div>
                     </Link>
+
+                    {/* プロフィール情報 */}
                     <div className={styles.castProfile}>
                       <div className={styles.wrapName}>
                         <p className={styles.castName}>{cast.castName}</p>
@@ -216,4 +249,5 @@ const CastScheduleByDay = () => {
     </>
   );
 };
+
 export default CastScheduleByDay;

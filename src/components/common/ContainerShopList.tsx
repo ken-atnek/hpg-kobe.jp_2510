@@ -3,7 +3,7 @@
  * URL: src/components/common/ContainerShopList.tsx
  * Referenced in: /app/page.tsx
  * Created: 2025-08-19
- * Last updated: 2025-08-19
+ * Last updated: 2025-09-11
  * ======================================= */
 'use client';
 import styles from '@/styles/components/common/ContainerShopList.module.scss';
@@ -12,17 +12,12 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import ExternalLink from '@/components/common/ExternalLink';
 import clsx from 'clsx';
+import { getShopFromPath, getStoreClass } from '@/lib/shopUtils';
 
 const ContainerShopList = () => {
   const pathname = usePathname();
-  const path = pathname.split('/')[1];
-
-  const storeIdMap: Record<string, string> = {
-    hot: 'kbHot',
-    villa: 'kbVilla',
-  };
-
-  const activeStoreClass = storeIdMap[path];
+  const shop = getShopFromPath(pathname);
+  const activeStoreClass = getStoreClass(shop);
 
   return (
     <section
