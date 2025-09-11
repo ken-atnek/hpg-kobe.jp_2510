@@ -4,7 +4,7 @@
  * URL: src/components/Shop/TopCastSlide.tsx
  * Referenced in: src/components/common/ShopTopMain.tsx
  * Created: 2025-08-22
- * Last updated: 2025-08-22
+ * Last updated: 2025-09-11
  * ======================================= */
 import styles from '@/styles/components/ShopTopCastSlide.module.scss';
 import { usePathname } from 'next/navigation';
@@ -13,6 +13,8 @@ import { useEffect, useState } from 'react';
 import 'swiper/css';
 import Image from 'next/image';
 import Link from 'next/link';
+import { getShopFromPath, getStoreClass } from '@/lib/shopUtils';
+
 type ContentsProps = {
   titleJp?: string;
   titleEn?: string;
@@ -27,18 +29,14 @@ const CastSlide = ({
   jsonPath,
 }: ContentsProps) => {
   const pathname = usePathname();
-  const path = pathname.split('/')[1];
+  const shop = getShopFromPath(pathname);
+  const activeStoreClass = getStoreClass(shop);
 
-  const storeIdMap: Record<string, string> = {
-    hot: 'kbHot',
-    villa: 'kbVilla',
-  };
   const storeNameMap: Record<string, string> = {
     hot: 'kobe hotpoint',
     villa: 'hotpoint villa',
   };
-  const storeId = storeIdMap[path];
-  const storeName = storeNameMap[path];
+  const storeName = storeNameMap[shop];
 
   const [casts, setCasts] = useState<
     {
@@ -59,7 +57,7 @@ const CastSlide = ({
   }, [jsonPath]);
 
   return (
-    <article className={clsx(styles.boxCastSlide, styles[storeId])}>
+    <article className={clsx(styles.boxCastSlide, styles[activeStoreClass])}>
       <div className={styles.wrapTitle}>
         <h2>
           <span>
@@ -89,7 +87,7 @@ const CastSlide = ({
               )}
               key={`${cast.castId}-${index}`}
             >
-              <Link href={cast.castUrl}>
+              <Link href={`/${shop}/profile/?id=${cast.castId}`}>
                 <div className={styles.image}>
                   <Image
                     src={cast.castImage}

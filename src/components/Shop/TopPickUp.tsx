@@ -3,7 +3,7 @@
  * URL: src/components/Shop/TopPickUp.tsx
  * Referenced in: src/components/common/ShopTopMain.tsx
  * Created: 2025-08-22
- * Last updated: 2025-08-22
+ * Last updated: 2025-09-11
  * ======================================= */
 'use client';
 import styles from '@/styles/components/ShopTopPickUp.module.scss';
@@ -13,13 +13,13 @@ import 'swiper/css';
 import { usePathname } from 'next/navigation';
 import { renderBannerItem, useBannerItems } from '@/lib/renderBannerItem';
 import Image from 'next/image';
+import { getShopFromPath } from '@/lib/shopUtils';
 import 'swiper/css';
 const TopPickUp = () => {
   const pathname = usePathname();
-  const path = pathname.split('/')[1];
+  const shop = getShopFromPath(pathname);
   // 🔽 JSON パスを店舗別に切り替え
-  const jsonBasePath = `/data/${path}`;
-  const jsonPathPickUp = `${jsonBasePath}/topPickUp.json`;
+  const jsonPathPickUp = `/data/${shop}/topPickUp.json`;
   const [items, setModalImage, modalImage] = useBannerItems(jsonPathPickUp);
 
   return (

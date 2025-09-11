@@ -1,17 +1,18 @@
 /* =======================================
  *店舗 TOP キャストランキング
- * URL: src/components/Shop/TopCastSlide.tsx
+ * URL: src/components/Shop/TopCastRanking.tsx
  * Referenced in: src/components/common/ShopTopMain.tsx
  * Created: 2025-08-23
- * Last updated: 2025-08-23
+ * Last updated: 2025-09-11
  * ======================================= */
 import styles from '@/styles/components/ShopTopCastRanking.module.scss';
 import { usePathname } from 'next/navigation';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import clsx from 'clsx';
 import Image from 'next/image';
+import Link from 'next/link';
 import type { CastDetail } from '@/types/CastDetails';
-
+import { getShopFromPath, getStoreClass } from '@/lib/shopUtils';
 type Ranking = {
   titleId: string;
   title: string;
@@ -32,18 +33,14 @@ const CastRanking = ({
   jsonPath,
 }: ContentsProps) => {
   const pathname = usePathname();
-  const path = pathname.split('/')[1];
+  const shop = getShopFromPath(pathname);
+  const activeStoreClass = getStoreClass(shop);
 
-  const storeIdMap: Record<string, string> = {
-    hot: 'kbHot',
-    villa: 'kbVilla',
-  };
   const storeNameMap: Record<string, string> = {
     hot: 'kobe hotpoint',
     villa: 'hotpoint villa',
   };
-  const storeId = storeIdMap[path];
-  const storeName = storeNameMap[path];
+  const storeName = storeNameMap[shop];
 
   const [rankingData, setRankingData] = useState<Ranking[]>([]);
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -54,7 +51,10 @@ const CastRanking = ({
       .catch((err) => console.error('ランキングデータの取得失敗:', err));
   }, [jsonPath]);
 
-  const selectedRanking = rankingData[selectedIndex] || { casts: [] };
+  const selectedRanking = useMemo(() => {
+    return rankingData[selectedIndex] || { casts: [] };
+  }, [rankingData, selectedIndex]);
+
   const listHead = selectedRanking.casts.slice(0, 3); // Rank 1〜3
   const listMiddle = selectedRanking.casts.slice(3, 5); // Rank 4〜5
 
@@ -67,8 +67,19 @@ const CastRanking = ({
     }, 200); // 300ms だけフェード時間
   };
 
+  // 表示キャスト順を sessionStorage に保存
+  useEffect(() => {
+    if (selectedRanking?.casts?.length) {
+      const castOrder = selectedRanking.casts.map((c) => ({
+        id: c.castId,
+        name: c.castName,
+      }));
+      sessionStorage.setItem('castOrder', JSON.stringify(castOrder));
+    }
+  }, [selectedRanking]);
+
   return (
-    <article className={clsx(styles.boxCastRanking, styles[storeId])}>
+    <article className={clsx(styles.boxCastRanking, styles[activeStoreClass])}>
       <div className={styles.wrapTitle}>
         <h2>
           <span>
@@ -110,9 +121,9 @@ const CastRanking = ({
                 >
                   <span>No.{cast.rank}</span>
                 </div>
-                <a href={cast.castUrl}>
+                <Link href={`/${shop}/profile/?id=${cast.castId}`}>
                   <Image src={cast.castImage} alt={cast.castName} fill />
-                </a>
+                </Link>
                 <div className={styles.textProfile}>
                   <p className={styles.castName}>{cast.castName}</p>
                   <div className={styles.sizeHead}>
@@ -137,14 +148,14 @@ const CastRanking = ({
                 >
                   <span>No.{cast.rank}</span>
                 </div>
-                <a href={cast.castUrl}>
+                <Link href={`/${shop}/profile/?id=${cast.castId}`}>
                   <Image
                     src={cast.castImage}
                     alt={cast.castName}
                     width={130}
                     height={170}
                   />
-                </a>
+                </Link>
                 <div className={styles.textProfile}>
                   <p className={styles.castName}>{cast.castName}</p>
                   <div className={styles.sizeHead}>

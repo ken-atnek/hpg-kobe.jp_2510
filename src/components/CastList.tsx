@@ -3,7 +3,7 @@
  * URL:src/components/CastList.tsx
  * Referenced in: : src/app/hot/cast/page.tsx
  * Created: 2025-09-02
- * Last updated: 2025-09-02
+ * Last updated: 2025-09-11
  * ======================================= */
 'use client';
 import styles from '@/styles/ShopCastList.module.scss';
@@ -12,6 +12,7 @@ import clsx from 'clsx';
 import { useEffect, useMemo, useState } from 'react';
 import type { CastDetail } from '@/types/CastDetails';
 import ItemCastList from './Shop/ItemCastList';
+import { getShopFromPath, getStoreClass } from '@/lib/shopUtils';
 
 const filters = [
   { id: 'today', label: '本日出勤' },
@@ -23,33 +24,29 @@ const filters = [
 
 const CastList = () => {
   const pathname = usePathname();
-  const path = pathname.split('/')[1];
+  const shop = getShopFromPath(pathname);
+  const activeStoreClass = getStoreClass(shop);
 
-  const storeIdMap: Record<string, string> = {
-    hot: 'kbHot',
-    villa: 'kbVilla',
-  };
-  const activeStoreClass = storeIdMap[path];
-
-  const [castGroups, setCastGroups] = useState<{ rank: string; casts: CastDetail[]; }[]>([]);
+  const [castGroups, setCastGroups] = useState<
+    { rank: string; casts: CastDetail[] }[]
+  >([]);
 
   useEffect(() => {
-    const path = pathname.split('/')[1]; // 例: "hot", "villa"
-    const jsonPath = `/data/${path}/CastList.json`;
+    const jsonPath = `/data/${shop}/CastList.json`;
 
     fetch(jsonPath)
       .then((res) => res.json())
       .then((data: CastDetail[]) => {
         setCastGroups([{ rank: '', casts: data }]);
       });
-  }, [pathname]);
+  }, [shop]);
 
   const [activeFilter, setActiveFilter] = useState<string | null>(null);
   const handleFilterClick = (filterId: string) => {
     setActiveFilter(filterId);
   };
 
-  const displayCasts = useMemo(() => {
+  const registeredCastList = useMemo(() => {
     const allCasts = castGroups.flatMap((group) => group.casts);
 
     let filtered = allCasts;
@@ -59,8 +56,7 @@ const CastList = () => {
       );
     } else if (activeFilter === 'new') {
       filtered = allCasts.filter(
-        (cast) =>
-          cast.badges?.includes('new') || cast.badges?.includes('trial')
+        (cast) => cast.badges?.includes('new') || cast.badges?.includes('trial')
       );
     }
 
@@ -72,7 +68,19 @@ const CastList = () => {
         filtered.sort((a, b) => a.tall - b.tall);
         break;
       case 'cup': {
-        const cupOrder = ['a','b','c','d','e','f','g','h','i','j','k'];
+        const cupOrder = [
+          'a',
+          'b',
+          'c',
+          'd',
+          'e',
+          'f',
+          'g',
+          'h',
+          'i',
+          'j',
+          'k',
+        ];
         filtered.sort((a, b) => {
           const aIndex = cupOrder.indexOf((a.cup || '').toLowerCase());
           const bIndex = cupOrder.indexOf((b.cup || '').toLowerCase());
@@ -89,6 +97,17 @@ const CastList = () => {
 
     return filtered;
   }, [activeFilter, castGroups]);
+
+  // 表示キャスト順を sessionStorage に保存
+  useEffect(() => {
+    if (registeredCastList.length > 0) {
+      const castOrder = registeredCastList.map((c) => ({
+        id: c.castId,
+        name: c.castName,
+      }));
+      sessionStorage.setItem('castOrder', JSON.stringify(castOrder));
+    }
+  }, [registeredCastList]);
 
   return (
     <>
@@ -127,7 +146,7 @@ const CastList = () => {
       </section>
       <section className={clsx(styles.containerList, styles[activeStoreClass])}>
         <ul className={styles.castList}>
-          {displayCasts.map((cast) => (
+          {registeredCastList.map((cast) => (
             <ItemCastList key={cast.castId} cast={cast} />
           ))}
         </ul>

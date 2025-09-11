@@ -43,3 +43,4 @@ next-env.d.ts
 # log
 cp_log/
 public/cast/
+public/movie/test.mp4

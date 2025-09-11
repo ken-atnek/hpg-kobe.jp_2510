@@ -1,5 +1,14 @@
 @use "variable" as *;
 @use "svg" as *;
+/* =================================
+ * 	中央寄せ
+ * ------------------------------ */
+@mixin flex-center($direction: row) {
+    display: flex;
+    flex-direction: $direction;
+    align-items: center;
+    justify-content: center;
+}
 
 /* =================================
  * 	店舗 TOP コンテンツタイトル
@@ -251,16 +260,16 @@
  9: { label: 'NORMAL', className: 'grade9' }
   * --------------------------------------------------------- */
     &.grade1 {
-        --grade-color: 201, 14, 14;
-    }
-    &.grade2 {
-        --grade-color: 201, 14, 14;
-    }
-    &.grade3 {
         --grade-color: 158, 44, 229;
     }
-    &.grade4 {
+    &.grade2 {
         --grade-color: 42, 63, 182;
+    }
+    &.grade3 {
+        --grade-color: 201, 14, 14;
+    }
+    &.grade4 {
+        --grade-color: 228, 11, 105;
     }
     &.grade5 {
         --grade-color: 101, 205, 162;

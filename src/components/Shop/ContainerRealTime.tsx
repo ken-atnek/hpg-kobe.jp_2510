@@ -3,7 +3,7 @@
  * URL: src/components/Shop/ContainerRealTime.tsx
  * Referenced in: src/app/hot/realtime/page.tsx
  * Created: 2025-08-29
- * Last updated: 2025-08-29
+ * Last updated: 2025-09-11
  * ======================================= */
 'use client';
 
@@ -11,6 +11,7 @@ import styles from '@/styles/components/ShopRealtime.module.scss';
 import { useEffect, useState } from 'react';
 import clsx from 'clsx';
 import { usePathname } from 'next/navigation';
+import { getShopFromPath, getStoreClass } from '@/lib/shopUtils';
 import Image from 'next/image';
 import type { CastDetail } from '@/types/CastDetails';
 import Link from 'next/link';
@@ -36,13 +37,8 @@ type CastWithStatus = CastDetail & {
 
 const ContainerRealtime = ({ jsonPath }: RealTimeProps) => {
   const pathname = usePathname();
-  const path = pathname.split('/')[1];
-
-  const storeIdMap: Record<string, string> = {
-    hot: 'kbHot',
-    villa: 'kbVilla',
-  };
-  const storeId = storeIdMap[path];
+  const shop = getShopFromPath(pathname);
+  const activeStoreClass = getStoreClass(shop);
 
   const [castData, setCastData] = useState<CastWithStatus[]>([]);
   const [updateTime, setUpdateTime] = useState<string>('');
@@ -70,8 +66,25 @@ const ContainerRealtime = ({ jsonPath }: RealTimeProps) => {
     {}
   );
 
+  // 表示キャスト順を sessionStorage に保存
+  // uniqueCasts: castData から重複を除いたキャストのリストとして利用
+  const realtimeList = castData.filter(
+    (cast, idx, self) => self.findIndex((c) => c.castId === cast.castId) === idx
+  );
+  useEffect(() => {
+    if (realtimeList.length > 0) {
+      const castOrder = realtimeList.map((c) => ({
+        id: c.castId,
+        name: c.castName,
+      }));
+      sessionStorage.setItem('castOrder', JSON.stringify(castOrder));
+    }
+  }, [realtimeList]);
+
   return (
-    <section className={clsx(styles.containerRealtime, styles[storeId])}>
+    <section
+      className={clsx(styles.containerRealtime, styles[activeStoreClass])}
+    >
       <div className={styles.boxUpDateTime}>
         <div className={styles.itemTime}>
           <span>更新時間</span>
@@ -102,7 +115,10 @@ const ContainerRealtime = ({ jsonPath }: RealTimeProps) => {
                   key={cast.castId}
                   className={`${styles.itemCast} ${styles[cast.shopId]}`}
                 >
-                  <Link href={cast.castUrl} className={styles.boxImage}>
+                  <Link
+                    href={`/${shop}/profile/?id=${cast.castId}`}
+                    className={styles.boxImage}
+                  >
                     <div
                       className={`${styles.wrapPhoto} ${gradeClassName ? styles[gradeClassName] : ''}`}
                     >

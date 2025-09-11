@@ -3,7 +3,7 @@
  * URL: src/components/Shop/TopSlideBan.tsx
  * Referenced in: src/components/common/ShopTopMain.tsx
  * Created: 2025-08-22
- * Last updated: 2025-08-22
+ * Last updated: 2025-09-11
  * ======================================= */
 'use client';
 import styles from '@/styles/components/ShopTopSlideBan.module.scss';
@@ -12,14 +12,15 @@ import { Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import { usePathname } from 'next/navigation';
 import { renderBannerItem, useBannerItems } from '@/lib/renderBannerItem';
+import { getShopFromPath } from '@/lib/shopUtils';
 import Image from 'next/image';
 import 'swiper/css';
 const TopSlideBan = () => {
   const pathname = usePathname();
-  const path = pathname.split('/')[1];
+  const shop = getShopFromPath(pathname);
+
   // 🔽 JSON パスを店舗別に切り替え
-  const jsonBasePath = `/data/${path}`;
-  const jsonPathPickUp = `${jsonBasePath}/topSlideBan.json`;
+  const jsonPathPickUp = `/data/${shop}/topSlideBan.json`;
   const [items, setModalImage, modalImage] = useBannerItems(jsonPathPickUp);
 
   // スライド数が足りないときは複製してループ対応

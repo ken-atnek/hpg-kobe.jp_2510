@@ -1,21 +1,22 @@
 /* =======================================
  * 出勤情報一覧 コンポーネント
  * URL:src/components/Shop/schedule/CastScheduleByPeriod.tsx
- * Referenced in: :src/app/hot/weekly-schedule/page.tsx
+ * Referenced in: :src/app/[shop]/weekly-schedule/page.tsx
  * Created: 2025-08-30
- * Last updated: 2025-08-30
+ * Last updated: 2025-09-11
  * ======================================= */
 'use client';
 import styles from '@/styles/ShopSchedule.module.scss';
-import { usePathname } from 'next/navigation';
+import { useEffect, useMemo, useState } from 'react';
 import clsx from 'clsx';
 import Link from 'next/link';
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
-import type { CastDetail } from '@/types/CastDetails';
+import { usePathname } from 'next/navigation';
 import { loadScheduleConfig } from '@/lib/loadScheduleConfig';
 import { getDateList } from '@/lib/getScheduleDataList';
 import { getShopFromPath, getStoreClass } from '@/lib/shopUtils';
+import type { CastDetail } from '@/types/CastDetails';
+
 type ScheduleData = {
   date: string;
   casts: CastDetail[];
@@ -28,12 +29,14 @@ const CastScheduleByPeriod = () => {
 
   const [schedules, setSchedules] = useState<ScheduleData[]>([]);
 
+  // データ取得
   useEffect(() => {
-    const loadSchedules = async () => {
+    const fetchSchedules = async () => {
       const config = await loadScheduleConfig(shop);
       const dateList = getDateList(config.switchHour, config.days);
       const basePath = `/data/${shop}/schedule`;
-      const fetched = await Promise.all(
+
+      const results = await Promise.all(
         dateList.map(async (date) => {
           const res = await fetch(`${basePath}/${date}.json`);
           const json = await res.json();
@@ -41,13 +44,14 @@ const CastScheduleByPeriod = () => {
         })
       );
 
-      setSchedules(fetched);
+      setSchedules(results);
     };
 
-    loadSchedules();
+    fetchSchedules();
   }, [shop]);
 
-  const uniqueCasts = (() => {
+  // キャストIDで重複除去
+  const periodScheduleList = useMemo(() => {
     const map = new Map<string, CastDetail>();
     schedules.forEach((schedule) => {
       schedule.casts.forEach((cast) => {
@@ -56,9 +60,19 @@ const CastScheduleByPeriod = () => {
         }
       });
     });
-
     return Array.from(map.values());
-  })();
+  }, [schedules]);
+
+  // 並び順を保存（詳細ページで prev/next に使用）
+  useEffect(() => {
+    if (periodScheduleList.length > 0) {
+      const castOrder = periodScheduleList.map((c) => ({
+        id: c.castId,
+        name: c.castName,
+      }));
+      sessionStorage.setItem('castOrder', JSON.stringify(castOrder));
+    }
+  }, [periodScheduleList]);
 
   return (
     <>
@@ -145,7 +159,7 @@ const CastScheduleByPeriod = () => {
             </li>
 
             {/* キャストごとの行 */}
-            {uniqueCasts.map((cast) => (
+            {periodScheduleList.map((cast) => (
               <li key={cast.castId} className={styles.row}>
                 {/* キャスト情報 */}
                 <div className={styles.boxCastInfo}>

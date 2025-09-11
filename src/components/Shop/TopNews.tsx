@@ -3,7 +3,7 @@
  * URL: src/components/Shop/TopNews.tsx
  * Referenced in: src/components/common/ShopTopMain.tsx
  * Created: 2025-08-23
- * Last updated: 2025-08-26
+ * Last updated: 2025-09-11
  * ======================================= */
 import styles from '@/styles/components/ShopNews.module.scss';
 import { usePathname } from 'next/navigation';
@@ -11,6 +11,7 @@ import { useState, useEffect } from 'react';
 import clsx from 'clsx';
 import Image from 'next/image';
 import Link from 'next/link';
+import { getShopFromPath, getStoreClass } from '@/lib/shopUtils';
 
 type NewsItem = {
   id: number;
@@ -37,18 +38,14 @@ const ShopNews = ({
   jsonPath,
 }: ContentsProps) => {
   const pathname = usePathname();
-  const path = pathname.split('/')[1];
+  const shop = getShopFromPath(pathname);
+  const activeStoreClass = getStoreClass(shop);
 
-  const storeIdMap: Record<string, string> = {
-    hot: 'kbHot',
-    villa: 'kbVilla',
-  };
   const storeNameMap: Record<string, string> = {
     hot: 'kobe hotpoint',
     villa: 'hotpoint villa',
   };
-  const storeId = storeIdMap[path];
-  const storeName = storeNameMap[path];
+  const storeName = storeNameMap[shop];
 
   const [newsItems, setNewsItems] = useState<NewsItem[]>([]);
 
@@ -73,7 +70,7 @@ const ShopNews = ({
   if (visibleItems.length === 0) return null;
 
   return (
-    <article className={clsx(styles.boxTopNews, styles[storeId])}>
+    <article className={clsx(styles.boxTopNews, styles[activeStoreClass])}>
       <div className={styles.wrapTitle}>
         <h2>
           <span>

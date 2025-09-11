@@ -2,7 +2,7 @@
  *神戸ホットポイント 店舗HEADER
  * URL: src/components/common/ShopHeader.tsx
  * Created: 2025-08-21
- * Last updated: 2025-08-21
+ * Last updated: 2025-09-11
  * ======================================= */
 import { usePathname } from 'next/navigation';
 import styles from '@/styles/components/common/Header.module.scss';
@@ -10,6 +10,7 @@ import clsx from 'clsx';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import ExternalLink from '@/components/common/ExternalLink';
+import { getShopFromPath, getStoreClass } from '@/lib/shopUtils';
 type NavItem = {
   href: string;
   label: string;
@@ -17,26 +18,26 @@ type NavItem = {
 };
 
 type HeaderProps = {
-  className?: string;
   title: string;
   navMenu: NavItem[];
 };
 
-const Header = ({ className, title, navMenu }: HeaderProps) => {
+const Header = ({ title, navMenu }: HeaderProps) => {
   const pathname = usePathname();
-  const store = pathname.split('/')[1]; // "hot", "villa", etc.
+  const shop = getShopFromPath(pathname);
+  const activeStoreClass = getStoreClass(shop);
 
   const [telop, setTelop] = useState<string>('');
 
   useEffect(() => {
-    fetch(`/data/${store}/topTelop.json`)
+    fetch(`/data/${shop}/topTelop.json`)
       .then((res) => res.json())
       .then((data) => setTelop(data.telopComment))
       .catch(() => setTelop('')); // エラー処理（存在しない店舗など）
-  }, [store]);
+  }, [shop]);
 
   return (
-    <header className={clsx(styles.containerHeader, className)}>
+    <header className={clsx(styles.containerHeader, styles[activeStoreClass])}>
       <article className={styles.headerTop}>
         <div className={styles.boxHead}>
           <p>hot point group kobe area</p>
