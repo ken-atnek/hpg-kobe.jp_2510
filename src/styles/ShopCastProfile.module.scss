@@ -709,11 +709,19 @@
             margin-top: 2em;
             width: 100%;
             overflow: scroll;
-            .shopComment {
+            .castMessage {
                 position: absolute;
                 right: 0;
                 top: 0;
                 width: 100%;
+                b {
+                    line-height: 1.6em;
+                    font-weight: 500;
+                }
+                strong {
+                    font-weight: 500;
+                    line-height: 1.6em;
+                }
             }
         }
     }
@@ -746,6 +754,14 @@
                 right: 0;
                 top: 0;
                 width: 100%;
+                b {
+                    line-height: 1.6em;
+                    font-weight: 500;
+                }
+                strong {
+                    font-weight: 500;
+                    line-height: 1.6em;
+                }
             }
         }
     }

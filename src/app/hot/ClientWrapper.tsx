@@ -23,7 +23,9 @@ export default function ClientWrapper({
   children: React.ReactNode;
 }) {
   const pathname = usePathname();
-  const isLeftActive = ['/hot/', '/hot/system/'].includes(pathname);
+  const isLeftActive = ['/hot/', '/hot/system/', '/hot/news/'].includes(
+    pathname
+  );
   const isAuthPage = pathname.startsWith('/hot/auth');
 
   // `/hot` or `/hot/system` のときだけ ShopLeft を main 内に表示
@@ -54,9 +56,7 @@ export default function ClientWrapper({
                 {children}
               </main>
             </div>
-            <ShopFooterMenu
-              navMenu={navMenu}
-            />
+            <ShopFooterMenu navMenu={navMenu} />
             <ContainerShopList />
             <Footer className={styles.shopHotFooter} />
           </>

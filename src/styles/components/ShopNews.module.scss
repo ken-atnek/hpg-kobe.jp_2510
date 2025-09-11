@@ -9,72 +9,105 @@
 /* stylelint-disable custom-property-pattern */
 // このファイル全体のルールを無効にする
 
+@mixin layout-ul {
+    position: relative;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    font-size: inherit;
+}
+@mixin layout-li {
+    position: relative;
+    grid-column: span 2;
+    display: grid;
+    grid-template-columns: subgrid;
+    font-size: inherit;
+    border-top: 1px solid;
+    padding-block: 2em;
+    gap: 0 2em;
+    .wrapThumb {
+        position: relative;
+        font-size: inherit;
+        width: 13em;
+        img {
+            width: 100%;
+            object-fit: contain;
+        }
+    }
+    .wrapText {
+        display: flex;
+        flex-direction: column;
+        font-size: inherit;
+        justify-content: space-between;
+        .itemDate {
+            font-size: FZ(16);
+            align-self: flex-end;
+            @include FuturaCyrillicDemi;
+        }
+        .itemTitle {
+            font-size: FZ(20);
+            letter-spacing: 0.08em;
+            font-weight: 500;
+            margin-top: 0.3em;
+            margin-bottom: 0.5em;
+        }
+        .itemBOdy {
+            flex: 1;
+            b {
+                line-height: 1.6em;
+                font-weight: 500;
+            }
+            strong {
+                font-weight: 500;
+                line-height: 1.6em;
+            }
+        }
+    }
+    &:last-of-type {
+        border-bottom: 1px solid;
+    }
+}
+/* =================================
+ * NEWSページ
+ * ------------------------------ */
+.containerNews {
+    display: flex;
+    flex-direction: column;
+    font-size: inherit;
+    padding-top: 2em;
+    box-shadow: 0.5rem -3rem 3rem rgba(1, 1, 1, 0.1);
+    .pageListNews {
+        @include layout-ul;
+        padding-inline: 3em;
+        margin-top: 3em;
+        .itemNews {
+            @include layout-li();
+        }
+    }
+}
+/* =================================
+ * TOP NEWSコンポーネント
+ * ------------------------------ */
 .boxTopNews {
     position: relative;
     font-size: inherit;
     padding: 9em 3em 1.6em 3em;
-
     width: 100%;
     .titleObject {
         @include object-title;
     }
     .listNews {
-        display: grid;
-        grid-template-columns: auto 1fr;
-        font-size: inherit;
-
+        @include layout-ul;
         li {
-            position: relative;
-            grid-column: span 2;
-            display: grid;
-            grid-template-columns: subgrid;
-            font-size: inherit;
-            border-top: 1px solid;
-            padding-block: 2em;
-            gap: 0 2em;
-            .wrapThumb {
-                position: relative;
-                font-size: inherit;
-                width: 13em;
-                img {
-                    width: 100%;
-                    object-fit: contain;
-                }
-            }
+            @include layout-li();
             .wrapText {
-                display: flex;
-                flex-direction: column;
-                font-size: inherit;
-                justify-content: space-between;
-                .itemDate {
-                    font-size: FZ(16);
-                    align-self: flex-end;
-                    @include FuturaCyrillicDemi;
-                }
-                .itemTitle {
-                    font-size: FZ(20);
-                    letter-spacing: 0.08em;
-                    font-weight: 500;
-                    margin-top: 0.3em;
-                    margin-bottom: 0.5em;
-                }
-                p {
-                    font-size: FZ(14);
-                    text-align: justify;
-                    letter-spacing: 0.04em;
-                    line-height: 1.6em;
-                    flex: 1;
-                }
                 .linkMore {
                     display: inline-block;
                     font-size: FZ(14);
                     align-self: flex-end;
                     font-weight: 500;
                     color: Blue;
+                    margin-top: 1em;
                 }
-            }
-            &:last-of-type {
-                border-bottom: 1px solid;
             }
         }
     }
