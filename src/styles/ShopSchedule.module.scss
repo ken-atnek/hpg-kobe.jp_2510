@@ -8,12 +8,14 @@
 /* stylelint-disable keyframes-name-pattern */
 /* stylelint-disable custom-property-pattern */
 // このファイル全体のルールを無効にする
-
 .containerContents {
     display: flex;
     flex-direction: column;
-    box-shadow: 0.5rem -3rem 3rem rgba(1, 1, 1, 0.1);
+    box-shadow: 0.5rem -3rem 3rem rgb(1 1 1 / 10%);
     padding-bottom: 3em;
+    &.kbHot {
+        --shop-color: #{$shop-color-hot-number};
+    }
 }
 
 /* =================================
@@ -103,13 +105,13 @@
             &.isActive {
                 color: $base-white;
                 &::before {
-                    background-color: rgba(var(--shop-color), 0.9);
+                    background-color: rgb(var(--shop-color), 0.9);
                 }
             }
             @include hover {
                 color: $base-white;
                 &::before {
-                    background-color: rgba(var(--shop-color), 0.9);
+                    background-color: rgb(var(--shop-color), 0.9);
                 }
             }
             &.shopHot {
@@ -121,6 +123,7 @@
         }
     }
 }
+
 /* =================================
  * 週間出勤一覧
  * ------------------------------ */
@@ -133,24 +136,23 @@
         font-size: inherit;
         border-top: 1px solid;
         border-left: 1px solid;
-        border-color: rgba(var(--shop-color), 1);
+        border-color: rgb(var(--shop-color), 1);
         grid-template-columns: auto 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
         li {
             display: grid;
             grid-template-columns: subgrid;
             font-size: inherit;
             border-bottom: 1px solid;
-            border-color: rgba(var(--shop-color), 1);
+            border-color: rgb(var(--shop-color), 1);
             grid-column: span 8;
             & > div {
                 padding: 0.5em;
                 font-size: inherit;
                 border-right: 1px solid;
-                border-right: 1px solid;
-                border-color: rgba(var(--shop-color), 1);
+                border-color: rgb(var(--shop-color), 1);
             }
             &.rowHeader {
-                background-color: rgba(var(--shop-color), 0.8);
+                background-color: rgb(var(--shop-color), 0.8);
                 color: $base-white;
                 div {
                     display: grid;
@@ -270,7 +272,6 @@
             }
             .wrapDate {
                 font-size: inherit;
-                display: grid;
                 place-content: center;
                 display: flex;
                 align-items: center;
@@ -291,10 +292,11 @@
             }
             &:not(:first-of-type) {
                 &:nth-of-type(2n - 1) {
-                    background-color: rgba(var(--shop-color), 0.1);
+                    background-color: rgb(var(--shop-color), 0.1);
                 }
             }
         }
+
         // 3日表示スタイル
         &--3 {
             grid-template-columns: auto 1fr 1fr 1fr;
@@ -302,6 +304,7 @@
                 grid-column: span 4;
             }
         }
+
         // 5日表示スタイル
         &--5 {
             grid-template-columns: auto 1fr 1fr 1fr 1fr 1fr;
@@ -311,11 +314,7 @@
         }
     }
 }
-.containerContents {
-    &.kbHot {
-        --shop-color: #{$shop-color-hot-number};
-    }
-}
+
 /* =================================
  * 日別表示
  * ------------------------------ */
@@ -329,7 +328,6 @@
         font-size: inherit;
         grid-template-columns: repeat(3, 1fr);
         padding-block: 5px;
-
         &::before,
         &::after {
             content: "";
@@ -346,10 +344,10 @@
         &::after {
             background-image: linear-gradient(
                 to top,
-                rgba(var(--shop-color), 0.4),
-                rgba(var(--shop-color), 0.8) 70%,
-                rgba(var(--shop-color), 1) 95%,
-                rgba(var(--shop-color), 0.8)
+                rgb(var(--shop-color), 0.4),
+                rgb(var(--shop-color), 0.8) 70%,
+                rgb(var(--shop-color), 1) 95%,
+                rgb(var(--shop-color), 0.8)
             );
         }
         div {
@@ -375,7 +373,6 @@
                 font-size: FZ(20);
                 color: $base-white;
                 @include FuturaCyrillicBook;
-                display: flex;
                 align-items: center;
                 gap: 0 0.2em;
                 padding-block: 0.7em;
@@ -397,7 +394,7 @@
             &.isActive {
                 button {
                     background-color: $base-white;
-                    color: rgba(var(--shop-color), 1);
+                    color: rgb(var(--shop-color), 1);
                     @include FuturaCyrillicDemi;
                     border-radius: 3px;
                 }
@@ -420,7 +417,6 @@
             color: $font-black;
             grid-row: span 4;
             grid-template-rows: subgrid;
-
             .realTImeDetail {
                 position: relative;
                 font-size: FZ(14);
@@ -428,7 +424,7 @@
                 text-align: center;
                 padding-block: 0.4em;
                 letter-spacing: 0.04em;
-                background-color: rgba(var(--shop-color), 1);
+                background-color: rgb(var(--shop-color), 1);
                 &.statusNa {
                     background-color: #eaeaea;
                     color: var(--shopColor);
@@ -439,7 +435,7 @@
                         top: 0;
                         width: 0.5rem;
                         height: 100%;
-                        background-color: rgba(var(--shop-color), 1);
+                        background-color: rgb(var(--shop-color), 1);
                     }
                 }
             }
@@ -448,8 +444,8 @@
                 display: flex;
                 justify-content: center;
                 padding-block: 0.3em;
-                background-color: rgba(var(--shop-color), 0.1);
-                border-top: 2px solid rgba(var(--shop-color), 1);
+                background-color: rgb(var(--shop-color), 0.1);
+                border-top: 2px solid rgb(var(--shop-color), 1);
                 span {
                     display: flex;
                     font-size: FZ(16);

@@ -1,6 +1,5 @@
 @use "./reset_v2.5" as *;
 @use "./variable" as *;
-
 body {
     @include SunSerif;
     font-feature-settings: "palt";
@@ -99,6 +98,7 @@ br {
         }
     }
 }
+
 /* =================================
  *  ページ内タイトル
  * ------------------------------ */

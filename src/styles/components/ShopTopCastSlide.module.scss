@@ -8,12 +8,11 @@
 /* stylelint-disable keyframes-name-pattern */
 /* stylelint-disable custom-property-pattern */
 // このファイル全体のルールを無効にする
-
 .boxCastSlide {
     position: relative;
     font-size: inherit;
-    padding: 9em 3em 1.6em 3em;
-    background: url(../../assets/images/pickup_bg.webp) no-repeat center
+    padding: 9em 3em 1.6em;
+    background: url("../../assets/images/pickup_bg.webp") no-repeat center
         center / cover;
     width: 100%;
     .titleObject {
@@ -56,13 +55,14 @@
                     bottom: 0;
                     left: 0;
                     width: 100%;
-                    background-color: rgba(1, 1, 1, 0.3);
+                    background-color: rgb(1 1 1 / 30%);
                     color: $base-white;
                     font-size: FZ(14);
                     text-align: center;
                     padding-block: 0.5em;
                     letter-spacing: 0.08em;
                 }
+
                 // &.newFace {
                 // }
                 // &.photoUp {
@@ -79,7 +79,7 @@
         }
     }
     &.kbHot {
-        background-color: hsl(196, 100%, 88%);
+        background-color: hsl(196deg 100% 88%);
         background-blend-mode: soft-light;
         .wrapTitle {
             @include contents-title(#000000);
@@ -87,7 +87,7 @@
         .titleObject {
             &::before {
                 filter: brightness(105%) hue-rotate(206deg) saturate(142%)
-                    drop-shadow(0.5rem 0.5rem 0.5rem rgba(1, 1, 1, 0.3));
+                    drop-shadow(0.5rem 0.5rem 0.5rem rgb(1 1 1 / 30%));
             }
         }
     }

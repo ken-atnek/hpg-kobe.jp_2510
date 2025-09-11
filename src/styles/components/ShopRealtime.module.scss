@@ -7,7 +7,6 @@
 /* stylelint-disable keyframes-name-pattern */
 /* stylelint-disable custom-property-pattern */
 // このファイル全体のルールを無効にする
-
 .containerRealtime {
     max-width: $articleMaxWidth;
     justify-self: center;
@@ -15,7 +14,7 @@
     display: flex;
     flex-direction: column;
     gap: 2em 0;
-    box-shadow: 0.5rem -3rem 3rem rgba(1, 1, 1, 0.1);
+    box-shadow: 0.5rem -3rem 3rem rgb(1 1 1 / 10%);
     .boxUpDateTime {
         align-self: center;
         font-size: inherit;
@@ -60,9 +59,9 @@
             border-top-left-radius: 1rem;
             border-top-right-radius: 1rem;
             background-image: linear-gradient(
-                rgba(var(--status-color)),
-                rgba(var(--status-color)) 40%,
-                rgba(var(--status-color))
+                rgb(var(--status-color)),
+                rgb(var(--status-color)) 40%,
+                rgb(var(--status-color))
             );
         }
         ul {
@@ -130,13 +129,13 @@
                     .realTImeDetail {
                         display: flex;
                         justify-content: center;
-                        border: 1px solid rgba(var(--status-color), 1);
+                        border: 1px solid rgb(var(--status-color), 1);
                         font-size: FZ(14);
                         font-weight: 600;
                         letter-spacing: 0.04em;
                         padding: 0.3em 0;
                         border-radius: 0.3em;
-                        color: rgba(var(--status-color), 1);
+                        color: rgb(var(--status-color), 1);
                     }
                     .castProfile {
                         font-size: inherit;
@@ -221,7 +220,7 @@
                         font-size: inherit;
                         h4 {
                             font-size: FZ(12);
-                            background-color: #ff0066;
+                            background-color: #f06;
                             padding-inline: 0.5em;
                             display: grid;
                             place-content: center;
@@ -258,7 +257,7 @@
                     }
                 }
             }
-            @media screen and (max-width: 1030px) {
+            @media screen and (width <= 1030px) {
                 grid-template-columns: repeat(2, 1fr);
                 li {
                     .boxImage {

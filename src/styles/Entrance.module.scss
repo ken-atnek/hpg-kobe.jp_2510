@@ -8,6 +8,7 @@
 /* stylelint-disable custom-property-pattern */
 // このファイル全体のルールを無効にする
 $entrance-max-width: 96rem;
+
 /* =================================
  * キャスト画像リスト
  * ------------------------------ */
@@ -21,7 +22,7 @@ $entrance-max-width: 96rem;
         display: flex;
         flex-direction: column;
         align-items: center;
-        background-color: #222222;
+        background-color: #222;
         font-size: inherit;
         color: $base-white;
         padding-bottom: 1em;
@@ -184,7 +185,7 @@ $entrance-max-width: 96rem;
         .listAreaShop {
             display: flex;
             justify-content: center;
-            margin: 3em 0 3em;
+            margin: 3em 0;
             font-size: inherit;
             gap: 0 1em;
             li {
@@ -334,7 +335,7 @@ $entrance-max-width: 96rem;
                 transform: translateY(-50%);
                 width: 2.4em;
                 aspect-ratio: 1;
-                background: url(../assets/images/under-18.svg) no-repeat center
+                background: url("../assets/images/under-18.svg") no-repeat center
                     center / contain;
             }
         }
