@@ -7,14 +7,14 @@
 /* stylelint-disable keyframes-name-pattern */
 /* stylelint-disable custom-property-pattern */
 // このファイル全体のルールを無効にする
-
 .containerSystemMain {
     display: flex;
     flex-direction: column;
     padding-top: 2em;
     padding-inline: 2em;
-    box-shadow: 0.5rem -3rem 3rem rgba(1, 1, 1, 0.1);
+    box-shadow: 0.5rem -3rem 3rem rgb(1 1 1 / 10%);
 }
+
 /* =================================
  * 平日・土日祝 料金変わらず営業中
  * ------------------------------ */
@@ -55,6 +55,7 @@
         }
     }
 }
+
 /* =================================
  * 料金表
  * ------------------------------ */
@@ -75,7 +76,7 @@
             text-align: center;
             color: #fff;
             padding-block: 1em;
-            background-color: rgba(var(--shopColor), 1);
+            background-color: rgb(var(--shopColor), 1);
         }
         ul {
             position: relative;
@@ -83,7 +84,7 @@
             display: grid;
             border-top: 1px solid;
             border-left: 1px solid;
-            border-color: rgba(var(--shopColor), 1);
+            border-color: rgb(var(--shopColor), 1);
             li {
                 font-size: inherit;
                 display: grid;
@@ -93,9 +94,9 @@
                     font-size: inherit;
                 }
                 &.header {
-                    background-color: rgba(var(--shopColor), 0.5);
+                    background-color: rgb(var(--shopColor), 0.5);
                     border-bottom: 1px solid;
-                    border-color: rgba(var(--shopColor), 1);
+                    border-color: rgb(var(--shopColor), 1);
                     div {
                         display: flex;
                         flex-direction: column;
@@ -103,7 +104,7 @@
                         gap: 0.3em;
                         padding-block: 0.8em;
                         border-right: 1px solid;
-                        border-color: rgba(var(--shopColor), 1);
+                        border-color: rgb(var(--shopColor), 1);
                         h4 {
                             font-size: FZ(20);
                             font-weight: 500;
@@ -125,12 +126,12 @@
                         padding-block: 0.8em;
                         border-right: 1px solid;
                         border-bottom: 1px solid;
-                        border-color: rgba(var(--shopColor), 1);
+                        border-color: rgb(var(--shopColor), 1);
                     }
                     .min {
                         align-items: flex-end;
                         padding-inline: 2em;
-                        background-color: rgba(var(--shopColor), 0.7);
+                        background-color: rgb(var(--shopColor), 0.7);
                         color: #fff;
                         span {
                             @include FuturaCyrillicBook;
@@ -185,6 +186,7 @@
         --shopColor: #{$shop-color-hot-number};
     }
 }
+
 /* =================================
  * 指名料
  * ------------------------------ */
@@ -216,6 +218,7 @@
         }
     }
 }
+
 /* =================================
  * ご予約方法
  * ------------------------------ */
@@ -267,7 +270,7 @@
                 display: flex;
                 flex-direction: column;
                 font-size: inherit;
-                background-color: #eeeeee;
+                background-color: #eee;
             }
             .wrapContentsHead {
                 align-items: center;
@@ -315,7 +318,7 @@
                     margin-bottom: 1.4em;
                 }
                 i {
-                    color: #ff0000;
+                    color: #f00;
                 }
                 a {
                     font-size: inherit;
@@ -368,16 +371,17 @@
         }
     }
 }
+
 /* =================================
  * WEB予約バナー
  * ------------------------------ */
 .blockReserveBan {
-    font-size: inherit;
     display: flex;
     justify-content: center;
     padding-block: 3em;
     font-size: inherit;
 }
+
 /* =================================
  * アクセスマップ
  * ------------------------------ */

@@ -8,6 +8,8 @@
 import styles from '@/styles/components/ShopNews.module.scss';
 import { usePathname } from 'next/navigation';
 import { useState, useEffect } from 'react';
+import { convertRemToPx } from '@/lib/convertRemToPx';
+import { convertFontToSpan } from '@/lib/cleanHtml';
 import clsx from 'clsx';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -103,8 +105,16 @@ const ShopNews = ({
             <div className={styles.wrapText}>
               <div className={styles.itemDate}>{item.date.slice(0, 16)}</div>
               <div className={styles.itemTitle}>{item.title}</div>
-              <p>{item.body}</p>
-              <Link href="/" className={styles.linkMore}>
+              <div
+                className={styles.itemBOdy}
+                dangerouslySetInnerHTML={{
+                  __html: convertFontToSpan(convertRemToPx(item.body, 14)),
+                }}
+              />
+              <Link
+                href={`/hot/news/#news-${item.id}`}
+                className={styles.linkMore}
+              >
                 ＜もっと見る＞
               </Link>
             </div>

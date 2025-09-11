@@ -19,10 +19,10 @@
             position: relative;
             width: 100%;
             aspect-ratio: 942 / 471;
+
             // overflow: hidden;
         }
     }
-
     :global {
         .swiper-pagination {
             width: 100%;
@@ -41,7 +41,6 @@
             z-index: 100;
             cursor: pointer;
         }
-
         .swiper-pagination-bullet-active {
             background-color: #404040;
         }

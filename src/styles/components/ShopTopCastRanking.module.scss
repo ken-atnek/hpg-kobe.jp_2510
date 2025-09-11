@@ -8,11 +8,11 @@
 /* stylelint-disable keyframes-name-pattern */
 /* stylelint-disable custom-property-pattern */
 // このファイル全体のルールを無効にする
-
 .boxCastRanking {
     position: relative;
     font-size: inherit;
-    padding: 9em 3em 1.6em 3em;
+    padding: 9em 3em 1.6em;
+
     // background: url(../../assets/images/contents-bg.webp) no-repeat center
     //     center / cover;
     width: 100%;
@@ -232,7 +232,7 @@
         }
     }
     &.kbHot {
-        background-color: rgba(248, 248, 248, 0.9);
+        background-color: rgb(248 248 248 / 90%);
         background-blend-mode: soft-light;
         .wrapTitle {
             @include contents-title(#000000);
@@ -240,7 +240,7 @@
         .titleObject {
             &::before {
                 filter: brightness(105%) hue-rotate(206deg) saturate(142%)
-                    drop-shadow(0.5rem 0.5rem 0.5rem rgba(1, 1, 1, 0.3));
+                    drop-shadow(0.5rem 0.5rem 0.5rem rgb(1 1 1 / 30%));
             }
         }
         .rankingContents {
@@ -263,16 +263,16 @@
             .wrapRankList {
                 .rankIcon {
                     &.rank1 {
-                        background-image: url(../../assets/images/hot/icon/rank-01.webp);
+                        background-image: url("../../assets/images/hot/icon/rank-01.webp");
                     }
                     &.rank2 {
-                        background-image: url(../../assets/images/hot/icon/rank-02.webp);
+                        background-image: url("../../assets/images/hot/icon/rank-02.webp");
                     }
                     &.rank3 {
-                        background-image: url(../../assets/images/hot/icon/rank-03.webp);
+                        background-image: url("../../assets/images/hot/icon/rank-03.webp");
                     }
                     &:not(.rank1, .rank2, .rank3) {
-                        background-image: url(../../assets/images/hot/icon/rank-04.webp);
+                        background-image: url("../../assets/images/hot/icon/rank-04.webp");
                     }
                 }
             }

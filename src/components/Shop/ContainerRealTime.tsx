@@ -17,10 +17,6 @@ import type { CastDetail } from '@/types/CastDetails';
 import Link from 'next/link';
 import { gradeMap } from '@/constants/castGradeMap';
 
-type RealTimeProps = {
-  jsonPath: string;
-};
-
 // realTimeStatus に対応するラベル
 const STATUS_LABELS: Record<string, string> = {
   '1': '現在受付中',
@@ -35,7 +31,7 @@ type CastWithStatus = CastDetail & {
   realTimeStatus: string | number;
 };
 
-const ContainerRealtime = ({ jsonPath }: RealTimeProps) => {
+const ContainerRealtime = () => {
   const pathname = usePathname();
   const shop = getShopFromPath(pathname);
   const activeStoreClass = getStoreClass(shop);
@@ -44,6 +40,8 @@ const ContainerRealtime = ({ jsonPath }: RealTimeProps) => {
   const [updateTime, setUpdateTime] = useState<string>('');
 
   useEffect(() => {
+    const jsonPath = `/data/${shop}/RealTime.json`;
+
     fetch(jsonPath)
       .then((res) => res.json())
       .then((data) => {
@@ -52,7 +50,7 @@ const ContainerRealtime = ({ jsonPath }: RealTimeProps) => {
           setUpdateTime(data[0].upDateTime || '');
         }
       });
-  }, [jsonPath]);
+  }, [shop]);
 
   const realTimeStatus = castData.reduce(
     (acc: Record<string, CastWithStatus[]>, item) => {

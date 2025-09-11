@@ -18,10 +18,9 @@
     align-items: center;
     padding-block: 2em;
     padding-inline: 2em;
-    box-shadow: 0.5rem -3rem 3rem rgba(1, 1, 1, 0.1);
+    box-shadow: 0.5rem -3rem 3rem rgb(1 1 1 / 10%);
     background-color: #f8f8f8;
     z-index: 2;
-
     .itemLogo {
         font-size: inherit;
     }
@@ -50,6 +49,7 @@
         }
     }
 }
+
 /* =================================
  * プロフィールコンテンツ
  * ------------------------------ */
@@ -65,6 +65,7 @@
         @warn "Unknown position: #{$position}";
     }
 }
+
 // タイトルH2
 .sidebarH2 {
     @include FuturaCyrillicBook;
@@ -78,11 +79,12 @@
 .containerContents {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    box-shadow: 0.5rem -3rem 3rem rgba(1, 1, 1, 0.1);
+    box-shadow: 0.5rem -3rem 3rem rgb(1 1 1 / 10%);
     color: #070707;
     background-color: #f8f8f8;
     padding-bottom: 2em;
 }
+
 /* =================================
  * 画像01（ランク付表示）
  * ------------------------------ */
@@ -140,6 +142,7 @@
         object-fit: cover;
     }
 }
+
 /* =================================
  * 画像 共通
  * ------------------------------ */
@@ -151,6 +154,7 @@
         object-fit: cover;
     }
 }
+
 /* =================================
  * プロフィール（名前他）
  * ------------------------------ */
@@ -200,7 +204,7 @@
                         width: 2.857em;
                         @include svg-icon-badge-trial("f8f8f8");
                         left: -0.1em;
-                        bottom: 0em;
+                        bottom: 0;
                     }
                 }
                 &.badgeHot {
@@ -216,7 +220,6 @@
         }
         .castName {
             position: relative;
-            font-size: inherit;
             @include flex-center(column);
             align-self: center;
             font-size: FZ(62);
@@ -431,6 +434,7 @@
         --grade-color: #66c3e0;
     }
 }
+
 /* =================================
  * Q & A
  * ------------------------------ */
@@ -441,7 +445,6 @@
     flex-direction: column;
     justify-content: space-between;
     overflow: hidden;
-
     ul {
         position: relative;
         width: 100%;
@@ -568,6 +571,7 @@
         }
     }
 }
+
 /* =================================
  * スケジュール
  * ------------------------------ */
@@ -580,7 +584,6 @@
     flex-direction: column;
     align-items: center;
     padding-block: 2em;
-
     .scheduleList {
         position: relative;
         display: grid;
@@ -688,13 +691,13 @@
         }
     }
 }
+
 /* =================================
  * キャストメッセージ
  * ------------------------------ */
 .boxCastMessage {
     font-size: inherit;
     display: flex;
-
     .boxInner {
         @include box-size(right);
         margin-top: 2em;
@@ -708,16 +711,25 @@
             flex: 1;
             margin-top: 2em;
             width: 100%;
-            overflow: scroll;
-            .shopComment {
+            overflow-y: scroll;
+            .castMessage {
                 position: absolute;
                 right: 0;
                 top: 0;
                 width: 100%;
+                b {
+                    line-height: 1.6em;
+                    font-weight: 500;
+                }
+                strong {
+                    font-weight: 500;
+                    line-height: 1.6em;
+                }
             }
         }
     }
 }
+
 /* =================================
  * ショップコメント
  * ------------------------------ */
@@ -725,7 +737,6 @@
     font-size: inherit;
     display: flex;
     justify-content: flex-end;
-
     .boxInner {
         @include box-size(left);
         margin-top: 2em;
@@ -740,16 +751,25 @@
             flex: 1;
             margin-top: 2em;
             width: 100%;
-            overflow: scroll;
+            overflow-y: scroll;
             .shopComment {
                 position: absolute;
                 right: 0;
                 top: 0;
                 width: 100%;
+                b {
+                    line-height: 1.6em;
+                    font-weight: 500;
+                }
+                strong {
+                    font-weight: 500;
+                    line-height: 1.6em;
+                }
             }
         }
     }
 }
+
 /* =================================
  * お客様の声(REVIEW)
  * ------------------------------ */
@@ -766,8 +786,10 @@
         align-items: center;
         justify-content: space-between;
     }
+
     // ShopCastReview.module.scssに記載
 }
+
 /* =================================
  * 動画
  * ------------------------------ */
@@ -777,13 +799,13 @@
     grid-column: span 2;
     font-size: inherit;
     padding-block: 2em;
-
     .itemMovie {
         font-size: inherit;
         width: 100%;
         max-width: 1166px;
     }
 }
+
 /* =================================
  * キャストNAV
  * ------------------------------ */

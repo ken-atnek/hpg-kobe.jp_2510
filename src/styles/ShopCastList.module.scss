@@ -19,9 +19,8 @@
     padding: 2em 0 0;
     gap: 0 1.4em;
     z-index: 2;
-    box-shadow: 0.5rem -3rem 3rem rgba(1, 1, 1, 0.1);
+    box-shadow: 0.5rem -3rem 3rem rgb(1 1 1 / 10%);
     background-color: $base-white;
-
     h3 {
         position: relative;
         @include FuturaCyrillicBook;
@@ -46,8 +45,7 @@
         gap: 0 0.3em;
         grid-template-columns: repeat(6, 7em);
         li {
-            font-size: inherit;
-            background-image: linear-gradient(to bottom, #dddddd, #bababa);
+            background-image: linear-gradient(to bottom, #ddd, #bababa);
             font-size: FZ(16);
             width: 100%;
             display: flex;
@@ -60,6 +58,7 @@
                 font-size: FZ(16);
                 display: flex;
                 justify-content: space-between;
+
                 // padding-inline: 1em;
                 i {
                     display: inline-block;
@@ -79,9 +78,8 @@
 .containerList {
     display: flex;
     flex-direction: column;
-    box-shadow: 0.5rem -3rem 3rem rgba(1, 1, 1, 0.1);
+    box-shadow: 0.5rem -3rem 3rem rgb(1 1 1 / 10%);
     padding-bottom: 3em;
-
     &.kbHot {
         --shop-color: #{$shop-color-hot-number};
     }
@@ -110,7 +108,6 @@
                 z-index: -1;
             }
         }
-
         &.grade1 {
             --grade-color: #9e2ce5;
         }
@@ -149,6 +146,7 @@
         padding-inline: 2em;
     }
 }
+
 /* =================================
  * キャストボックス
  * ------------------------------ */
@@ -161,7 +159,6 @@
     color: $font-black;
     grid-row: span 4;
     grid-template-rows: subgrid;
-
     .wrapTodayTime {
         font-size: inherit;
         display: flex;
@@ -171,7 +168,7 @@
             place-content: center;
             font-size: FZ(14);
             padding-inline: 0.8em;
-            background-color: rgba(var(--shop-color), 1);
+            background-color: rgb(var(--shop-color), 1);
             color: $base-white;
             font-weight: 500;
         }
@@ -181,10 +178,10 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background-color: rgba(var(--shop-color), 0.1);
+            background-color: rgb(var(--shop-color), 0.1);
             flex: 1;
-            border-top: 1px solid rgba(var(--shop-color), 1);
-            border-right: 1px solid rgba(var(--shop-color), 1);
+            border-top: 1px solid rgb(var(--shop-color), 1);
+            border-right: 1px solid rgb(var(--shop-color), 1);
             span {
                 display: flex;
                 font-size: FZ(16);
@@ -204,17 +201,15 @@
                 }
             }
         }
-
         .scheduleStatus {
             font-size: FZ(14);
             letter-spacing: 0.04em;
-            background-color: rgba(var(--shop-color), 0.1);
+            background-color: rgb(var(--shop-color), 0.1);
             display: flex;
             align-items: center;
             justify-content: center;
-            border-top: 1px solid rgba(var(--shop-color), 1);
-            border-right: 1px solid rgba(var(--shop-color), 1);
-
+            border-top: 1px solid rgb(var(--shop-color), 1);
+            border-right: 1px solid rgb(var(--shop-color), 1);
             flex: 1;
         }
     }
@@ -381,7 +376,6 @@
             padding-block: 0.4em;
         }
     }
-
     &:nth-of-type(n + 5) {
         margin-top: 3em;
     }
