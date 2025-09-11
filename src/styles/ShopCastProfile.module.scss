@@ -711,7 +711,7 @@
             flex: 1;
             margin-top: 2em;
             width: 100%;
-            overflow: scroll;
+            overflow-y: scroll;
             .castMessage {
                 position: absolute;
                 right: 0;
@@ -751,7 +751,7 @@
             flex: 1;
             margin-top: 2em;
             width: 100%;
-            overflow: scroll;
+            overflow-y: scroll;
             .shopComment {
                 position: absolute;
                 right: 0;

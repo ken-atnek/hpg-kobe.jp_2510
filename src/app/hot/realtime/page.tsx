@@ -20,7 +20,7 @@ export default function HotRealTime() {
   return (
     <>
       <PageTitle titleJp="リアルタイム" titleEn="realtime" />
-      <ContainerRealtime jsonPath={`/data/hot/RealTIme.json`} />
+      <ContainerRealtime />
     </>
   );
 }

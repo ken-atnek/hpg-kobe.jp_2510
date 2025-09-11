@@ -12,13 +12,12 @@
         "startTime": "10:00",
         "endTime": "20:00",
         "gradeId": 3,
-        "age": "26",
-        "tall": "166",
-        "bust": "85",
+        "age": 26,
+        "tall": 166,
+        "bust": 85,
         "cup": "d",
-        "west": "57",
-        "hip": "85",
-        "castUrl": "/hot/"
+        "west": 57,
+        "hip": 85
       },
       {
         "castId": "581",
@@ -31,13 +30,12 @@
         "startTime": "10:00",
         "endTime": "20:00",
         "gradeId": 8,
-        "age": "25",
-        "tall": "150",
-        "bust": "83",
+        "age": 28,
+        "tall": 162,
+        "bust": 82,
         "cup": "c",
-        "west": "56",
-        "hip": "84",
-        "castUrl": "/style/"
+        "west": 58,
+        "hip": 87
       },
       {
         "castId": "795",
@@ -50,15 +48,13 @@
         "startTime": "10:00",
         "endTime": "20:00",
         "gradeId": 6,
-        "age": "21",
-        "tall": "158",
-        "bust": "100",
-        "cup": "f",
-        "west": "57",
-        "hip": "85",
-        "castUrl": "/villa/"
+        "age": 28,
+        "tall": 162,
+        "bust": 82,
+        "cup": "c",
+        "west": 58,
+        "hip": 87
       },
-
       {
         "castId": "426",
         "castName": "彩咲みわこ",
@@ -70,13 +66,12 @@
         "startTime": "10:00",
         "endTime": "20:00",
         "gradeId": 6,
-        "age": "38",
-        "tall": "154",
-        "bust": "88",
-        "cup": "d",
-        "west": "58",
-        "hip": "85",
-        "castUrl": "/villa/"
+        "age": 28,
+        "tall": 162,
+        "bust": 82,
+        "cup": "c",
+        "west": 58,
+        "hip": 87
       },
       {
         "castId": "423",
@@ -89,17 +84,16 @@
         "startTime": "10:00",
         "endTime": "20:00",
         "gradeId": 7,
-        "age": "41",
-        "tall": "160",
-        "bust": "84",
-        "cup": "e",
-        "west": "57",
-        "hip": "84",
-        "castUrl": "/villa/"
+        "age": 41,
+        "tall": 160,
+        "bust": 82,
+        "cup": "c",
+        "west": 56,
+        "hip": 81
       },
       {
         "castId": "424",
-        "castName": "竹田やな",
+        "castName": "竹田やなこ",
         "shopId": "hot",
         "shopName": "ホットポイントヴィラ",
         "castImage": "/images/cast/villa/villa-yana01.jpg",
@@ -108,13 +102,12 @@
         "startTime": "10:00",
         "endTime": "20:00",
         "gradeId": 9,
-        "age": "41",
-        "tall": "160",
-        "bust": "84",
-        "cup": "e",
-        "west": "57",
-        "hip": "84",
-        "castUrl": "/villa/"
+        "age": 27,
+        "tall": 150,
+        "bust": 85,
+        "cup": "d",
+        "west": 58,
+        "hip": 86
       }
     ]
   }

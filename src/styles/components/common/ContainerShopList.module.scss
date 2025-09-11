@@ -39,6 +39,7 @@
         grid-template-rows: 1fr auto auto;
         li {
             position: relative;
+            font-size: inherit;
             width: 100%;
             display: grid;
             grid-template-rows: subgrid;
@@ -53,6 +54,7 @@
                 height: 100%;
                 padding-block: 1em;
                 font-size: inherit;
+                height: 9em;
                 &.kbHot {
                     svg {
                         width: 50%;
