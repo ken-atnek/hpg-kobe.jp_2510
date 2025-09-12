@@ -12,6 +12,7 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { convertRemToPx } from '@/lib/convertRemToPx';
 import { convertFontToSpan } from '@/lib/cleanHtml';
+
 type ContentsProps = {
   jsonPath: string;
 };
@@ -31,10 +32,25 @@ const PageNews = ({ jsonPath }: ContentsProps) => {
   const [newsItems, setNewsItems] = useState<NewsItem[]>([]);
 
   useEffect(() => {
-    fetch(jsonPath)
-      .then((res) => res.json())
-      .then((data) => setNewsItems(data))
-      .catch((err) => console.error('ニュースデータの取得失敗:', err));
+    const fetchNewsData = async () => {
+      try {
+        // ニュースデータは常にキャッシュバスティング
+        const timestamp = Date.now();
+        const dataPath = `${jsonPath}?t=${timestamp}`;
+
+        const response = await fetch(dataPath);
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data: NewsItem[] = await response.json();
+        setNewsItems(data);
+      } catch (error) {
+        console.error('ニュースデータの取得エラー:', error);
+      }
+    };
+
+    fetchNewsData();
   }, [jsonPath]);
 
   useEffect(() => {
@@ -81,4 +97,5 @@ const PageNews = ({ jsonPath }: ContentsProps) => {
     </ul>
   );
 };
+
 export default PageNews;

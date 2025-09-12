@@ -40,16 +40,28 @@ const ContainerRealtime = () => {
   const [updateTime, setUpdateTime] = useState<string>('');
 
   useEffect(() => {
-    const jsonPath = `/data/${shop}/RealTime.json`;
+    const fetchRealtimeData = async () => {
+      try {
+        // リアルタイムデータは常にキャッシュバスティング
+        const timestamp = Date.now();
+        const dataPath = `/data/${shop}/RealTime.json?t=${timestamp}`;
 
-    fetch(jsonPath)
-      .then((res) => res.json())
-      .then((data) => {
+        const response = await fetch(dataPath);
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data = await response.json();
         if (Array.isArray(data) && data.length > 0) {
           setCastData(data[0].castData || []);
           setUpdateTime(data[0].upDateTime || '');
         }
-      });
+      } catch (error) {
+        console.error('リアルタイムデータの取得エラー:', error);
+      }
+    };
+
+    fetchRealtimeData();
   }, [shop]);
 
   const realTimeStatus = castData.reduce(

@@ -32,13 +32,25 @@ const CastList = () => {
   >([]);
 
   useEffect(() => {
-    const jsonPath = `/data/${shop}/CastList.json`;
+    const fetchCastList = async () => {
+      try {
+        // キャストリストは出勤情報含むため常にキャッシュバスティング
+        const timestamp = Date.now();
+        const jsonPath = `/data/${shop}/CastList.json?t=${timestamp}`;
 
-    fetch(jsonPath)
-      .then((res) => res.json())
-      .then((data: CastDetail[]) => {
+        const response = await fetch(jsonPath);
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data: CastDetail[] = await response.json();
         setCastGroups([{ rank: '', casts: data }]);
-      });
+      } catch (error) {
+        console.error('キャストリストデータの取得エラー:', error);
+      }
+    };
+
+    fetchCastList();
   }, [shop]);
 
   const [activeFilter, setActiveFilter] = useState<string | null>(null);

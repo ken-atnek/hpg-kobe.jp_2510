@@ -29,15 +29,24 @@ const CastReviewList = ({ castId, shop }: Props) => {
   useEffect(() => {
     const fetchReviews = async () => {
       try {
-        const res = await fetch(`/cast/${shop}/${castId}/review.json`);
-        if (!res.ok) throw new Error('レビュー取得失敗');
-        const data = await res.json();
+        // キャッシュバスティング用のタイムスタンプを追加
+        const timestamp =
+          process.env.NODE_ENV === 'development' ? Date.now() : '';
+        const dataPath = `/cast/${shop}/${castId}/review.json${timestamp ? `?t=${timestamp}` : ''}`;
+
+        const res = await fetch(dataPath);
+        if (!res.ok) {
+          throw new Error(`HTTP error! status: ${res.status}`);
+        }
+
+        const data: ReviewItem[] = await res.json();
         setReviews(data);
       } catch (err) {
-        console.error(err);
+        console.error('レビューデータの取得エラー:', err);
         setReviews([]);
       }
     };
+
     fetchReviews();
   }, [castId, shop]);
 

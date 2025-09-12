@@ -38,12 +38,19 @@ const ReciprocalLink = () => {
   const [error, setError] = useState<string | null>(null);
 
   const getDataPath = useCallback(() => {
+    let basePath = '';
+
     if (pathname.startsWith('/hot')) {
-      return '/data/hot/ReciprocalLink.json';
+      basePath = '/data/hot/ReciprocalLink.json';
     } else if (pathname.startsWith('/villa')) {
-      return '/data/villa/ReciprocalLink.json';
+      basePath = '/data/villa/ReciprocalLink.json';
+    } else {
+      basePath = '/data/area-top/ReciprocalLink.json';
     }
-    return '/data/area-top/ReciprocalLink.json';
+
+    // キャッシュバスティング用のタイムスタンプを追加
+    const timestamp = Date.now();
+    return `${basePath}?t=${timestamp}`;
   }, [pathname]);
 
   useEffect(() => {

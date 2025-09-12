@@ -29,18 +29,27 @@ export default function CastSchedule({ castId, shop }: CastScheduleProps) {
   const [error, setError] = useState(false);
 
   useEffect(() => {
-    fetch(`/cast/${shop}/${castId}/schedule.json`)
-      .then((res) => {
-        if (!res.ok) throw new Error('Failed to fetch schedule');
-        return res.json();
-      })
-      .then((data: ScheduleItem[]) => {
+    const fetchSchedule = async () => {
+      try {
+        // キャストスケジュールは常にキャッシュバスティング
+        const timestamp = Date.now();
+        const dataPath = `/cast/${shop}/${castId}/schedule.json?t=${timestamp}`;
+
+        const res = await fetch(dataPath);
+        if (!res.ok) {
+          throw new Error('スケジュールの読み込みに失敗しました');
+        }
+
+        const data: ScheduleItem[] = await res.json();
         setSchedule(data);
         setError(false);
-      })
-      .catch(() => {
+      } catch (error) {
+        console.error('スケジュールデータの取得エラー:', error);
         setError(true);
-      });
+      }
+    };
+
+    fetchSchedule();
   }, [castId, shop]);
 
   if (error) return <p>スケジュールの読み込みに失敗しました。</p>;

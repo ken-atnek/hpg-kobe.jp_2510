@@ -5,9 +5,11 @@
  * Created: 2025-08-18
  * Last updated: 2025-08-18
  * ======================================= */
+'use client';
 import styles from '@/styles/Entrance.module.scss';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
+
 type ListItem = {
   castName: string;
   areaName: string;
@@ -15,13 +17,31 @@ type ListItem = {
   areaImage: string;
   castImage: string;
 };
+
 const EntranceCastList = () => {
   const [CastData, setCastData] = useState<ListItem[]>([]);
 
   useEffect(() => {
-    fetch('/data/entranceCastData.json')
-      .then((res) => res.json())
-      .then((data: ListItem[]) => setCastData(data));
+    const fetchCastData = async () => {
+      try {
+        // キャッシュバスティング用のタイムスタンプを追加
+        const timestamp =
+          process.env.NODE_ENV === 'development' ? Date.now() : '';
+        const dataPath = `/data/entranceCastData.json${timestamp ? `?t=${timestamp}` : ''}`;
+
+        const response = await fetch(dataPath);
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data: ListItem[] = await response.json();
+        setCastData(data);
+      } catch (error) {
+        console.error('EntranceCastデータの取得エラー:', error);
+      }
+    };
+
+    fetchCastData();
   }, []);
 
   return (
@@ -52,4 +72,5 @@ const EntranceCastList = () => {
     </ul>
   );
 };
+
 export default EntranceCastList;
