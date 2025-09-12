@@ -81,6 +81,13 @@
                     border-radius: 0.3rem;
                     opacity: 0;
                 }
+                &.active {
+                    &::before {
+                        clip-path: inset(0);
+                        opacity: 0.3;
+                        transition: unset;
+                    }
+                }
                 @include pc {
                     &:hover {
                         transition: 0.3s ease-out;
@@ -110,10 +117,7 @@
     }
     .boxTelop {
         width: 100%;
-        background: linear-gradient(
-            rgb(218 218 218),
-            rgb(199 199 199) 100%
-        );
+        background: linear-gradient(rgb(218 218 218), rgb(199 199 199) 100%);
         border-bottom: 1px solid rgb(164 164 164);
         display: flex;
         justify-content: center;
