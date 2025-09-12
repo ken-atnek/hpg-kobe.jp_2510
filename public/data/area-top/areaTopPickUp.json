@@ -5,13 +5,12 @@
     "shopId": "hot",
     "shopName": "神戸ホットポイント",
     "castImage": "/images/cast/hot/hot-kazuha01.jpg",
-    "age": "26",
-    "tall": "166",
-    "bust": "85",
+    "age": 26,
+    "tall": 166,
+    "bust": 85,
     "cup": "d",
-    "west": "57",
-    "hip": "85",
-    "castUrl": "/hot/"
+    "west": 57,
+    "hip": 85
   },
   {
     "castId": "795",
@@ -19,13 +18,12 @@
     "shopId": "hot",
     "shopName": "神戸ホットポイント",
     "castImage": "/images/cast/hot/hot-noeru01.jpg",
-    "age": "21",
-    "tall": "158",
-    "bust": "86",
-    "cup": "f",
-    "west": "57",
-    "hip": "85",
-    "castUrl": "/villa/"
+    "age": 28,
+    "tall": 162,
+    "bust": 82,
+    "cup": "c",
+    "west": 58,
+    "hip": 87
   },
   {
     "castId": "426",
@@ -33,13 +31,12 @@
     "shopId": "villa",
     "shopName": "ホットポイントヴィラ",
     "castImage": "/images/cast/villa/villa-miwako01.jpg",
-    "age": "38",
-    "tall": "154",
-    "bust": "88",
-    "cup": "d",
-    "west": "58",
-    "hip": "85",
-    "castUrl": "/villa/"
+    "age": 28,
+    "tall": 162,
+    "bust": 82,
+    "cup": "c",
+    "west": 58,
+    "hip": 87
   },
   {
     "castId": "423",
@@ -47,12 +44,11 @@
     "shopId": "villa",
     "shopName": "ホットポイントヴィラ",
     "castImage": "/images/cast/villa/villa-yana01.jpg",
-    "age": "41",
-    "tall": "160",
-    "bust": "84",
-    "cup": "e",
-    "west": "57",
-    "hip": "84",
-    "castUrl": "/villa/"
+    "age": 41,
+    "tall": 160,
+    "bust": 82,
+    "cup": "c",
+    "west": 56,
+    "hip": 81
   }
 ]

@@ -2,7 +2,7 @@
  * 神戸ホットポイントグループ 年齢認証ユーティリティ（TTL対応）
  * URL: src/lib/age.ts
  * Created: 2025-08-18
- * Last updated: 2025-08-19
+ * Last updated: 2025-09-12
  * ======================================= */
 
 export type AgeScope = 'global' | 'hot' | 'villa' | 'group'; // 必要なスコープを列挙
@@ -13,68 +13,63 @@ type StoredFlag = { exp: number; v: 1 };
 const key = (scope: AgeScope) => `age-ok:${scope}`;
 
 // 設定ファイル（public 配下）例: /age.config.json
-// {
-//   "ttlHours": 24,
-//   "scopes": {
-//     "global": { "ttlHours": 24 }
-//   }
-// }
 const CONFIG_URL = '/age.config.json';
-const DEFAULT_TTL_HOURS = 24; // JSONが無い/壊れている場合のデフォルト
+const DEFAULT_TTL_MINUTES = 1440; // 24時間 = 1440分
 
 // 開発環境では 6時間で再認証（NODE_ENV=development）
-const DEV_TTL_SECONDS = 21600;
-const isDev =
-  typeof process !== 'undefined' && process.env?.NODE_ENV === 'development';
+const isDev = process?.env?.NODE_ENV === 'development';
 
-// スコープ毎のTTLキャッシュ（時間単位）
-let ttlCache: Record<string, number> | null = null;
+// スコープ毎のTTLキャッシュ（初期化時にデフォルト値を設定）
+const ttlCache: Record<string, number> = { default: DEFAULT_TTL_MINUTES };
 
 type AgeJson = {
   ttlHours?: number;
-  scopes?: Record<string, { ttlHours?: number }>;
+  ttlMinutes?: number;
+  scopes?: Record<string, { ttlHours?: number; ttlMinutes?: number }>;
 };
 
-const loadTtlHours = async (scope: AgeScope): Promise<number> => {
-  // 開発時は常に 5 秒固定（秒→時間換算）
-  if (isDev) return DEV_TTL_SECONDS / 3600;
+// 分単位でのTTL読み込み関数
+const loadTtlMinutes = async (scope: AgeScope): Promise<number> => {
+  if (isDev) return 360; // 開発時は 360分
 
-  if (ttlCache) return ttlCache[scope] ?? ttlCache.default ?? DEFAULT_TTL_HOURS;
+  if (ttlCache[scope]) return ttlCache[scope];
+
   try {
-    const res = await fetch(CONFIG_URL, { cache: 'no-store' });
-    if (res.ok) {
-      const json = (await res.json()) as AgeJson;
-      const base =
-        typeof json.ttlHours === 'number' ? json.ttlHours : DEFAULT_TTL_HOURS;
-      ttlCache = { default: base };
-      if (json.scopes) {
-        for (const [k, v] of Object.entries(json.scopes)) {
-          const ttl = typeof v.ttlHours === 'number' ? v.ttlHours : base;
-          ttlCache[k] = ttl;
-        }
+    const res = await fetch(CONFIG_URL);
+    if (!res.ok) throw new Error(`Failed to fetch config: ${res.statusText}`);
+    const json: AgeJson = await res.json();
+
+    // グローバル設定（優先順位: ttlMinutes > ttlHours）
+    ttlCache.default = json.ttlMinutes ?? (json.ttlHours ?? 24) * 60;
+
+    // スコープ別設定
+    if (json.scopes) {
+      for (const [key, config] of Object.entries(json.scopes)) {
+        ttlCache[key] = config.ttlMinutes ?? (config.ttlHours ?? 0) * 60;
       }
-    } else {
-      ttlCache = { default: DEFAULT_TTL_HOURS };
     }
-  } catch {
-    ttlCache = { default: DEFAULT_TTL_HOURS };
+  } catch (error) {
+    console.error('Failed to load age config:', error);
+    ttlCache.default = DEFAULT_TTL_MINUTES;
   }
-  return ttlCache[scope] ?? ttlCache.default!;
+
+  return ttlCache[scope] ?? ttlCache.default;
 };
 
 /**
  * 認証済みにする（TTL付き）
- * - JSON設定の ttlHours を参照して有効期限(exp)を算出し、localStorageに保存
- * - ttlHours <= 0 の場合は無期限（MAX_SAFE_INTEGER）
+ * - JSON設定の ttlMinutes または ttlHours を参照して有効期限(exp)を算出し、localStorageに保存
+ * - ttlMinutes <= 0 の場合は無期限（MAX_SAFE_INTEGER）
  */
 export const setAgeVerifiedAsync = async (scope: AgeScope) => {
-  const ttlHours = await loadTtlHours(scope);
+  const ttlMinutes = await loadTtlMinutes(scope);
   const exp =
-    ttlHours <= 0
+    ttlMinutes <= 0
       ? Number.MAX_SAFE_INTEGER
-      : Date.now() + ttlHours * 60 * 60 * 1000;
-  const payload: StoredFlag = { exp, v: 1 };
-  localStorage.setItem(key(scope), JSON.stringify(payload));
+      : Date.now() + ttlMinutes * 60 * 1000; // 分→ミリ秒変換
+
+  const flag: StoredFlag = { exp, v: 1 };
+  localStorage.setItem(key(scope), JSON.stringify(flag));
 };
 
 /**
@@ -90,14 +85,14 @@ export const isAgeVerified = (scope: AgeScope) => {
 
   if (raw === '1') {
     // 旧仕様：本番では無期限扱い、開発では無効扱い（テストしやすくするため）
-    if (isDev) return false;
-    return true;
+    return !isDev;
   }
+
   try {
     const obj = JSON.parse(raw) as StoredFlag;
-    if (typeof obj.exp !== 'number') return false;
-    return Date.now() < obj.exp;
-  } catch {
+    return typeof obj.exp === 'number' && Date.now() < obj.exp;
+  } catch (error) {
+    console.error('Failed to parse age verification flag:', error);
     return false;
   }
 };

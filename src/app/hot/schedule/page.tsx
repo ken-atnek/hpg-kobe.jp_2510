@@ -11,8 +11,7 @@ import PageTitle from '@/components/common/PageTitle';
 import CastScheduleByDay from '@/components/Shop/schedule/CastScheduleByDay';
 
 export const metadata: Metadata = {
-  title:
-    '出勤情報情報｜神戸・三宮の風俗｜ファッションヘルス:神戸ホットポイント',
+  title: '出勤情報｜神戸・三宮の風俗｜ファッションヘルス:神戸ホットポイント',
   description: isRealProduction
     ? '神戸ホットポイントの出勤情報。出勤中のキャスト、待ち時間、キャンセル待ち状況を即時更新。三宮エリアで最も新鮮な情報をお届け。'
     : undefined,
