@@ -12,26 +12,7 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { gradeMap } from '@/constants/castGradeMap';
-type CastItem = {
-  castId: string;
-  castName: string;
-  shopId: string;
-  shopName: string;
-  castImage: string;
-  realTimeStatus: number;
-  realTimeDetail: string;
-  realTimeStart?: string;
-  startTime: string;
-  endTime: string;
-  gradeId: number;
-  age: string;
-  tall: string;
-  bust: string;
-  cup: string;
-  west: string;
-  hip: string;
-  castUrl: string;
-};
+import type { CastDetail } from '@/types/CastDetails';
 
 // cast.gradeId から className を取得（例: 'grade6'）
 
@@ -43,7 +24,7 @@ const SHOP_LABELS: Record<string, string> = {
 };
 
 const BlockRealTIme = () => {
-  const [castList, setCastList] = useState<CastItem[]>([]);
+  const [castList, setCastList] = useState<CastDetail[]>([]);
 
   useEffect(() => {
     fetch('/data/area-top/areaTopRealTime.json')
@@ -66,7 +47,7 @@ const BlockRealTIme = () => {
           }
         };
         const sortedData = data.sort(
-          (a: CastItem, b: CastItem) =>
+          (a: CastDetail, b: CastDetail) =>
             getPriority(a.realTimeStatus) - getPriority(b.realTimeStatus)
         );
         setCastList(sortedData);
@@ -93,7 +74,7 @@ const BlockRealTIme = () => {
               <span>{cast.startTime}</span>
               <span>{cast.endTime}</span>
             </div>
-            <Link href={cast.castUrl}>
+            <Link href={`/${cast.shopId}/profile/?id=${cast.castId}`}>
               <div
                 className={`${styles.wrapPhoto} ${gradeClassName ? styles[gradeClassName] : ''}`}
               >

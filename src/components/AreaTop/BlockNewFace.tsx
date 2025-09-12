@@ -12,27 +12,12 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import styles from '@/styles/AreaTop.module.scss';
-
-// JSON の型
-export type NewFaceItem = {
-  castId: string;
-  castName: string;
-  shopId: 'hot' | 'villa';
-  shopName: string;
-  castImage: string;
-  age: string;
-  tall: string;
-  bust: string;
-  cup: string;
-  west: string;
-  hip: string;
-  castUrl: string;
-};
+import type { CastDetail } from '@/types/CastDetails';
 
 const BlockNewFace = () => {
   const [grouped, setGrouped] = useState<{
-    hot: NewFaceItem[];
-    villa: NewFaceItem[];
+    hot: CastDetail[];
+    villa: CastDetail[];
   } | null>(null);
 
   const [activeIndices, setActiveIndices] = useState<{
@@ -47,7 +32,7 @@ const BlockNewFace = () => {
     let cancelled = false;
     fetch('/data/area-top/areaTopNewFace.json')
       .then((res) => res.json())
-      .then((data: NewFaceItem[]) => {
+      .then((data: CastDetail[]) => {
         if (cancelled) return;
         const grouped = {
           hot: data.filter((item) => item.shopId === 'hot'),
@@ -99,7 +84,7 @@ const BlockNewFace = () => {
               {grouped[shop].map((cast, idx) => (
                 <Link
                   key={cast.castId}
-                  href={cast.castUrl}
+                  href={`/${shop}/profile/?id=${cast.castId}`}
                   className={`${styles.wrapLink} ${styles.fadeItem} ${
                     idx === activeIndex ? styles.isActive : ''
                   }`}

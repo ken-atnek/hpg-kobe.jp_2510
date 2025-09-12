@@ -3,7 +3,7 @@
  * URL: src/components/AreaTop/BlockPickUp.tsx
  * Referenced in: /app/page.tsx
  * Created: 2025-08-19
- * Last updated: 2025-08-19
+ * Last updated: 2025-09-12
  * ======================================= */
 
 'use client';
@@ -12,28 +12,13 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import styles from '@/styles/AreaTop.module.scss';
-
-// JSON の型
-export type PickUpItem = {
-  castId: string;
-  castName: string;
-  shopId: 'hot' | 'style' | 'villa';
-  shopName: string;
-  castImage: string;
-  age: string;
-  tall: string;
-  bust: string;
-  cup: string;
-  west: string;
-  hip: string;
-  castUrl: string;
-};
+import type { CastDetail } from '@/types/CastDetails';
 
 const BlockPickUp = () => {
   const [grouped, setGrouped] = useState<{
-    hot: PickUpItem[];
+    hot: CastDetail[];
     // style: PickUpItem[];
-    villa: PickUpItem[];
+    villa: CastDetail[];
   } | null>(null);
 
   const [activeIndices, setActiveIndices] = useState<{
@@ -49,11 +34,10 @@ const BlockPickUp = () => {
     let cancelled = false;
     fetch('/data/area-top/areaTopPickUp.json')
       .then((res) => res.json())
-      .then((data: PickUpItem[]) => {
+      .then((data: CastDetail[]) => {
         if (cancelled) return;
         const grouped = {
           hot: data.filter((item) => item.shopId === 'hot'),
-          style: data.filter((item) => item.shopId === 'style'),
           villa: data.filter((item) => item.shopId === 'villa'),
         };
         setGrouped(grouped);
@@ -102,7 +86,7 @@ const BlockPickUp = () => {
               {grouped[shop].map((cast, idx) => (
                 <Link
                   key={cast.castId}
-                  href={cast.castUrl}
+                  href={`/${shop}/profile/?id=${cast.castId}`}
                   className={`${styles.wrapLink} ${styles.fadeItem} ${
                     idx === activeIndex ? styles.isActive : ''
                   }`}
