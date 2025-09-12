@@ -3,6 +3,7 @@
  * ------------------------------ */
 @use "variable" as *;
 @use "svg" as *;
+@use "mixin" as *;
 /* stylelint-disable no-descending-specificity */
 /* stylelint-disable keyframes-name-pattern */
 /* stylelint-disable custom-property-pattern */
@@ -230,6 +231,35 @@ $entrance-max-width: 96rem;
             }
         }
     }
+    .blockReciprocalLink {
+        background-color: #eee;
+        font-size: inherit;
+        padding: 1em;
+        @include flex-center;
+        .boxReciprocalLink {
+            position: relative;
+            font-size: inherit;
+            display: flex;
+            flex-direction: column;
+            gap: 1em 0;
+            ul {
+                position: relative;
+                display: flex;
+                font-size: inherit;
+                &.reciprocalBlock--1 {
+                    flex-direction: column;
+                    gap: 0.5em 0;
+                }
+                &.reciprocalBlock--2 {
+                    gap: 0.5em;
+                    justify-content: center;
+                    align-self: center;
+                    flex-wrap: wrap;
+                    max-width: $entrance-max-width;
+                }
+            }
+        }
+    }
     .boxGroupShop {
         display: flex;
         flex-direction: column;
@@ -335,8 +365,8 @@ $entrance-max-width: 96rem;
                 transform: translateY(-50%);
                 width: 2.4em;
                 aspect-ratio: 1;
-                background: url("../assets/images/under-18.svg") no-repeat center
-                    center / contain;
+                background: url("../assets/images/under-18.svg") no-repeat
+                    center center / contain;
             }
         }
     }

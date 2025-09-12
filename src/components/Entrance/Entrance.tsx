@@ -6,14 +6,15 @@
  * Last updated: 2025-08-18
  * ======================================= */
 'use client';
+import styles from '@/styles/Entrance.module.scss';
 import { useRouter } from 'next/navigation';
 import { setAgeVerifiedAsync, type AgeScope } from '@/lib/age';
-import styles from '@/styles/Entrance.module.scss';
 import EntranceCastList from '@/components/Entrance/CastList';
 import Image from 'next/image';
 import EntranceAreaShopList from '@/components/Entrance/AreaShopList';
 import EntranceGroupShopList from '@/components/Entrance/GroupShopList';
 import type { StaticImport } from 'next/dist/shared/lib/get-img-props';
+import ReciprocalLink from '@/components/Entrance/ReciprocalLink';
 export default function Entrance({
   // scope,
   backPath,
@@ -76,6 +77,9 @@ export default function Entrance({
       <section className={styles.blockAreaShop}>
         <h3 className={styles.itemH3}>area shop</h3>
         <EntranceAreaShopList excludeStoreId={excludeStoreId} />
+      </section>
+      <section className={styles.blockReciprocalLink}>
+        <ReciprocalLink />
       </section>
       <section className={styles.blockGroupShop}>
         <h3 className={styles.itemH3}>group shop list</h3>
