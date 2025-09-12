@@ -13,9 +13,26 @@ const BlockTelop = () => {
   const [telop, setTelop] = useState<string>('');
 
   useEffect(() => {
-    fetch('/data/area-top/areaTopTelop.json')
-      .then((res) => res.json())
-      .then((data) => setTelop(data.telopComment));
+    const fetchTelopData = async () => {
+      try {
+        // キャッシュバスティング用のタイムスタンプを追加
+        const timestamp =
+          process.env.NODE_ENV === 'development' ? Date.now() : '';
+        const dataPath = `/data/area-top/areaTopTelop.json${timestamp ? `?t=${timestamp}` : ''}`;
+
+        const response = await fetch(dataPath);
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        setTelop(data.telopComment);
+      } catch (error) {
+        console.error('Telopデータの取得エラー:', error);
+      }
+    };
+
+    fetchTelopData();
   }, []);
 
   return (

@@ -12,6 +12,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import styles from '@/styles/ShopCommon.module.scss';
+import ExternalLink from '@/components/common/ExternalLink';
 import { ReactNode, useEffect, useState } from 'react';
 export type BannerItem = {
   banId: string;
@@ -55,12 +56,7 @@ export const renderBannerItem = (
       );
     case 3:
       return (
-        <a
-          href={item.url}
-          target="_blank"
-          rel="noopener noreferrer"
-          className={styles.itemBan}
-        >
+        <ExternalLink href={item.url} className={styles.itemBan}>
           <Image
             src={item.banImage}
             alt={item.banTitle}
@@ -68,7 +64,7 @@ export const renderBannerItem = (
             height={119}
             {...(isPriority ? { priority: true } : {})}
           />
-        </a>
+        </ExternalLink>
       );
     case 4:
       return (
@@ -98,10 +94,31 @@ export const useBannerItems = (
   const [modalImage, setModalImage] = useState<string | null>(null);
 
   useEffect(() => {
-    fetch(jsonPath)
-      .then((res) => res.json())
-      .then((data: BannerItem[]) => setItems(data))
-      .catch((err) => console.error('バナー取得失敗:', err));
+    const fetchBannerData = async () => {
+      try {
+        // キャッシュバスティング用のタイムスタンプを追加
+        const timestamp =
+          process.env.NODE_ENV === 'development' ? Date.now() : '';
+        const dataPath = `${jsonPath}${timestamp ? `?t=${timestamp}` : ''}`;
+
+        const response = await fetch(dataPath);
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data: BannerItem[] = await response.json();
+
+        // statusが1-4のアクティブなアイテムのみフィルタリング
+        const activeItems = data.filter(
+          (item) => item.status >= 1 && item.status <= 4
+        );
+        setItems(activeItems);
+      } catch (error) {
+        console.error('バナーデータ取得エラー:', jsonPath, error);
+      }
+    };
+
+    fetchBannerData();
   }, [jsonPath]);
 
   return [items, setModalImage, modalImage];

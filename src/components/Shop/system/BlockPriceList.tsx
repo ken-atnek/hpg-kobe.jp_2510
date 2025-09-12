@@ -11,6 +11,7 @@ import { usePathname } from 'next/navigation';
 import clsx from 'clsx';
 import { useEffect, useState } from 'react';
 import { getShopFromPath, getStoreClass } from '@/lib/shopUtils';
+
 type ContentsProps = {
   jsonPath: string;
 };
@@ -37,11 +38,26 @@ const BlockPriceList = ({ jsonPath }: ContentsProps) => {
   const [pricePlans, setPricePlans] = useState<PricePlan[]>([]);
 
   useEffect(() => {
-    fetch(jsonPath)
-      .then((res) => res.json())
-      .then((data) => {
+    const fetchPricePlans = async () => {
+      try {
+        // キャッシュバスティング用のタイムスタンプを追加
+        const timestamp =
+          process.env.NODE_ENV === 'development' ? Date.now() : '';
+        const dataPath = `${jsonPath}${timestamp ? `?t=${timestamp}` : ''}`;
+
+        const response = await fetch(dataPath);
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data: PricePlan[] = await response.json();
         setPricePlans(data);
-      });
+      } catch (error) {
+        console.error('料金プランデータの取得エラー:', jsonPath, error);
+      }
+    };
+
+    fetchPricePlans();
   }, [jsonPath]);
 
   return (
@@ -88,4 +104,5 @@ const BlockPriceList = ({ jsonPath }: ContentsProps) => {
     </div>
   );
 };
+
 export default BlockPriceList;

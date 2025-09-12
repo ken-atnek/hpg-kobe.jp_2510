@@ -34,7 +34,11 @@ const ShopFooterMenu = ({ navMenu }: ShopFooterMenuProps) => {
               {item.label}
             </ExternalLink>
           ) : (
-            <Link key={index} href={item.href}>
+            <Link
+              key={index}
+              href={item.href}
+              className={clsx(pathname === item.href && styles.active)}
+            >
               {item.label}
             </Link>
           )

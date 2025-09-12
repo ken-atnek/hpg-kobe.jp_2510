@@ -15,14 +15,32 @@ import ImageWebReserve from '@/assets/images/hot/web-reserve.webp';
 import Image from 'next/image';
 import ExternalLink from '@/components/common/ExternalLink';
 import BlockAccess from '@/components/Shop/system/BlockAccess';
+
 const SystemMain = () => {
   const [requestFee, setRequestFee] = useState<number | null>(null);
 
   useEffect(() => {
-    fetch('/data/hot/RequestFee.json')
-      .then((res) => res.json())
-      .then((data) => setRequestFee(data.fee))
-      .catch(() => setRequestFee(null));
+    const fetchRequestFee = async () => {
+      try {
+        // キャッシュバスティング用のタイムスタンプを追加
+        const timestamp =
+          process.env.NODE_ENV === 'development' ? Date.now() : '';
+        const dataPath = `/data/hot/RequestFee.json${timestamp ? `?t=${timestamp}` : ''}`;
+
+        const response = await fetch(dataPath);
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        setRequestFee(data.fee);
+      } catch (error) {
+        console.error('RequestFeeデータの取得エラー:', error);
+        setRequestFee(null);
+      }
+    };
+
+    fetchRequestFee();
   }, []);
 
   return (

@@ -30,21 +30,38 @@ const BlockNewFace = () => {
   // データ取得
   useEffect(() => {
     let cancelled = false;
-    fetch('/data/area-top/areaTopNewFace.json')
-      .then((res) => res.json())
-      .then((data: CastDetail[]) => {
+
+    const fetchNewFaceData = async () => {
+      try {
+        // キャッシュバスティング用のタイムスタンプを追加
+        const timestamp =
+          process.env.NODE_ENV === 'development' ? Date.now() : '';
+        const dataPath = `/data/area-top/areaTopNewFace.json${timestamp ? `?t=${timestamp}` : ''}`;
+
+        const response = await fetch(dataPath);
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data: CastDetail[] = await response.json();
         if (cancelled) return;
+
         const grouped = {
           hot: data.filter((item) => item.shopId === 'hot'),
           villa: data.filter((item) => item.shopId === 'villa'),
         };
         setGrouped(grouped);
-      });
+      } catch (error) {
+        console.error('NewFaceデータの取得エラー:', error);
+      }
+    };
+
+    fetchNewFaceData();
+
     return () => {
       cancelled = true;
     };
   }, []);
-
   // インターバルでインデックス切り替え
   useEffect(() => {
     if (!grouped) return;

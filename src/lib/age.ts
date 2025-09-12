@@ -30,7 +30,7 @@ type AgeJson = {
 
 // 分単位でのTTL読み込み関数
 const loadTtlMinutes = async (scope: AgeScope): Promise<number> => {
-  if (isDev) return 360; // 開発時は 360分
+  if (isDev) return 1; // 開発時は 1分
 
   if (ttlCache[scope]) return ttlCache[scope];
 

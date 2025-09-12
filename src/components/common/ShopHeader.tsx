@@ -11,6 +11,7 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import ExternalLink from '@/components/common/ExternalLink';
 import { getShopFromPath, getStoreClass } from '@/lib/shopUtils';
+
 type NavItem = {
   href: string;
   label: string;
@@ -30,10 +31,27 @@ const Header = ({ title, navMenu }: HeaderProps) => {
   const [telop, setTelop] = useState<string>('');
 
   useEffect(() => {
-    fetch(`/data/${shop}/topTelop.json`)
-      .then((res) => res.json())
-      .then((data) => setTelop(data.telopComment))
-      .catch(() => setTelop('')); // エラー処理（存在しない店舗など）
+    const fetchTelopData = async () => {
+      try {
+        // 開発環境でのみキャッシュバスティング
+        const timestamp =
+          process.env.NODE_ENV === 'development' ? Date.now() : '';
+        const dataPath = `/data/${shop}/topTelop.json${timestamp ? `?t=${timestamp}` : ''}`;
+
+        const response = await fetch(dataPath);
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        setTelop(data.telopComment);
+      } catch (error) {
+        console.error('テロップデータの取得エラー:', error);
+        setTelop(''); // エラー時は空文字
+      }
+    };
+
+    fetchTelopData();
   }, [shop]);
 
   return (
@@ -52,7 +70,11 @@ const Header = ({ title, navMenu }: HeaderProps) => {
                 {item.label}
               </ExternalLink>
             ) : (
-              <Link key={index} href={item.href}>
+              <Link
+                key={index}
+                href={item.href}
+                className={clsx(pathname === item.href && styles.active)}
+              >
                 {item.label}
               </Link>
             )

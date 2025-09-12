@@ -52,10 +52,25 @@ const ShopNews = ({
   const [newsItems, setNewsItems] = useState<NewsItem[]>([]);
 
   useEffect(() => {
-    fetch(jsonPath)
-      .then((res) => res.json())
-      .then((data) => setNewsItems(data))
-      .catch((err) => console.error('ニュースデータの取得失敗:', err));
+    const fetchNewsData = async () => {
+      try {
+        // ニュースデータは常にキャッシュバスティング
+        const timestamp = Date.now();
+        const dataPath = `${jsonPath}?t=${timestamp}`;
+
+        const response = await fetch(dataPath);
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data: NewsItem[] = await response.json();
+        setNewsItems(data);
+      } catch (error) {
+        console.error('ニュースデータの取得エラー:', error);
+      }
+    };
+
+    fetchNewsData();
   }, [jsonPath]);
 
   // フィルタして表示対象を抽出

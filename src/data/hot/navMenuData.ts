@@ -2,7 +2,7 @@
  * 神戸ホットポイント メニュー項目
  * URL: src/data/hot/navMenuData.ts
  * Created: 2025-08-21
- * Last updated: 2025-08-27
+ * Last updated: 2025-09-16
  * ======================================= */
 export const navMenu = [
   { href: '/hot/', label: 'トップ' },
@@ -17,6 +17,11 @@ export const navMenu = [
   {
     href: 'https://www.cityheaven.net/hyogo/A2802/A280201/koubehp/diarylist/?of=y',
     label: '写メ日記',
+    target: true,
+  },
+  {
+    href: 'https://www.cityheaven.net/hyogo/A2802/A280201/koubehp/shopevent/',
+    label: 'イベント',
     target: true,
   },
   { href: '/hot/system/', label: 'システム' },

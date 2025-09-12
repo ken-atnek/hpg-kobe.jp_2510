@@ -32,16 +32,34 @@ const BlockPickUp = () => {
   // データ取得
   useEffect(() => {
     let cancelled = false;
-    fetch('/data/area-top/areaTopPickUp.json')
-      .then((res) => res.json())
-      .then((data: CastDetail[]) => {
+
+    const fetchPickUpData = async () => {
+      try {
+        // キャッシュバスティング用のタイムスタンプを追加
+        const timestamp =
+          process.env.NODE_ENV === 'development' ? Date.now() : '';
+        const dataPath = `/data/area-top/areaTopPickUp.json${timestamp ? `?t=${timestamp}` : ''}`;
+
+        const response = await fetch(dataPath);
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data: CastDetail[] = await response.json();
         if (cancelled) return;
+
         const grouped = {
           hot: data.filter((item) => item.shopId === 'hot'),
           villa: data.filter((item) => item.shopId === 'villa'),
         };
         setGrouped(grouped);
-      });
+      } catch (error) {
+        console.error('PickUpデータの取得エラー:', error);
+      }
+    };
+
+    fetchPickUpData();
+
     return () => {
       cancelled = true;
     };

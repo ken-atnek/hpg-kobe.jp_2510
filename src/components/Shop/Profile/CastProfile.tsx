@@ -99,19 +99,29 @@ export default function CastProfile() {
   useEffect(() => {
     if (!castId) return;
 
-    fetch(`/cast/${shop}/${castId}/details.json`)
-      .then((res) => {
-        if (!res.ok) throw new Error('Not Found');
-        return res.json();
-      })
-      .then((data) => {
+    const fetchCastData = async () => {
+      try {
+        // キャッシュバスティング用のタイムスタンプを追加
+        const timestamp =
+          process.env.NODE_ENV === 'development' ? Date.now() : '';
+        const dataPath = `/cast/${shop}/${castId}/details.json${timestamp ? `?t=${timestamp}` : ''}`;
+
+        const response = await fetch(dataPath);
+        if (!response.ok) {
+          throw new Error('キャスト情報が見つかりません');
+        }
+
+        const data = await response.json();
         setCast(data);
         setError(false);
-      })
-      .catch(() => {
+      } catch (error) {
+        console.error('キャストデータの取得エラー:', error);
         setCast(null);
         setError(true);
-      });
+      }
+    };
+
+    fetchCastData();
   }, [castId, shop]);
 
   if (!castId) return <p>キャストIDが指定されていません。</p>;

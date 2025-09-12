@@ -38,19 +38,32 @@ const CastScheduleByDay = () => {
   // スケジュールの読み込み
   useEffect(() => {
     const loadSchedules = async () => {
-      const config = await loadScheduleConfig(shop);
-      const dateList = getDateList(config.switchHour, config.days);
-      const basePath = `/data/${shop}/schedule`;
+      try {
+        const config = await loadScheduleConfig(shop);
+        const dateList = getDateList(config.switchHour, config.days);
+        const basePath = `/data/${shop}/schedule`;
 
-      const fetched = await Promise.all(
-        dateList.map(async (date) => {
-          const res = await fetch(`${basePath}/${date}.json`);
-          const json = await res.json();
-          return json as ScheduleData;
-        })
-      );
+        // スケジュールデータは常にキャッシュバスティング
+        const timestamp = Date.now();
+        const timestampParam = `?t=${timestamp}`;
 
-      setSchedules(fetched);
+        const fetched = await Promise.all(
+          dateList.map(async (date) => {
+            const response = await fetch(
+              `${basePath}/${date}.json${timestampParam}`
+            );
+            if (!response.ok) {
+              throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            const json = await response.json();
+            return json as ScheduleData;
+          })
+        );
+
+        setSchedules(fetched);
+      } catch (error) {
+        console.error('スケジュールデータの取得エラー:', error);
+      }
     };
 
     loadSchedules();

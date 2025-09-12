@@ -27,9 +27,19 @@ const BlockRealTIme = () => {
   const [castList, setCastList] = useState<CastDetail[]>([]);
 
   useEffect(() => {
-    fetch('/data/area-top/areaTopRealTime.json')
-      .then((res) => res.json())
-      .then((data) => {
+    const fetchRealTimeData = async () => {
+      try {
+        // リアルタイムデータは常にキャッシュバスティング
+        const timestamp = Date.now();
+        const dataPath = `/data/area-top/areaTopRealTime.json?t=${timestamp}`;
+
+        const response = await fetch(dataPath);
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data: CastDetail[] = await response.json();
+
         const getPriority = (status: number) => {
           switch (status) {
             case 1:
@@ -46,13 +56,19 @@ const BlockRealTIme = () => {
               return 5; // 不明
           }
         };
+
         const sortedData = data.sort(
           (a: CastDetail, b: CastDetail) =>
             getPriority(a.realTimeStatus) - getPriority(b.realTimeStatus)
         );
+
         setCastList(sortedData);
-      })
-      .catch((error) => console.error('データ取得エラー:', error));
+      } catch (error) {
+        console.error('RealTimeデータの取得エラー:', error);
+      }
+    };
+
+    fetchRealTimeData();
   }, []);
   return (
     <ul className={styles.listRealTime}>
