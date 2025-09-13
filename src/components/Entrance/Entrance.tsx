@@ -8,13 +8,16 @@
 'use client';
 import styles from '@/styles/Entrance.module.scss';
 import { useRouter } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import { setAgeVerifiedAsync, type AgeScope } from '@/lib/age';
 import EntranceCastList from '@/components/Entrance/CastList';
 import Image from 'next/image';
+import clsx from 'clsx';
 import EntranceAreaShopList from '@/components/Entrance/AreaShopList';
 import EntranceGroupShopList from '@/components/Entrance/GroupShopList';
 import type { StaticImport } from 'next/dist/shared/lib/get-img-props';
 import ReciprocalLink from '@/components/Entrance/ReciprocalLink';
+import { getShopFromPath, getStoreClass } from '@/lib/shopUtils';
 export default function Entrance({
   // scope,
   backPath,
@@ -31,12 +34,14 @@ export default function Entrance({
   excludeStoreId?: string;
 }) {
   const router = useRouter();
-
+  const pathname = usePathname();
+  const shop = getShopFromPath(pathname);
+  const activeStoreClass = getStoreClass(shop);
   return (
-    <main className={styles.containerEntrance}>
+    <main className={clsx(styles.containerEntrance, styles[activeStoreClass])}>
       <h1>{headingText}</h1>
       <section className={styles.blockCastList}>
-        <EntranceCastList />
+        <EntranceCastList logoSrc={logoSrc} />
       </section>
       <section className={styles.blockButton}>
         <button
@@ -64,7 +69,7 @@ export default function Entrance({
             alt="HOT POINT GROUP"
             priority
           />
-          <h2>あなたは18歳以上ですか？</h2>
+          <p>あなたは18歳以上ですか？</p>
         </div>
         <a
           href="https://www.yahoo.co.jp/"
@@ -87,7 +92,9 @@ export default function Entrance({
       </section>
       <div className={styles.copyRight}>
         <p>
-          当サイトはアダルトな内容を含んでいます。18歳未満の方の閲覧は堅くご遠慮願います。
+          当サイトはアダルトな内容を含んでいます。
+          <br className="sp" />
+          18歳未満の方の閲覧は堅くご遠慮願います。
         </p>
       </div>
     </main>

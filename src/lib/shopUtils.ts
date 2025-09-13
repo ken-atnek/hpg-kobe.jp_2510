@@ -9,11 +9,23 @@ export const logoHrefMap: Record<string, string> = {
 };
 
 export function getShopFromPath(pathname: string): string {
-  return pathname.split('/')[1] || 'hot';
+  const shop = pathname.split('/')[1];
+
+  // shopが存在し、かつstoreIdMapに定義されている場合のみ返す
+  if (shop && storeIdMap[shop]) {
+    return shop;
+  }
+
+  // どの店舗にも該当しない場合は空文字またはnullを返す
+  return '';
 }
 
 export function getStoreClass(shop: string): string {
-  return storeIdMap[shop] || storeIdMap['hot'];
+  // shopが空の場合はクラスを返さない
+  if (!shop || !storeIdMap[shop]) {
+    return '';
+  }
+  return storeIdMap[shop];
 }
 
 export function getLogoHref(shop: string): string {
@@ -22,5 +34,6 @@ export function getLogoHref(shop: string): string {
 
 export const platinumMailUrlMap: Record<string, string> = {
   hot: 'https://www.cityheaven.net/hyogo/A2802/A280201/koubehp/platinummail/?of=y',
-  villa:'https://www.cityheaven.net/hyogo/A2802/A280201/koube_hp_part3/platinummail/?of=y',
+  villa:
+    'https://www.cityheaven.net/hyogo/A2802/A280201/koube_hp_part3/platinummail/?of=y',
 };
