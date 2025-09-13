@@ -3,42 +3,36 @@
     "category": 1,
     "castId": "759",
     "castName": "\u6709\u6751\u304b\u305a\u306f",
-    "castImage": "/images/cast/hot/hot-kazuha01.jpg",
-    "castUrl": "/hot/"
+    "castImage": "/images/cast/hot/hot-kazuha01.jpg"
   },
   {
     "category": 1,
     "castId": "795",
     "castName": "\u82e5\u5bae\u306e\u3048\u308b",
-    "castImage": "/images/cast/hot/hot-noeru01.jpg",
-    "castUrl": "/villa/"
+    "castImage": "/images/cast/hot/hot-noeru01.jpg"
   },
   {
     "category": 1,
     "castId": "581",
     "castName": "\u5e73\u91ce\u308c\u306e",
-    "castImage": "/images/cast/style/style-reno01.jpg",
-    "castUrl": "/style/"
+    "castImage": "/images/cast/style/style-reno01.jpg"
   },
   {
     "category": 1,
     "castId": "261",
     "castName": "\u96ea\u5e73\u3042\u304d\u307b",
-    "castImage": "/images/cast/style/style-akiho01.jpg",
-    "castUrl": "/style/"
+    "castImage": "/images/cast/style/style-akiho01.jpg"
   },
   {
     "category": 1,
     "castId": "426",
     "castName": "\u5f69\u54b2\u307f\u308f\u3053",
-    "castImage": "/images/cast/villa/villa-miwako01.jpg",
-    "castUrl": "/villa/"
+    "castImage": "/images/cast/villa/villa-miwako01.jpg"
   },
   {
     "category": 1,
     "castId": "423",
     "castName": "\u7af9\u7530\u3084\u306a",
-    "castImage": "/images/cast/villa/villa-yana01.jpg",
-    "castUrl": "/villa/"
+    "castImage": "/images/cast/villa/villa-yana01.jpg"
   }
 ]

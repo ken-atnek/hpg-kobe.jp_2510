@@ -22,6 +22,13 @@ type ContentsProps = {
   jsonPath: string;
 };
 
+type CastSlideItem = {
+  category: number;
+  castId: string;
+  castName: string;
+  castImage: string;
+};
+
 const CastSlide = ({
   titleJp,
   titleEn,
@@ -44,7 +51,6 @@ const CastSlide = ({
       castId: string;
       castName: string;
       castImage: string;
-      castUrl: string;
     }[]
   >([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -62,7 +68,7 @@ const CastSlide = ({
           throw new Error(`HTTP error! status: ${response.status}`);
         }
 
-        const data: CastDetail[] = await response.json();
+        const data: CastSlideItem[] = await response.json();
         setCastData(data);
       } catch (error) {
         console.error('キャストデータの取得エラー:', error);

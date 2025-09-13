@@ -40,12 +40,14 @@ const EntranceGroupShopList = () => {
   const grouped = groupByArea(GroupShops);
   const areaKeys = Object.keys(grouped);
 
-  // UIの状態
+  // PC版の状態
   const [selectedArea, setSelectedArea] = useState<string | null>(null);
-  // UL内に実際に描画する中身（閉じアニメ中は残す）
   const [renderArea, setRenderArea] = useState<string | null>(null);
 
-  // パネルの高さをJSでアニメ
+  // スマホ版の状態（エリアごとの開閉状態）
+  const [expandedAreas, setExpandedAreas] = useState<Set<string>>(new Set());
+
+  // パネルの高さをJSでアニメ（PC版用）
   const panelRef = useRef<HTMLUListElement>(null);
   const [panelStyle, setPanelStyle] = useState<CSSProperties>({
     height: '0px',
@@ -53,27 +55,38 @@ const EntranceGroupShopList = () => {
     transition: `height ${TRANSITION_MS}ms ease`,
   });
 
-  // ボタンクリック
+  // PC版のボタンクリック
   const handleSelect = useCallback((areaId: string) => {
     setSelectedArea((prev) => {
       if (prev === areaId) {
-        // クローズ開始：selectedAreaをnullにして閉じアニメへ
         return null;
       }
-      // オープン or 切替
       setRenderArea(areaId);
       return areaId;
     });
   }, []);
 
-  // 初回オープンやキーボード操作時の整合性
+  // スマホ版のアコーディオン切替
+  const toggleMobileArea = useCallback((areaId: string) => {
+    setExpandedAreas((prev) => {
+      const newSet = new Set(prev);
+      if (newSet.has(areaId)) {
+        newSet.delete(areaId);
+      } else {
+        newSet.add(areaId);
+      }
+      return newSet;
+    });
+  }, []);
+
+  // PC版の初回オープンやキーボード操作時の整合性
   useEffect(() => {
     if (selectedArea && renderArea !== selectedArea) {
       setRenderArea(selectedArea);
     }
   }, [selectedArea, renderArea]);
 
-  // オープン/クローズ/切替ごとの高さアニメを制御
+  // PC版のオープン/クローズ/切替ごとの高さアニメを制御
   useEffect(() => {
     const el = panelRef.current;
     if (!el) return;
@@ -81,82 +94,109 @@ const EntranceGroupShopList = () => {
     const forceReflow = () => void el.offsetHeight;
 
     if (selectedArea === null) {
-      // === クローズ ===
-      // 1) 現在高さを固定
       const current = getComputedStyle(el).height;
       setPanelStyle((s) => ({ ...s, height: current }));
       forceReflow();
-      // 2) 0にアニメ
       setPanelStyle((s) => ({ ...s, height: '0px' }));
       return;
     }
 
-    // === オープン or エリア切替 ===
-    // いまの高さをfrom、高さ計算後にtoへ
     const from = getComputedStyle(el).height;
     setPanelStyle((s) => ({ ...s, height: from }));
     forceReflow();
 
-    // 中身が変わった直後に scrollHeight を取得
     const to = `${el.scrollHeight}px`;
     setPanelStyle((s) => ({ ...s, height: to }));
   }, [selectedArea, renderArea]);
 
-  // アニメ完了後の後片付け
+  // PC版のアニメ完了後の後片付け
   const handleTransitionEnd = () => {
     const el = panelRef.current;
     if (!el) return;
 
     if (selectedArea) {
-      // 開き終わったら auto に戻して自然なレイアウトへ
       setPanelStyle((s) => ({ ...s, height: 'auto' }));
     } else {
-      // 閉じ終わったら中身をアンマウント
       setRenderArea(null);
     }
   };
 
   return (
     <article className={styles.boxGroupShop}>
-      <nav role="tablist" aria-label="エリア選択">
+      {/* PC版のタブ表示 */}
+      <div className={styles.pcVersion}>
+        <nav role="tablist" aria-label="エリア選択">
+          {areaKeys.map((area) => {
+            const isActive = selectedArea === area;
+            const panelId = `panel-${area}`;
+            const tabId = `tab-${area}`;
+            return (
+              <button
+                key={area}
+                id={tabId}
+                type="button"
+                role="tab"
+                aria-selected={isActive}
+                aria-controls={panelId}
+                data-active={isActive || undefined}
+                onClick={() => handleSelect(area)}
+              >
+                <span>{areaLabels[area] ?? area}</span>
+              </button>
+            );
+          })}
+        </nav>
+        <ul
+          id={selectedArea ? `panel-${selectedArea}` : undefined}
+          role={selectedArea ? 'tabpanel' : undefined}
+          aria-labelledby={selectedArea ? `tab-${selectedArea}` : undefined}
+          ref={panelRef}
+          style={panelStyle}
+          onTransitionEnd={handleTransitionEnd}
+        >
+          {renderArea
+            ? grouped[renderArea].map((shop) => (
+                <li key={shop.storeId}>
+                  <ExternalLink href={shop.url} aria-label={shop.name}>
+                    {shop.name}
+                  </ExternalLink>
+                </li>
+              ))
+            : null}
+        </ul>
+      </div>
+
+      {/* スマホ版のアコーディオン表示 */}
+      <div className={styles.mobileVersion}>
         {areaKeys.map((area) => {
-          const isActive = selectedArea === area;
-          const panelId = `panel-${area}`;
-          const tabId = `tab-${area}`;
+          const isExpanded = expandedAreas.has(area);
           return (
-            <button
-              key={area}
-              id={tabId}
-              type="button"
-              role="tab"
-              aria-selected={isActive}
-              aria-controls={panelId}
-              data-active={isActive || undefined}
-              onClick={() => handleSelect(area)}
-            >
-              <span>{areaLabels[area] ?? area}</span>
-            </button>
+            <div key={area} className={styles.areaSection}>
+              <button
+                type="button"
+                onClick={() => toggleMobileArea(area)}
+                aria-expanded={isExpanded}
+              >
+                <span className={styles.nameAreaJp}>
+                  {areaLabels[area] ?? area}
+                </span>
+                <span className={styles.nameAreaEn}>{area.toUpperCase()}</span>
+              </button>
+              <ul data-expanded={isExpanded}>
+                <div>
+                  {grouped[area].map((shop) => (
+                    <li key={shop.storeId}>
+                      <ExternalLink href={shop.url} aria-label={shop.name}>
+                        {shop.name}
+                      </ExternalLink>
+                    </li>
+                  ))}
+                </div>
+              </ul>
+            </div>
           );
         })}
-      </nav>
-      <ul
-        id={selectedArea ? `panel-${selectedArea}` : undefined}
-        role={selectedArea ? 'tabpanel' : undefined}
-        aria-labelledby={selectedArea ? `tab-${selectedArea}` : undefined}
-        ref={panelRef}
-        style={panelStyle}
-        onTransitionEnd={handleTransitionEnd}
-      >
-        {renderArea
-          ? grouped[renderArea].map((shop) => (
-              <li key={shop.storeId}>
-                <ExternalLink href={shop.url} aria-label={shop.name}>
-                  {shop.name}
-                </ExternalLink>
-              </li>
-            ))
-          : null}
-      </ul>
+      </div>
     </article>
   );
 };

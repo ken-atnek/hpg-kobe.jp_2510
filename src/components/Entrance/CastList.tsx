@@ -9,6 +9,7 @@
 import styles from '@/styles/Entrance.module.scss';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
+import type { StaticImport } from 'next/dist/shared/lib/get-img-props';
 
 type ListItem = {
   castName: string;
@@ -18,7 +19,11 @@ type ListItem = {
   castImage: string;
 };
 
-const EntranceCastList = () => {
+type EntranceCastListProps = {
+  logoSrc: string | StaticImport;
+};
+
+const EntranceCastList = ({ logoSrc }: EntranceCastListProps) => {
   const [CastData, setCastData] = useState<ListItem[]>([]);
 
   useEffect(() => {
@@ -69,6 +74,15 @@ const EntranceCastList = () => {
           <p className={styles.shopName}>{item.shopName}</p>
         </li>
       ))}
+      <li className={styles.mobileLogo}>
+        <Image
+          src={logoSrc}
+          width={100}
+          height={60}
+          alt="HOT POINT GROUP"
+          priority
+        />
+      </li>
     </ul>
   );
 };
