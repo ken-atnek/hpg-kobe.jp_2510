@@ -53,6 +53,11 @@ const Header = ({ title, navMenu, selectedNavIds }: HeaderProps) => {
     return navMenu.filter((item) => ids.includes(item.id));
   }, [navMenu, selectedNavIds]);
 
+  // navRecruitの項目を取得
+  const recruitItem = useMemo(() => {
+    return navMenu.find((item) => item.id === 'navRecruit');
+  }, [navMenu]);
+
   const [telop, setTelop] = useState<string>('');
 
   // ハンバーガーメニュー操作
@@ -255,6 +260,13 @@ const Header = ({ title, navMenu, selectedNavIds }: HeaderProps) => {
             )
           )}
         </nav>
+        <div className={styles.linkRecruit}>
+          {recruitItem && (
+            <ExternalLink href={recruitItem.href}>
+              <span>【PR】求人情報</span>
+            </ExternalLink>
+          )}
+        </div>
       </div>
     </header>
   );
