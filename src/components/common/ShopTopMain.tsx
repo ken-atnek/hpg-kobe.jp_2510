@@ -6,6 +6,7 @@
  * Last updated: 2025-09-11
  * ======================================= */
 import styles from '@/styles/ShopCommon.module.scss';
+import castSlideStyles from '@/styles/components/ShopTopCastSlide.module.scss'; 
 import TopPickUp from '@/components/Shop/TopPickUp';
 import CastSlide from '@/components/Shop/TopCastSlide';
 import { usePathname } from 'next/navigation';
@@ -33,6 +34,7 @@ const ShopTopMain = () => {
         titleJp="新人紹介"
         titleEn="new face"
         titleEnSub="cast"
+        classNameStyles={castSlideStyles.newFace}
         jsonPath={`/data/${shop}/TopNewFace.json`}
       />
       <ShopNews

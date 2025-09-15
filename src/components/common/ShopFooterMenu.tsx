@@ -27,6 +27,7 @@ const ShopFooterMenu = ({ navMenu }: ShopFooterMenuProps) => {
   const activeStoreClass = getStoreClass(shop);
   return (
     <section className={clsx(styles.shopFooterMenu, styles[activeStoreClass])}>
+      <h2>menu</h2>
       <nav>
         {navMenu.map((item, index) =>
           item.target ? (

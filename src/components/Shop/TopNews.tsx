@@ -50,6 +50,7 @@ const ShopNews = ({
   const storeName = storeNameMap[shop];
 
   const [newsItems, setNewsItems] = useState<NewsItem[]>([]);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     const fetchNewsData = async () => {
@@ -70,7 +71,17 @@ const ShopNews = ({
       }
     };
 
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
     fetchNewsData();
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+
+    return () => {
+      window.removeEventListener('resize', checkMobile);
+    };
   }, [jsonPath]);
 
   // フィルタして表示対象を抽出
@@ -123,7 +134,9 @@ const ShopNews = ({
               <div
                 className={styles.itemBOdy}
                 dangerouslySetInnerHTML={{
-                  __html: convertFontToSpan(convertRemToPx(item.body, 14)),
+                  __html: convertFontToSpan(
+                    convertRemToPx(item.body, isMobile ? 10 : 14)
+                  ),
                 }}
               />
               <Link

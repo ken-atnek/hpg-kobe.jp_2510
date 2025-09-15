@@ -16,6 +16,11 @@
     // background: url(../../assets/images/contents-bg.webp) no-repeat center
     //     center / cover;
     width: 100%;
+    @include sp {
+        order: -2;
+        padding: 24vw 2vw 4vw;
+    }
+
     .titleObject {
         @include object-title;
     }
@@ -24,18 +29,26 @@
         flex-direction: column;
         font-size: inherit;
         color: $font-black;
+
         nav {
             font-size: inherit;
             display: grid;
+
             button {
                 font-size: inherit;
                 padding-block: 1em;
                 border-top: 1px solid;
                 border-right: 1px solid;
+                @include sp {
+                    padding-block: 2vw;
+                }
                 span {
                     position: relative;
                     font-size: FZ(18);
                     font-weight: 600;
+                    @include sp {
+                        font-size: FZ(16);
+                    }
                     &::before {
                         content: "";
                         position: absolute;
@@ -48,6 +61,9 @@
                 &:first-of-type {
                     border-left: 1px solid;
                     border-top-left-radius: 2rem;
+                    @include sp {
+                        border-top-left-radius: 4vw;
+                    }
                 }
                 &.isActive {
                     background-color: rgba($shop-hot, 0.5);
@@ -77,6 +93,11 @@
                     gap: 0 1rem;
                     font-size: inherit;
                     padding: 0.5em;
+                    @include sp {
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                    }
                     .rankIcon {
                         position: absolute;
                         font-size: inherit;
@@ -97,6 +118,10 @@
                             right: -0.5em;
                             aspect-ratio: 1.313/1;
                             font-size: 3em;
+                            top: unset;
+                            bottom: 2vw;
+                            right: unset;
+                            left: -2vw;
                         }
                         &.rank2,
                         &.rank3 {
@@ -104,6 +129,13 @@
                             top: -0.3em;
                             right: -0.5em;
                             font-size: 1.8em;
+                            @include sp {
+                                top: unset;
+                                right: unset;
+                                left: -1vw;
+                                bottom: 8vw;
+                                width: 22vw;
+                            }
                         }
                         &:not(.rank1, .rank2, .rank3) {
                             width: 25%;
@@ -111,6 +143,13 @@
                             right: -0.5em;
                             z-index: +1;
                             font-size: 1.6em;
+                            @include sp {
+                                top: unset;
+                                right: unset;
+                                left: -1vw;
+                                bottom: 8vw;
+                                width: 20vw;
+                            }
                         }
                     }
                     a {
@@ -130,6 +169,11 @@
                         flex-direction: column;
                         gap: 0.3em 0;
                         align-self: flex-end;
+                        @include sp {
+                            align-items: flex-end;
+                            gap: 0 0;
+                            margin-top: 2vw;
+                        }
                         .castName {
                             font-size: FZ(18);
                             font-weight: 600;
@@ -191,6 +235,10 @@
                 &.listHead {
                     grid-template-rows: 1fr 1fr;
                     grid-template-columns: 55% 1fr;
+                    @include sp {
+                        grid-template-columns: repeat(2, 1fr);
+                        grid-template-rows: unset;
+                    }
                     li {
                         grid-template-columns: 35% 1fr;
                         &:nth-of-type(1) {
@@ -201,11 +249,19 @@
                             border-left: 1px solid;
                             border-bottom: 1px solid;
                             z-index: +1;
+                            @include sp {
+                                grid-row: unset;
+                                grid-column: span 2;
+                            }
                         }
                         &:nth-of-type(2) {
                             border-top: 1px solid;
                             border-bottom: 1px solid;
                             border-right: 1px solid;
+                            @include sp {
+                                border-top: unset;
+                                border-left: 1px solid;
+                            }
                         }
                         &:nth-of-type(3) {
                             border-right: 1px solid;

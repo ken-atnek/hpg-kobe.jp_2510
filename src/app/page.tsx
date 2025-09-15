@@ -46,7 +46,7 @@ export default function AreaTop() {
         <section className={styles.containerContents}>
           <article className={styles.innerContainerContents}>
             <div className={styles.boxLeftBan}>
-              <h2>
+              <h2 className={styles.h2Topics}>
                 <span>topics</span>トピックス
               </h2>
               <BannerGroup
