@@ -419,6 +419,21 @@
                 }
             }
         }
+        .linkRecruit {
+            font-size: inherit;
+            display: flex;
+            justify-content: center;
+            a {
+                font-size: inherit;
+                padding-block: 1vw;
+                span {
+                    display: inline-block;
+                    color: #fff;
+                    font-size: FZ(16);
+                    letter-spacing: 0.06em;
+                }
+            }
+        }
     }
 }
 /* =================================
