@@ -21,6 +21,7 @@ export type Shop = {
   phone: string;
   url: string;
   shopColor?: string;
+  mapUrl?: string;
 };
 
 export const Shops = [
@@ -35,6 +36,7 @@ export const Shops = [
     phone: '078-332-0388',
     url: '/hot/',
     shopColor: '#3da3fc',
+    mapUrl: 'https://maps.app.goo.gl/epJdH7BtHsccYyGdA',
   },
   {
     storeId: 'kbVilla',
@@ -47,6 +49,7 @@ export const Shops = [
     phone: '078-332-3666',
     url: '/villa/',
     shopColor: '#db3dfc',
+    mapUrl: 'https://maps.app.goo.gl/[VillaのGoogleマップURL]',
   },
   // {
   //   storeId: 'kbStyle',

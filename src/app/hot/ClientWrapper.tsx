@@ -43,6 +43,12 @@ export default function ClientWrapper({
             <Header
               title="神戸・三宮の風俗｜ファッションヘルス:神戸ホットポイント"
               navMenu={navMenu}
+              selectedNavIds={[
+                'navRealTime',
+                'navSchedule',
+                'navCastList',
+                'navPhotoBlog',
+              ]}
             />
             <div className={styles.innerMain}>
               <main

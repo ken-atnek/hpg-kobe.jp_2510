@@ -24,6 +24,9 @@ const ContainerShopList = () => {
       className={clsx(styles.containerShopList, styles[activeStoreClass])}
     >
       <h2>hotpoint group kobe area</h2>
+      <a href="#" className={styles.pageTop}>
+        <span>page top</span>
+      </a>
       <ul>
         {Shops.map((shop) => (
           <li key={shop.storeId}>

@@ -8,27 +8,94 @@ import { usePathname } from 'next/navigation';
 import styles from '@/styles/components/common/Header.module.scss';
 import clsx from 'clsx';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef, useCallback, useMemo } from 'react';
 import ExternalLink from '@/components/common/ExternalLink';
-import { getShopFromPath, getStoreClass } from '@/lib/shopUtils';
+import {
+  getShopFromPath,
+  getStoreClass,
+  storeIdMap, // ← storeIdMapを追加でインポート
+} from '@/lib/shopUtils';
+import { Shops, type Shop } from '@/data/AreaShopData';
 
 type NavItem = {
+  id: string;
   href: string;
   label: string;
+  labelEn: string;
   target?: boolean;
 };
 
 type HeaderProps = {
   title: string;
   navMenu: NavItem[];
+  selectedNavIds?: string[]; // 表示したいナビの ID を指定（省略時は全て表示）
 };
 
-const Header = ({ title, navMenu }: HeaderProps) => {
+export function getShopData(shop: string): Shop | null {
+  const storeId = storeIdMap[shop]; // 'hot' -> 'kbHot', 'villa' -> 'kbVilla'
+  return Shops.find((shopData) => shopData.storeId === storeId) || null;
+}
+
+const Header = ({ title, navMenu, selectedNavIds }: HeaderProps) => {
   const pathname = usePathname();
   const shop = getShopFromPath(pathname);
   const activeStoreClass = getStoreClass(shop);
+  const shopData = getShopData(shop);
+
+  // mobileHeadNav用の4つの項目を選択（デフォルトまたは指定された項目）
+  const mobileHeadNavItems = useMemo(() => {
+    const ids = selectedNavIds?.slice(0, 4) || [
+      'navRealTime',
+      'navSchedule',
+      'navCastList',
+      'navSystem',
+    ];
+    return navMenu.filter((item) => ids.includes(item.id));
+  }, [navMenu, selectedNavIds]);
 
   const [telop, setTelop] = useState<string>('');
+
+  // ハンバーガーメニュー操作
+  const [isOpen, setIsOpen] = useState(false);
+  const toggleMenu = useCallback(() => setIsOpen(!isOpen), [isOpen]);
+  const closeMenu = useCallback(() => setIsOpen(false), []);
+  const navRef = useRef<HTMLDivElement>(null);
+  const hamburgerRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    if (isOpen) {
+      // メニューを開く時：スクロールを禁止
+      document.documentElement.style.overflow = 'hidden';
+      document.documentElement.style.height = '100vh';
+    } else {
+      // メニューを閉じる時：スタイルを復元
+      document.documentElement.style.overflow = '';
+      document.documentElement.style.height = '';
+    }
+
+    return () => {
+      // クリーンアップ：コンポーネントがアンマウントされた時にスタイルを復元
+      document.documentElement.style.overflow = '';
+      document.documentElement.style.height = '';
+    };
+  }, [isOpen]);
+
+  useEffect(() => {
+    const handleOutsideClick = (event: MouseEvent) => {
+      if (
+        isOpen &&
+        navRef.current &&
+        hamburgerRef.current &&
+        !navRef.current.contains(event.target as Node) &&
+        !hamburgerRef.current.contains(event.target as Node) // ハンバーガーボタンを除外
+      ) {
+        closeMenu();
+      }
+    };
+    document.addEventListener('click', handleOutsideClick, true);
+    return () =>
+      document.removeEventListener('click', handleOutsideClick, true);
+  }, [isOpen, closeMenu]);
 
   useEffect(() => {
     const fetchTelopData = async () => {
@@ -44,14 +111,16 @@ const Header = ({ title, navMenu }: HeaderProps) => {
         }
 
         const data = await response.json();
-        setTelop(data.telopComment);
+        setTelop(data.telopComment || ''); // undefined チェックを追加
       } catch (error) {
         console.error('テロップデータの取得エラー:', error);
         setTelop(''); // エラー時は空文字
       }
     };
 
-    fetchTelopData();
+    if (shop) {
+      fetchTelopData();
+    }
   }, [shop]);
 
   return (
@@ -62,23 +131,82 @@ const Header = ({ title, navMenu }: HeaderProps) => {
           <h1>{title}</h1>
         </div>
       </article>
-      <div className={styles.boxNav}>
+      <div
+        className={clsx(
+          styles.boxNav,
+          isOpen && styles.isOpen,
+          !isOpen && styles.closing
+        )}
+        ref={navRef}
+        onClick={(e) => {
+          // オーバーレイ部分（背景）をクリックした場合のみメニューを閉じる
+          if (e.target === e.currentTarget) {
+            closeMenu();
+          }
+        }}
+      >
+        <div className={styles.mobileHamburgerHead}>
+          <div className={styles.shopName}>
+            <svg>
+              <use href={`${shopData?.svgLogo || ''}`} />
+            </svg>
+            <span>{shopData?.name}</span>
+          </div>
+          <Link
+            href={`/${shop}`}
+            className={styles.mobileHome}
+            onClick={closeMenu}
+          >
+            <svg>
+              <use href="#mobile_home" />
+            </svg>
+          </Link>
+        </div>
         <nav>
           {navMenu.map((item, index) =>
             item.target ? (
-              <ExternalLink key={index} href={item.href}>
-                {item.label}
+              <ExternalLink
+                key={index}
+                href={item.href}
+                className={styles[item.id]}
+              >
+                <span>
+                  <i className={styles.en}>{item.labelEn}</i>
+                  <i className={styles.jp}>{item.label}</i>
+                </span>
               </ExternalLink>
             ) : (
               <Link
                 key={index}
                 href={item.href}
-                className={clsx(pathname === item.href && styles.active)}
+                onClick={closeMenu}
+                className={clsx(
+                  pathname === item.href && styles.active,
+                  styles[item.id]
+                )}
               >
-                {item.label}
+                <span>
+                  <i className={styles.en}>{item.labelEn}</i>
+                  <i className={styles.jp}>{item.label}</i>
+                </span>
               </Link>
             )
           )}
+          <ExternalLink
+            className={clsx(styles.mobileOnly, styles.linkTel)}
+            href={`tel:${shopData?.phone || ''}`}
+          >
+            <span>{shopData?.phone}</span>
+          </ExternalLink>
+          <ExternalLink
+            className={clsx(styles.mobileOnly, styles.linkMap)}
+            href={shopData?.mapUrl}
+          >
+            <span>
+              <i className={styles.en}>map</i>
+              <i className={styles.jp}>地図</i>
+            </span>
+          </ExternalLink>
         </nav>
       </div>
       <hr className={styles.boxStripe} />
@@ -86,6 +214,47 @@ const Header = ({ title, navMenu }: HeaderProps) => {
         <div className={styles.innerTelop}>
           <p>{telop}</p>
         </div>
+      </div>
+      <button
+        ref={hamburgerRef}
+        type="button"
+        className={clsx(styles.hamburgerButton, isOpen && styles.isOpen)}
+        onClick={toggleMenu}
+        aria-expanded={isOpen}
+        aria-label="メニューを開閉"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <div className={styles.mobilePageHead}>
+        <div className={styles.contentsTop}>
+          <div className={styles.name}>
+            <span className={styles.en}>{shopData?.nameEn}</span>
+            <span className={styles.jp}>{shopData?.name}</span>
+          </div>
+          <ExternalLink
+            href={`tel:${shopData?.phone || ''}`}
+            className={styles.mobilePhone}
+          >
+            <svg>
+              <use href="#mobile_phone" />
+            </svg>
+          </ExternalLink>
+        </div>
+        <nav className={styles.mobileHeadNav}>
+          {mobileHeadNavItems.map((item, index) =>
+            item.target ? (
+              <ExternalLink key={index} href={item.href}>
+                {item.label}
+              </ExternalLink>
+            ) : (
+              <Link key={index} href={item.href}>
+                {item.label}
+              </Link>
+            )
+          )}
+        </nav>
       </div>
     </header>
   );

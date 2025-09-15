@@ -34,12 +34,35 @@ const TopSlideBan = () => {
     <article className={styles.boxTopSlideBan}>
       <div className={styles.wrapImageList}>
         <Swiper
-          slidesPerView={2.5}
+          slidesPerView={3}
           centeredSlides={true}
           loop={true}
           autoplay={{ delay: 6000, disableOnInteraction: false }}
           modules={[Autoplay]}
           speed={1400}
+          initialSlide={0}
+          watchOverflow={true}
+          observer={true}
+          observeParents={true}
+          breakpoints={{
+            // スマホ（768px未満）
+            0: {
+              slidesPerView: 1.25,
+              centeredSlides: true,
+              spaceBetween: 8,
+              speed: 1000,
+              initialSlide: 0,
+              autoplay: { delay: 4000, disableOnInteraction: false },
+            },
+            // タブレット（768px以上）
+            768: {
+              slidesPerView: 3,
+              spaceBetween: 20,
+              centeredSlides: true,
+              speed: 1400,
+              autoplay: { delay: 5000, disableOnInteraction: false },
+            },
+          }}
         >
           {visibleItems.map((item) => (
             <SwiperSlide key={`${item.banId}-${Math.random()}`}>

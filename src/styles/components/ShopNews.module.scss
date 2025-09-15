@@ -13,6 +13,10 @@
     display: grid;
     grid-template-columns: auto 1fr;
     font-size: inherit;
+    @include sp {
+        display: flex;
+        flex-direction: column;
+    }
 }
 @mixin layout-li {
     position: relative;
@@ -23,10 +27,23 @@
     border-top: 1px solid;
     padding-block: 2em;
     gap: 0 2em;
+    @include sp {
+        display: flex;
+        flex-direction: column;
+        grid-column: unset;
+        padding-block: 1vw;
+        gap: 2vw 0;
+        border-top: unset;
+    }
     .wrapThumb {
         position: relative;
         font-size: inherit;
         width: 13em;
+        @include sp {
+            align-self: center;
+            width: 100%;
+            max-width: 60vw;
+        }
         img {
             width: 100%;
             object-fit: contain;
@@ -37,10 +54,16 @@
         flex-direction: column;
         font-size: inherit;
         justify-content: space-between;
+        @include sp {
+            display: contents;
+        }
         .itemDate {
             font-size: FZ(16);
             align-self: flex-end;
             @include FuturaCyrillicDemi;
+            @include sp {
+                order: -1;
+            }
         }
         .itemTitle {
             font-size: FZ(20);
@@ -96,6 +119,10 @@
     .titleObject {
         @include object-title;
     }
+    @include sp {
+        padding: 24vw 2vw 4vw;
+        order: -1;
+    }
     .listNews {
         @include layout-ul;
         li {
@@ -108,6 +135,12 @@
                     font-weight: 500;
                     color: blue;
                     margin-top: 1em;
+                }
+            }
+            @include sp {
+                // スマホでは2番目の記事を非表示
+                &:nth-child(n + 2) {
+                    display: none;
                 }
             }
         }
@@ -156,6 +189,11 @@
                         background-image: url("../../assets/images/hot/icon/rank-04.webp");
                     }
                 }
+            }
+        }
+        &.kbHot {
+            @include sp {
+                background-color: rgba($shop-hot, 0.2);
             }
         }
     }

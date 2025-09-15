@@ -18,12 +18,18 @@
     .titleObject {
         @include object-title;
     }
+    @include sp {
+        padding: 24vw 2vw 4vw;
+    }
     .wrapSlideList {
         position: relative;
         width: 100%;
         font-size: inherit;
         overflow: hidden;
         height: 29rem;
+        @include sp {
+            height: 60vw;
+        }
         .slideTrack {
             display: flex;
             width: max-content;
@@ -33,11 +39,17 @@
             left: 0;
             gap: 0 0.8rem;
             font-size: inherit;
+            @include sp {
+                animation: slide-left 40s linear infinite;
+            }
             .itemCast {
                 position: relative;
                 width: 21rem;
                 flex-shrink: 0;
                 font-size: inherit;
+                @include sp {
+                    width: 45vw;
+                }
                 a {
                     font-size: inherit;
                 }
@@ -77,6 +89,9 @@
                 transform: translateX(-50%);
             }
         }
+    }
+    &.newFace {
+        order: -2;
     }
     &.kbHot {
         background-color: hsl(196deg 100% 88%);

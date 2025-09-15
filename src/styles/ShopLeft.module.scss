@@ -3,6 +3,7 @@
  * ------------------------------ */
 @use "variable" as *;
 @use "svg" as *;
+@use "mixin" as *;
 /* stylelint-disable no-descending-specificity */
 /* stylelint-disable keyframes-name-pattern */
 /* stylelint-disable custom-property-pattern */
@@ -16,12 +17,18 @@
     flex-direction: column;
     padding-left: 1em;
     background-color: #fff;
+    @include sp {
+        display: contents;
+    }
     .boxHead {
         font-size: inherit;
         display: flex;
         flex-direction: column;
         align-items: flex-end;
         padding: 3em 1em 1em;
+        @include sp {
+            display: none;
+        }
         .itemLogo {
             position: relative;
             font-size: inherit;
@@ -49,6 +56,21 @@
         font-size: inherit;
         padding-top: 8em;
         padding-bottom: 1em;
+        @include sp {
+            padding: 24vw 2vw 4vw;
+        }
+        .wrapTitle {
+            display: none;
+            @include sp {
+                display: block;
+            }
+        }
+        .titleObject {
+            display: none;
+            @include sp {
+                @include object-title;
+            }
+        }
         &::before {
             content: "";
             position: absolute;
@@ -57,8 +79,9 @@
             width: 100%;
             aspect-ratio: 524/246;
             z-index: +1;
-            background: url("../assets/images/objects/photo-diary-hot.webp")
-                no-repeat center center / contain;
+            @include sp {
+                display: none;
+            }
         }
         .wrapContents {
             font-size: inherit;
@@ -73,26 +96,57 @@
         display: flex;
         flex-direction: column;
         gap: 0.5em 0;
+        @include sp {
+            order: 1;
+            padding-inline: 2vw;
+            margin-top: 2vw;
+        }
         ul {
             position: relative;
             width: 100%;
             display: grid;
             grid-auto-flow: row;
             gap: 0.5em 0;
+            @include sp {
+                gap: 2vw 0;
+            }
         }
     }
     .boxBanBottom {
         margin-top: 1em;
+        @include sp {
+            order: 1;
+            margin-top: 2vw;
+        }
     }
     &.kbHot {
         .itemLogo {
             width: 100%;
             margin-bottom: 1em;
+            @include sp {
+                width: 40vw;
+                margin-bottom: unset;
+            }
             svg {
                 width: 100%;
                 aspect-ratio: 500/176;
                 stroke: unset;
                 fill: $shop-hot;
+            }
+        }
+        .boxPhotoDiary {
+            &::before {
+                background: url("../assets/images/objects/photo-diary-hot.webp")
+                    no-repeat center center / contain;
+            }
+            .wrapTitle {
+                @include contents-title(#000000);
+            }
+            .titleObject {
+                &::before {
+                    filter: brightness(105%) hue-rotate(206deg) saturate(142%)
+                        drop-shadow(0.5rem 0.5rem 0.5rem rgb(1 1 1 / 30%));
+                }
             }
         }
     }

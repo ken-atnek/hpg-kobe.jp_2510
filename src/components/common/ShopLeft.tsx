@@ -59,6 +59,24 @@ const ShopLeft = ({ photoDiaryUrl }: ShopLeftProps) => {
         )}
       </div>
       <div className={styles.boxPhotoDiary}>
+        <div className={styles.wrapTitle}>
+          <h2>
+            <span>
+              photo
+              <i>diary</i>
+            </span>
+            写メ日記
+          </h2>
+        </div>
+        <div className={styles.titleObject}>
+          <div className={styles.wrapText}>
+            <div className={styles.shopName}>{shopData?.nameEn}</div>
+            <div className={styles.title}>
+              photo
+              <i>diary</i>
+            </div>
+          </div>
+        </div>
         <div className={styles.wrapContents}>
           <iframe src={photoDiaryUrl} />
         </div>

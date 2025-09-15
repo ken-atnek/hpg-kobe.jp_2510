@@ -55,7 +55,12 @@ const Footer = ({ className }: FooterProps) => {
     <footer className={clsx(styles.containerFooter, className)}>
       <nav className={styles.listArea}>
         {AreaData.map((item, index) => (
-          <ExternalLink key={index} href={item.url} className={styles.itemLink}>
+          <ExternalLink
+            key={index}
+            href={item.url}
+            className={styles.itemLink}
+            style={{ '--shop-color': item.shopColor } as React.CSSProperties}
+          >
             <span className={styles.nameEn}>{item.nameEn} area</span>
             <span className={styles.nameJp}>{item.nameJp}エリア</span>
           </ExternalLink>
@@ -63,6 +68,7 @@ const Footer = ({ className }: FooterProps) => {
       </nav>
       <div className={styles.copyRight}>
         画像及び記事の無断使用・転用は固くお断り致します。
+        <br className="sp" />
         <span>(C)&(P)KOBE HOTPOINT GROUP</span>
       </div>
     </footer>

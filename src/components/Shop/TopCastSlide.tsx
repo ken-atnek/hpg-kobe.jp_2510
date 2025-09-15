@@ -20,6 +20,7 @@ type ContentsProps = {
   titleEn?: string;
   titleEnSub?: string;
   jsonPath: string;
+  classNameStyles?: string | string[]; // 追加
 };
 
 type CastSlideItem = {
@@ -34,6 +35,7 @@ const CastSlide = ({
   titleEn,
   titleEnSub,
   jsonPath,
+  classNameStyles, // 追加
 }: ContentsProps) => {
   const pathname = usePathname();
   const shop = getShopFromPath(pathname);
@@ -87,7 +89,13 @@ const CastSlide = ({
   }
 
   return (
-    <article className={clsx(styles.boxCastSlide, styles[activeStoreClass])}>
+    <article
+      className={clsx(
+        styles.boxCastSlide,
+        styles[activeStoreClass],
+        classNameStyles // 追加
+      )}
+    >
       <div className={styles.wrapTitle}>
         <h2>
           <span>
