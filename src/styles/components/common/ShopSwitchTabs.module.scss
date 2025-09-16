@@ -1,0 +1,69 @@
+/* =================================
+ * 	 店舗切替タブ
+ * ------------------------------ */
+@use "variable" as *;
+@use "svg" as *;
+/* stylelint-disable no-descending-specificity */
+/* stylelint-disable keyframes-name-pattern */
+/* stylelint-disable custom-property-pattern */
+// このファイル全体のルールを無効にする
+
+.shopSwitchTabs {
+    font-size: inherit;
+    display: flex;
+    gap: 0 0.8em;
+    a {
+        position: relative;
+        font-size: FZ(14);
+        color: #8e8e8e;
+        width: 12em;
+        display: flex;
+        justify-content: center;
+        padding: 0.8em 0 0.5em;
+        transition: 0.3s ease-out;
+        &::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            z-index: -1;
+            border-radius: 0.5em 0.5em 0 0;
+            border: 1px solid #c2c2c2;
+            border-bottom: unset;
+            transform: perspective(1em) rotateX(2deg);
+            background-color: #e6e6e6;
+            transform-origin: right;
+            transition: 0.3s ease-out;
+        }
+        &.isActive {
+            color: $base-white;
+            &::before {
+                background-color: rgb(var(--shop-color), 0.9);
+            }
+        }
+        @include hover {
+            color: $base-white;
+            &::before {
+                background-color: rgb(var(--shop-color), 0.9);
+            }
+        }
+        &.kbHot {
+            --shop-color: #{$shop-color-hot-number};
+        }
+        &.kbVilla {
+            --shop-color: #{$shop-color-villa-number};
+        }
+    }
+    &.realtime {
+        position: absolute;
+        right: 0;
+        top: 0;
+    }
+    &.cast {
+        z-index: 3;
+        box-shadow: 0.5rem -3rem 3rem rgb(1 1 1 / 10%);
+        background-color: $base-white;
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+    }
+}

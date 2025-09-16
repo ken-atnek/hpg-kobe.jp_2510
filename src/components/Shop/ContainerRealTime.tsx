@@ -16,6 +16,7 @@ import Image from 'next/image';
 import type { CastDetail } from '@/types/CastDetails';
 import Link from 'next/link';
 import { gradeMap } from '@/constants/castGradeMap';
+import ShopSwitchTabs from '@/components/common/ShopSwitchTabs';
 
 // realTimeStatus に対応するラベル
 const STATUS_LABELS: Record<string, string> = {
@@ -95,6 +96,8 @@ const ContainerRealtime = () => {
     <section
       className={clsx(styles.containerRealtime, styles[activeStoreClass])}
     >
+      {/* 店舗切替タブ */}
+      <ShopSwitchTabs basePath="realtime" variant="realtime" />
       <div className={styles.boxUpDateTime}>
         <div className={styles.itemTime}>
           <span>更新時間</span>

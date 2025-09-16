@@ -12,7 +12,10 @@
     flex-direction: column;
     align-items: center;
     padding-block: 2em;
-    z-index: 3;
+    z-index: 4;
+    @include sp {
+        padding-block: 4vw;
+    }
     &::before,
     &::after {
         content: "";
@@ -42,6 +45,9 @@
                 @include FuturaCyrillicBook;
                 text-transform: uppercase;
                 letter-spacing: 0.04em;
+                @include sp {
+                    font-size: FZ(50);
+                }
             }
             h2 {
                 font-size: FZ(16);
@@ -53,6 +59,9 @@
             translate: 0 -50%;
             left: 2em;
             font-size: inherit;
+            @include sp {
+                display: none;
+            }
         }
     }
     &.kbHot {

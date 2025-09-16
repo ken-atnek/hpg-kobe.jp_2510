@@ -18,6 +18,7 @@ import { loadScheduleConfig } from '@/lib/loadScheduleConfig';
 import { getDateList } from '@/lib/getScheduleDataList';
 import { gradeMap } from '@/constants/castGradeMap';
 import { getShopFromPath, getStoreClass } from '@/lib/shopUtils';
+import ShopSwitchTabs from '@/components/common/ShopSwitchTabs';
 
 type ScheduleData = {
   date: string;
@@ -98,23 +99,7 @@ const CastScheduleByDay = () => {
         </Link>
 
         {/* 店舗切替タブ */}
-        <nav>
-          <Link
-            href="/hot/weekly-schedule/"
-            className={clsx(styles.shopHot, shop === 'hot' && styles.isActive)}
-          >
-            神戸ホットポイント
-          </Link>
-          <Link
-            href="/villa/weekly-schedule/"
-            className={clsx(
-              styles.shopVilla,
-              shop === 'villa' && styles.isActive
-            )}
-          >
-            ホットポイント VILLA
-          </Link>
-        </nav>
+        <ShopSwitchTabs basePath="schedule" variant="schedule" />
       </section>
 
       <section
