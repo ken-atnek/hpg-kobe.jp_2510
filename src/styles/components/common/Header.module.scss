@@ -14,6 +14,7 @@
     align-items: center;
     padding-top: 0.3em;
     z-index: 5;
+
     // --baseColor: #000;
     @include sp {
         display: contents;
@@ -348,6 +349,7 @@
         }
     }
 }
+
 /* =================================
  * モバイル ヘッド
  * ------------------------------ */
@@ -436,6 +438,7 @@
         }
     }
 }
+
 /* =================================
  * ハンバーガーボタン
  * ------------------------------ */
@@ -446,7 +449,6 @@
         position: fixed;
         left: 2vw;
         top: 6.5vw;
-
         width: 13vw;
         aspect-ratio: 1;
         border-radius: 1vw;

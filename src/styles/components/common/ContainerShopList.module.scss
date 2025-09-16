@@ -81,7 +81,6 @@
         }
         li {
             position: relative;
-            font-size: inherit;
             width: 100%;
             display: grid;
             grid-template-rows: subgrid;
@@ -93,7 +92,6 @@
                 background-color: $base-white;
                 display: flex;
                 justify-content: center;
-                height: 100%;
                 padding-block: 1em;
                 font-size: inherit;
                 height: 9em;

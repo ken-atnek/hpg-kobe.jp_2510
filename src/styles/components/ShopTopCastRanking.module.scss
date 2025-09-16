@@ -20,7 +20,6 @@
         order: -2;
         padding: 24vw 2vw 4vw;
     }
-
     .titleObject {
         @include object-title;
     }
@@ -29,11 +28,9 @@
         flex-direction: column;
         font-size: inherit;
         color: $font-black;
-
         nav {
             font-size: inherit;
             display: grid;
-
             button {
                 font-size: inherit;
                 padding-block: 1em;
@@ -114,8 +111,6 @@
                         }
                         &.rank1 {
                             width: 55%;
-                            top: -0.5em;
-                            right: -0.5em;
                             aspect-ratio: 1.313/1;
                             font-size: 3em;
                             top: unset;
@@ -171,7 +166,7 @@
                         align-self: flex-end;
                         @include sp {
                             align-items: flex-end;
-                            gap: 0 0;
+                            gap: 0;
                             margin-top: 2vw;
                         }
                         .castName {
