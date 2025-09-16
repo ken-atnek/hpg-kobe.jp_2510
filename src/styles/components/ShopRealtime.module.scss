@@ -15,6 +15,10 @@
     flex-direction: column;
     gap: 2em 0;
     box-shadow: 0.5rem -3rem 3rem rgb(1 1 1 / 10%);
+    @include sp {
+        padding: 14vw 0 6vw;
+        gap: 0;
+    }
     .boxUpDateTime {
         align-self: center;
         font-size: inherit;
@@ -22,6 +26,9 @@
         flex-direction: column;
         align-items: center;
         gap: 0.8em 0;
+        @include sp {
+            margin-bottom: 4vw;
+        }
         .itemTime {
             font-size: inherit;
             display: flex;
@@ -63,6 +70,11 @@
                 rgb(var(--status-color)) 40%,
                 rgb(var(--status-color))
             );
+            @include sp {
+                border-radius: unset;
+                font-size: FZ(20);
+                padding-block: 4vw;
+            }
         }
         ul {
             position: relative;
@@ -85,6 +97,7 @@
                 gap: 0.5em;
                 container: inline-size;
                 width: 100%;
+                box-shadow: 0.3rem 0.3rem 1rem -0.5rem #b4b4b4;
                 .boxImage {
                     position: relative;
                     font-size: inherit;
@@ -105,6 +118,9 @@
                         &.grade5 {
                             img {
                                 clip-path: inset(0.5em);
+                                @include sp {
+                                    clip-path: inset(2vw);
+                                }
                             }
                         }
                         &.grade6,
@@ -136,6 +152,10 @@
                         padding: 0.3em 0;
                         border-radius: 0.3em;
                         color: rgb(var(--status-color), 1);
+                        @include sp {
+                            font-size: FZ(16);
+                            padding: 0.5em 0;
+                        }
                     }
                     .castProfile {
                         font-size: inherit;
@@ -153,10 +173,16 @@
                                 font-size: clamp(14px, 1.7cqw, 21px);
                                 font-weight: 600;
                                 letter-spacing: 0.08em;
+                                @include sp {
+                                    font-size: FZ(20);
+                                }
                             }
                             .age {
                                 @include FuturaCyrillicBook;
                                 font-size: FZ(18);
+                                @include sp {
+                                    font-size: FZ(20);
+                                }
                                 &::before {
                                     font-size: 0.8em;
                                     content: "Age.";
@@ -172,6 +198,9 @@
                             span {
                                 @include FuturaCyrillicBook;
                                 font-size: clamp(14px, 1.2cqw, 18px);
+                                @include sp {
+                                    font-size: FZ(17);
+                                }
                                 &.tall {
                                     &::before {
                                         content: "T.";
@@ -224,6 +253,9 @@
                             padding-inline: 0.5em;
                             display: grid;
                             place-content: center;
+                            @include sp {
+                                font-size: 1rem;
+                            }
                         }
                         .innerTime {
                             font-size: inherit;
@@ -236,6 +268,9 @@
                                 @include FuturaCyrillicBook;
                                 font-size: clamp(14px, 1.3cqw, 16px);
                                 letter-spacing: 0.08em;
+                                @include sp {
+                                    font-size: FZ(16);
+                                }
                                 &:first-of-type {
                                     &::after {
                                         content: "~";
@@ -254,6 +289,9 @@
                         text-align: justify;
                         letter-spacing: 0.08em;
                         line-height: 1.4em;
+                        @include sp {
+                            font-size: FZ(14);
+                        }
                     }
                 }
             }
@@ -263,8 +301,17 @@
                     .boxImage {
                         width: 14cqw;
                         max-width: unset;
+                        @include sp {
+                            width: 42vw;
+                            max-width: unset;
+                        }
                     }
                 }
+            }
+            @include sp {
+                grid-template-columns: unset;
+                padding: 4vw 4vw 6vw;
+                gap: 4vw 0;
             }
         }
         &.status1 {

@@ -65,5 +65,8 @@
         width: 100%;
         display: flex;
         justify-content: flex-end;
+        @include sp {
+            padding-top: 2vw;
+        }
     }
 }

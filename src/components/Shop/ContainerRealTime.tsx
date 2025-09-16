@@ -109,7 +109,9 @@ const ContainerRealtime = () => {
           </time>
         </div>
         <p>
-          表示時間には多少ずれが生じる場合があります。詳しくはお電話にてご確認下さい
+          表示時間には多少ずれが生じる場合があります。
+          <br className="sp" />
+          詳しくはお電話にてご確認下さい
         </p>
       </div>
       {Object.entries(realTimeStatus).map(([status, list]) => (
