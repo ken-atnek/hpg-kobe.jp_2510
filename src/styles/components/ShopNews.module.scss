@@ -99,9 +99,9 @@
     padding-top: 2em;
     box-shadow: 0.5rem -3rem 3rem rgb(1 1 1 / 10%);
     .pageListNews {
-        @include layout-ul;
         padding-inline: 3em;
         margin-top: 3em;
+        @include layout-ul;
         .itemNews {
             @include layout-li;
         }

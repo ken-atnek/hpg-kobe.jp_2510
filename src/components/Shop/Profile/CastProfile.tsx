@@ -272,7 +272,7 @@ export default function CastProfile() {
             )}
           </nav>
         </div>
-        <div className={styles.itemImage}>
+        <div className={clsx(styles.itemImage, styles.main02)}>
           <Image
             src={
               cast.profileImages && cast.profileImages.length > 1
@@ -298,7 +298,7 @@ export default function CastProfile() {
             </ExternalLink>
           )}
         </div>
-        <div className={styles.itemImage}>
+        <div className={clsx(styles.itemImage, styles.main03)}>
           <Image
             src={
               cast.profileImages && cast.profileImages.length > 2
@@ -358,7 +358,7 @@ export default function CastProfile() {
             </div>
           </div>
         </div>
-        <div className={styles.itemImage}>
+        <div className={clsx(styles.itemImage, styles.main04)}>
           <Image
             src={
               cast.profileImages && cast.profileImages.length > 3
@@ -428,7 +428,9 @@ export default function CastProfile() {
                 href={`/${shop}/profile?id=${prevCastId}`}
                 className={styles.linkCastDetail}
               >
-                {prevCastName}さんのページへ
+                {prevCastName}
+                <br className="sp" />
+                さんのページへ
               </Link>
             ) : (
               <div></div>
@@ -441,7 +443,9 @@ export default function CastProfile() {
                 href={`/${shop}/profile?id=${nextCastId}`}
                 className={styles.linkCastDetail}
               >
-                {nextCastName}さんのページへ
+                {nextCastName}
+                <br className="sp" />
+                さんのページへ
               </Link>
             ) : (
               <div></div>

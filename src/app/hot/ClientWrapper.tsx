@@ -75,10 +75,7 @@ export default function ClientWrapper({
                 }`}
               >
                 {isLeftActive && (
-                  <ShopLeft
-                    photoDiaryUrl="https://blogparts.cityheaven.net/widget/?shopId=1684&mode=2&type=14&limitedKind=0&num=9&col=3&color=2&fontsize=12"
-                    variant={isMobile ? 'compact' : 'default'} // スマホ時はコンパクト版
-                  />
+                  <ShopLeft photoDiaryUrl="https://blogparts.cityheaven.net/widget/?shopId=1684&mode=2&type=14&limitedKind=0&num=9&col=3&color=2&fontsize=12" />
                 )}
                 {children}
               </main>
