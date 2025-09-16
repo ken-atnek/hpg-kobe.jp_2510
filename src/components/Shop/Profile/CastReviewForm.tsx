@@ -28,7 +28,7 @@ const CastReviewForm = () => {
             </p>
           </div>
         </li>
-        <li>
+        <li className={styles.boxRating}>
           <label htmlFor="rating">評価：</label>
           <div className={styles.ratingStars} id="rating">
             {Array.from({ length: 5 }, (_, i) => {
@@ -61,7 +61,7 @@ const CastReviewForm = () => {
         <li>
           <label htmlFor="comment">レビュー内容：</label>
           <div className={styles.contents}>
-            <textarea rows={4} name="comment" id="comment"></textarea>
+            <textarea name="comment" id="comment"></textarea>
             <p className={styles.note}>
               ※30文字以上の記入がある場合のみクーポン券等の抽選対象になります。
             </p>

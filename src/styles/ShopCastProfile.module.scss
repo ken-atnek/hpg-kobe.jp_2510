@@ -21,6 +21,9 @@
     box-shadow: 0.5rem -3rem 3rem rgb(1 1 1 / 10%);
     background-color: #f8f8f8;
     z-index: 2;
+    @include sp {
+        padding: 4vw 2vw;
+    }
     .itemLogo {
         font-size: inherit;
     }
@@ -36,10 +39,17 @@
         border-radius: 1rem;
         background-color: #fff;
         box-shadow: 0 2px 5px rgba(#242424, 0.2);
+        @include sp {
+            width: 10em;
+            height: 10vw;
+        }
     }
     &.kbHot {
         .itemLogo {
             width: 16em;
+            @include sp {
+                width: 28vw;
+            }
             svg {
                 width: 100%;
                 aspect-ratio: 500/176;
@@ -59,10 +69,20 @@
     max-width: 544px;
     @if $position == left {
         margin-right: 2em;
+        @include sp {
+            margin-right: unset;
+        }
     } @else if $position == right {
         margin-left: 2em;
+        @include sp {
+            margin-left: unset;
+        }
     } @else {
         @warn "Unknown position: #{$position}";
+    }
+    @include sp {
+        margin: unset;
+        max-width: unset;
     }
 }
 
@@ -83,6 +103,9 @@
     color: #070707;
     background-color: #f8f8f8;
     padding-bottom: 2em;
+    @include sp {
+        grid-auto-flow: row;
+    }
 }
 
 /* =================================
@@ -91,6 +114,10 @@
 .itemHeadImage {
     @include cast-wrap-photo;
     font-size: inherit;
+    @include sp {
+        order: -8;
+        grid-column: span 2;
+    }
     &.grade1,
     &.grade2,
     &.grade3,
@@ -98,6 +125,9 @@
     &.grade5 {
         img {
             clip-path: inset(1em);
+            @include sp {
+                clip-path: inset(3vw);
+            }
         }
     }
     &.grade6,
@@ -105,6 +135,9 @@
     &.grade8 {
         img {
             clip-path: inset(0.6em);
+            @include sp {
+                clip-path: inset(2vw);
+            }
         }
     }
     img {
@@ -118,6 +151,9 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-column: span 2;
+    @include sp {
+        order: -1;
+    }
     img {
         width: 100%;
         aspect-ratio: 600/800;
@@ -128,13 +164,22 @@
     position: relative;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
+    @include sp {
+        display: contents;
+    }
     .itemImageFirst {
         grid-column: span 2;
+        @include sp {
+            order: 5;
+        }
     }
     .itemImageBottom {
         grid-column: span 2;
         display: grid;
         grid-template-columns: subgrid;
+        @include sp {
+            order: 9;
+        }
     }
     img {
         width: 100%;
@@ -153,6 +198,23 @@
         aspect-ratio: 600/800;
         object-fit: cover;
     }
+    &.main02 {
+        @include sp {
+            grid-column: span 2;
+            order: -3;
+        }
+    }
+    &.main03 {
+        @include sp {
+            grid-column: span 2;
+            order: -2;
+        }
+    }
+    &.main04 {
+        @include sp {
+            grid-column: span 2;
+        }
+    }
 }
 
 /* =================================
@@ -163,17 +225,29 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
+    @include sp {
+        display: contents;
+    }
     .wrapHead {
         @include box-size(right);
         display: flex;
         flex-direction: column;
         gap: 1em 0;
         padding-bottom: 2em;
+        @include sp {
+            display: contents;
+        }
         .innerBadge {
             font-size: inherit;
             display: flex;
             justify-content: center;
             gap: 0 4px;
+            @include sp {
+                order: -9;
+                grid-column: span 2;
+                justify-content: flex-start;
+                padding: 2vw 2vw;
+            }
             .labelBadge {
                 position: relative;
                 font-size: FZ(14);
@@ -184,6 +258,10 @@
                 color: #fff;
                 font-weight: 500;
                 padding-left: 0.5em;
+                @include sp {
+                    width: 34vw;
+                    height: 8vw;
+                }
                 &::before {
                     content: "";
                     position: absolute;
@@ -225,12 +303,20 @@
             font-size: FZ(62);
             font-weight: 300;
             margin-top: 0.5em;
+            @include sp {
+                order: -10;
+                grid-column: span 2;
+                font-size: FZ(46);
+            }
             span {
                 font-size: 0.25em;
                 @include FuturaCyrillicBook;
                 color: #8a6f60;
                 text-transform: uppercase;
                 letter-spacing: 0.2em;
+                @include sp {
+                    font-size: 0.3em;
+                }
             }
             .itemRanking {
                 position: absolute;
@@ -240,6 +326,13 @@
                 width: 12rem;
                 aspect-ratio: 1;
                 left: calc(100% + 0.3em);
+                @include sp {
+                    width: 24vw;
+                    left: unset;
+                    translate: unset;
+                    top: calc(100% + 18vw);
+                    right: 2vw;
+                }
                 img {
                     aspect-ratio: 1;
                     width: 100%;
@@ -252,6 +345,12 @@
             flex-direction: column;
             align-items: center;
             gap: 0.5em 0;
+            @include sp {
+                order: -10;
+                grid-column: span 2;
+                gap: 1vw 0;
+                margin-top: 2vw;
+            }
             .size {
                 font-size: inherit;
                 display: flex;
@@ -261,6 +360,9 @@
             .age {
                 @include FuturaCyrillicBook;
                 font-size: FZ(24);
+                @include sp {
+                    font-size: FZ(26);
+                }
                 &::before {
                     font-size: 0.6em;
                     content: "Age.";
@@ -316,6 +418,12 @@
             grid-template-columns: repeat(4, 1fr);
             gap: 4px;
             margin-top: 3em;
+            @include sp {
+                grid-column: span 2;
+                order: -7;
+                margin-top: unset;
+                padding: 2vw;
+            }
             li {
                 font-size: FZ(14);
                 @include flex-center;
@@ -331,6 +439,11 @@
         font-size: inherit;
         gap: 0 0.5em;
         height: 5.3em;
+        @include sp {
+            order: -8;
+            grid-column: span 2;
+            height: 12vw;
+        }
         .title {
             position: relative;
             @include FuturaCyrillicDemi;
@@ -359,6 +472,14 @@
         display: grid;
         grid-template-columns: auto 1fr;
         gap: 4px 1.4em;
+        @include sp {
+            grid-column: span 2;
+            order: -7;
+            margin-top: unset;
+            margin-bottom: unset;
+            padding: 2vw 2vw;
+            gap: 0.5vw 4vw;
+        }
         li {
             font-size: inherit;
             grid-column: span 2;
@@ -370,6 +491,9 @@
                 align-items: center;
                 font-size: FZ(16);
                 gap: 0 0.3em;
+                @include sp {
+                    font-size: FZ(14);
+                }
                 i {
                     position: relative;
                     display: block;
@@ -392,9 +516,15 @@
                 display: grid;
                 grid-template-columns: repeat(7, 1fr);
                 gap: 0.4em;
+                @include sp {
+                    gap: 0.5vw;
+                }
                 .barBlock {
                     background-color: #ede6e2;
                     height: 3.6rem;
+                    @include sp {
+                        height: 8vw;
+                    }
                     &.active {
                         background-color: #ea567b; // ピンク系
                     }
@@ -445,6 +575,10 @@
     flex-direction: column;
     justify-content: space-between;
     overflow: hidden;
+    @include sp {
+        grid-column: span 2;
+        order: -2;
+    }
     ul {
         position: relative;
         width: 100%;
@@ -455,6 +589,11 @@
         flex: 1;
         padding-block: 2em;
         gap: 0 2em;
+        @include sp {
+            grid-template-columns: unset;
+            grid-auto-flow: row;
+            padding-inline: 2vw;
+        }
         &::before,
         &::after {
             content: "";
@@ -483,11 +622,23 @@
             grid-template-columns: subgrid;
             padding-left: 1em;
             align-items: center;
+            @include sp {
+                grid-column: unset;
+                grid-template-columns: unset;
+                display: flex;
+                flex-direction: column;
+                padding-left: unset;
+                padding-block: 2vw;
+                gap: 1vw 0;
+            }
             &:not(:last-of-type) {
                 border-bottom: 1px solid #d9d9d9;
             }
             span {
                 font-size: FZ(14);
+                @include sp {
+                    font-size: FZ(16);
+                }
             }
             .labelQuestion {
                 color: #8a6f60;
@@ -499,6 +650,9 @@
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         font-size: inherit;
+        @include sp {
+            order: -1;
+        }
         a {
             position: relative;
             font-size: inherit;
@@ -510,6 +664,17 @@
             padding-top: 6em;
             padding-bottom: 1.4em;
             color: #f8f8f8;
+            @include sp {
+                grid-column: span 2;
+                justify-content: flex-start;
+                display: flex;
+                flex-direction: column;
+                padding-top: unset;
+                padding-bottom: unset;
+                justify-content: center;
+                padding-left: 26vw;
+                height: 22vw;
+            }
             &::before {
                 content: "";
                 position: absolute;
@@ -530,6 +695,10 @@
                         width: 4em;
                         @include svg-icon-diamond("f8f8f8");
                         bottom: calc(100% + 1em);
+                        @include sp {
+                            bottom: unset;
+                            left: 9vw;
+                        }
                     }
                 }
             }
@@ -540,6 +709,10 @@
                         width: 3.6em;
                         @include svg-icon-camera("f8f8f8");
                         bottom: calc(100% + 1em);
+                        @include sp {
+                            bottom: unset;
+                            left: 10vw;
+                        }
                     }
                 }
             }
@@ -549,21 +722,35 @@
                 letter-spacing: 0.1em;
                 @include FuturaCyrillicBook;
                 position: relative;
+                @include sp {
+                    text-align: left;
+                    position: static;
+                }
                 &::before {
                     content: "";
                     position: absolute;
                     left: 50%;
                     translate: -50%;
+                    @include sp {
+                        top: 50%;
+                        translate: 0 -50%;
+                    }
                 }
             }
             h2 {
                 font-size: FZ(32);
                 font-weight: 500;
                 letter-spacing: 0.08em;
+                @include sp {
+                    font-size: FZ(28);
+                }
             }
             p {
                 font-size: FZ(14);
                 text-align: center;
+                @include sp {
+                    text-align: left;
+                }
             }
         }
         &:not(:has(.photoBlog)) {
@@ -584,6 +771,11 @@
     flex-direction: column;
     align-items: center;
     padding-block: 2em;
+    @include sp {
+        grid-column: span 2;
+        order: -1;
+        padding-inline: 2vw;
+    }
     .scheduleList {
         position: relative;
         display: grid;
@@ -593,6 +785,12 @@
         max-width: 1166px;
         gap: 0 0.3em;
         margin-top: 2em;
+        @include sp {
+            max-width: unset;
+            grid-template-columns: auto 1fr;
+            gap: 1vw 0;
+            margin-top: 4vw;
+        }
         li {
             position: relative;
             font-size: inherit;
@@ -600,16 +798,34 @@
             grid-row: span 2;
             display: grid;
             grid-template-rows: subgrid;
+            @include sp {
+                grid-row: unset;
+                grid-column: span 2;
+                grid-template-columns: subgrid;
+                align-items: center;
+                grid-template-rows: unset;
+                height: 14vw;
+            }
             .wrapDate {
                 font-size: inherit;
                 display: flex;
                 flex-direction: column;
                 align-items: center;
                 padding: 1.2em 1.4em 0;
+                @include sp {
+                    flex-direction: row;
+                    padding: unset;
+                    border-right: 1px solid #070707;
+                    padding-inline: 4vw;
+                    gap: 0 1vw;
+                }
                 .itemDate {
                     @include FuturaCyrillicBook;
                     font-size: FZ(40);
                     letter-spacing: 0.04em;
+                    @include sp {
+                        font-size: FZ(36);
+                    }
                 }
                 .itemWeek {
                     font-size: FZ(14);
@@ -618,6 +834,10 @@
                     width: 100%;
                     text-align: center;
                     padding-bottom: 0.5em;
+                    @include sp {
+                        padding-bottom: unset;
+                        border-bottom: unset;
+                    }
                 }
                 &.saturday {
                     color: #3039ee;
@@ -633,11 +853,20 @@
                 align-items: center;
                 padding: 0.5em 0.5em 0.8em;
                 gap: 1em 0;
+                @include sp {
+                    padding: unset;
+                    flex-direction: row;
+                    justify-content: center;
+                    gap: 0 8vw;
+                }
                 span {
                     position: relative;
                     @include FuturaCyrillicBook;
                     font-size: FZ(24);
                     letter-spacing: 0.1em;
+                    @include sp {
+                        font-size: FZ(20);
+                    }
                     &:nth-of-type(2) {
                         &::before {
                             content: "";
@@ -649,6 +878,16 @@
                             background-color: #070707;
                             bottom: calc(100% + 0.2em);
                             clip-path: polygon(0 0, 100% 0, 50% 100%);
+                            @include sp {
+                                left: unset;
+                                bottom: unset;
+                                top: 50%;
+                                width: 8px;
+                                height: 10px;
+                                translate: 0 -50%;
+                                right: calc(100% + 3vw);
+                                clip-path: polygon(0 0, 100% 50%, 0 100%);
+                            }
                         }
                     }
                 }
@@ -659,6 +898,9 @@
                 font-size: FZ(14);
                 letter-spacing: 0.04em;
                 padding-block: 1em;
+                @include sp {
+                    font-size: FZ(16);
+                }
             }
         }
     }
@@ -672,6 +914,13 @@
         border-radius: 1rem;
         box-shadow: 0 2px 5px rgba(#242424, 0.2);
         margin-top: 1em;
+        @include sp {
+            flex-direction: column;
+            padding: 4vw;
+            align-items: center;
+            width: 100%;
+            gap: 2vw 0;
+        }
         h3 {
             background-color: #f8f8f8;
             color: #8a6f60;
@@ -680,6 +929,13 @@
             font-size: FZ(16);
             padding: 1.4em 4em 1.4em 2em;
             clip-path: polygon(0 0, 100% 0, 80% 100%, 0 100%);
+            @include sp {
+                clip-path: unset;
+                border-radius: 100vmax;
+                padding: 0.5em 0;
+                width: 60vw;
+                text-align: center;
+            }
         }
         p {
             font-size: FZ(16);
@@ -688,6 +944,10 @@
             padding-right: 4em;
             font-weight: 500;
             letter-spacing: 0.04em;
+            @include sp {
+                padding: 0;
+                letter-spacing: 0.12em;
+            }
         }
     }
 }
@@ -698,6 +958,10 @@
 .boxCastMessage {
     font-size: inherit;
     display: flex;
+    @include sp {
+        grid-column: span 2;
+        padding: 4vw 2vw;
+    }
     .boxInner {
         @include box-size(right);
         margin-top: 2em;
@@ -712,11 +976,19 @@
             margin-top: 2em;
             width: 100%;
             overflow-y: scroll;
+            @include sp {
+                display: contents;
+            }
             .castMessage {
                 position: absolute;
                 right: 0;
                 top: 0;
                 width: 100%;
+                @include sp {
+                    position: relative;
+                    right: unset;
+                    top: unset;
+                }
                 b {
                     line-height: 1.6em;
                     font-weight: 500;
@@ -737,6 +1009,11 @@
     font-size: inherit;
     display: flex;
     justify-content: flex-end;
+    @include sp {
+        grid-column: span 2;
+        order: 1;
+        padding: 4vw 2vw;
+    }
     .boxInner {
         @include box-size(left);
         margin-top: 2em;
@@ -752,11 +1029,19 @@
             margin-top: 2em;
             width: 100%;
             overflow-y: scroll;
+            @include sp {
+                display: contents;
+            }
             .shopComment {
                 position: absolute;
                 right: 0;
                 top: 0;
                 width: 100%;
+                @include sp {
+                    position: relative;
+                    right: unset;
+                    top: unset;
+                }
                 b {
                     line-height: 1.6em;
                     font-weight: 500;
@@ -777,6 +1062,11 @@
     font-size: inherit;
     display: flex;
     background-color: #ede6e2;
+    @include sp {
+        grid-column: span 2;
+        order: 5;
+        padding: 6vw 4vw 4vw;
+    }
     .boxInner {
         @include box-size(right);
         margin-top: 2em;
@@ -799,6 +1089,11 @@
     grid-column: span 2;
     font-size: inherit;
     padding-block: 2em;
+    @include sp {
+        grid-column: span 2;
+        order: 10;
+        padding-block: unset;
+    }
     .itemMovie {
         font-size: inherit;
         width: 100%;
@@ -818,11 +1113,19 @@
     display: flex;
     justify-content: center;
     padding-block: 2em;
+    @include sp {
+        grid-column: span 2;
+        order: 10;
+        padding: 4vw 2vw;
+    }
     nav {
         display: grid;
         font-size: inherit;
         grid-template-columns: 1fr auto 1fr;
         gap: 0 0.5em;
+        @include sp {
+            width: 100%;
+        }
         a {
             font-size: FZ(14);
             border: 1px solid;
@@ -832,10 +1135,18 @@
         }
         .linkCastList {
             padding-inline: 3em;
+            @include sp {
+                padding-inline: 4vw;
+            }
         }
         .linkCastDetail {
             min-width: 25em;
             padding-inline: 3em;
+            @include sp {
+                min-width: unset;
+                padding-inline: unset;
+                text-align: center;
+            }
         }
     }
 }
