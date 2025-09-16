@@ -13,6 +13,9 @@
     padding-top: 2em;
     padding-inline: 2em;
     box-shadow: 0.5rem -3rem 3rem rgb(1 1 1 / 10%);
+    @include sp {
+        padding: 6vw 2vw;
+    }
 }
 
 /* =================================
@@ -33,6 +36,9 @@
         font-size: FZ(30);
         font-weight: 700;
         letter-spacing: 0.04em;
+        @include sp {
+            font-size: FZ(24);
+        }
     }
     p {
         font-size: FZ(18);
@@ -42,6 +48,9 @@
         border-radius: 0.2em;
         display: flex;
         align-items: center;
+        @include sp {
+            font-size: FZ(16);
+        }
         time {
             font-weight: 600;
             font-size: 1.4em;
@@ -66,6 +75,10 @@
     flex-direction: column;
     gap: 3em 0;
     margin-top: 3em;
+    @include sp {
+        gap: 4vw 0;
+        margin-top: 6vw;
+    }
     .wrapPricePlan {
         position: relative;
         font-size: inherit;
@@ -181,6 +194,9 @@
     .notice {
         font-size: FZ(14);
         text-align: center;
+        @include sp {
+            font-size: FZ(12);
+        }
     }
     &.kbHot {
         --shopColor: #{$shop-color-hot-number};
@@ -199,6 +215,9 @@
     display: flex;
     align-items: center;
     padding: 0.8em 8em;
+    @include sp {
+        margin-top: 4vw;
+    }
     h3 {
         font-size: FZ(18);
         margin-right: 0.5em;
@@ -227,6 +246,14 @@
     flex-direction: column;
     font-size: inherit;
     margin-top: 8em;
+    @include sp {
+        margin-top: 12vw;
+        h2 {
+            span {
+                font-size: 2.6em;
+            }
+        }
+    }
     ul {
         position: relative;
         font-size: inherit;
@@ -234,6 +261,12 @@
         grid-template-columns: repeat(2, 1fr);
         margin-top: 3em;
         gap: 0 2em;
+        @include sp {
+            margin-top: 4vw;
+            grid-template-columns: unset;
+            grid-auto-flow: row;
+            gap: 0;
+        }
         li {
             position: relative;
             font-size: inherit;
@@ -248,6 +281,9 @@
                 place-content: center;
                 padding-block: 3em;
                 font-size: inherit;
+                @include sp {
+                    padding-block: 6vw;
+                }
                 h3 {
                     background-color: #fff;
                     font-size: FZ(24);
@@ -355,6 +391,11 @@
                     letter-spacing: 0.04em;
                 }
             }
+            &:not(:first-of-type) {
+                @include sp {
+                    margin-top: 6vw;
+                }
+            }
         }
     }
     &.kbHot {
@@ -380,4 +421,7 @@
     justify-content: center;
     padding-block: 3em;
     font-size: inherit;
+    @include sp {
+        padding-block: 6vw;
+    }
 }

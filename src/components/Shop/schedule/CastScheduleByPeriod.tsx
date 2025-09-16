@@ -16,7 +16,7 @@ import { loadScheduleConfig } from '@/lib/loadScheduleConfig';
 import { getDateList } from '@/lib/getScheduleDataList';
 import { getShopFromPath, getStoreClass } from '@/lib/shopUtils';
 import type { CastDetail } from '@/types/CastDetails';
-
+import ShopSwitchTabs from '@/components/common/ShopSwitchTabs';
 type ScheduleData = {
   date: string;
   casts: CastDetail[];
@@ -122,23 +122,8 @@ const CastScheduleByPeriod = () => {
             <p>の出勤表</p>
           </div>
         )}
-        <nav>
-          <Link
-            href="/hot/schedule/"
-            className={clsx(styles.shopHot, shop === 'hot' && styles.isActive)}
-          >
-            神戸ホットポイント
-          </Link>
-          <Link
-            href="/villa/schedule/"
-            className={clsx(
-              styles.shopVilla,
-              shop === 'villa' && styles.isActive
-            )}
-          >
-            ホットポイント VILLA
-          </Link>
-        </nav>
+        {/* 店舗切替タブ */}
+        <ShopSwitchTabs basePath="weekly-schedule" variant="weekly-schedule" />
       </section>
       <section
         className={clsx(styles.containerContents, styles[activeStoreClass])}

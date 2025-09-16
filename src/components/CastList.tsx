@@ -13,7 +13,7 @@ import { useEffect, useMemo, useState } from 'react';
 import type { CastDetail } from '@/types/CastDetails';
 import ItemCastList from './Shop/ItemCastList';
 import { getShopFromPath, getStoreClass } from '@/lib/shopUtils';
-
+import ShopSwitchTabs from '@/components/common/ShopSwitchTabs';
 const filters = [
   { id: 'today', label: '本日出勤' },
   { id: 'age', label: '年齢' },
@@ -123,6 +123,7 @@ const CastList = () => {
 
   return (
     <>
+      <ShopSwitchTabs basePath="cast" variant="cast" />
       <section
         className={clsx(styles.containerSearch, styles[activeStoreClass])}
       >

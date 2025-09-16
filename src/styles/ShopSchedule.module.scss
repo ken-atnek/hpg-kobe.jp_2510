@@ -16,6 +16,9 @@
     &.kbHot {
         --shop-color: #{$shop-color-hot-number};
     }
+    @include sp {
+        padding: 0 0 6vw;
+    }
 }
 
 /* =================================
@@ -29,6 +32,10 @@
     gap: 0 1em;
     z-index: +2;
     background-color: $base-white;
+    @include sp {
+        padding-top: unset;
+        justify-content: flex-end;
+    }
     .linkByDay,
     .linkByPeriod {
         display: flex;
@@ -44,6 +51,9 @@
     .linkByPeriod {
         align-self: center;
         margin-bottom: 0.5em;
+        @include sp {
+            display: none;
+        }
     }
     .boxPeriod {
         font-size: inherit;
@@ -74,52 +84,6 @@
             align-self: flex-end;
             padding-bottom: 0.1em;
             margin-left: 0.2em;
-        }
-    }
-    nav {
-        font-size: inherit;
-        display: flex;
-        gap: 0 0.8em;
-        a {
-            position: relative;
-            font-size: FZ(14);
-            color: #8e8e8e;
-            width: 12em;
-            display: flex;
-            justify-content: center;
-            padding: 0.8em 0 0.5em;
-            transition: 0.3s ease-out;
-            &::before {
-                content: "";
-                position: absolute;
-                inset: 0;
-                z-index: -1;
-                border-radius: 0.5em 0.5em 0 0;
-                border: 1px solid #c2c2c2;
-                border-bottom: unset;
-                transform: perspective(1em) rotateX(2deg);
-                background-color: #e6e6e6;
-                transform-origin: right;
-                transition: 0.3s ease-out;
-            }
-            &.isActive {
-                color: $base-white;
-                &::before {
-                    background-color: rgb(var(--shop-color), 0.9);
-                }
-            }
-            @include hover {
-                color: $base-white;
-                &::before {
-                    background-color: rgb(var(--shop-color), 0.9);
-                }
-            }
-            &.shopHot {
-                --shop-color: #{$shop-color-hot-number};
-            }
-            &.shopVilla {
-                --shop-color: #{$shop-color-villa-number};
-            }
         }
     }
 }
@@ -378,6 +342,11 @@
                 padding-block: 0.7em;
                 width: 100%;
                 display: flex;
+                @include sp {
+                    flex-direction: column;
+                    align-items: center;
+                    font-size: FZ(16);
+                }
                 span {
                     font-size: 0.8em;
                     font-weight: 500;
@@ -408,6 +377,11 @@
         padding: 2em;
         font-size: inherit;
         gap: 0 1.4em;
+        @include sp {
+            grid-template-columns: unset;
+            padding: 4vw 4vw;
+            gap: 0;
+        }
         li {
             position: relative;
             font-size: inherit;
@@ -417,6 +391,11 @@
             color: $font-black;
             grid-row: span 4;
             grid-template-rows: subgrid;
+            @include sp {
+                grid-row: unset;
+                grid-template-rows: auto 1fr auto;
+                grid-template-columns: auto 1fr;
+            }
             .realTImeDetail {
                 position: relative;
                 font-size: FZ(14);
@@ -425,6 +404,11 @@
                 padding-block: 0.4em;
                 letter-spacing: 0.04em;
                 background-color: rgb(var(--shop-color), 1);
+                @include sp {
+                    order: 1;
+                    font-size: FZ(16);
+                    padding-block: 2vw;
+                }
                 &.statusNa {
                     background-color: #eaeaea;
                     color: var(--shopColor);
@@ -446,12 +430,21 @@
                 padding-block: 0.3em;
                 background-color: rgb(var(--shop-color), 0.1);
                 border-top: 2px solid rgb(var(--shop-color), 1);
+                @include sp {
+                    border-bottom: 2px solid rgb(var(--shop-color), 1);
+                    padding-block: unset;
+                    height: 2.4em;
+                    align-items: center;
+                }
                 span {
                     display: flex;
                     font-size: FZ(16);
                     @include FuturaCyrillicBook;
                     align-items: center;
                     letter-spacing: 0.12em;
+                    @include sp {
+                        font-size: FZ(18);
+                    }
                     &:nth-of-type(2) {
                         &::before {
                             display: inline-block;
@@ -467,6 +460,9 @@
                 .scheduleStatus {
                     font-size: FZ(14);
                     letter-spacing: 0.04em;
+                    @include sp {
+                        font-size: FZ(16);
+                    }
                 }
             }
             a {
@@ -474,6 +470,12 @@
                 font-size: inherit;
                 display: flex;
                 flex-direction: column;
+                @include sp {
+                    order: -1;
+                    width: 42vw;
+                    grid-row: span 3;
+                    position: static;
+                }
                 .wrapBadge {
                     position: absolute;
                     right: 0;
@@ -482,6 +484,9 @@
                     grid-auto-flow: row;
                     font-size: inherit;
                     gap: 5px 0;
+                    @include sp {
+                        top: 10vw;
+                    }
                     .labelBadge {
                         position: relative;
                         display: grid;
@@ -529,6 +534,9 @@
                     &.grade5 {
                         img {
                             clip-path: inset(0.5em);
+                            @include sp {
+                                clip-path: inset(2vw);
+                            }
                         }
                     }
                     &.grade6,
@@ -536,6 +544,9 @@
                     &.grade8 {
                         img {
                             clip-path: inset(0.3em);
+                            @include sp {
+                                clip-path: inset(1vw);
+                            }
                         }
                     }
                     img {
@@ -550,18 +561,33 @@
                 justify-content: space-between;
                 padding: 0.5em;
                 gap: 0.2em 0;
+                @include sp {
+                    padding: 2vw 2vw 1vw;
+                    justify-content: flex-end;
+                }
                 .wrapName {
                     font-size: inherit;
                     display: flex;
                     justify-content: space-between;
                     align-items: center;
+                    @include sp {
+                        flex-direction: column;
+                        align-items: flex-start;
+                    }
                     .castName {
                         font-size: FZ(18);
                         letter-spacing: 0.12em;
+                        @include sp {
+                            font-size: FZ(20);
+                            font-weight: 500;
+                        }
                     }
                     .age {
                         @include FuturaCyrillicBook;
                         font-size: FZ(20);
+                        @include sp {
+                            font-size: FZ(22);
+                        }
                         &::before {
                             font-size: 0.8em;
                             content: "Age.";
@@ -576,6 +602,9 @@
                     span {
                         @include FuturaCyrillicBook;
                         font-size: FZ(16);
+                        @include sp {
+                            font-size: FZ(18);
+                        }
                         &.tall {
                             &::before {
                                 content: "T.";
@@ -622,6 +651,14 @@
             }
             &:nth-of-type(n + 6) {
                 margin-top: 3em;
+                @include sp {
+                    margin-top: unset;
+                }
+            }
+            &:not(:first-of-type) {
+                @include sp {
+                    margin-top: 6vw;
+                }
             }
         }
     }

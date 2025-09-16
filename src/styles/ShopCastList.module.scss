@@ -21,6 +21,10 @@
     z-index: 2;
     box-shadow: 0.5rem -3rem 3rem rgb(1 1 1 / 10%);
     background-color: $base-white;
+    @include sp {
+        gap: 0;
+        padding: 2vw 2vw;
+    }
     h3 {
         position: relative;
         @include FuturaCyrillicBook;
@@ -38,12 +42,20 @@
             translate: 0 -50%;
             background-color: #000;
         }
+        @include sp {
+            display: none;
+        }
     }
     ul {
         font-size: inherit;
         display: grid;
         gap: 0 0.3em;
         grid-template-columns: repeat(6, 7em);
+        @include sp {
+            grid-template-columns: repeat(3, 1fr);
+            width: 100%;
+            gap: 1vw;
+        }
         li {
             background-image: linear-gradient(to bottom, #ddd, #bababa);
             font-size: FZ(16);
@@ -80,6 +92,9 @@
     flex-direction: column;
     box-shadow: 0.5rem -3rem 3rem rgb(1 1 1 / 10%);
     padding-bottom: 3em;
+    @include sp {
+        padding: 4vw 2vw;
+    }
     &.kbHot {
         --shop-color: #{$shop-color-hot-number};
     }
@@ -144,6 +159,12 @@
         gap: 0 1.4em;
         margin-top: 3em;
         padding-inline: 2em;
+        @include sp {
+            grid-template-columns: repeat(2, 1fr);
+            padding-inline: 0;
+            margin-top: unset;
+            gap: 0 2vw;
+        }
     }
 }
 
@@ -171,6 +192,9 @@
             background-color: rgb(var(--shop-color), 1);
             color: $base-white;
             font-weight: 500;
+            @include sp {
+                font-size: 2.8vw;
+            }
         }
         .itemTime {
             padding-block: 0.3em;
@@ -182,12 +206,19 @@
             flex: 1;
             border-top: 1px solid rgb(var(--shop-color), 1);
             border-right: 1px solid rgb(var(--shop-color), 1);
+            @include sp {
+                padding-block: 0.8vw;
+            }
             span {
                 display: flex;
                 font-size: FZ(16);
                 @include FuturaCyrillicBook;
                 align-items: center;
                 letter-spacing: 0.12em;
+                @include sp {
+                    font-size: FZ(15);
+                    letter-spacing: 0.08em;
+                }
                 &:nth-of-type(2) {
                     &::before {
                         display: inline-block;
@@ -226,6 +257,10 @@
             grid-auto-flow: row;
             font-size: inherit;
             gap: 5px 0;
+            @include sp {
+                top: 2vw;
+                gap: 1vw 0;
+            }
             .labelBadge {
                 position: relative;
                 display: grid;
@@ -237,6 +272,12 @@
                 color: $base-white;
                 padding: 0.5em 0.5em 0.5em 1em;
                 line-height: 1.2em;
+                @include sp {
+                    font-size: 1rem;
+                    width: 4.8em;
+                    height: 3.4em;
+                    padding-left: 0.8em;
+                }
                 &::before {
                     content: "";
                     position: absolute;
@@ -321,6 +362,9 @@
             span {
                 @include FuturaCyrillicBook;
                 font-size: FZ(16);
+                @include sp {
+                    font-size: FZ(18);
+                }
                 &.tall {
                     &::before {
                         content: "T.";
@@ -374,9 +418,21 @@
             font-size: FZ(14);
             text-align: center;
             padding-block: 0.4em;
+            @include sp {
+                font-size: FZ(12);
+                padding-block: 0.2em;
+            }
         }
     }
     &:nth-of-type(n + 5) {
         margin-top: 3em;
+        @include sp {
+            margin-top: unset;
+        }
+    }
+    &:nth-of-type(n + 3) {
+        @include sp {
+            margin-top: 8vw;
+        }
     }
 }
