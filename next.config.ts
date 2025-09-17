@@ -4,18 +4,15 @@ const isProd = process.env.NODE_ENV === 'production';
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
-  experimental: {
-    optimizeCss: false,
-  },
   sassOptions: {
-    includePaths: [path.join(__dirname, 'src/styles')], // ここでルートを設定
+    includePaths: [path.join(__dirname, 'src/styles')],
   },
   output: 'export',
   trailingSlash: true,
   images: { unoptimized: true },
 
   ...(isProd && {
-    assetPrefix: '', // ここを `""` に変更
+    assetPrefix: '',
   }),
 };
 

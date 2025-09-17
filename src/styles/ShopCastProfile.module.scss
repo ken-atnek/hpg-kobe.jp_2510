@@ -246,7 +246,7 @@
                 order: -9;
                 grid-column: span 2;
                 justify-content: flex-start;
-                padding: 2vw 2vw;
+                padding: 2vw;
             }
             .labelBadge {
                 position: relative;
@@ -477,7 +477,7 @@
             order: -7;
             margin-top: unset;
             margin-bottom: unset;
-            padding: 2vw 2vw;
+            padding: 2vw;
             gap: 0.5vw 4vw;
         }
         li {
@@ -580,9 +580,9 @@
         order: -2;
     }
     ul {
+        @include box-size(left);
         position: relative;
         width: 100%;
-        @include box-size(left);
         align-self: flex-end;
         display: grid;
         grid-template-columns: auto 1fr;
@@ -666,7 +666,6 @@
             color: #f8f8f8;
             @include sp {
                 grid-column: span 2;
-                justify-content: flex-start;
                 display: flex;
                 flex-direction: column;
                 padding-top: unset;

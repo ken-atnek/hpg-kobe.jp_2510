@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build && rm -f out/404.html && rm -rf out/404",
+    "dev": "cross-env NODE_OPTIONS='--no-warnings --no-deprecation' next dev",
+    "build": "cross-env NODE_OPTIONS='--no-warnings --no-deprecation' next build && rm -f out/404.html && rm -rf out/404",
     "start": "next start",
     "lint": "next lint",
     "lint:style": "stylelint \"src/**/*.scss\" --fix"
@@ -21,6 +21,7 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "cross-env": "^10.0.0",
     "eslint": "^9",
     "eslint-config-next": "15.4.6",
     "prettier": "^3.6.2",
