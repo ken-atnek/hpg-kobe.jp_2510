@@ -1,0 +1,50 @@
+{
+  "date": "2025-09-18",
+  "casts": [
+    {
+      "castId": "795",
+      "castName": "若宮のえる",
+      "shopName": "神戸ホットポイント",
+      "castImage": "/images/cast/hot/hot-noeru01.jpg",
+      "gradeId": 6,
+      "age": "21",
+      "tall": "158",
+      "bust": "100",
+      "cup": "f",
+      "west": "57",
+      "hip": "85",
+      "scheduleStatus": "TEL確認"
+    },
+    {
+      "castId": "581",
+      "castName": "平野れの",
+      "shopName": "神戸ホットポイント",
+      "castImage": "/images/cast/style/style-reno01.jpg",
+      "gradeId": 6,
+      "age": "21",
+      "tall": "158",
+      "bust": "100",
+      "cup": "f",
+      "west": "57",
+      "hip": "85",
+      "startTime": "18:00",
+      "endTime": "23:59"
+    },
+    {
+      "castId": "424",
+      "castName": "竹田やな",
+      "shopId": "hot",
+      "shopName": "ホットポイントヴィラ",
+      "castImage": "/images/cast/villa/villa-yana01.jpg",
+      "gradeId": 9,
+      "age": "41",
+      "tall": "160",
+      "bust": "84",
+      "cup": "e",
+      "west": "57",
+      "hip": "84",
+      "startTime": "8:00",
+      "endTime": "13:59"
+    }
+  ]
+}

@@ -11,26 +11,20 @@ import { useRouter } from 'next/navigation';
 import { usePathname } from 'next/navigation';
 import { setAgeVerifiedAsync, type AgeScope } from '@/lib/age';
 import EntranceCastList from '@/components/Entrance/CastList';
-import Image from 'next/image';
 import clsx from 'clsx';
 import EntranceAreaShopList from '@/components/Entrance/AreaShopList';
 import EntranceGroupShopList from '@/components/Entrance/GroupShopList';
-import type { StaticImport } from 'next/dist/shared/lib/get-img-props';
 import ReciprocalLink from '@/components/Entrance/ReciprocalLink';
-import { getShopFromPath, getStoreClass } from '@/lib/shopUtils';
+import { getShopFromPath, getStoreClass, getLogoHref } from '@/lib/shopUtils';
 export default function Entrance({
   // scope,
   backPath,
   headingText,
-  logoSrc,
-  classNameAnnounce,
   excludeStoreId,
 }: {
   scope: AgeScope;
   backPath: string;
   headingText?: string;
-  logoSrc: string | StaticImport;
-  classNameAnnounce?: keyof typeof styles;
   excludeStoreId?: string;
 }) {
   const router = useRouter();
@@ -41,7 +35,7 @@ export default function Entrance({
     <main className={clsx(styles.containerEntrance, styles[activeStoreClass])}>
       <h1>{headingText}</h1>
       <section className={styles.blockCastList}>
-        <EntranceCastList logoSrc={logoSrc} />
+        <EntranceCastList />
       </section>
       <section className={styles.blockButton}>
         <button
@@ -59,16 +53,15 @@ export default function Entrance({
         >
           yes
         </button>
-        <div
-          className={`${styles.boxAnnounce} ${classNameAnnounce ? styles[classNameAnnounce] : ''}`}
-        >
-          <Image
-            src={logoSrc}
+        <div className={clsx(styles.boxAnnounce, styles[activeStoreClass])}>
+          <svg
             width={100}
             height={60}
-            alt="HOT POINT GROUP"
-            priority
-          />
+            aria-label="HOT POINT GROUP"
+            className={styles.logoSvg} // 必要に応じてスタイル追加
+          >
+            <use href={getLogoHref(shop)} />
+          </svg>
           <p>あなたは18歳以上ですか？</p>
         </div>
         <a

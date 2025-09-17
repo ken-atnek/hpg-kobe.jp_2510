@@ -5,7 +5,7 @@ export const storeIdMap: Record<string, string> = {
 
 export const logoHrefMap: Record<string, string> = {
   hot: '#svg_logoKobeHot',
-  villa: '#svg_logoVilla',
+  villa: '#svg_logoKobeVilla',
 };
 
 export function getShopFromPath(pathname: string): string {

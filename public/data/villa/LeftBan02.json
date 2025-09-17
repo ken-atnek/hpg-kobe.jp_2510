@@ -1,0 +1,30 @@
+[
+  {
+    "banId": "001",
+    "status": 1,
+    "banTitle": "タイトルバー",
+    "banImage": "/images/hot/1653402015.gif"
+  },
+  {
+    "banId": "002",
+    "banTitle": "入店特典",
+    "banImage": "/images/hot/1660707155.jpg",
+    "status": 3,
+    "linkTarget": true,
+    "url": "https://kyusyu-okinawa.qzin.jp/celebhot/"
+  },
+  {
+    "banId": "003",
+    "banTitle": "求人バナー",
+    "banImage": "/images/hot/1714723227.jpg",
+    "status": 3,
+    "linkTarget": true,
+    "url": "https://kyusyu-okinawa.qzin.jp/celebhot/"
+  },
+  {
+    "banId": "004",
+    "status": 1,
+    "banTitle": "女の子大募集１",
+    "banImage": "/images/hot/1653298658.png"
+  }
+]

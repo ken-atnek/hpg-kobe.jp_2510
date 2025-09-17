@@ -106,4 +106,17 @@
             }
         }
     }
+    &.kbVilla {
+        background-color: hsl(250, 100%, 94%);
+        background-blend-mode: soft-light;
+        .wrapTitle {
+            @include contents-title(#000000);
+        }
+        .titleObject {
+            &::before {
+                filter: grayscale(29%) hue-rotate(318deg) saturate(103%)
+                    drop-shadow(0.5rem 0.5rem 0.5rem rgb(1 1 1 / 30%));
+            }
+        }
+    }
 }

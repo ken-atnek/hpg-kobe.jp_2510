@@ -4,7 +4,7 @@
  * URL: src/components/Shop/system/BlockAccess.tsx
  * Referenced in: src/components/Shop/Hot/SystemMain.tsx
  * Created: 2025-08-27
- * Last updated: 2025-09-11
+ * Last updated: 2025-09-17
  * ======================================= */
 import styles from '@/styles/components/BlockAccess.module.scss';
 import { usePathname } from 'next/navigation';
@@ -14,11 +14,10 @@ import ExternalLink from '@/components/common/ExternalLink';
 import { getShopFromPath, getStoreClass } from '@/lib/shopUtils';
 
 type ShopDetails = {
-  googleMapUrl?: string;
   variant?: 'default' | 'systemPage' | 'topPage'; // バリアント追加
 };
 
-const BlockAccess = ({ googleMapUrl, variant = 'default' }: ShopDetails) => {
+const BlockAccess = ({ variant = 'default' }: ShopDetails) => {
   const pathname = usePathname();
   const shop = getShopFromPath(pathname);
   const activeStoreClass = getStoreClass(shop);
@@ -28,16 +27,23 @@ const BlockAccess = ({ googleMapUrl, variant = 'default' }: ShopDetails) => {
     const mapping: { [key: string]: string } = {
       hot: 'kbHot',
       villa: 'kbVilla',
-      style: 'kbStyle',
     };
     return mapping[shop] || shop;
   };
 
+  // shopからGoogleマップURLを取得
+  const getGoogleMapUrl = (shop: string) => {
+    const mapUrls: { [key: string]: string } = {
+      hot: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d205.03222338293656!2d135.19077178090814!3d34.6921737674493!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f60.!3m3!1m2!1s0x60008f7b0fbf9cd9%3A0xfe2ecc533108053d!2z56We5oi444Ob44OD44OI44Od44Kk44Oz44OI5pys5bqX!5e0!3m2!1sja!2sjp!4v1750246830699!5m2!1sja!2sjp', // hotのマップURL
+      villa:
+        'https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d820.1184078352044!2d135.191745!3d34.693232!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60008ee49f0cd7ef%3A0xe210857088893020!2z44CSNjUwLTAwMTIg5YW15bqr55yM56We5oi45biC5Lit5aSu5Yy65YyX6ZW354ut6YCa77yR5LiB55uu77yR77yQ4oiS77yR77yTIOODmeOCrOOCueODk-ODqw!5e0!3m2!1sja!2sjp!4v1758098714799!5m2!1sja!2sjp', // villaのマップURL
+    };
+    return mapUrls[shop];
+  };
+
   const storeId = getStoreId(shop);
   const shopData = Shops.find((s) => s.storeId === storeId);
-
-  // googleMapUrlの優先順位: props > shopData.mapUrl
-  const finalGoogleMapUrl = googleMapUrl || shopData?.mapUrl;
+  const googleMapUrl = getGoogleMapUrl(shop);
 
   return (
     <div
@@ -69,9 +75,9 @@ const BlockAccess = ({ googleMapUrl, variant = 'default' }: ShopDetails) => {
         </div>
       )}
       <div className={styles.wrapMap}>
-        {finalGoogleMapUrl ? (
+        {googleMapUrl ? (
           <iframe
-            src={finalGoogleMapUrl}
+            src={googleMapUrl}
             width="100%"
             height="450"
             style={{ border: 0 }}
