@@ -1,8 +1,8 @@
 /* =======================================
- *店舗 システム MAIN
- * URL: src/components/Shop/Hot/SystemMain.tsx
- * Created: 2025-08-27
- * Last updated: 2025-08-27
+ *ホットポイントヴィラ システム MAIN
+ * URL: src/components/Shop/Villa/SystemMain.tsx
+ * Created: 2025-09-17
+ * Last updated: 2025-09-17
  * ======================================= */
 'use client';
 
@@ -11,7 +11,7 @@ import { useEffect, useState } from 'react';
 import BlockTopAnnounce from '@/components/Shop/system/BlockTopAnnounce';
 import BlockPriceList from '@/components/Shop/system/BlockPriceList';
 import BlockReservationGuide from '@/components/Shop/system/BlockReservationGuide';
-import ImageWebReserve from '@/assets/images/hot/web-reserve.webp';
+import ImageWebReserve from '@/assets/images/villa/web-reserve.webp';
 import Image from 'next/image';
 import ExternalLink from '@/components/common/ExternalLink';
 import BlockAccess from '@/components/Shop/system/BlockAccess';
@@ -25,7 +25,7 @@ const SystemMain = () => {
         // キャッシュバスティング用のタイムスタンプを追加
         const timestamp =
           process.env.NODE_ENV === 'development' ? Date.now() : '';
-        const dataPath = `/data/hot/RequestFee.json${timestamp ? `?t=${timestamp}` : ''}`;
+        const dataPath = `/data/villa/RequestFee.json${timestamp ? `?t=${timestamp}` : ''}`;
 
         const response = await fetch(dataPath);
         if (!response.ok) {
@@ -50,7 +50,7 @@ const SystemMain = () => {
         ご利用料金
       </h2>
       <BlockTopAnnounce />
-      <BlockPriceList jsonPath={`/data/hot/Price.json`} />
+      <BlockPriceList jsonPath={`/data/villa/Price.json`} />
       <article className={styles.blockRequestFee}>
         <h3>指名料</h3>
         {requestFee !== null ? (
@@ -60,11 +60,11 @@ const SystemMain = () => {
         )}
       </article>
       <BlockReservationGuide
-        logoUrl="#svg_logoKobeHot"
-        reserveUrl="https://www.cityheaven.net/hyogo/A2802/A280201/koubehp/S6ShopReservation/?pcmode=sp"
+        logoUrl="#svg_logoKobeVilla"
+        reserveUrl="https://www.cityheaven.net/hyogo/A2802/A280201/koube_hp_part3/S6ShopReservation/?pcmode=spp"
       />
       <article className={styles.blockReserveBan}>
-        <ExternalLink href="https://www.cityheaven.net/hyogo/A2802/A280201/koubehp/S6ShopReservation/?pcmode=sp">
+        <ExternalLink href="https://www.cityheaven.net/hyogo/A2802/A280201/koube_hp_part3/S6ShopReservation/?pcmode=sp">
           <Image src={ImageWebReserve} alt="WEB予約" />
         </ExternalLink>
       </article>
