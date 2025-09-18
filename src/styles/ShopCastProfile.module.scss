@@ -52,9 +52,23 @@
             }
             svg {
                 width: 100%;
-                aspect-ratio: 500/176;
+                @include svg-hot;
                 stroke: unset;
                 fill: $shop-hot;
+            }
+        }
+    }
+    &.kbVilla {
+        .itemLogo {
+            width: 16em;
+            @include sp {
+                width: 28vw;
+            }
+            svg {
+                width: 100%;
+                @include svg-villa;
+                stroke: unset;
+                fill: $shop-villa;
             }
         }
     }
@@ -229,11 +243,11 @@
         display: contents;
     }
     .wrapHead {
-        @include box-size(right);
         display: flex;
         flex-direction: column;
         gap: 1em 0;
         padding-bottom: 2em;
+        @include box-size(right);
         @include sp {
             display: contents;
         }
@@ -466,12 +480,12 @@
         }
     }
     .ratingList {
-        @include box-size(right);
-        margin-top: 2em;
-        margin-bottom: 2em;
         display: grid;
         grid-template-columns: auto 1fr;
+        margin-top: 2em;
+        margin-bottom: 2em;
         gap: 4px 1.4em;
+        @include box-size(right);
         @include sp {
             grid-column: span 2;
             order: -7;
@@ -580,15 +594,15 @@
         order: -2;
     }
     ul {
-        @include box-size(left);
         position: relative;
         width: 100%;
-        align-self: flex-end;
         display: grid;
+        align-self: flex-end;
         grid-template-columns: auto 1fr;
         flex: 1;
         padding-block: 2em;
         gap: 0 2em;
+        @include box-size(left);
         @include sp {
             grid-template-columns: unset;
             grid-auto-flow: row;
@@ -962,13 +976,13 @@
         padding: 4vw 2vw;
     }
     .boxInner {
-        @include box-size(right);
         margin-top: 2em;
         width: 100%;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: space-between;
+        @include box-size(right);
         .wrapCastMessage {
             position: relative;
             flex: 1;
@@ -1014,14 +1028,14 @@
         padding: 4vw 2vw;
     }
     .boxInner {
-        @include box-size(left);
-        margin-top: 2em;
-        justify-self: end;
         width: 100%;
         display: flex;
+        justify-self: end;
         flex-direction: column;
-        align-items: center;
         justify-content: space-between;
+        align-items: center;
+        margin-top: 2em;
+        @include box-size(left);
         .wrapShopComment {
             position: relative;
             flex: 1;
@@ -1067,13 +1081,13 @@
         padding: 6vw 4vw 4vw;
     }
     .boxInner {
-        @include box-size(right);
         margin-top: 2em;
         width: 100%;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: space-between;
+        @include box-size(right);
     }
 
     // ShopCastReview.module.scssに記載

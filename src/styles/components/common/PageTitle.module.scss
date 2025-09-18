@@ -3,6 +3,7 @@
  * ------------------------------ */
 @use "variable" as *;
 @use "svg" as *;
+@use "../../mixin" as *;
 /* stylelint-disable no-descending-specificity */
 /* stylelint-disable keyframes-name-pattern */
 /* stylelint-disable custom-property-pattern */
@@ -72,9 +73,23 @@
             width: 16em;
             svg {
                 width: 100%;
-                aspect-ratio: 500/176;
+                @include svg-hot;
                 stroke: unset;
                 fill: $shop-hot;
+            }
+        }
+    }
+    &.kbVilla {
+        &::after {
+            background-color: rgba($shop-villa, 0.3);
+        }
+        .itemLogo {
+            width: 16em;
+            svg {
+                width: 100%;
+                @include svg-hot;
+                stroke: unset;
+                fill: $shop-villa;
             }
         }
     }
