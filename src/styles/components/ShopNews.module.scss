@@ -107,7 +107,7 @@
         }
     }
     &.kbHot {
-        background-color: rgba(61, 163, 252, 0.2);
+        background-color: rgb(61 163 252 / 20%);
     }
 }
 
@@ -159,12 +159,12 @@
             }
         }
         @include sp {
-            background-color: rgba(61, 163, 252, 0.2);
+            background-color: rgb(61 163 252 / 20%);
         }
     }
     &.kbVilla {
         @include sp {
-            background-color: rgba(241, 135, 255, 0.2);
+            background-color: rgb(241 135 255 / 20%);
         }
         .wrapTitle {
             @include contents-title(#000000);

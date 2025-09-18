@@ -107,7 +107,7 @@
         }
     }
     &.kbVilla {
-        background-color: hsl(250, 100%, 94%);
+        background-color: hsl(250deg 100% 94%);
         background-blend-mode: soft-light;
         .wrapTitle {
             @include contents-title(#000000);

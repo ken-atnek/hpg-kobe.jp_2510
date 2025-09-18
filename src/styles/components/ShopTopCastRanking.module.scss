@@ -303,7 +303,6 @@
                     }
                     &.isActive {
                         background-color: rgba($shop-hot, 0.5);
-
                         span {
                             &::before {
                                 @include svg-icon-crown("231815");
@@ -350,7 +349,6 @@
                     }
                     &.isActive {
                         background-color: rgba($shop-villa, 0.3);
-
                         span {
                             &::before {
                                 @include svg-icon-crown("231815");

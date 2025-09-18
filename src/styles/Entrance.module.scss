@@ -170,6 +170,10 @@ $entrance-max-width: 96rem;
                 fill: $base-white;
                 width: 100%;
             }
+            img {
+                font-size: inherit;
+                width: 9em;
+            }
             p {
                 font-size: FZ(14);
                 color: $base-white;
