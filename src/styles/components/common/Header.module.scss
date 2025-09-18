@@ -342,7 +342,19 @@
                 .shopName {
                     svg {
                         width: 40vw;
-                        aspect-ratio: 500/176;
+                        @include svg-hot;
+                    }
+                }
+            }
+        }
+    }
+    &.kbVilla {
+        .boxNav {
+            .mobileHamburgerHead {
+                .shopName {
+                    svg {
+                        width: 40vw;
+                        @include svg-villa;
                     }
                 }
             }

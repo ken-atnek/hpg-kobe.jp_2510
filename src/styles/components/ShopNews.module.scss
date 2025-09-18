@@ -106,6 +106,9 @@
             @include layout-li;
         }
     }
+    &.kbHot {
+        background-color: rgb(61 163 252 / 20%);
+    }
 }
 
 /* =================================
@@ -146,8 +149,6 @@
         }
     }
     &.kbHot {
-        background-color: rgb(248 248 248 / 90%);
-        background-blend-mode: soft-light;
         .wrapTitle {
             @include contents-title(#000000);
         }
@@ -157,43 +158,21 @@
                     drop-shadow(0.5rem 0.5rem 0.5rem rgb(1 1 1 / 30%));
             }
         }
-        .rankingContents {
-            nav {
-                button {
-                    span {
-                        &::before {
-                            @include svg-icon-crown("3da3fc");
-                        }
-                    }
-                    &.isActive {
-                        span {
-                            &::before {
-                                @include svg-icon-crown("231815");
-                            }
-                        }
-                    }
-                }
-            }
-            .wrapRankList {
-                .rankIcon {
-                    &.rank1 {
-                        background-image: url("../../assets/images/hot/icon/rank-01.webp");
-                    }
-                    &.rank2 {
-                        background-image: url("../../assets/images/hot/icon/rank-02.webp");
-                    }
-                    &.rank3 {
-                        background-image: url("../../assets/images/hot/icon/rank-03.webp");
-                    }
-                    &:not(.rank1, .rank2, .rank3) {
-                        background-image: url("../../assets/images/hot/icon/rank-04.webp");
-                    }
-                }
-            }
+        @include sp {
+            background-color: rgb(61 163 252 / 20%);
         }
-        &.kbHot {
-            @include sp {
-                background-color: rgba($shop-hot, 0.2);
+    }
+    &.kbVilla {
+        @include sp {
+            background-color: rgb(241 135 255 / 20%);
+        }
+        .wrapTitle {
+            @include contents-title(#000000);
+        }
+        .titleObject {
+            &::before {
+                filter: grayscale(29%) hue-rotate(318deg) saturate(103%)
+                    drop-shadow(0.5rem 0.5rem 0.5rem rgb(1 1 1 / 30%));
             }
         }
     }

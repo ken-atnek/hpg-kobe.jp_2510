@@ -11,37 +11,108 @@ import { useRouter } from 'next/navigation';
 import { usePathname } from 'next/navigation';
 import { setAgeVerifiedAsync, type AgeScope } from '@/lib/age';
 import EntranceCastList from '@/components/Entrance/CastList';
-import Image from 'next/image';
 import clsx from 'clsx';
 import EntranceAreaShopList from '@/components/Entrance/AreaShopList';
 import EntranceGroupShopList from '@/components/Entrance/GroupShopList';
-import type { StaticImport } from 'next/dist/shared/lib/get-img-props';
 import ReciprocalLink from '@/components/Entrance/ReciprocalLink';
 import { getShopFromPath, getStoreClass } from '@/lib/shopUtils';
+import Image, { type StaticImageData } from 'next/image';
+import GroupLogo from '@/assets/images/logo/group_hot.webp';
+
+// ロゴ設定（このコンポーネント内でのみ使用）
+type LogoScope = 'group' | 'hot' | 'villa';
+
+interface LogoConfig {
+  type: 'svg' | 'image';
+  src?: string | StaticImageData;
+  href?: string;
+  alt: string;
+  width: number;
+  height: number;
+}
+
+const getLogoConfig = (scope: LogoScope): LogoConfig => {
+  const logoConfigs: { [key in LogoScope]: LogoConfig } = {
+    group: {
+      type: 'image',
+      src: GroupLogo,
+      alt: 'HOT POINT GROUP',
+      width: 100,
+      height: 60,
+    },
+    hot: {
+      type: 'svg',
+      href: '#svg_logoKobeHot',
+      alt: '神戸ホットポイント',
+      width: 120,
+      height: 40,
+    },
+    villa: {
+      type: 'svg',
+      href: '#svg_logoKobeVilla',
+      alt: 'ホットポイント VILLA',
+      width: 100,
+      height: 50,
+    },
+  };
+  return logoConfigs[scope];
+};
+
+// ロゴコンポーネント（このコンポーネント内でのみ使用）
+const Logo = ({
+  scope,
+  className,
+}: {
+  scope: LogoScope;
+  className?: string;
+}) => {
+  const config = getLogoConfig(scope);
+
+  if (config.type === 'svg') {
+    return (
+      <svg
+        width={config.width}
+        height={config.height}
+        aria-label={config.alt}
+        className={className}
+      >
+        <use href={config.href} />
+      </svg>
+    );
+  }
+
+  return (
+    <Image
+      src={config.src!}
+      alt={config.alt}
+      width={config.width}
+      height={config.height}
+      className={className}
+    />
+  );
+};
+
 export default function Entrance({
-  // scope,
+  scope,
   backPath,
   headingText,
-  logoSrc,
-  classNameAnnounce,
   excludeStoreId,
 }: {
   scope: AgeScope;
   backPath: string;
   headingText?: string;
-  logoSrc: string | StaticImport;
-  classNameAnnounce?: keyof typeof styles;
   excludeStoreId?: string;
 }) {
   const router = useRouter();
   const pathname = usePathname();
   const shop = getShopFromPath(pathname);
   const activeStoreClass = getStoreClass(shop);
+
   return (
     <main className={clsx(styles.containerEntrance, styles[activeStoreClass])}>
       <h1>{headingText}</h1>
       <section className={styles.blockCastList}>
-        <EntranceCastList logoSrc={logoSrc} />
+        <EntranceCastList />
       </section>
       <section className={styles.blockButton}>
         <button
@@ -59,16 +130,8 @@ export default function Entrance({
         >
           yes
         </button>
-        <div
-          className={`${styles.boxAnnounce} ${classNameAnnounce ? styles[classNameAnnounce] : ''}`}
-        >
-          <Image
-            src={logoSrc}
-            width={100}
-            height={60}
-            alt="HOT POINT GROUP"
-            priority
-          />
+        <div className={clsx(styles.boxAnnounce, styles[activeStoreClass])}>
+          <Logo scope={scope as LogoScope} className={styles.logoSvg} />
           <p>あなたは18歳以上ですか？</p>
         </div>
         <a

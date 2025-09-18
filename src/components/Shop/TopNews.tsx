@@ -140,7 +140,7 @@ const ShopNews = ({
                 }}
               />
               <Link
-                href={`/hot/news/#news-${item.id}`}
+                href={`/${shop}/news/#news-${item.id}`}
                 className={styles.linkMore}
               >
                 ＜もっと見る＞

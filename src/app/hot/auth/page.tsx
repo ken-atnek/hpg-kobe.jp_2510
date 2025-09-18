@@ -6,7 +6,6 @@
  * ======================================= */
 // src/app/hot/(auth)/auth/page.tsx
 import Entrance from '@/components/Entrance/Entrance';
-import HotLogo from '@/assets/images/logo/kobe-hot.webp';
 
 export default function HotAuthPage() {
   return (
@@ -14,8 +13,6 @@ export default function HotAuthPage() {
       scope="hot"
       backPath="/hot"
       headingText="神戸・三宮の風俗｜ファッションヘルス:神戸ホットポイント"
-      logoSrc={HotLogo.src}
-      classNameAnnounce="hot"
       excludeStoreId="kbHot"
     />
   );

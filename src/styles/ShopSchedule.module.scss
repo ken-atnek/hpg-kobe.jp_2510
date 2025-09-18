@@ -16,6 +16,9 @@
     &.kbHot {
         --shop-color: #{$shop-color-hot-number};
     }
+    &.kbVilla {
+        --shop-color: #{$shop-color-villa-number};
+    }
     @include sp {
         padding: 0 0 6vw;
     }

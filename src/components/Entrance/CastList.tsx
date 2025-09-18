@@ -9,8 +9,7 @@
 import styles from '@/styles/Entrance.module.scss';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
-import type { StaticImport } from 'next/dist/shared/lib/get-img-props';
-
+import GroupLogo from '@/assets/images/logo/group_hot.webp';
 type ListItem = {
   castName: string;
   areaName: string;
@@ -19,11 +18,7 @@ type ListItem = {
   castImage: string;
 };
 
-type EntranceCastListProps = {
-  logoSrc: string | StaticImport;
-};
-
-const EntranceCastList = ({ logoSrc }: EntranceCastListProps) => {
+const EntranceCastList = () => {
   const [CastData, setCastData] = useState<ListItem[]>([]);
 
   useEffect(() => {
@@ -76,7 +71,7 @@ const EntranceCastList = ({ logoSrc }: EntranceCastListProps) => {
       ))}
       <li className={styles.mobileLogo}>
         <Image
-          src={logoSrc}
+          src={GroupLogo}
           width={100}
           height={60}
           alt="HOT POINT GROUP"

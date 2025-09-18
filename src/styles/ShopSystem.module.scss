@@ -3,6 +3,7 @@
  * ------------------------------ */
 @use "variable" as *;
 @use "svg" as *;
+@use "mixin" as *;
 /* stylelint-disable no-descending-specificity */
 /* stylelint-disable keyframes-name-pattern */
 /* stylelint-disable custom-property-pattern */
@@ -61,6 +62,12 @@
         background-color: $shop-hot;
         p {
             color: $shop-hot;
+        }
+    }
+    &.kbVilla {
+        background-color: $shop-villa;
+        p {
+            color: $shop-villa;
         }
     }
 }
@@ -200,6 +207,9 @@
     }
     &.kbHot {
         --shopColor: #{$shop-color-hot-number};
+    }
+    &.kbVilla {
+        --shopColor: #{$shop-color-villa-number};
     }
 }
 
@@ -405,9 +415,22 @@
             margin-top: 2em;
             svg {
                 width: 100%;
-                aspect-ratio: 500/176;
+                @include svg-hot;
                 stroke: unset;
                 fill: $shop-hot;
+            }
+        }
+    }
+    &.kbVilla {
+        .itemLogo {
+            width: 60%;
+            margin-bottom: 1em;
+            margin-top: 2em;
+            svg {
+                width: 100%;
+                @include svg-villa;
+                stroke: unset;
+                fill: $shop-villa;
             }
         }
     }

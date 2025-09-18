@@ -166,10 +166,13 @@ $entrance-max-width: 96rem;
             flex-direction: column;
             align-items: center;
             gap: 1em 0;
+            svg {
+                fill: $base-white;
+                width: 100%;
+            }
             img {
                 font-size: inherit;
-                width: 100%;
-                max-width: 9.5em;
+                width: 9em;
             }
             p {
                 font-size: FZ(14);
@@ -180,9 +183,14 @@ $entrance-max-width: 96rem;
                     font-size: 1.1rem;
                 }
             }
-            &.hot {
-                img {
-                    filter: brightness(100);
+            &.kbHot {
+                svg {
+                    @include svg-hot;
+                }
+            }
+            &.kbVilla {
+                svg {
+                    @include svg-villa;
                 }
             }
         }
@@ -541,12 +549,8 @@ $entrance-max-width: 96rem;
             }
         }
     }
-    &.kbHot {
-        .mobileLogo {
-            img {
-                filter: brightness(100);
-            }
-        }
+    &.kbHot,
+    &.kbVilla {
         .blockAreaShop {
             .listAreaShop {
                 @include sp {

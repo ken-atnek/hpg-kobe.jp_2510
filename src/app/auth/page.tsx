@@ -5,14 +5,12 @@
  * Last updated: 2025-08-18
  * ======================================= */
 import Entrance from '@/components/Entrance/Entrance';
-import GroupLogo from '@/assets/images/logo/group_hot.webp';
 export default function Page() {
   return (
     <Entrance
       scope="group"
       backPath="/"
       headingText="神戸・三宮の風俗｜ファッションヘルス:神戸ホットポイントグループ"
-      logoSrc={GroupLogo.src}
     />
   );
 }

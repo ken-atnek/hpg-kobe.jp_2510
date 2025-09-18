@@ -1,0 +1,30 @@
+[
+  {
+    "category": 2,
+    "castId": "581",
+    "castName": "平野れの",
+    "castImage": "/images/cast/style/style-reno01.jpg",
+    "castUrl": "/style/"
+  },
+  {
+    "category": 2,
+    "castId": "261",
+    "castName": "雪平あきほ",
+    "castImage": "/images/cast/style/style-akiho01.jpg",
+    "castUrl": "/style/"
+  },
+  {
+    "category": 2,
+    "castId": "426",
+    "castName": "彩咲みわこ",
+    "castImage": "/images/cast/villa/villa-miwako01.jpg",
+    "castUrl": "/villa/"
+  },
+  {
+    "category": 2,
+    "castId": "423",
+    "castName": "竹田やな",
+    "castImage": "/images/cast/villa/villa-yana01.jpg",
+    "castUrl": "/villa/"
+  }
+]

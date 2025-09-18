@@ -1,0 +1,41 @@
+[
+  {
+    "id": 1,
+    "active": true,
+    "date": "2025-08-01 12:16:52",
+    "on_time": "1756189481",
+    "title": "神戸ホットポイント 『浴衣＆水着フェア2025』",
+    "body": "<div style=\"text-align: center;\"><span style=\"color:#0000FF;\"><span style=\"font-size:xx-large;\"><b>神戸ホットポイント</b></span></span><br><span style=\"font-size:xx-large;\"><strong><span style=\"color:#0000FF;\">『浴衣＆水着フェア2025』</span></strong><br><span style=\"color:#FF0000;\"><b style=\"font-size: x-large; text-align: center;\">開催日：7月18日(金)～8月17日(日)迄</b></span><br><span style=\"font-size:x-large;\"><span style=\"color:#000000;\"><b style=\"font-size: x-large; text-align: center;\">まもなく楽しみな夏が到来です(^^)/</b></span></span></span><br><span style=\"font-size:x-large;\"><b>当店自慢の可愛い・キレイな女の子達が<br>えっちな浴衣＆水着でお出迎え💗<br>イベント期間中は無料で浴衣＆水着姿が見れちゃいます(^O^)／<br><span style=\"font-size:xx-large;\"><span style=\"font-size:x-large;\"><span style=\"color:#000000;\">この機会に是非ご来店下さいませ!!</span></span><br><span style=\"color:#FF0000;\"><span style=\"font-size:x-large;\">※全ての女性が対象ではございません。</span></span></span></b></span></div>",
+
+    "thumbnail": "/images/hot/32.jpg"
+  },
+  {
+    "id": 2,
+    "active": true,
+    "date": "2025-05-08 18:05:18",
+    "on_time": "1756189481",
+    "title": "『口コミキャンペーン』第2弾！！",
+    "body": "<div style=\"padding: 20px; background: rgb(255, 255, 255); box-shadow: rgb(249, 130, 137) 0px 0px 50px inset, rgb(206, 206, 206) 5px 5px 0px; font-size: 100%; text-align: center;\"><span style=\"font-size:1.1rem;\"><strong><span style=\"color:#000000;\">『口コミキャンペーン』第2弾！！</span><br><br>当店でお遊び頂いた女の子との口コミ体験談を<br>どんどんお寄せくださいね！！</strong></span><br><br><span style=\"font-size:1.2rem;\"><strong><span style=\"color:#FF0000;\">投稿頂いた口コミの画面をご提示で<br>その場で<br>3０００円分のポイントをプレゼント！！</span></strong></span><br><br><span style=\"font-size:1.1rem;\"><strong>ポイントカードをお持ちでないお客様は<br>スタッフまでお尋ね下さい。<br><br><br><span style=\"color:#FFFF00;\"><span style=\"background-color:#FF0000;\">ひとりの女の子への複数の口コミ投稿は対象外となりますのでご了承ください。</span></span></strong></span></div>",
+    "thumbnail": "/images/hot/24.jpg"
+  },
+  {
+    "id": 3,
+    "active": false,
+    "date": "2025-05-08 18:05:03",
+    "off_time": "1756535081",
+    "title": "伝説のe-50カードが復活！！",
+    "body": "伝説のe-50カードが復活！！『伝説のe-50カード』お持ちのお客様は是非ご利用下さい。１年間毎日使えます！！40分・50分コース→2000円OFF、60分コース以上→3000円OFF ※他の割引とは併用不可。",
+    "thumbnail": "/images/hot/26.jpg"
+  },
+  {
+    "id": 4,
+    "active": true,
+    "date": "2025-05-08 18:03:08",
+    "on_time": "1756275881",
+    "off_time": "1756535081",
+    "title": "☆4月イベント☆『毎週・月曜日・木曜日はポイント10倍』",
+    "body": "<div style=\"text-align: center;\"><span style=\"font-size:1.1rem;\"><strong><span style=\"color:#FF0000;\">神戸ホットポイント<br>ついにホットな日が開幕！！</span><br><br><span style=\"color:#FF0000;\">☆4月イベント☆<br>『毎週・月曜日・木曜日はポイント10倍』</span><br><span style=\"color:#0000FF;\">期間：4月1日(火)～4月30日(水)<br>指名+60分コース→通常208Pが<br>10倍だと2080P！！</span><br>是非皆様のご来店心よりお待ちしております。<br><br><font color=\"#ff0000\">※ホットポイントグループの会員カードを<br>お持ちのお客様・ヘブンネットでネット予約されたお客様限定。<br>会員カードは当日発行も可能。<br>お気軽にスタッフにお尋ね下さい。</font></strong></span></div>",
+
+    "thumbnail": "/images/hot/31.jpg"
+  }
+]
