@@ -406,22 +406,6 @@
                             padding-block: 0.3em;
                         }
                     }
-                    .modalOverlay {
-                        position: fixed;
-                        inset: 0;
-                        background: rgb(0 0 0 / 70%);
-                        z-index: 1000;
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-                        font-size: inherit;
-                        .modalContent {
-                            background: #fff;
-                            padding: 1em;
-                            border-radius: 0.5em;
-                            cursor: pointer;
-                        }
-                    }
                 }
             }
             .boxMainContents {
