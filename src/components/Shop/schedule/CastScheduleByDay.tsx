@@ -62,9 +62,7 @@ const CastScheduleByDay = () => {
         );
 
         setSchedules(fetched);
-      } catch (error) {
-        console.error('スケジュールデータの取得エラー:', error);
-      }
+      } catch {}
     };
 
     loadSchedules();
@@ -84,10 +82,13 @@ const CastScheduleByDay = () => {
         id: c.castId,
         name: c.castName,
       }));
-      sessionStorage.setItem('castOrder', JSON.stringify(castOrder));
+      // 修正: 用途ごとにキーを分ける
+      sessionStorage.setItem(
+        'castOrder_schedulebyday',
+        JSON.stringify(castOrder)
+      );
     }
   }, [dailyScheduleList]);
-
   return (
     <>
       <section className={clsx(styles.containerHead, styles[activeStoreClass])}>
@@ -147,7 +148,7 @@ const CastScheduleByDay = () => {
                 return (
                   <li key={cast.castId} className={styles.castItem}>
                     {/* リアルタイム状態 */}
-                    {cast.realTimeStatus && (
+                    {cast.realTimeStatus ? (
                       <div
                         className={`${styles.realTImeDetail} ${
                           [3, 4, 5].includes(cast.realTimeStatus)
@@ -157,6 +158,8 @@ const CastScheduleByDay = () => {
                       >
                         {cast.realTimeDetail}
                       </div>
+                    ) : (
+                      <div className={styles.realTImeNoDetail} />
                     )}
 
                     {/* 出勤時間またはステータス */}
@@ -175,7 +178,9 @@ const CastScheduleByDay = () => {
                     </div>
 
                     {/* キャストリンク */}
-                    <Link href={`/${shop}/profile/?id=${cast.castId}`}>
+                    <Link
+                      href={`/${shop}/profile/?id=${cast.castId}&type=schedulebyday`}
+                    >
                       {/* バッジ表示 */}
                       <div className={styles.wrapBadge}>
                         {cast.badges?.includes('trial') ? (
@@ -217,7 +222,15 @@ const CastScheduleByDay = () => {
                         <span className={styles.gradeLabel}>
                           {gradeMap[cast.gradeId]?.label}
                         </span>
-                        <Image src={cast.castImage} alt={cast.castName} fill />
+                        <Image
+                          src={
+                            cast.castImage && cast.castImage !== ''
+                              ? cast.castImage
+                              : `/images/cast/${shop}/no-image.webp`
+                          }
+                          alt={cast.castName}
+                          fill
+                        />
                       </div>
                     </Link>
 

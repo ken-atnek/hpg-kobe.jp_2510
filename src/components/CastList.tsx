@@ -45,8 +45,9 @@ const CastList = () => {
 
         const data: CastDetail[] = await response.json();
         setCastGroups([{ rank: '', casts: data }]);
-      } catch (error) {
-        console.error('キャストリストデータの取得エラー:', error);
+      } catch {
+        // エラー時の処理（ログ出力など不要なら空でOK）
+        setCastGroups([]);
       }
     };
 
@@ -117,10 +118,9 @@ const CastList = () => {
         id: c.castId,
         name: c.castName,
       }));
-      sessionStorage.setItem('castOrder', JSON.stringify(castOrder));
+      sessionStorage.setItem('castOrder_castlist', JSON.stringify(castOrder));
     }
   }, [registeredCastList]);
-
   return (
     <>
       <ShopSwitchTabs basePath="cast" variant="cast" />

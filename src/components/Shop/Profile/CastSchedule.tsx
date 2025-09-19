@@ -43,8 +43,7 @@ export default function CastSchedule({ castId, shop }: CastScheduleProps) {
         const data: ScheduleItem[] = await res.json();
         setSchedule(data);
         setError(false);
-      } catch (error) {
-        console.error('スケジュールデータの取得エラー:', error);
+      } catch {
         setError(true);
       }
     };

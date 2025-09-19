@@ -69,11 +69,9 @@ const CastSlide = ({
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
-
         const data: CastSlideItem[] = await response.json();
         setCastData(data);
-      } catch (error) {
-        console.error('キャストデータの取得エラー:', error);
+      } catch {
         setCastData([]);
       } finally {
         setIsLoading(false);
@@ -82,6 +80,16 @@ const CastSlide = ({
 
     fetchCastData();
   }, [jsonPath]);
+
+  useEffect(() => {
+    if (castData.length > 0) {
+      const castOrder = castData.map((c) => ({
+        id: c.castId,
+        name: c.castName,
+      }));
+      sessionStorage.setItem('castOrder_newface', JSON.stringify(castOrder));
+    }
+  }, [castData]);
 
   // データが空またはロード中の場合は非表示
   if (isLoading || castData.length === 0) {
@@ -125,10 +133,14 @@ const CastSlide = ({
               )}
               key={`${cast.castId}-${index}`}
             >
-              <Link href={`/${shop}/profile/?id=${cast.castId}`}>
+              <Link href={`/${shop}/profile/?id=${cast.castId}&type=newface`}>
                 <div className={styles.image}>
                   <Image
-                    src={cast.castImage}
+                    src={
+                      cast.castImage && cast.castImage !== ''
+                        ? cast.castImage
+                        : `/images/cast/${shop}/no-image.webp`
+                    }
                     alt={cast.castName}
                     fill
                     style={{ objectFit: 'cover' }}

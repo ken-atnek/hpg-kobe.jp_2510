@@ -80,6 +80,7 @@ export default function RootLayout({
   return (
     <html
       lang="ja"
+      data-scroll-behavior="smooth"
       className={`${notoSans.className} ${roboto.className} ${bebasNeue.className} ${reenineBeanie.className}`}
     >
       <head>

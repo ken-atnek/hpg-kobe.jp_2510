@@ -51,8 +51,8 @@ const BlockNewFace = () => {
           villa: data.filter((item) => item.shopId === 'villa'),
         };
         setGrouped(grouped);
-      } catch (error) {
-        console.error('NewFaceデータの取得エラー:', error);
+      } catch {
+        // エラー時の処理（何もしない）
       }
     };
 
@@ -111,7 +111,11 @@ const BlockNewFace = () => {
                   <div className={styles.wrapImage}>
                     <Image
                       key={cast.castId}
-                      src={cast.castImage}
+                      src={
+                        cast.castImage && cast.castImage !== ''
+                          ? cast.castImage
+                          : `/images/cast/${shop}/no-image.webp`
+                      }
                       alt={cast.castName}
                       width={120}
                       height={160}

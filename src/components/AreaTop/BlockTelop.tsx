@@ -27,8 +27,8 @@ const BlockTelop = () => {
 
         const data = await response.json();
         setTelop(data.telopComment);
-      } catch (error) {
-        console.error('Telopデータの取得エラー:', error);
+      } catch {
+        // エラー時の処理（何もしない）
       }
     };
 

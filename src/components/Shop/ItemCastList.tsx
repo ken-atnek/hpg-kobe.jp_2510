@@ -40,7 +40,7 @@ const ItemCastList = ({ cast }: Props) => {
           <p className={styles.scheduleStatus}>{cast.scheduleStatus}</p>
         )}
       </div>
-      <Link href={`/${shop}/profile/?id=${cast.castId}`}>
+      <Link href={`/${shop}/profile/?id=${cast.castId}&type=castlist`}>
         <div className={styles.wrapBadge}>
           {/* 新人さん or 体験入店（どちらか一方） */}
           {cast.badges?.includes('trial') ? (
@@ -74,7 +74,15 @@ const ItemCastList = ({ cast }: Props) => {
           <span className={styles.gradeLabel}>
             {gradeMap[cast.gradeId]?.label}
           </span>
-          <Image src={cast.castImage} alt={cast.castName} fill />
+          <Image
+            src={
+              cast.castImage && cast.castImage !== ''
+                ? cast.castImage
+                : `/images/cast/${shop}/no-image.webp`
+            }
+            alt={cast.castName}
+            fill
+          />
         </div>
       </Link>
       <div className={styles.castProfile}>
@@ -93,7 +101,10 @@ const ItemCastList = ({ cast }: Props) => {
         </div>
       </div>
       <ul className={styles.listType}>
-        {cast.type.map((typeId, i) => {
+        {(cast.type.length > 4
+          ? [...cast.type].sort(() => Math.random() - 0.5).slice(0, 4)
+          : cast.type
+        ).map((typeId, i) => {
           const label = typeLabels[typeId];
           return label ? <li key={i}>{label}</li> : null;
         })}

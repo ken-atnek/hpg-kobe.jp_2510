@@ -37,7 +37,7 @@ export default function AreaTop() {
       <main className={styles.areaTop}>
         <h1>神戸・三宮の風俗｜ファッションヘルス:神戸ホットポイントグループ</h1>
         <section className={styles.containerHeadTitle}>
-          <Image src={GroupLogo} alt="hot point group" />
+          <Image src={GroupLogo} alt="hot point group" priority />
           <p>神戸ホットポイントグループ</p>
         </section>
         <section className={styles.containerPickUp}>

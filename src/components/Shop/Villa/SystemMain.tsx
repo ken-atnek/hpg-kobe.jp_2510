@@ -34,8 +34,7 @@ const SystemMain = () => {
 
         const data = await response.json();
         setRequestFee(data.fee);
-      } catch (error) {
-        console.error('RequestFeeデータの取得エラー:', error);
+      } catch {
         setRequestFee(null);
       }
     };

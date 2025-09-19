@@ -52,8 +52,8 @@ const BlockPriceList = ({ jsonPath }: ContentsProps) => {
 
         const data: PricePlan[] = await response.json();
         setPricePlans(data);
-      } catch (error) {
-        console.error('料金プランデータの取得エラー:', jsonPath, error);
+      } catch {
+        // エラー時の処理（何もしない）
       }
     };
 

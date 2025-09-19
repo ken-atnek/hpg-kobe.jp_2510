@@ -49,6 +49,20 @@ const TopPickUp = () => {
         )
       : null;
 
+  // スライド数が足りない場合は複製してループ対応
+  const minSlides = 4;
+  const visibleItems =
+    items.length === 0
+      ? []
+      : items.length < minSlides
+        ? Array(Math.ceil(minSlides / items.length))
+            .fill(items)
+            .flat()
+            .slice(0, minSlides)
+        : items;
+
+  const enableLoop = visibleItems.length > 1;
+
   return (
     <>
       <article className={styles.boxTopPickUp}>
@@ -57,13 +71,16 @@ const TopPickUp = () => {
             slidesPerView={'auto'}
             spaceBetween={0}
             autoplay={{ delay: 3000, disableOnInteraction: false }}
-            loop={true}
+            loop={enableLoop}
             modules={[Autoplay, Pagination]}
             speed={800}
             pagination={{ clickable: true }}
           >
-            {items.map((item, index) => (
-              <SwiperSlide key={item.banId} style={{ width: '100%' }}>
+            {visibleItems.map((item, index) => (
+              <SwiperSlide
+                key={`${item.banId}-${index}`}
+                style={{ width: '100%' }}
+              >
                 <div className={styles.aspectWrapper}>
                   {renderBannerItem(item, setModalImage, index === 0)}
                 </div>

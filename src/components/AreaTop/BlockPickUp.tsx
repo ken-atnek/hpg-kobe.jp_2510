@@ -58,8 +58,8 @@ const BlockPickUp = () => {
         };
         setGrouped(grouped);
         setAllCasts(data); // 全キャストデータもセット
-      } catch (error) {
-        console.error('PickUpデータの取得エラー:', error);
+      } catch {
+        // エラー時の処理（何もしない）
       }
     };
 
@@ -111,6 +111,7 @@ const BlockPickUp = () => {
           alt={cast.castName}
           width={120}
           height={160}
+          priority
         />
       </div>
       <div className={styles.wrapProfile}>
@@ -128,6 +129,25 @@ const BlockPickUp = () => {
       </div>
     </Link>
   );
+
+  // 画像が無いキャストを除外
+  const filteredCasts = allCasts.filter(
+    (cast) => cast.castImage && cast.castImage !== ''
+  );
+
+  let visibleCasts: CastDetail[] = [];
+  let enableLoop = false;
+
+  if (filteredCasts.length >= 3) {
+    visibleCasts = filteredCasts;
+    enableLoop = true;
+  } else if (filteredCasts.length === 2) {
+    visibleCasts = filteredCasts;
+    enableLoop = false; // 2枚のときはloopを無効
+  } else if (filteredCasts.length === 1) {
+    visibleCasts = filteredCasts;
+    enableLoop = false;
+  }
 
   return (
     <>
@@ -157,6 +177,7 @@ const BlockPickUp = () => {
                         alt={cast.castName}
                         width={120}
                         height={160}
+                        priority
                       />
                     </div>
                     <div className={styles.wrapProfile}>
@@ -182,13 +203,14 @@ const BlockPickUp = () => {
 
       {/* スマホ版（Swiperスライド表示） */}
       <div className={styles.mobileBlockPickUp}>
-        {allCasts.length > 0 && (
+        {visibleCasts.length >= 2 ? (
           <Swiper
             modules={[Autoplay, Pagination]}
             spaceBetween={20}
             slidesPerView={1}
             centeredSlides={true}
-            loop={true} // 無限ループを有効化
+            loop={enableLoop}
+            watchOverflow={true}
             speed={1000}
             style={
               {
@@ -206,13 +228,17 @@ const BlockPickUp = () => {
             }}
             className={styles.castSwiper}
           >
-            {allCasts.map((cast) => (
-              <SwiperSlide key={cast.castId}>
+            {visibleCasts.map((cast, idx) => (
+              <SwiperSlide key={`${cast.castId}-${idx}`}>
                 {renderCastCard(cast)}
               </SwiperSlide>
             ))}
           </Swiper>
-        )}
+        ) : visibleCasts.length === 1 ? (
+          <div className={styles.singleCastWrapper}>
+            {renderCastCard(visibleCasts[0])}
+          </div>
+        ) : null}
       </div>
     </>
   );

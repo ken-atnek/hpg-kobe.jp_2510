@@ -57,9 +57,7 @@ const ContainerRealtime = () => {
           setCastData(data[0].castData || []);
           setUpdateTime(data[0].upDateTime || '');
         }
-      } catch (error) {
-        console.error('リアルタイムデータの取得エラー:', error);
-      }
+      } catch {}
     };
 
     fetchRealtimeData();
@@ -88,7 +86,8 @@ const ContainerRealtime = () => {
         id: c.castId,
         name: c.castName,
       }));
-      sessionStorage.setItem('castOrder', JSON.stringify(castOrder));
+      // 修正: 用途ごとにキーを分ける
+      sessionStorage.setItem('castOrder_realtime', JSON.stringify(castOrder));
     }
   }, [realtimeList]);
 
@@ -131,7 +130,7 @@ const ContainerRealtime = () => {
                   className={`${styles.itemCast} ${styles[cast.shopId]}`}
                 >
                   <Link
-                    href={`/${shop}/profile/?id=${cast.castId}`}
+                    href={`/${shop}/profile/?id=${cast.castId}&type=realtime`}
                     className={styles.boxImage}
                   >
                     <div
@@ -143,7 +142,15 @@ const ContainerRealtime = () => {
                       <span className={styles.gradeLabel}>
                         {gradeMap[cast.gradeId]?.label}
                       </span>
-                      <Image src={cast.castImage} alt={cast.castName} fill />
+                      <Image
+                        src={
+                          cast.castImage && cast.castImage !== ''
+                            ? cast.castImage
+                            : `/images/cast/${shop}/no-image.webp`
+                        }
+                        alt={cast.castName}
+                        fill
+                      />
                     </div>
                   </Link>
                   <div className={styles.boxDetails}>

@@ -117,8 +117,7 @@ const Header = ({ title, navMenu, selectedNavIds }: HeaderProps) => {
 
         const data = await response.json();
         setTelop(data.telopComment || ''); // undefined チェックを追加
-      } catch (error) {
-        console.error('テロップデータの取得エラー:', error);
+      } catch {
         setTelop(''); // エラー時は空文字
       }
     };

@@ -35,9 +35,17 @@ const TopSlideBan = () => {
   // スライド数が足りないときは複製してループ対応
   const minSlideCount = 8;
   const visibleItems =
-    items.length < minSlideCount
-      ? [...items, ...items, ...items] // 3倍に増やす（元の構造を壊さず）
-      : items;
+    items.length === 0
+      ? []
+      : items.length < minSlideCount
+        ? Array(Math.ceil(minSlideCount / items.length))
+            .fill(items)
+            .flat()
+            .slice(0, minSlideCount)
+        : items;
+
+  // ループ有効判定（2枚以上のときのみ有効）
+  const enableLoop = visibleItems.length > 1;
 
   const modal =
     modalImage && mounted
@@ -63,7 +71,7 @@ const TopSlideBan = () => {
           <Swiper
             slidesPerView={3}
             centeredSlides={true}
-            loop={true}
+            loop={enableLoop}
             autoplay={{ delay: 6000, disableOnInteraction: false }}
             modules={[Autoplay]}
             speed={1400}
@@ -91,8 +99,8 @@ const TopSlideBan = () => {
               },
             }}
           >
-            {visibleItems.map((item) => (
-              <SwiperSlide key={`${item.banId}-${Math.random()}`}>
+            {visibleItems.map((item, index) => (
+              <SwiperSlide key={`${item.banId}-${index}`}>
                 <div className={styles.aspectWrapper}>
                   {renderBannerItem(item, setModalImage)}
                 </div>

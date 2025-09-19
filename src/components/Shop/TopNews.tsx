@@ -66,9 +66,7 @@ const ShopNews = ({
 
         const data: NewsItem[] = await response.json();
         setNewsItems(data);
-      } catch (error) {
-        console.error('ニュースデータの取得エラー:', error);
-      }
+      } catch {}
     };
 
     const checkMobile = () => {

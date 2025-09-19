@@ -63,8 +63,8 @@ const BlockRealTIme = () => {
         );
 
         setCastList(sortedData);
-      } catch (error) {
-        console.error('RealTimeデータの取得エラー:', error);
+      } catch {
+        // エラー時の処理（何もしない）
       }
     };
 
