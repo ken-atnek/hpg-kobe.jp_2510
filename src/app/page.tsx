@@ -18,6 +18,7 @@ import BlockNewFace from '@/components/AreaTop/BlockNewFace';
 import ContainerShopList from '@/components/common/ContainerShopList';
 import BlockRealTIme from '@/components/AreaTop/BlockRealTIme';
 import { isRealProduction } from '@/lib/env';
+
 export const generateMetadata = (): Metadata => {
   return {
     title: '神戸・三宮の風俗｜ファッションヘルス:神戸ホットポイントグループ',
@@ -26,7 +27,11 @@ export const generateMetadata = (): Metadata => {
       : undefined,
   };
 };
+
 export default function AreaTop() {
+  // 🔽 タイムスタンプでキャッシュバスティング
+  const timestamp = Date.now();
+
   return (
     <RequireAge scope="group" authPath="/auth">
       <main className={styles.areaTop}>
@@ -50,29 +55,29 @@ export default function AreaTop() {
                 <span>topics</span>トピックス
               </h2>
               <BannerGroup
-                jsonPath="/data/area-top/areaTopLeftBanGroup.json"
+                jsonPath={`/data/area-top/areaTopLeftBanGroup.json?t=${timestamp}`}
                 title="kobe area event"
                 className={styles.boxGroup}
               />
               <BannerGroup
-                jsonPath="/data/area-top/areaTopLeftBanHot.json"
+                jsonPath={`/data/area-top/areaTopLeftBanHot.json?t=${timestamp}`}
                 title="kobe hotpoint event"
                 className={styles.boxHot}
               />
               <BannerGroup
-                jsonPath="/data/area-top/areaTopLeftBanVilla.json"
+                jsonPath={`/data/area-top/areaTopLeftBanVilla.json?t=${timestamp}`}
                 title="hotpoint villa event"
                 className={styles.boxVilla}
               />
               <BannerGroup
-                jsonPath="/data/area-top/areaTopLeftBanRecruit.json"
+                jsonPath={`/data/area-top/areaTopLeftBanRecruit.json?t=${timestamp}`}
                 title="recruit"
                 className={styles.boxRecruit}
               />
             </div>
             <div className={styles.boxMainContents}>
               <BannerGroup
-                jsonPath="/data/area-top/areaTopMainHead.json"
+                jsonPath={`/data/area-top/areaTopMainHead.json?t=${timestamp}`}
                 className={styles.wrapMainBanHead}
               />
               <div className={styles.wrapNewFace}>

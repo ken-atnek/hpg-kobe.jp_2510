@@ -17,14 +17,21 @@ import BannerGroup from '@/components/common/BannerGroup';
 import ShopNews from '@/components/Shop/TopNews';
 import { getShopFromPath, getStoreClass } from '@/lib/shopUtils';
 import BlockAccess from '@/components/Shop/system/BlockAccess';
+
 const ShopTopMain = () => {
   const pathname = usePathname();
   const shop = getShopFromPath(pathname);
   const activeStoreClass = getStoreClass(shop);
 
-  // 🔽 JSON パスを店舗別に切り替え
+  // 🔽 タイムスタンプでキャッシュバスティング
+  const timestamp = Date.now();
+
+  // 🔽 JSON パスを店舗別に切り替え（タイムスタンプ付き）
   const jsonBasePath = `/data/${shop}`;
-  const jsonPathBanMain = `${jsonBasePath}/TopMainBan01.json`;
+  const jsonPathBanMain = `${jsonBasePath}/TopMainBan01.json?t=${timestamp}`;
+  const jsonPathNewFace = `${jsonBasePath}/TopNewFace.json?t=${timestamp}`;
+  const jsonPathNews = `${jsonBasePath}/TopNews.json?t=${timestamp}`;
+  const jsonPathRanking = `${jsonBasePath}/TopRanking.json?t=${timestamp}`;
 
   return (
     <section
@@ -36,18 +43,18 @@ const ShopTopMain = () => {
         titleEn="new face"
         titleEnSub="cast"
         classNameStyles={castSlideStyles.newFace}
-        jsonPath={`/data/${shop}/TopNewFace.json`}
+        jsonPath={jsonPathNewFace}
       />
       <ShopNews
         titleJp="新着情報・トピックス"
         titleEn="news"
-        jsonPath={`/data/${shop}/TopNews.json`}
+        jsonPath={jsonPathNews}
       />
       <CastRanking
         titleJp="キャストランキング"
         titleEn="cast"
         titleEnSub="ranking"
-        jsonPath={`/data/${shop}/TopRanking.json`}
+        jsonPath={jsonPathRanking}
       />
       <TopSlideBan />
       <BannerGroup jsonPath={jsonPathBanMain} className={styles.boxBanMain} />

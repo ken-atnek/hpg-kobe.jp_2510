@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "cross-env NODE_OPTIONS='--no-warnings --no-deprecation' next dev",
     "build": "cross-env NODE_OPTIONS='--no-warnings --no-deprecation' next build && rm -f out/404.html && rm -rf out/404",
+    "postbuild": "rm -rf out/data out/images out/cast out/movie",
     "start": "next start",
     "lint": "next lint",
     "lint:style": "stylelint \"src/**/*.scss\" --fix"

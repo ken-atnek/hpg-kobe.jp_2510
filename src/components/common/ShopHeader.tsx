@@ -108,7 +108,7 @@ const Header = ({ title, navMenu, selectedNavIds }: HeaderProps) => {
         // 開発環境でのみキャッシュバスティング
         const timestamp =
           process.env.NODE_ENV === 'development' ? Date.now() : '';
-        const dataPath = `/data/${shop}/topTelop.json${timestamp ? `?t=${timestamp}` : ''}`;
+        const dataPath = `/data/${shop}/TopTelop.json${timestamp ? `?t=${timestamp}` : ''}`;
 
         const response = await fetch(dataPath);
         if (!response.ok) {
