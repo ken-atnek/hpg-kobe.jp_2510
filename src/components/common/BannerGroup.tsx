@@ -13,6 +13,8 @@ import { renderBannerItem, useBannerItems } from '@/lib/renderBannerItem';
 import styles from '@/styles/AreaTop.module.scss';
 import clsx from 'clsx';
 import Image from 'next/image';
+import { createPortal } from 'react-dom';
+import { useEffect, useState } from 'react';
 
 type Props = {
   jsonPath: string;
@@ -22,31 +24,41 @@ type Props = {
 
 const BannerGroup = ({ jsonPath, title, className }: Props) => {
   const [items, setModalImage, modalImage] = useBannerItems(jsonPath);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const modal =
+    modalImage && mounted
+      ? createPortal(
+          <div className="modal-overlay" onClick={() => setModalImage(null)}>
+            <div className={styles.modalContent}>
+              <Image
+                src={modalImage}
+                alt="ポップアップ画像"
+                width={650}
+                height={238}
+              />
+            </div>
+          </div>,
+          document.body
+        )
+      : null;
 
   return (
-    <article className={clsx(styles.boxBanGroup, className)}>
-      {title && <h3>{title}</h3>}
-      <ul>
-        {items.map((item) => (
-          <li key={item.banId}>{renderBannerItem(item, setModalImage)}</li>
-        ))}
-      </ul>
-      {modalImage && (
-        <div
-          className={styles.modalOverlay}
-          onClick={() => setModalImage(null)}
-        >
-          <div className={styles.modalContent}>
-            <Image
-              src={modalImage}
-              alt="ポップアップ画像"
-              width={650}
-              height={238}
-            />
-          </div>
-        </div>
-      )}
-    </article>
+    <>
+      <article className={clsx(styles.boxBanGroup, className)}>
+        {title && <h3>{title}</h3>}
+        <ul>
+          {items.map((item) => (
+            <li key={item.banId}>{renderBannerItem(item, setModalImage)}</li>
+          ))}
+        </ul>
+      </article>
+      {modal}
+    </>
   );
 };
 
