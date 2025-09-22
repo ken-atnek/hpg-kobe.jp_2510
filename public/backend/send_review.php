@@ -78,11 +78,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 	#===========================================#
 	# ** メールの設定 **
 	$to = "ken.atnek@gmail.com";
-	// $to = "horizouen-kumamoto@sge.bbiq.jp";
+	// $to = "<宛先メールアドレス>";
 	$to_name = $shopName;
 	$send_date = date("Y/n/j-H:i", time());
 	$from_name = $shopName . " 女の子レビュー投稿フォーム";
-	$from_email = "contact@horizouen-kumamoto.com";  //
+	$from_email = "review@hpg-kobe.jp";  //
 	# ** エンコーディング設定 **
 	$orgEncoding = mb_internal_encoding();
 	mb_language("uni");
