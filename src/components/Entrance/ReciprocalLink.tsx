@@ -88,11 +88,8 @@ const ReciprocalLink = () => {
         const data: ReciprocalLinkBlock[] = JSON.parse(text);
         const activeBlocks = data.filter((block) => block.status);
         setReciprocalData(activeBlocks);
-      } catch (err) {
-        console.error('相互リンクデータの取得エラー:', err);
-        setError(
-          err instanceof Error ? err.message : '不明なエラーが発生しました'
-        );
+      } catch {
+        setError('相互リンクデータの取得に失敗しました');
       } finally {
         setLoading(false);
       }

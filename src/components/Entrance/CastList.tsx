@@ -36,8 +36,8 @@ const EntranceCastList = () => {
 
         const data: ListItem[] = await response.json();
         setCastData(data);
-      } catch (error) {
-        console.error('EntranceCastデータの取得エラー:', error);
+      } catch {
+        // エラー時の処理（何もしない）
       }
     };
 

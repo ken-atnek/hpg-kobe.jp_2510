@@ -63,8 +63,8 @@ const BlockRealTIme = () => {
         );
 
         setCastList(sortedData);
-      } catch (error) {
-        console.error('RealTimeデータの取得エラー:', error);
+      } catch {
+        // エラー時の処理（何もしない）
       }
     };
 
@@ -100,7 +100,15 @@ const BlockRealTIme = () => {
                 <span className={styles.gradeLabel}>
                   {gradeMap[cast.gradeId]?.label}
                 </span>
-                <Image src={cast.castImage} alt={cast.castName} fill />
+                <Image
+                  src={
+                    cast.castImage && cast.castImage !== ''
+                      ? cast.castImage
+                      : `/images/cast/${cast.shopId}/no-image.webp`
+                  }
+                  alt={cast.castName}
+                  fill
+                />
               </div>
             </Link>
             <div className={styles.castProfile}>

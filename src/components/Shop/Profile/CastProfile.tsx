@@ -41,9 +41,20 @@ export default function CastProfile() {
   const [nextCastId, setNextCastId] = useState<string | null>(null);
   const [prevCastName, setPrevCastName] = useState<string | null>(null);
   const [nextCastName, setNextCastName] = useState<string | null>(null);
+  const queryParams = new URLSearchParams(window.location.search);
+  const type = queryParams.get('type') || 'ranking';
+  const rankingType = queryParams.get('rankingType'); // 追加
+
   useEffect(() => {
     try {
-      const castOrderStr = sessionStorage.getItem('castOrder');
+      let castOrderStr: string | null = null;
+      if (type === 'ranking' && rankingType) {
+        castOrderStr = sessionStorage.getItem(
+          `castOrder_ranking_${rankingType}`
+        );
+      } else {
+        castOrderStr = sessionStorage.getItem(`castOrder_${type}`);
+      }
       if (!castOrderStr) return;
 
       type CastOrderItem = {
@@ -51,8 +62,7 @@ export default function CastProfile() {
         name: string;
       };
       const castOrder = JSON.parse(castOrderStr) as CastOrderItem[];
-      const queryParams = new URLSearchParams(window.location.search);
-      const currentId = queryParams.get('id');
+      const currentId = searchParams.get('id');
       if (!currentId) return;
 
       const currentIndex = castOrder.findIndex((c) => c.id === currentId);
@@ -65,10 +75,10 @@ export default function CastProfile() {
       setNextCastId(next?.id || null);
       setPrevCastName(prev?.name || null);
       setNextCastName(next?.name || null);
-    } catch (err) {
-      console.error('castOrder 読み込みエラー:', err);
+    } catch {
+      // エラー時の処理（何もしない）
     }
-  }, []);
+  }, [type, rankingType, castId, searchParams]);
 
   useEffect(() => {
     if (cast) {
@@ -114,8 +124,7 @@ export default function CastProfile() {
         const data = await response.json();
         setCast(data);
         setError(false);
-      } catch (error) {
-        console.error('キャストデータの取得エラー:', error);
+      } catch {
         setCast(null);
         setError(true);
       }
@@ -123,6 +132,15 @@ export default function CastProfile() {
 
     fetchCastData();
   }, [castId, shop]);
+
+  useEffect(() => {
+    // typeごとにcastOrderを切り替える
+    if (type === 'ranking') {
+      // ランキング用のcastOrderをセット
+    } else if (type === 'newface') {
+      // 新人用のcastOrderをセット
+    }
+  }, [type]);
 
   if (!castId) return <p>キャストIDが指定されていません。</p>;
   if (error) return <p>キャスト情報が見つかりません。</p>;
@@ -186,7 +204,7 @@ export default function CastProfile() {
             <div className={styles.castName}>
               {cast.castName}
               <span>{cast.castNameEn}</span>
-              {cast.ranking != null && (
+              {String(cast.ranking) !== '' && (
                 <div className={styles.itemRanking}>
                   <Image
                     src={`/images/rank/rank${String(cast.ranking).padStart(2, '0')}.webp`}
@@ -425,7 +443,7 @@ export default function CastProfile() {
           <nav>
             {prevCastId ? (
               <Link
-                href={`/${shop}/profile?id=${prevCastId}`}
+                href={`/${shop}/profile?id=${prevCastId}&type=${type}${type === 'ranking' && rankingType ? `&rankingType=${rankingType}` : ''}`}
                 className={styles.linkCastDetail}
               >
                 {prevCastName}
@@ -440,7 +458,7 @@ export default function CastProfile() {
             </Link>
             {nextCastId ? (
               <Link
-                href={`/${shop}/profile?id=${nextCastId}`}
+                href={`/${shop}/profile?id=${nextCastId}&type=${type}${type === 'ranking' && rankingType ? `&rankingType=${rankingType}` : ''}`}
                 className={styles.linkCastDetail}
               >
                 {nextCastName}

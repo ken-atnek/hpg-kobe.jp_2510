@@ -113,8 +113,8 @@ export const useBannerItems = (
           (item) => item.status >= 1 && item.status <= 4
         );
         setItems(activeItems);
-      } catch (error) {
-        console.error('バナーデータ取得エラー:', jsonPath, error);
+      } catch {
+        // エラー時の処理（何もしない）
       }
     };
 

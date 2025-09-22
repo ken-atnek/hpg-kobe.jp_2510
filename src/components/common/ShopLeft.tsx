@@ -3,7 +3,7 @@
  * 店舗 LEFTコンテンツ
  * URL: src/components/common/ShopLeft.tsx
  * Created: 2025-08-22
- * Last updated: 2025-08-23
+ * Last updated: 2025-09-19
  * ======================================= */
 import { usePathname } from 'next/navigation';
 import styles from '@/styles/ShopLeft.module.scss';
@@ -25,10 +25,13 @@ const ShopLeft = ({ photoDiaryUrl }: ShopLeftProps) => {
   const storeId = getStoreClass(shop); // 'kbHot' など
   const shopData = Shops.find((item) => item.storeId === storeId);
 
-  // 🔽 JSON パスを店舗別に切り替え
+  // 🔽 タイムスタンプでキャッシュバスティング
+  const timestamp = Date.now();
+
+  // 🔽 JSON パスを店舗別に切り替え（タイムスタンプ付き）
   const jsonBasePath = `/data/${shop}`;
-  const jsonPathTop = `${jsonBasePath}/LeftBan01.json`;
-  const jsonPathBottom = `${jsonBasePath}/LeftBan02.json`;
+  const jsonPathTop = `${jsonBasePath}/LeftBan01.json?t=${timestamp}`;
+  const jsonPathBottom = `${jsonBasePath}/LeftBan02.json?t=${timestamp}`;
 
   return (
     <section

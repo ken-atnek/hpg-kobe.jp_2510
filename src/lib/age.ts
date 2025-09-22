@@ -48,8 +48,7 @@ const loadTtlMinutes = async (scope: AgeScope): Promise<number> => {
         ttlCache[key] = config.ttlMinutes ?? (config.ttlHours ?? 0) * 60;
       }
     }
-  } catch (error) {
-    console.error('Failed to load age config:', error);
+  } catch {
     ttlCache.default = DEFAULT_TTL_MINUTES;
   }
 
@@ -84,15 +83,13 @@ export const isAgeVerified = (scope: AgeScope) => {
   if (!raw) return false;
 
   if (raw === '1') {
-    // 旧仕様：本番では無期限扱い、開発では無効扱い（テストしやすくするため）
     return !isDev;
   }
 
   try {
     const obj = JSON.parse(raw) as StoredFlag;
     return typeof obj.exp === 'number' && Date.now() < obj.exp;
-  } catch (error) {
-    console.error('Failed to parse age verification flag:', error);
+  } catch {
     return false;
   }
 };

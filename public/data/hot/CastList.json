@@ -1,5 +1,5 @@
 [
-    {
+  {
     "castId": "824",
     "castName": "上葉 るる",
     "castImage": "/images/cast/hot/hot-ruru01.jpg",
@@ -19,7 +19,7 @@
   {
     "castId": "685",
     "castName": "野崎りおん",
-    "castImage": "/images/cast/hot/hot-rion01.jpg",
+
     "startTime": "10:00",
     "endTime": "20:00",
     "gradeId": 1,
@@ -39,7 +39,7 @@
     "startTime": "10:00",
     "endTime": "20:00",
     "gradeId": 6,
-    "type": [1, 3, 5, 8],
+    "type": [1, 3, 5, 8, 10, 11, 12, 13, 14],
     "age": 26,
     "tall": 166,
     "bust": 85,
@@ -113,5 +113,4 @@
     "hip": 86,
     "badges": ["new"]
   }
-
 ]

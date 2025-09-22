@@ -48,7 +48,9 @@ const CastRanking = ({
     fetch(jsonPath)
       .then((res) => res.json())
       .then((data) => setRankingData(data))
-      .catch((err) => console.error('ランキングデータの取得失敗:', err));
+      .catch(() => {
+        // エラー時の処理（何もしない）
+      });
   }, [jsonPath]);
 
   const selectedRanking = useMemo(() => {
@@ -67,16 +69,20 @@ const CastRanking = ({
     }, 200); // 300ms だけフェード時間
   };
 
-  // 表示キャスト順を sessionStorage に保存
+  // 表示キャスト順を sessionStorage にランキング種別ごとに保存
   useEffect(() => {
-    if (selectedRanking?.casts?.length) {
+    if (selectedRanking?.casts?.length && rankingData[selectedIndex]?.titleId) {
       const castOrder = selectedRanking.casts.map((c) => ({
         id: c.castId,
         name: c.castName,
       }));
-      sessionStorage.setItem('castOrder', JSON.stringify(castOrder));
+      // ランキング種別ごとに保存
+      sessionStorage.setItem(
+        `castOrder_ranking_${rankingData[selectedIndex].titleId}`,
+        JSON.stringify(castOrder)
+      );
     }
-  }, [selectedRanking]);
+  }, [selectedRanking, rankingData, selectedIndex]);
 
   return (
     <article className={clsx(styles.boxCastRanking, styles[activeStoreClass])}>
@@ -121,8 +127,19 @@ const CastRanking = ({
                 >
                   <span>No.{cast.rank}</span>
                 </div>
-                <Link href={`/${shop}/profile/?id=${cast.castId}`}>
-                  <Image src={cast.castImage} alt={cast.castName} fill />
+                {/* type=ranking & rankingType=titleId を付与 */}
+                <Link
+                  href={`/${shop}/profile/?id=${cast.castId}&type=ranking&rankingType=${rankingData[selectedIndex]?.titleId}`}
+                >
+                  <Image
+                    src={
+                      cast.castImage && cast.castImage !== ''
+                        ? cast.castImage
+                        : `/images/cast/${shop}/no-image.webp`
+                    }
+                    alt={cast.castName}
+                    fill
+                  />
                 </Link>
                 <div className={styles.textProfile}>
                   <p className={styles.castName}>{cast.castName}</p>
@@ -148,9 +165,16 @@ const CastRanking = ({
                 >
                   <span>No.{cast.rank}</span>
                 </div>
-                <Link href={`/${shop}/profile/?id=${cast.castId}`}>
+                {/* type=ranking & rankingType=titleId を付与 */}
+                <Link
+                  href={`/${shop}/profile/?id=${cast.castId}&type=ranking&rankingType=${rankingData[selectedIndex]?.titleId}`}
+                >
                   <Image
-                    src={cast.castImage}
+                    src={
+                      cast.castImage && cast.castImage !== ''
+                        ? cast.castImage
+                        : `/images/cast/${shop}/no-image.webp`
+                    }
                     alt={cast.castName}
                     width={130}
                     height={170}

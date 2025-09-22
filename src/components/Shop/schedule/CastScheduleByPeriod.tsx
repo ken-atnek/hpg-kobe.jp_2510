@@ -55,9 +55,7 @@ const CastScheduleByPeriod = () => {
         );
 
         setSchedules(results);
-      } catch (error) {
-        console.error('スケジュールデータの取得エラー:', error);
-      }
+      } catch {}
     };
 
     fetchSchedules();
@@ -83,7 +81,11 @@ const CastScheduleByPeriod = () => {
         id: c.castId,
         name: c.castName,
       }));
-      sessionStorage.setItem('castOrder', JSON.stringify(castOrder));
+      // 修正: 用途ごとにキーを分ける
+      sessionStorage.setItem(
+        'castOrder_scheduleperiod',
+        JSON.stringify(castOrder)
+      );
     }
   }, [periodScheduleList]);
 
@@ -162,11 +164,17 @@ const CastScheduleByPeriod = () => {
                 {/* キャスト情報 */}
                 <div className={styles.boxCastInfo}>
                   <Link
-                    href={`/${shop}/profile/?id=${cast.castId}`}
+                    href={`/${shop}/profile/?id=${cast.castId}&type=scheduleperiod`}
                     className={styles.wrapImage}
                   >
                     <Image
-                      src={cast.castImageSquare || cast.castImage}
+                      src={
+                        cast.castImageSquare && cast.castImageSquare !== ''
+                          ? cast.castImageSquare
+                          : cast.castImage && cast.castImage !== ''
+                            ? cast.castImage
+                            : `/images/cast/${shop}/no-image.webp`
+                      }
                       alt={cast.castName}
                       fill
                     />

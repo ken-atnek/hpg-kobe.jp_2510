@@ -41,8 +41,7 @@ const CastReviewList = ({ castId, shop }: Props) => {
 
         const data: ReviewItem[] = await res.json();
         setReviews(data);
-      } catch (err) {
-        console.error('レビューデータの取得エラー:', err);
+      } catch {
         setReviews([]);
       }
     };

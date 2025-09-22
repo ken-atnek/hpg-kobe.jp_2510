@@ -14,70 +14,44 @@ import { usePathname } from 'next/navigation';
 import { renderBannerItem, useBannerItems } from '@/lib/renderBannerItem';
 import { getShopFromPath } from '@/lib/shopUtils';
 import Image from 'next/image';
+import { createPortal } from 'react-dom';
+import { useEffect, useState } from 'react';
 import 'swiper/css';
+
 const TopSlideBan = () => {
   const pathname = usePathname();
   const shop = getShopFromPath(pathname);
+  const [mounted, setMounted] = useState(false);
 
-  // 🔽 JSON パスを店舗別に切り替え
-  const jsonPathPickUp = `/data/${shop}/topSlideBan.json`;
+  // 🔽 TopSlideBanは頻繁に更新されるため常にキャッシュバスティング
+  const timestamp = Date.now();
+  const jsonPathPickUp = `/data/${shop}/TopSlideBan.json?t=${timestamp}`;
   const [items, setModalImage, modalImage] = useBannerItems(jsonPathPickUp);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   // スライド数が足りないときは複製してループ対応
   const minSlideCount = 8;
   const visibleItems =
-    items.length < minSlideCount
-      ? [...items, ...items, ...items] // 3倍に増やす（元の構造を壊さず）
-      : items;
+    items.length === 0
+      ? []
+      : items.length < minSlideCount
+        ? Array(Math.ceil(minSlideCount / items.length))
+            .fill(items)
+            .flat()
+            .slice(0, minSlideCount)
+        : items;
 
-  return (
-    <article className={styles.boxTopSlideBan}>
-      <div className={styles.wrapImageList}>
-        <Swiper
-          slidesPerView={3}
-          centeredSlides={true}
-          loop={true}
-          autoplay={{ delay: 6000, disableOnInteraction: false }}
-          modules={[Autoplay]}
-          speed={1400}
-          initialSlide={0}
-          watchOverflow={true}
-          observer={true}
-          observeParents={true}
-          breakpoints={{
-            // スマホ（768px未満）
-            0: {
-              slidesPerView: 1.25,
-              centeredSlides: true,
-              spaceBetween: 8,
-              speed: 1000,
-              initialSlide: 0,
-              autoplay: { delay: 4000, disableOnInteraction: false },
-            },
-            // タブレット（768px以上）
-            768: {
-              slidesPerView: 3,
-              spaceBetween: 20,
-              centeredSlides: true,
-              speed: 1400,
-              autoplay: { delay: 5000, disableOnInteraction: false },
-            },
-          }}
-        >
-          {visibleItems.map((item) => (
-            <SwiperSlide key={`${item.banId}-${Math.random()}`}>
-              <div className={styles.aspectWrapper}>
-                {renderBannerItem(item, setModalImage)}
-              </div>
-            </SwiperSlide>
-          ))}
-        </Swiper>
-        {modalImage && (
-          <div
-            className={styles.modalOverlay}
-            onClick={() => setModalImage(null)}
-          >
-            <div className={styles.modalContent}>
+  // ループ有効判定（2枚以上のときのみ有効）
+  const enableLoop = visibleItems.length > 1;
+
+  const modal =
+    modalImage && mounted
+      ? createPortal(
+          <div className="modal-overlay" onClick={() => setModalImage(null)}>
+            <div className="modal-content">
               <Image
                 src={modalImage}
                 alt="ポップアップ画像"
@@ -85,10 +59,58 @@ const TopSlideBan = () => {
                 height={238}
               />
             </div>
-          </div>
-        )}
-      </div>
-    </article>
+          </div>,
+          document.body
+        )
+      : null;
+
+  return (
+    <>
+      <article className={styles.boxTopSlideBan}>
+        <div className={styles.wrapImageList}>
+          <Swiper
+            slidesPerView={3}
+            centeredSlides={true}
+            loop={enableLoop}
+            autoplay={{ delay: 6000, disableOnInteraction: false }}
+            modules={[Autoplay]}
+            speed={1400}
+            initialSlide={0}
+            watchOverflow={true}
+            observer={true}
+            observeParents={true}
+            breakpoints={{
+              // スマホ（768px未満）
+              0: {
+                slidesPerView: 1.25,
+                centeredSlides: true,
+                spaceBetween: 8,
+                speed: 1000,
+                initialSlide: 0,
+                autoplay: { delay: 4000, disableOnInteraction: false },
+              },
+              // タブレット（768px以上）
+              768: {
+                slidesPerView: 3,
+                spaceBetween: 20,
+                centeredSlides: true,
+                speed: 1400,
+                autoplay: { delay: 5000, disableOnInteraction: false },
+              },
+            }}
+          >
+            {visibleItems.map((item, index) => (
+              <SwiperSlide key={`${item.banId}-${index}`}>
+                <div className={styles.aspectWrapper}>
+                  {renderBannerItem(item, setModalImage)}
+                </div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </div>
+      </article>
+      {modal}
+    </>
   );
 };
 export default TopSlideBan;
