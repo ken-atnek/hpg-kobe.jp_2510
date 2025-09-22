@@ -50,7 +50,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 	$shopName = $shop_master['shop_name'];
 	#DBへ登録
 	#登録SQL文
-	$sql_str = "INSERT INTO t_review_master (r_gid,r_shop ,r_nick_name,r_comment,r_mail,r_value,r_status) values (?,?,?,?,?,?,?)";
+	$sql_str = "INSERT INTO t_review_master (r_gid,r_shop ,r_nick_name,r_comment,r_mail,r_value,r_status,r_insert_day,r_update_day) values (?,?,?,?,?,?,?,?,?)";
 	#DB接続
 	$db = db_connect();
 	#プリペアドステートメントへセット
@@ -63,6 +63,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 	$dbStm->bindValue(':mail', $email);
 	$dbStm->bindValue(':value', $rating);
 	$dbStm->bindValue(':status', 0);
+	$dbStm->bindValue(':insert_day', time());
+	$dbStm->bindValue(':update_day', '');
 	#SQL実行
 	$rst_insert = $dbStm->execute(array($cast_id, $shop_id, $nickname, $comment, $email, $rating, 0));
 	if ($rst_insert) {
