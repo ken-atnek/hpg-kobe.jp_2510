@@ -988,7 +988,7 @@
             flex: 1;
             margin-top: 2em;
             width: 100%;
-            overflow-y: scroll;
+            overflow-y: auto;
             font-size: inherit;
             @include sp {
                 display: contents;
@@ -1043,7 +1043,7 @@
             flex: 1;
             margin-top: 2em;
             width: 100%;
-            overflow-y: scroll;
+            overflow-y: auto;
             @include sp {
                 display: contents;
             }
