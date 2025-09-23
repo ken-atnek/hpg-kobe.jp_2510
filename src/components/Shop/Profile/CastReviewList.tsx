@@ -9,6 +9,7 @@
 import { useEffect, useState } from 'react';
 import styles from '@/styles/ShopCastReview.module.scss';
 import clsx from 'clsx';
+import { convertRemToPx } from '@/lib/convertRemToPx';
 
 type ReviewItem = {
   id: string;
@@ -84,7 +85,12 @@ const CastReviewList = ({ castId, shop }: Props) => {
                 </time>
                 <span>{review.name}さんの口コミ</span>
               </div>
-              <p className={styles.reviewComment}>{review.comment}</p>
+              <div
+                  className={styles.reviewComment}
+                  dangerouslySetInnerHTML={{
+                    __html: convertRemToPx(review.comment),
+                  }}
+                />
             </li>
           ))
         )}
