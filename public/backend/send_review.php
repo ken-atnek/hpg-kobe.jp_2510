@@ -45,7 +45,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 	$nickname = isset($_POST["name"]) ? trim($_POST["name"]) : "";
 	$email = isset($_POST["email"]) ? trim($_POST["email"]) : "";
 	$rating = isset($_POST["rating"]) ? trim($_POST["rating"]) : "";
-	$comment = isset($_POST["comment"]) ? trim($_POST["comment"]) : "";
+	$comment = isset($_POST["comment"]) ? mb_eregi_replace("(\n){1,}$", "", $_POST["comment"]) : "";
 
 	// ** ログ出力: 受信データ **
 	debug_log("=== レビュー投稿フォーム受信データ ===");

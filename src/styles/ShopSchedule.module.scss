@@ -293,7 +293,7 @@
         position: relative;
         display: grid;
         font-size: inherit;
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(7, 1fr);
         padding-block: 5px;
         &::before,
         &::after {
