@@ -11,6 +11,7 @@ import SvgDefs from '@/components/SvgDefs';
 import { Noto_Sans_JP, Roboto } from 'next/font/google';
 import { Bebas_Neue, Reenie_Beanie } from 'next/font/google';
 import { isRealProduction } from '@/lib/env';
+import Script from 'next/script';
 const bebasNeue = Bebas_Neue({
   subsets: ['latin'],
   weight: ['400'],
@@ -92,6 +93,19 @@ export default function RootLayout({
           name="viewport"
           content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
         />
+        {/* Google tag (gtag.js) */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-35J5J9835B"
+          strategy="afterInteractive"
+        />
+        <Script id="gtag-init" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-35J5J9835B');
+          `}
+        </Script>
       </head>
       <body>
         <SvgDefs />
