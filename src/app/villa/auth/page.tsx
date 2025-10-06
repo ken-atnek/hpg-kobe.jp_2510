@@ -10,7 +10,7 @@ import Entrance from '@/components/Entrance/Entrance';
 export default function HotAuthPage() {
   return (
     <Entrance
-      scope="hot"
+      scope="villa"
       backPath="/villa"
       headingText="神戸・三宮の風俗｜ファッションヘルス:ホットポイントヴィラ"
       excludeStoreId="kbVilla"

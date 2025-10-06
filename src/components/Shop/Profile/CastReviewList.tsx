@@ -54,7 +54,7 @@ const CastReviewList = ({ castId, shop }: Props) => {
     <div className={styles.innerReviewList}>
       <ul>
         {reviews.length === 0 ? (
-          <p className={styles.noReview}>まだ口コミがありません</p>
+          <li className={styles.noReview}>口コミ情報がありません</li>
         ) : (
           reviews.map((review) => (
             <li key={review.id} className={styles.reviewItem}>

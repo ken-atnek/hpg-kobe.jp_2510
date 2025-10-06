@@ -195,7 +195,9 @@ const CastScheduleByDay = () => {
                           <span
                             className={`${styles.labelBadge} ${styles.badgeNew}`}
                           >
-                            新人さん
+                            新人
+                            <br />
+                            さん
                           </span>
                         ) : null}
 

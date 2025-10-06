@@ -45,7 +45,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 	$nickname = isset($_POST["name"]) ? trim($_POST["name"]) : "";
 	$email = isset($_POST["email"]) ? trim($_POST["email"]) : "";
 	$rating = isset($_POST["rating"]) ? trim($_POST["rating"]) : "";
-	$comment = isset($_POST["comment"]) ? trim($_POST["comment"]) : "";
+	$comment = isset($_POST["comment"]) ? mb_eregi_replace("(\n){1,}$", "", $_POST["comment"]) : "";
 
 	// ** ログ出力: 受信データ **
 	debug_log("=== レビュー投稿フォーム受信データ ===");
@@ -143,8 +143,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 	#===========================================#
 	# ** メールの設定 **
 	debug_log("メール送信準備開始");
-	#$to = "ken.atnek@gmail.com";
-	$to = "shigetaka@a-fact.co.jp"; //テスト用
+	$to = "review@hpg-kobe.jp";
+	#$to = "ken.atnek@gmail.com"; //テスト用
 	// $to = "<宛先メールアドレス>";
 	$to_name = $shopName;
 	$send_date = date("Y/n/j-H:i", time());

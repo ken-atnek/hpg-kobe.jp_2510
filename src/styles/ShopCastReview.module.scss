@@ -19,6 +19,8 @@
     font-size: inherit;
     margin-top: 2em;
     overflow-y: auto;
+    display: flex;
+    flex-direction: column;
     @include sp {
         display: contents;
     }
@@ -28,6 +30,10 @@
         top: 0;
         font-size: inherit;
         width: 100%;
+        min-height: 12lh;
+        display: flex;
+        flex-direction: column;
+        flex: 1;
         @include sp {
             position: relative;
             left: 0;
@@ -78,6 +84,12 @@
                 text-align: justify;
                 letter-spacing: 0.04em;
                 line-height: 1.4em;
+            }
+            &.noReview {
+                flex: 1;
+                display: flex;
+                justify-content: center;
+                align-items: center;
             }
         }
     }
