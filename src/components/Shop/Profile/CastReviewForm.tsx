@@ -58,7 +58,7 @@ const CastReviewForm = () => {
     formData.append('comment', comment);
     try {
       const response = await fetch(
-        'https://demo-hpg-kobe.bxchange.net/backend/send_review.php',
+        'https://www.hpg-kobe.jp/backend/send_review.php',
         {
           method: 'POST',
           body: formData,
