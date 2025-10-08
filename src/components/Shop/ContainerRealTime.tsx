@@ -3,7 +3,7 @@
  * URL: src/components/Shop/ContainerRealTime.tsx
  * Referenced in: src/app/hot/realtime/page.tsx
  * Created: 2025-08-29
- * Last updated: 2025-09-11
+ * Last updated: 2025-10-08
  * ======================================= */
 'use client';
 
@@ -12,6 +12,7 @@ import { useEffect, useState } from 'react';
 import clsx from 'clsx';
 import { usePathname } from 'next/navigation';
 import { getShopFromPath, getStoreClass } from '@/lib/shopUtils';
+import { trackPageAccess } from '@/lib/accessCounterApi';
 import Image from 'next/image';
 import type { CastDetail } from '@/types/CastDetails';
 import Link from 'next/link';
@@ -41,6 +42,12 @@ const ContainerRealtime = () => {
   const [updateTime, setUpdateTime] = useState<string>('');
 
   useEffect(() => {
+
+    //ページ読み込み時にバックグラウンド処理でユーザーアクセス情報をログに保存する
+    const pageId = 'realTime';
+    trackPageAccess(shop, pageId);
+    //ページ読み込み時にバックグラウンド処理でユーザーアクセス情報をログに保存する
+
     const fetchRealtimeData = async () => {
       try {
         // リアルタイムデータは常にキャッシュバスティング

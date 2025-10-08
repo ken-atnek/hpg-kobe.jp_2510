@@ -3,8 +3,8 @@
 * 女の子レビュー投稿フォーム
 * URL:public/backend/send_review.php
 * Referenced in: /CastReviewForm.tsx,
- * Created: 2025-09-22
- * Last updated: 2025-09-22
+*  Created: 2025-09-22
+*  Last updated: 2025-09-22
 * ======================================= */
 header("Access-Control-Allow-Origin: *"); // CORS対策
 header("Content-Type: application/json");

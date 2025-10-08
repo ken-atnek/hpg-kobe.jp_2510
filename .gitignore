@@ -40,9 +40,15 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
+# schedule/json
+public/data/hot/schedule/*.json
+
 # log
 cp_log/
 public/cast/
 public/movie/test.mp4
 env.download
 env.production
+
+.htaccess
+google970b80570935ad04.html

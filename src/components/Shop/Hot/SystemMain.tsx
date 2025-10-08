@@ -2,7 +2,7 @@
  *店舗 システム MAIN
  * URL: src/components/Shop/Hot/SystemMain.tsx
  * Created: 2025-08-27
- * Last updated: 2025-08-27
+ * Last updated: 2025-10-08
  * ======================================= */
 'use client';
 
@@ -15,11 +15,19 @@ import ImageWebReserve from '@/assets/images/hot/web-reserve.webp';
 import Image from 'next/image';
 import ExternalLink from '@/components/common/ExternalLink';
 import BlockAccess from '@/components/Shop/system/BlockAccess';
+import { trackPageAccess } from '@/lib/accessCounterApi';
 
 const SystemMain = () => {
   const [requestFee, setRequestFee] = useState<number | null>(null);
 
   useEffect(() => {
+
+    //ページ読み込み時にバックグラウンド処理でユーザーアクセス情報をログに保存する
+    const shop = 'hot';
+    const pageId = 'system';
+    trackPageAccess(shop, pageId);
+    //ページ読み込み時にバックグラウンド処理でユーザーアクセス情報をログに保存する
+
     const fetchRequestFee = async () => {
       try {
         // キャッシュバスティング用のタイムスタンプを追加

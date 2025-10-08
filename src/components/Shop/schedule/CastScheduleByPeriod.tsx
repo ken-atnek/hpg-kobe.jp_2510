@@ -3,7 +3,7 @@
  * URL:src/components/Shop/schedule/CastScheduleByPeriod.tsx
  * Referenced in: :src/app/[shop]/weekly-schedule/page.tsx
  * Created: 2025-08-30
- * Last updated: 2025-09-11
+ * Last updated: 2025-10-08
  * ======================================= */
 'use client';
 import styles from '@/styles/ShopSchedule.module.scss';
@@ -14,6 +14,7 @@ import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { loadScheduleConfig } from '@/lib/loadScheduleConfig';
 import { getDateList } from '@/lib/getScheduleDataList';
+import { trackPageAccess } from '@/lib/accessCounterApi';
 import { getShopFromPath, getStoreClass } from '@/lib/shopUtils';
 import type { CastDetail } from '@/types/CastDetails';
 import ShopSwitchTabs from '@/components/common/ShopSwitchTabs';
@@ -31,6 +32,12 @@ const CastScheduleByPeriod = () => {
 
   // データ取得
   useEffect(() => {
+
+    //ページ読み込み時にバックグラウンド処理でユーザーアクセス情報をログに保存する
+    const pageId = 'scheduleByPeriod';
+    trackPageAccess(shop, pageId);
+    //ページ読み込み時にバックグラウンド処理でユーザーアクセス情報をログに保存する
+
     const fetchSchedules = async () => {
       try {
         const config = await loadScheduleConfig(shop);
