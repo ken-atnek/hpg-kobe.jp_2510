@@ -33,7 +33,6 @@ const CastList = () => {
   >([]);
 
   useEffect(() => {
-
     //ページ読み込み時にバックグラウンド処理でユーザーアクセス情報をログに保存する
     const pageId = 'castList';
     trackPageAccess(shop, pageId);
@@ -70,6 +69,9 @@ const CastList = () => {
     const allCasts = castGroups.flatMap((group) => group.casts);
 
     let filtered = allCasts;
+    if (!activeFilter) {
+      return allCasts;
+    }
     if (activeFilter === 'today') {
       filtered = allCasts.filter(
         (cast) => cast.scheduleStatus || cast.startTime || cast.endTime
