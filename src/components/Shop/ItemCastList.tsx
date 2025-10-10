@@ -7,6 +7,7 @@
  * ======================================= */
 
 import styles from '@/styles/ShopCastList.module.scss';
+import clsx from 'clsx';
 import type { CastDetail } from '@/types/CastDetails';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -84,6 +85,20 @@ const ItemCastList = ({ cast }: Props) => {
             fill
           />
         </div>
+        {cast.ranking && (
+          <div
+            className={clsx(styles.itemRanking, {
+              [styles[`ranking${cast.ranking}`]]: cast.ranking,
+            })}
+          >
+            <Image
+              src={`/images/ranking/${String(cast.ranking).padStart(2, '0')}.webp`}
+              alt={`ランキング ${cast.ranking}位`}
+              width={50} // 必要に応じてサイズを調整
+              height={50} // 必要に応じてサイズを調整
+            />
+          </div>
+        )}
       </Link>
       <div className={styles.castProfile}>
         <div className={styles.wrapName}>

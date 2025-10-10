@@ -331,6 +331,16 @@
                 object-fit: cover;
             }
         }
+        .itemRanking {
+            font-size: inherit;
+            width: 4.4em;
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            img {
+                width: 100%;
+            }
+        }
     }
     .castProfile {
         font-size: inherit;
