@@ -45,6 +45,7 @@ public/data/hot/schedule/*.json
 
 # log
 cp_log/
+public/data/
 public/cast/
 public/movie/test.mp4
 env.download
@@ -52,3 +53,4 @@ env.production
 
 .htaccess
 google970b80570935ad04.html
+
