@@ -3,7 +3,7 @@
  * URL: src/components/Shop/Profile/CastProfile.tsx
  * Referenced in: src/app/hot/profile/page.tsx
  * Created: 2025-09-06
- * Last updated: 2025-09-10
+ * Last updated: 2025-10-08
  * ======================================= */
 'use client';
 
@@ -18,6 +18,8 @@ import { typeLabels } from '@/constants/castTypeLabels';
 import { getShopFromPath, getStoreClass } from '@/lib/shopUtils';
 import { platinumMailUrlMap } from '@/lib/shopUtils';
 import { convertRemToPx } from '@/lib/convertRemToPx';
+import { trackPageAccess } from '@/lib/accessCounterApi';
+import { trackCastAccess } from '@/lib/accessCastCounterApi';
 
 import type { CastDetail } from '@/types/CastDetails';
 import ProfileContainerHead from '@/components/Shop/Profile/ProfileContainerHead';
@@ -132,6 +134,22 @@ export default function CastProfile() {
 
     fetchCastData();
   }, [castId, shop]);
+
+  //ページ読み込み時にバックグラウンド処理でユーザーアクセス情報をログに保存する
+  useEffect(() => {
+    if (!castId) return;
+
+    // 重複実行を防ぐためのフラグをチェック
+    const key = `access_tracked_${shop}_${castId}`;
+    if (sessionStorage.getItem(key)) return;
+    const pageId = 'castProfile';
+    trackPageAccess(shop, pageId);
+    //キャストアクセスカウンター
+    trackCastAccess(castId);
+    // フラグを設定（ページリロード時にリセットされる）
+    sessionStorage.setItem(key, 'true');
+  }, [castId, shop]);
+  //ページ読み込み時にバックグラウンド処理でユーザーアクセス情報をログに保存する
 
   useEffect(() => {
     // typeごとにcastOrderを切り替える

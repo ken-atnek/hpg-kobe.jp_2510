@@ -3,7 +3,7 @@
  * URL:src/components/Shop/schedule/CastScheduleByDay.tsx
  * Referenced in: :src/app/hot/weekly-schedule/page.tsx
  * Created: 2025-09-01
- * Last updated: 2025-09-11
+ * Last updated: 2025-10-08
  * ======================================= */
 'use client';
 
@@ -16,6 +16,7 @@ import { useEffect, useState } from 'react';
 import type { CastDetail } from '@/types/CastDetails';
 import { loadScheduleConfig } from '@/lib/loadScheduleConfig';
 import { getDateList } from '@/lib/getScheduleDataList';
+import { trackPageAccess } from '@/lib/accessCounterApi';
 import { gradeMap } from '@/constants/castGradeMap';
 import { getShopFromPath, getStoreClass } from '@/lib/shopUtils';
 import ShopSwitchTabs from '@/components/common/ShopSwitchTabs';
@@ -38,6 +39,12 @@ const CastScheduleByDay = () => {
 
   // スケジュールの読み込み
   useEffect(() => {
+
+    //ページ読み込み時にバックグラウンド処理でユーザーアクセス情報をログに保存する
+    const pageId = 'scheduleByDay';
+    trackPageAccess(shop, pageId);
+    //ページ読み込み時にバックグラウンド処理でユーザーアクセス情報をログに保存する
+
     const loadSchedules = async () => {
       try {
         const config = await loadScheduleConfig(shop);

@@ -3,7 +3,7 @@
  * URL:src/components/CastList.tsx
  * Referenced in: : src/app/hot/cast/page.tsx
  * Created: 2025-09-02
- * Last updated: 2025-09-11
+ * Last updated: 2025-10-08
  * ======================================= */
 'use client';
 import styles from '@/styles/ShopCastList.module.scss';
@@ -13,6 +13,7 @@ import { useEffect, useMemo, useState } from 'react';
 import type { CastDetail } from '@/types/CastDetails';
 import ItemCastList from './Shop/ItemCastList';
 import { getShopFromPath, getStoreClass } from '@/lib/shopUtils';
+import { trackPageAccess } from '@/lib/accessCounterApi';
 import ShopSwitchTabs from '@/components/common/ShopSwitchTabs';
 const filters = [
   { id: 'today', label: '本日出勤' },
@@ -32,6 +33,12 @@ const CastList = () => {
   >([]);
 
   useEffect(() => {
+
+    //ページ読み込み時にバックグラウンド処理でユーザーアクセス情報をログに保存する
+    const pageId = 'castList';
+    trackPageAccess(shop, pageId);
+    //ページ読み込み時にバックグラウンド処理でユーザーアクセス情報をログに保存する
+
     const fetchCastList = async () => {
       try {
         // キャストリストは出勤情報含むため常にキャッシュバスティング
