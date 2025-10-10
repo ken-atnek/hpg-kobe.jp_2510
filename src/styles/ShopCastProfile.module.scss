@@ -340,6 +340,7 @@
                 width: 12rem;
                 aspect-ratio: 1;
                 left: calc(100% + 0.3em);
+                z-index: 1;
                 @include sp {
                     width: 24vw;
                     left: unset;
