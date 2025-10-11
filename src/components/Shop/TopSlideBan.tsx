@@ -15,7 +15,7 @@ import { renderBannerItem, useBannerItems } from '@/lib/renderBannerItem';
 import { getShopFromPath } from '@/lib/shopUtils';
 import Image from 'next/image';
 import { createPortal } from 'react-dom';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import 'swiper/css';
 
 const TopSlideBan = () => {
@@ -24,9 +24,12 @@ const TopSlideBan = () => {
   const [mounted, setMounted] = useState(false);
 
   // 🔽 TopSlideBanは頻繁に更新されるため常にキャッシュバスティング
-  const timestamp = Date.now();
-  const jsonPathPickUp = `/data/${shop}/TopSlideBan.json?t=${timestamp}`;
-  const [items, setModalImage, modalImage] = useBannerItems(jsonPathPickUp);
+  const jsonSlideBan = useMemo(() => {
+    const timestamp = Date.now();
+    return `/data/${shop}/TopSlideBan.json?t=${timestamp}`;
+  }, [shop]);
+
+  const [items, setModalImage, modalImage] = useBannerItems(jsonSlideBan);
 
   useEffect(() => {
     setMounted(true);

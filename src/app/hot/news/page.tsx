@@ -4,6 +4,7 @@
  * Created: 2025-09-11
  * Last updated: 2025-09-11
  * ======================================= */
+import LayoutWrapperMain from '@/components/Shop/Hot/LayoutWrapperMain';
 import type { Metadata } from 'next';
 import { isRealProduction } from '@/lib/env';
 import styles from '@/styles/components/ShopNews.module.scss';
@@ -17,12 +18,14 @@ export const metadata: Metadata = {
 
 export default function HotNews() {
   return (
-    <section className={styles.containerNews}>
-      <h2 className="pageH2">
-        <span>news</span>
-        ニュース
-      </h2>
-      <PageNews jsonPath={`/data/hot/TopNews.json`} />
-    </section>
+    <LayoutWrapperMain>
+      <section className={styles.containerNews}>
+        <h2 className="pageH2">
+          <span>news</span>
+          ニュース
+        </h2>
+        <PageNews jsonPath={`/data/hot/TopNews.json`} />
+      </section>
+    </LayoutWrapperMain>
   );
 }

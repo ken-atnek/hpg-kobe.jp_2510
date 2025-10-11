@@ -4,10 +4,13 @@
  * Created: 2025-09-06
  * Last updated: 2025-09-06
  * ======================================= */
-'use client';
+import LayoutWrapperSub from '@/components/Shop/Hot/LayoutWrapperSub';
 import CastProfile from '@/components/Shop/Profile/CastProfile';
 
 export default function ProfilePage() {
-  
-  return <CastProfile />;
+  return (
+    <LayoutWrapperSub>
+      <CastProfile />
+    </LayoutWrapperSub>
+  );
 }

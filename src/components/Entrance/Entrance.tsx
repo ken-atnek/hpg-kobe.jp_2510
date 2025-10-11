@@ -95,12 +95,10 @@ const Logo = ({
 export default function Entrance({
   scope,
   backPath,
-  headingText,
   excludeStoreId,
 }: {
   scope: AgeScope;
   backPath: string;
-  headingText?: string;
   excludeStoreId?: string;
 }) {
   const router = useRouter();
@@ -110,7 +108,6 @@ export default function Entrance({
 
   return (
     <main className={clsx(styles.containerEntrance, styles[activeStoreClass])}>
-      <h1>{headingText}</h1>
       <section className={styles.blockCastList}>
         <EntranceCastList />
       </section>

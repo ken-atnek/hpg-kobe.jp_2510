@@ -46,8 +46,12 @@
 }
 .shopMainContainer {
     display: grid;
-    grid-auto-flow: row;
     max-width: $articleMaxWidth;
+    grid-template-columns: 25% 1fr;
+    padding-bottom: 3em;
+    box-shadow: 0.5rem -3rem 3rem rgb(1 1 1 / 10%);
+
+    gap: 0 1em;
     @include sp {
         display: contents;
     }
@@ -68,13 +72,11 @@
             }
         }
     }
-    &.isLeftActive {
-        box-shadow: 0.5rem -3rem 3rem rgb(1 1 1 / 10%);
-        grid-auto-flow: unset;
-        grid-template-columns: 25% 1fr;
-        padding-bottom: 3em;
-        gap: 0 1em;
-    }
+}
+.shopSubContainer {
+    display: grid;
+    max-width: $articleMaxWidth;
+    grid-auto-flow: row;
 }
 .containerShopTopMain {
     @include sp {

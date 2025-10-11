@@ -1,11 +1,9 @@
-'use client';
 /* =======================================
  * 店舗 LEFTコンテンツ
  * URL: src/components/common/ShopLeft.tsx
  * Created: 2025-08-22
  * Last updated: 2025-09-19
  * ======================================= */
-import { usePathname } from 'next/navigation';
 import styles from '@/styles/ShopLeft.module.scss';
 import BannerGroup from '@/components/common/BannerGroup';
 import clsx from 'clsx';
@@ -15,11 +13,10 @@ import { getShopFromPath, getStoreClass, getLogoHref } from '@/lib/shopUtils';
 
 type ShopLeftProps = {
   photoDiaryUrl?: string;
+  shop: string;
 };
 
-const ShopLeft = ({ photoDiaryUrl }: ShopLeftProps) => {
-  const pathname = usePathname();
-  const shop = getShopFromPath(pathname);
+const ShopLeft = ({ photoDiaryUrl, shop }: ShopLeftProps) => {
   const activeStoreClass = getStoreClass(shop);
   const logoHref = getLogoHref(shop);
   const storeId = getStoreClass(shop); // 'kbHot' など
