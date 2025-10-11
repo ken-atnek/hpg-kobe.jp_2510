@@ -114,9 +114,8 @@ export default function CastProfile() {
     const fetchCastData = async () => {
       try {
         // キャッシュバスティング用のタイムスタンプを追加
-        const timestamp =
-          process.env.NODE_ENV === 'development' ? Date.now() : '';
-        const dataPath = `/cast/${shop}/${castId}/details.json${timestamp ? `?t=${timestamp}` : ''}`;
+        const timestamp = Date.now();
+        const dataPath = `/cast/${shop}/${castId}/details.json?t=${timestamp}`;
 
         const response = await fetch(dataPath);
         if (!response.ok) {
