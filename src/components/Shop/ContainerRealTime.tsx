@@ -42,7 +42,6 @@ const ContainerRealtime = () => {
   const [updateTime, setUpdateTime] = useState<string>('');
 
   useEffect(() => {
-
     //ページ読み込み時にバックグラウンド処理でユーザーアクセス情報をログに保存する
     const pageId = 'realTime';
     trackPageAccess(shop, pageId);
@@ -139,6 +138,7 @@ const ContainerRealtime = () => {
                   <Link
                     href={`/${shop}/profile/?id=${cast.castId}&type=realtime`}
                     className={styles.boxImage}
+                    prefetch={false}
                   >
                     <div
                       className={`${styles.wrapPhoto} ${gradeClassName ? styles[gradeClassName] : ''}`}

@@ -5,7 +5,7 @@
  * Last updated: 2025-09-17
  * ======================================= */
 export const navMenu = [
-  { id: 'navTop', href: '/villa/', label: 'トップ', labelEn: 'top' },
+  { id: 'navTop', href: '/villa/top/', label: 'トップ', labelEn: 'top' },
   {
     id: 'navReserve',
     href: 'https://www.cityheaven.net/hyogo/A2802/A280201/koube_hp_part3/S6ShopReservation/?pcmode=sp',

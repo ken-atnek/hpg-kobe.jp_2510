@@ -2,9 +2,9 @@
  *ホットポイントヴィラ 出勤情報
  * URL: src/app/hot/schedule/page.tsx
  * Created: 2025-09-18
- * Last updated: 2025-09-18
+ * Last updated: 2025-10-11
  * ======================================= */
-
+import LayoutWrapperSub from '@/components/Shop/Villa/LayoutWrapperSub';
 import type { Metadata } from 'next';
 import { isRealProduction } from '@/lib/env';
 import PageTitle from '@/components/common/PageTitle';
@@ -18,9 +18,9 @@ export const metadata: Metadata = {
 };
 export default function VillaSchedule() {
   return (
-    <>
+    <LayoutWrapperSub>
       <PageTitle titleJp="出勤情報" titleEn="schedule" />
       <CastScheduleByDay />
-    </>
+    </LayoutWrapperSub>
   );
 }

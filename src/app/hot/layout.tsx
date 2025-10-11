@@ -5,7 +5,7 @@
  * Last updated: 2025-08-20
  * ======================================= */
 import styles from '@/styles/ShopCommon.module.scss';
-export default function RootLayout({
+export default function HotRootLayout({
   children,
 }: {
   children: React.ReactNode;

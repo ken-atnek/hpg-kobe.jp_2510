@@ -17,7 +17,9 @@ export const metadata: Metadata = {
 export default function HotEntrance() {
   return (
     <>
-      <h1 className={styles.itemH1}>神戸・三宮の風俗｜ファッションヘルス</h1>
+      <h1 className={styles.itemH1}>
+        神戸ホットポイント｜神戸・三宮の風俗｜ファッションヘルス
+      </h1>
       <Entrance scope="hot" backPath="/hot/top/" excludeStoreId="kbHot" />
     </>
   );

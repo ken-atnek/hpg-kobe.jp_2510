@@ -4,7 +4,7 @@
  * Created: 2025-09-18
  * Last updated: 2025-09-18
  * ======================================= */
-
+import LayoutWrapperSub from '@/components/Shop/Villa/LayoutWrapperSub';
 import type { Metadata } from 'next';
 import { isRealProduction } from '@/lib/env';
 import PageTitle from '@/components/common/PageTitle';
@@ -18,9 +18,9 @@ export const metadata: Metadata = {
 };
 export default function VillaWeeklySchedule() {
   return (
-    <>
+    <LayoutWrapperSub>
       <PageTitle titleJp="週間出勤表" titleEn="weekly schedule" />
       <CastScheduleByPeriod />
-    </>
+    </LayoutWrapperSub>
   );
 }
