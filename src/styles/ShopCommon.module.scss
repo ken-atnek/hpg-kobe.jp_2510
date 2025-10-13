@@ -50,7 +50,6 @@
     grid-template-columns: 25% 1fr;
     padding-bottom: 3em;
     box-shadow: 0.5rem -3rem 3rem rgb(1 1 1 / 10%);
-
     gap: 0 1em;
     @include sp {
         display: contents;

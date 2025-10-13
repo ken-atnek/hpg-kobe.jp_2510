@@ -4,13 +4,16 @@
  * Created: 2025-09-06
  * Last updated: 2025-09-06
  * ======================================= */
+import { Suspense } from 'react';
 import LayoutWrapperSub from '@/components/Shop/Hot/LayoutWrapperSub';
 import CastProfile from '@/components/Shop/Profile/CastProfile';
 
-export default function ProfilePage() {
+export default function HotProfilePage() {
   return (
     <LayoutWrapperSub>
-      <CastProfile />
+      <Suspense fallback={<div />}>
+        <CastProfile />
+      </Suspense>
     </LayoutWrapperSub>
   );
 }

@@ -9,7 +9,7 @@ import BannerGroup from '@/components/common/BannerGroup';
 import clsx from 'clsx';
 import { Shops } from '@/data/AreaShopData';
 import ExternalLink from '@/components/common/ExternalLink';
-import { getShopFromPath, getStoreClass, getLogoHref } from '@/lib/shopUtils';
+import { getStoreClass, getLogoHref } from '@/lib/shopUtils';
 
 type ShopLeftProps = {
   photoDiaryUrl?: string;
