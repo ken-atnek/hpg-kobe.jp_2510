@@ -9,6 +9,19 @@
 /* stylelint-disable custom-property-pattern */
 // このファイル全体のルールを無効にする
 $entrance-max-width: 96rem;
+.itemH1 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 0.5em 0;
+    font-size: 0.8em;
+    color: #c9c9c9;
+    background-color: #313131;
+    @include sp {
+        font-size: 1rem;
+    }
+}
 
 /* =================================
  * キャスト画像リスト
@@ -108,19 +121,6 @@ $entrance-max-width: 96rem;
     flex-direction: column;
     align-items: center;
     font-size: inherit;
-    h1 {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 100%;
-        padding: 0.5em 0;
-        font-size: 0.8em;
-        color: #c9c9c9;
-        background-color: #313131;
-        @include sp {
-            font-size: 1rem;
-        }
-    }
     .itemH3 {
         position: relative;
         text-align: center;

@@ -43,9 +43,8 @@ export default function CastProfile() {
   const [nextCastId, setNextCastId] = useState<string | null>(null);
   const [prevCastName, setPrevCastName] = useState<string | null>(null);
   const [nextCastName, setNextCastName] = useState<string | null>(null);
-  const queryParams = new URLSearchParams(window.location.search);
-  const type = queryParams.get('type') || 'ranking';
-  const rankingType = queryParams.get('rankingType'); // 追加
+  const type = searchParams.get('type') || 'ranking';
+  const rankingType = searchParams.get('rankingType');
 
   useEffect(() => {
     try {
@@ -191,6 +190,7 @@ export default function CastProfile() {
             alt={`${cast.castName}の画像1`}
             width={580}
             height={773}
+            priority
           />
         </div>
         <div

@@ -4,7 +4,7 @@
  * Created: 2025-08-30
  * Last updated: 2025-08-30
  * ======================================= */
-
+import LayoutWrapperSub from '@/components/Shop/Hot/LayoutWrapperSub';
 import type { Metadata } from 'next';
 import { isRealProduction } from '@/lib/env';
 import PageTitle from '@/components/common/PageTitle';
@@ -18,9 +18,9 @@ export const metadata: Metadata = {
 };
 export default function HotSchedule() {
   return (
-    <>
+    <LayoutWrapperSub>
       <PageTitle titleJp="出勤情報" titleEn="schedule" />
       <CastScheduleByDay />
-    </>
+    </LayoutWrapperSub>
   );
 }

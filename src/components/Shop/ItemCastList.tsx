@@ -41,7 +41,10 @@ const ItemCastList = ({ cast }: Props) => {
           <p className={styles.scheduleStatus}>{cast.scheduleStatus}</p>
         )}
       </div>
-      <Link href={`/${shop}/profile/?id=${cast.castId}&type=castlist`}>
+      <Link
+        href={`/${shop}/profile/?id=${cast.castId}&type=castlist`}
+        prefetch={false}
+      >
         <div className={styles.wrapBadge}>
           {/* 新人さん or 体験入店（どちらか一方） */}
           {cast.badges?.includes('trial') ? (
