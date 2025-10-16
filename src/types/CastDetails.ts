@@ -16,6 +16,7 @@ export type CastDetail = {
   castNameEn: string;
   castImage: string;
   movie?: string;
+  moviePosterImage?: string;
   castImageSquare?: string;
   profileImages: string[];
   age: number;

@@ -448,6 +448,7 @@ export default function CastProfile() {
             <div className={styles.itemMovie}>
               <video
                 src={cast.movie}
+                poster={cast.moviePosterImage}
                 controls
                 preload="metadata"
                 width="100%"
