@@ -28,7 +28,6 @@ const TopSlideBan = () => {
     const timestamp = Date.now();
     return `/data/${shop}/TopSlideBan.json?t=${timestamp}`;
   }, [shop]);
-
   const [items, setModalImage, modalImage] = useBannerItems(jsonSlideBan);
 
   useEffect(() => {

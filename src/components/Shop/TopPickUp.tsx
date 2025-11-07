@@ -23,11 +23,11 @@ const TopPickUp = () => {
   const shop = getShopFromPath(pathname);
   const [mounted, setMounted] = useState(false);
 
+  // 🔽 TopPickUpは頻繁に更新されるため常にキャッシュバスティング
   const jsonPathPickUp = useMemo(() => {
     const timestamp = Date.now();
     return `/data/${shop}/TopPickUp.json?t=${timestamp}`;
   }, [shop]);
-
   const [items, setModalImage, modalImage] = useBannerItems(jsonPathPickUp);
 
   useEffect(() => {
