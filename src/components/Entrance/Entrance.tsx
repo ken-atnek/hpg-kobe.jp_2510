@@ -138,6 +138,38 @@ export default function Entrance({
         >
           no
         </a>
+        {shop === 'villa' && (
+          <div className={styles.banHeaven}>
+            <a
+              href="https://www.cityheaven.net/hyogo/A2802/A280201/koube_hp_part3/?of=y2"
+              target="_blank"
+              rel="noopener noreferrer" // セキュリティ対策
+            >
+              <Image
+                src="https://img.cityheaven.net/img/kikaku/hy_memberdiary/wp-content/uploads/2023/09/HN遷移バナー_オフィシャル用.png"
+                alt="ヘブンネット公式サイトへ" // alt属性追加
+                width={600} // 適切なサイズ指定
+                height={100} // 適切なサイズ指定
+                style={{ width: '100%', height: 'auto' }} // レスポンシブ対応
+                loading="lazy" // 遅延読み込み
+              />
+            </a>
+            <a
+              href="https://www.girlsheaven-job.net/hyogo/ma-45/sa-460/koube_hp_part3/?of=y"
+              target="_blank"
+              rel="noopener noreferrer" // セキュリティ対策
+            >
+              <Image
+                src="https://img.cityheaven.net/img/kikaku/hy_memberdiary/wp-content/uploads/2023/09/GH遷移バナー_オフィシャル用-1.png"
+                alt="ガールズヘブン求人サイトへ" // alt属性追加
+                width={600} // 適切なサイズ指定
+                height={100} // 適切なサイズ指定
+                style={{ width: '100%', height: 'auto' }} // レスポンシブ対応
+                loading="lazy" // 遅延読み込み
+              />
+            </a>
+          </div>
+        )}
       </section>
       <section className={styles.blockAreaShop}>
         <h3 className={styles.itemH3}>area shop</h3>
