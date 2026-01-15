@@ -12,7 +12,7 @@ import { usePathname } from 'next/navigation';
 import { setAgeVerifiedAsync, type AgeScope } from '@/lib/age';
 import EntranceCastList from '@/components/Entrance/CastList';
 import clsx from 'clsx';
-import EntranceAreaShopList from '@/components/Entrance/AreaShopList';
+// import EntranceAreaShopList from '@/components/Entrance/AreaShopList';
 import EntranceGroupShopList from '@/components/Entrance/GroupShopList';
 import ReciprocalLink from '@/components/Entrance/ReciprocalLink';
 import { getShopFromPath, getStoreClass } from '@/lib/shopUtils';
@@ -95,7 +95,7 @@ const Logo = ({
 export default function Entrance({
   scope,
   backPath,
-  excludeStoreId,
+  // excludeStoreId,
 }: {
   scope: AgeScope;
   backPath: string;
@@ -190,10 +190,10 @@ export default function Entrance({
           </div>
         )}
       </section>
-      <section className={styles.blockAreaShop}>
+      {/* <section className={styles.blockAreaShop}>
         <h3 className={styles.itemH3}>area shop</h3>
         <EntranceAreaShopList excludeStoreId={excludeStoreId} />
-      </section>
+      </section> */}
       <section className={styles.blockReciprocalLink}>
         <ReciprocalLink />
       </section>
