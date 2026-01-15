@@ -150,15 +150,19 @@ $entrance-max-width: 96rem;
         font-size: inherit;
     }
     .blockButton {
-        display: flex;
+        display: grid;
+        grid-template-columns: 4.5em 20em 4.5em;
         justify-content: center;
-        background-color: #000;
         align-items: center;
+        background-color: #000;
         padding: 3em 2em 2em;
         gap: 0 2em;
+        width: 100%;
         @include sp {
             padding: 6vw 0;
             gap: 0 4vw;
+            grid-template-columns: 4.5em 1fr 4.5em;
+            padding-inline: 10vw;
         }
         .boxAnnounce {
             font-size: inherit;
@@ -166,6 +170,9 @@ $entrance-max-width: 96rem;
             flex-direction: column;
             align-items: center;
             gap: 1em 0;
+            @include sp {
+                width: 40vw;
+            }
             svg {
                 fill: $base-white;
                 width: 100%;
@@ -181,6 +188,7 @@ $entrance-max-width: 96rem;
                 letter-spacing: 0.12em;
                 @include sp {
                     font-size: 1.1rem;
+                    width: fit-content;
                 }
             }
             &.kbHot {
@@ -226,6 +234,14 @@ $entrance-max-width: 96rem;
                 opacity: 1;
                 filter: blur(0);
             }
+        }
+        .banHeaven {
+            grid-column: span 3;
+            display: flex;
+            flex-direction: column;
+            margin-top: 2rem;
+            align-items: center;
+            gap: 1rem 0.5rem;
         }
     }
     .blockAreaShop {
@@ -313,6 +329,7 @@ $entrance-max-width: 96rem;
                 &.reciprocalBlock--1 {
                     flex-direction: column;
                     gap: 0.5em 0;
+                    align-items: center;
                 }
                 &.reciprocalBlock--2 {
                     gap: 0.5em;

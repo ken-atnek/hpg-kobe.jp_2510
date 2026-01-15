@@ -105,7 +105,7 @@ const ReciprocalLink = () => {
     // bodyがある場合はHTMLをそのまま表示
     if (item.body) {
       return (
-        <div
+        <li
           key={item.banId}
           className={styles.reciprocalItem}
           dangerouslySetInnerHTML={{ __html: item.body }}
@@ -117,7 +117,7 @@ const ReciprocalLink = () => {
     if (item.url) {
       return (
         <li key={item.banId} className={styles.reciprocalItem}>
-          <div className={styles.reciprocalLink}>
+          <li className={styles.reciprocalLink}>
             {item.thumbnail && (
               <Image
                 src={item.thumbnail}
@@ -127,7 +127,7 @@ const ReciprocalLink = () => {
                 className={styles.reciprocalThumbnail}
               />
             )}
-          </div>
+          </li>
         </li>
       );
     }
