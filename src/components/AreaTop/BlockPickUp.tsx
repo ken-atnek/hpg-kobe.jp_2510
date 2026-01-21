@@ -3,16 +3,18 @@
  * URL: src/components/AreaTop/BlockPickUp.tsx
  * Referenced in: /app/page.tsx
  * Created: 2025-08-19
- * Last updated: 2025-09-12
+ * Last updated: 2026-01-21
  * ======================================= */
 
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
+import type { CSSProperties } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import styles from '@/styles/AreaTop.module.scss';
 import type { CastDetail } from '@/types/CastDetails';
+
 // Swiper関連のインポート
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination } from 'swiper/modules';
@@ -20,21 +22,14 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 
 const BlockPickUp = () => {
-  const [grouped, setGrouped] = useState<{
-    hot: CastDetail[];
-    villa: CastDetail[];
-  } | null>(null);
+  // villa の全件（SPのSwiperはこれを使う）
+  const [villaCasts, setVillaCasts] = useState<CastDetail[]>([]);
 
-  const [allCasts, setAllCasts] = useState<CastDetail[]>([]);
+  // PC左右の表示インデックス
+  const [leftIndex, setLeftIndex] = useState(0);
+  const [rightIndex, setRightIndex] = useState(0);
 
-  const [activeIndices, setActiveIndices] = useState<{
-    [key in 'hot' | 'villa']: number;
-  }>({
-    hot: 0,
-    villa: 0,
-  });
-
-  // データ取得
+  // データ取得（villaのみ）
   useEffect(() => {
     let cancelled = false;
 
@@ -42,7 +37,9 @@ const BlockPickUp = () => {
       try {
         const timestamp =
           process.env.NODE_ENV === 'development' ? Date.now() : '';
-        const dataPath = `/data/area-top/areaTopPickUp.json${timestamp ? `?t=${timestamp}` : ''}`;
+        const dataPath = `/data/area-top/areaTopPickUp.json${
+          timestamp ? `?t=${timestamp}` : ''
+        }`;
 
         const response = await fetch(dataPath);
         if (!response.ok) {
@@ -52,12 +49,17 @@ const BlockPickUp = () => {
         const data: CastDetail[] = await response.json();
         if (cancelled) return;
 
-        const grouped = {
-          hot: data.filter((item) => item.shopId === 'hot'),
-          villa: data.filter((item) => item.shopId === 'villa'),
-        };
-        setGrouped(grouped);
-        setAllCasts(data); // 全キャストデータもセット
+        const villaAll = data.filter((item) => item.shopId === 'villa');
+        setVillaCasts(villaAll);
+
+        // PCの初期表示（先頭＆最後）
+        if (villaAll.length > 0) {
+          setLeftIndex(0);
+          setRightIndex(villaAll.length - 1);
+        } else {
+          setLeftIndex(0);
+          setRightIndex(0);
+        }
       } catch {
         // エラー時の処理（何もしない）
       }
@@ -70,34 +72,42 @@ const BlockPickUp = () => {
     };
   }, []);
 
-  // PC版のインターバル処理（既存のまま）
+  // PC版のインターバル処理（左：先頭→ / 右：最後←）
   useEffect(() => {
-    if (!grouped) return;
+    const len = villaCasts.length;
+    if (len === 0) return;
 
-    const timers: NodeJS.Timeout[] = [];
-
-    let delay = 0;
-    (['hot', 'villa'] as const).forEach((shop) => {
-      const timer = setTimeout(() => {
-        setInterval(() => {
-          setActiveIndices((prev) => {
-            const list = grouped[shop];
-            if (!list || list.length === 0) return prev;
-            const nextIndex = (prev[shop] + 1) % list.length;
-            return { ...prev, [shop]: nextIndex };
-          });
-        }, 4000);
-      }, delay);
-      delay += 200;
-      timers.push(timer);
-    });
+    const interval = setInterval(() => {
+      setLeftIndex((prev) => (prev + 1) % len);
+      setRightIndex((prev) => (prev - 1 + len) % len);
+    }, 4000);
 
     return () => {
-      timers.forEach((t) => clearTimeout(t));
+      clearInterval(interval);
     };
-  }, [grouped]);
+  }, [villaCasts]);
 
-  // キャストカードを生成する共通関数
+  // SP用：画像が無いキャストを除外（JSON順のまま）
+  const filteredCasts = useMemo(
+    () => villaCasts.filter((cast) => cast.castImage && cast.castImage !== ''),
+    [villaCasts]
+  );
+
+  let visibleCasts: CastDetail[] = [];
+  let enableLoop = false;
+
+  if (filteredCasts.length >= 3) {
+    visibleCasts = filteredCasts;
+    enableLoop = true;
+  } else if (filteredCasts.length === 2) {
+    visibleCasts = filteredCasts;
+    enableLoop = false; // 2枚のときはloopを無効
+  } else if (filteredCasts.length === 1) {
+    visibleCasts = filteredCasts;
+    enableLoop = false;
+  }
+
+  // SP（Swiper）用のカード
   const renderCastCard = (cast: CastDetail) => (
     <Link
       key={cast.castId}
@@ -130,78 +140,70 @@ const BlockPickUp = () => {
     </Link>
   );
 
-  // 画像が無いキャストを除外
-  const filteredCasts = allCasts.filter(
-    (cast) => cast.castImage && cast.castImage !== ''
+  // PC用（フェード切替）カード：全件を重ねて active だけ表示
+  const renderPcCard = (
+    cast: CastDetail,
+    isActive: boolean,
+    keySuffix: string
+  ) => (
+    <Link
+      key={`${cast.castId}-${keySuffix}`}
+      href={`/villa/profile/?id=${cast.castId}`}
+      className={`${styles.wrapLink} ${styles.fadeItem} ${
+        isActive ? styles.isActive : ''
+      }`}
+      aria-hidden={!isActive}
+      tabIndex={isActive ? 0 : -1}
+    >
+      <div className={styles.shopName}>{cast.shopName}</div>
+      <div className={styles.wrapImage}>
+        <Image
+          src={cast.castImage}
+          alt={cast.castName}
+          width={120}
+          height={160}
+          priority
+        />
+      </div>
+      <div className={styles.wrapProfile}>
+        <div className={styles.castName}>{cast.castName}</div>
+        <div className={styles.castSize}>
+          <span className={styles.age}>{cast.age}</span>
+          <span className={styles.tall}>{cast.tall}</span>
+          <span className={styles.bust}>
+            {cast.bust}
+            <i>{cast.cup}</i>
+          </span>
+          <span className={styles.west}>{cast.west}</span>
+          <span className={styles.hip}>{cast.hip}</span>
+        </div>
+      </div>
+    </Link>
   );
-
-  let visibleCasts: CastDetail[] = [];
-  let enableLoop = false;
-
-  if (filteredCasts.length >= 3) {
-    visibleCasts = filteredCasts;
-    enableLoop = true;
-  } else if (filteredCasts.length === 2) {
-    visibleCasts = filteredCasts;
-    enableLoop = false; // 2枚のときはloopを無効
-  } else if (filteredCasts.length === 1) {
-    visibleCasts = filteredCasts;
-    enableLoop = false;
-  }
 
   return (
     <>
-      {/* PC版（既存のフェード表示） */}
+      {/* PC版（左右2枠：左=先頭から / 右=最後から） */}
       <ul className={`${styles.blockPickUp} ${styles.pcVersion}`}>
-        {(['hot', 'villa'] as const).map((shop) => {
-          if (!grouped || !grouped[shop] || grouped[shop].length === 0)
-            return <li key={shop}></li>;
-          const activeIndex = activeIndices[shop];
-          return (
-            <li key={shop}>
-              <div className={styles.fadeStage}>
-                {grouped[shop].map((cast, idx) => (
-                  <Link
-                    key={cast.castId}
-                    href={`/${shop}/profile/?id=${cast.castId}`}
-                    className={`${styles.wrapLink} ${styles.fadeItem} ${
-                      idx === activeIndex ? styles.isActive : ''
-                    }`}
-                    aria-hidden={idx !== activeIndex}
-                    tabIndex={idx === activeIndex ? 0 : -1}
-                  >
-                    <div className={styles.shopName}>{cast.shopName}</div>
-                    <div className={styles.wrapImage}>
-                      <Image
-                        src={cast.castImage}
-                        alt={cast.castName}
-                        width={120}
-                        height={160}
-                        priority
-                      />
-                    </div>
-                    <div className={styles.wrapProfile}>
-                      <div className={styles.castName}>{cast.castName}</div>
-                      <div className={styles.castSize}>
-                        <span className={styles.age}>{cast.age}</span>
-                        <span className={styles.tall}>{cast.tall}</span>
-                        <span className={styles.bust}>
-                          {cast.bust}
-                          <i>{cast.cup}</i>
-                        </span>
-                        <span className={styles.west}>{cast.west}</span>
-                        <span className={styles.hip}>{cast.hip}</span>
-                      </div>
-                    </div>
-                  </Link>
-                ))}
-              </div>
-            </li>
-          );
-        })}
-      </ul>
+        {/* 左枠（先頭から進む） */}
+        <li>
+          <div className={styles.fadeStage}>
+            {villaCasts.map((cast, idx) =>
+              renderPcCard(cast, idx === leftIndex, 'L')
+            )}
+          </div>
+        </li>
 
-      {/* スマホ版（Swiperスライド表示） */}
+        {/* 右枠（最後から戻る） */}
+        <li>
+          <div className={styles.fadeStage}>
+            {villaCasts.map((cast, idx) =>
+              renderPcCard(cast, idx === rightIndex, 'R')
+            )}
+          </div>
+        </li>
+      </ul>
+      {/* スマホ版（PC左枠の並び＝JSON順をSwiper表示） */}
       <div className={styles.mobileBlockPickUp}>
         {visibleCasts.length >= 2 ? (
           <Swiper
@@ -216,7 +218,7 @@ const BlockPickUp = () => {
               {
                 '--swiper-transition-timing-function':
                   'cubic-bezier(0.25, 0.1, 0.25, 1)',
-              } as React.CSSProperties
+              } as CSSProperties
             }
             autoplay={{
               delay: 5000,
