@@ -42,6 +42,14 @@
             background-color: $bg-black;
         }
     }
+    &.kbStyle {
+        margin-bottom: 3em;
+        background-color: $shop-style;
+        @include sp {
+            margin-bottom: unset;
+            background-color: $bg-black;
+        }
+    }
     .pageTop {
         display: none;
         @include sp {
@@ -78,7 +86,7 @@
         max-width: $articleMaxWidth;
         width: 100%;
         display: grid;
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(3, 1fr);
         font-size: inherit;
         justify-content: center;
         gap: 0 1.4em;
@@ -109,7 +117,7 @@
                 }
                 &.kbHot {
                     svg {
-                        width: 50%;
+                        width: 60%;
                         aspect-ratio: 500/176;
                         stroke: unset;
                         fill: #000;
@@ -121,13 +129,25 @@
                 }
                 &.kbVilla {
                     svg {
-                        width: 50%;
+                        width: 70%;
                         aspect-ratio: 500/161;
                         stroke: unset;
                         fill: #000;
                         @include sp {
                             width: 85%;
                             fill: $shop-villa;
+                        }
+                    }
+                }
+                &.kbStyle {
+                    svg {
+                        width: 75%;
+                        aspect-ratio: 298/81;
+                        stroke: unset;
+                        fill: #000;
+                        @include sp {
+                            width: 85%;
+                            fill: $shop-style;
                         }
                     }
                 }

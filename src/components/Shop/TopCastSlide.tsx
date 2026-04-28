@@ -44,6 +44,7 @@ const CastSlide = ({
   const storeNameMap: Record<string, string> = {
     hot: 'kobe hotpoint',
     villa: 'hotpoint villa',
+    style: 'hotpoint style',
   };
   const storeName = storeNameMap[shop];
 

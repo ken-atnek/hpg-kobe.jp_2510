@@ -27,6 +27,7 @@ const BlockAccess = ({ variant = 'default' }: ShopDetails) => {
     const mapping: { [key: string]: string } = {
       hot: 'kbHot',
       villa: 'kbVilla',
+      style: 'kbStyle',
     };
     return mapping[shop] || shop;
   };
@@ -37,6 +38,8 @@ const BlockAccess = ({ variant = 'default' }: ShopDetails) => {
       hot: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d205.03222338293656!2d135.19077178090814!3d34.6921737674493!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f60.!3m3!1m2!1s0x60008f7b0fbf9cd9%3A0xfe2ecc533108053d!2z56We5oi444Ob44OD44OI44Od44Kk44Oz44OI5pys5bqX!5e0!3m2!1sja!2sjp!4v1750246830699!5m2!1sja!2sjp', // hotのマップURL
       villa:
         'https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d820.1184078352044!2d135.191745!3d34.693232!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60008ee49f0cd7ef%3A0xe210857088893020!2z44CSNjUwLTAwMTIg5YW15bqr55yM56We5oi45biC5Lit5aSu5Yy65YyX6ZW354ut6YCa77yR5LiB55uu77yR77yQ4oiS77yR77yTIOODmeOCrOOCueODk-ODqw!5e0!3m2!1sja!2sjp!4v1758098714799!5m2!1sja!2sjp', // villaのマップURL
+      style:
+        'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5012.697747895469!2d135.18728349355078!3d34.69228700195405!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60008ee3503c6ff3%3A0x6f768caa6c53d6a0!2z44CSNjUwLTAwMTIg5YW15bqr55yM56We5oi45biC5Lit5aSu5Yy65YyX6ZW354ut6YCa77yS5LiB55uu77yR4oiS77yUIDFm!5e0!3m2!1sja!2sjp!4v1777373762643!5m2!1sja!2sjp', // villaのマップURL
     };
     return mapUrls[shop];
   };

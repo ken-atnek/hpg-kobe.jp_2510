@@ -5,7 +5,7 @@
  * Last updated: 2025-09-15
  * ======================================= */
 export const navMenu = [
-  { id: 'navTop', href: '/hot/top/', label: 'トップ', labelEn: 'top' },
+  { id: 'navTop', href: '/style/top/', label: 'トップ', labelEn: 'top' },
   {
     id: 'navReserve',
     href: '#',

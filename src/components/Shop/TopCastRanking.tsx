@@ -84,6 +84,8 @@ const CastRanking = ({
     }
   }, [selectedRanking, rankingData, selectedIndex]);
 
+  if (rankingData.length === 0) return null;
+
   return (
     <article className={clsx(styles.boxCastRanking, styles[activeStoreClass])}>
       <div className={styles.wrapTitle}>

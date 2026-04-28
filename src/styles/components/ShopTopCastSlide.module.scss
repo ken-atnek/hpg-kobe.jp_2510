@@ -119,4 +119,11 @@
             }
         }
     }
+    &.kbStyle {
+        background-color: hsl(343, 85%, 87%);
+        background-blend-mode: soft-light;
+        .wrapTitle {
+            @include contents-title(#000000);
+        }
+    }
 }
