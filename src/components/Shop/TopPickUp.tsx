@@ -15,7 +15,7 @@ import { renderBannerItem, useBannerItems } from '@/lib/renderBannerItem';
 import Image from 'next/image';
 import { getShopFromPath } from '@/lib/shopUtils';
 import { createPortal } from 'react-dom';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import 'swiper/css';
 
 const TopPickUp = () => {
@@ -24,8 +24,10 @@ const TopPickUp = () => {
   const [mounted, setMounted] = useState(false);
 
   // 🔽 TopPickUpは頻繁に更新されるため常にキャッシュバスティング
-  const timestamp = Date.now();
-  const jsonPathPickUp = `/data/${shop}/TopPickUp.json?t=${timestamp}`;
+  const jsonPathPickUp = useMemo(() => {
+    const timestamp = Date.now();
+    return `/data/${shop}/TopPickUp.json?t=${timestamp}`;
+  }, [shop]);
   const [items, setModalImage, modalImage] = useBannerItems(jsonPathPickUp);
 
   useEffect(() => {

@@ -5,7 +5,7 @@
  * Last updated: 2025-08-19
  * ======================================= */
 
-import LogoHot from '@/assets/images/logo/kobe-hot.webp';
+// import LogoHot from '@/assets/images/logo/kobe-hot.webp';
 import LogoVilla from '@/assets/images/logo/kobe-villa.webp';
 // import LogoStyle from '@/assets/images/logo/kobe-style.webp';
 import { StaticImageData } from 'next/image';
@@ -25,19 +25,19 @@ export type Shop = {
 };
 
 export const Shops = [
-  {
-    storeId: 'kbHot',
-    name: '神戸ホットポイント',
-    nameEn: 'kobe hotpoint',
-    logo: LogoHot,
-    svgLogo: '#svg_logoKobeHot',
-    post: '〒650-0012',
-    address: '兵庫県神戸市中央区北長狭通２丁目１−４',
-    phone: '078-332-0388',
-    url: '/hot/',
-    shopColor: '#3da3fc',
-    mapUrl: 'https://maps.app.goo.gl/epJdH7BtHsccYyGdA',
-  },
+  // {
+  //   storeId: 'kbHot',
+  //   name: '神戸ホットポイント',
+  //   nameEn: 'kobe hotpoint',
+  //   logo: LogoHot,
+  //   svgLogo: '#svg_logoKobeHot',
+  //   post: '〒650-0012',
+  //   address: '兵庫県神戸市中央区北長狭通２丁目１−４',
+  //   phone: '078-332-0388',
+  //   url: '/hot/top/',
+  //   shopColor: '#3da3fc',
+  //   mapUrl: 'https://maps.app.goo.gl/epJdH7BtHsccYyGdA',
+  // },
   {
     storeId: 'kbVilla',
     name: 'ホットポイントヴィラ',
@@ -47,7 +47,7 @@ export const Shops = [
     post: '〒650-0012',
     address: '兵庫県神戸市中央区北長狭通１丁目１０−１３',
     phone: '078-332-3666',
-    url: '/villa/',
+    url: '/villa/top/',
     shopColor: '#db3dfc',
     mapUrl: 'https://maps.app.goo.gl/[VillaのGoogleマップURL]',
   },

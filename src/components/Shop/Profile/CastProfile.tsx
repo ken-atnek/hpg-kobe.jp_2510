@@ -43,9 +43,8 @@ export default function CastProfile() {
   const [nextCastId, setNextCastId] = useState<string | null>(null);
   const [prevCastName, setPrevCastName] = useState<string | null>(null);
   const [nextCastName, setNextCastName] = useState<string | null>(null);
-  const queryParams = new URLSearchParams(window.location.search);
-  const type = queryParams.get('type') || 'ranking';
-  const rankingType = queryParams.get('rankingType'); // 追加
+  const type = searchParams.get('type') || 'ranking';
+  const rankingType = searchParams.get('rankingType');
 
   useEffect(() => {
     try {
@@ -114,9 +113,8 @@ export default function CastProfile() {
     const fetchCastData = async () => {
       try {
         // キャッシュバスティング用のタイムスタンプを追加
-        const timestamp =
-          process.env.NODE_ENV === 'development' ? Date.now() : '';
-        const dataPath = `/cast/${shop}/${castId}/details.json${timestamp ? `?t=${timestamp}` : ''}`;
+        const timestamp = Date.now();
+        const dataPath = `/cast/${shop}/${castId}/details.json?t=${timestamp}`;
 
         const response = await fetch(dataPath);
         if (!response.ok) {
@@ -192,6 +190,7 @@ export default function CastProfile() {
             alt={`${cast.castName}の画像1`}
             width={580}
             height={773}
+            priority
           />
         </div>
         <div
@@ -449,6 +448,7 @@ export default function CastProfile() {
             <div className={styles.itemMovie}>
               <video
                 src={cast.movie}
+                poster={cast.moviePosterImage}
                 controls
                 preload="metadata"
                 width="100%"

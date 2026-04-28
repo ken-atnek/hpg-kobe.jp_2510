@@ -2,14 +2,20 @@
  *ホットポイントヴィラ Layout
  * URL:src/app/hot/layout.tsx
  * Created: 2025-09-17
- * Last updated: 2025-09-17
+ * Last updated: 2025-10-11
  * ======================================= */
-import ClientWrapper from '@/app/villa/ClientWrapper';
-
-export default function RootLayout({
+import styles from '@/styles/ShopCommon.module.scss';
+export default function VillaRootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  return <ClientWrapper>{children}</ClientWrapper>;
+  return (
+    <div
+      className={styles.bodyContents}
+      style={{ '--baseColor': '#c654cb' } as React.CSSProperties}
+    >
+      {children}
+    </div>
+  );
 }

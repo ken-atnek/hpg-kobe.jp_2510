@@ -1,3 +1,4 @@
+'use client';
 /* =======================================
  *店舗 FOOTER MENU
  * URL: src/components/common/ShopFooterMenu.tsx

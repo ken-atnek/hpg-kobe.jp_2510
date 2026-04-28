@@ -4,7 +4,7 @@
  * Created: 2025-09-18
  * Last updated: 2025-09-18
  * ======================================= */
-
+import LayoutWrapperSub from '@/components/Shop/Villa/LayoutWrapperSub';
 import type { Metadata } from 'next';
 import { isRealProduction } from '@/lib/env';
 import PageTitle from '@/components/common/PageTitle';
@@ -18,9 +18,9 @@ export const metadata: Metadata = {
 };
 export default function VillaRealTime() {
   return (
-    <>
+    <LayoutWrapperSub>
       <PageTitle titleJp="リアルタイム" titleEn="realtime" />
       <ContainerRealtime />
-    </>
+    </LayoutWrapperSub>
   );
 }

@@ -1,3 +1,4 @@
+'use client';
 /* =======================================
  *神戸ホットポイント 店舗HEADER
  * URL: src/components/common/ShopHeader.tsx
