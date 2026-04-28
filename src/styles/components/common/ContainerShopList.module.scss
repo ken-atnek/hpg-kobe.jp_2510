@@ -78,8 +78,7 @@
         max-width: $articleMaxWidth;
         width: 100%;
         display: grid;
-
-        // grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(2, 1fr);
         font-size: inherit;
         justify-content: center;
         gap: 0 1.4em;
@@ -91,7 +90,7 @@
         }
         li {
             position: relative;
-            width: 50vw;
+            // width: 50vw;
             display: grid;
             grid-template-rows: subgrid;
             font-size: 1em;
