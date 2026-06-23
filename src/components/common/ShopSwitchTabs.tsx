@@ -65,6 +65,7 @@ function getShopDisplayName(shopId: string): string {
   const shopNames: Record<string, string> = {
     hot: '神戸ホットポイント',
     villa: 'ホットポイント VILLA',
+    style: 'ホットポイントスタイル',
   };
   return shopNames[shopId] || shopId;
 }
