@@ -20,7 +20,7 @@ import Image, { type StaticImageData } from 'next/image';
 import GroupLogo from '@/assets/images/logo/group_hot.webp';
 
 // ロゴ設定（このコンポーネント内でのみ使用）
-type LogoScope = 'group' | 'hot' | 'villa';
+type LogoScope = 'group' | 'hot' | 'villa' | 'style';
 
 interface LogoConfig {
   type: 'svg' | 'image';
@@ -51,6 +51,13 @@ const getLogoConfig = (scope: LogoScope): LogoConfig => {
       type: 'svg',
       href: '#svg_logoKobeVilla',
       alt: 'ホットポイント VILLA',
+      width: 100,
+      height: 50,
+    },
+    style: {
+      type: 'svg',
+      href: '#svg_logoKobeStyle',
+      alt: 'ホットポイント スタイル',
       width: 100,
       height: 50,
     },

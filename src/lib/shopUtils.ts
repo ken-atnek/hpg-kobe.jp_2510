@@ -1,11 +1,13 @@
 export const storeIdMap: Record<string, string> = {
   hot: 'kbHot',
   villa: 'kbVilla',
+  style: 'kbStyle',
 };
 
 export const logoHrefMap: Record<string, string> = {
   hot: '#svg_logoKobeHot',
   villa: '#svg_logoKobeVilla',
+  style: '#svg_logoKobeStyle',
 };
 
 export function getShopFromPath(pathname: string): string {
@@ -33,7 +35,8 @@ export function getLogoHref(shop: string): string {
 }
 
 export const platinumMailUrlMap: Record<string, string> = {
-  hot: 'https://www.cityheaven.net/hyogo/A2802/A280201/koubehp/platinummail/?of=y',
+  // hot: 'https://www.cityheaven.net/hyogo/A2802/A280201/koubehp/platinummail/?of=y',
+  hot: 'https://www.cityheaven.net/hyogo/A2802/A280201/koube_hp_part3/platinummail/?of=y',
   villa:
     'https://www.cityheaven.net/hyogo/A2802/A280201/koube_hp_part3/platinummail/?of=y',
 };

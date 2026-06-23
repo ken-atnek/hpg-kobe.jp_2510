@@ -66,6 +66,8 @@ const TopSlideBan = () => {
         )
       : null;
 
+  if (items.length === 0) return null;
+
   return (
     <>
       <article className={styles.boxTopSlideBan}>

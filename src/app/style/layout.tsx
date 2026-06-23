@@ -1,5 +1,5 @@
 /* =======================================
- *神戸ホットポイントホットポイント
+ *神戸ホットポイントスタイル
  * URL:src/app/hot/layout.tsx
  * Created: 2025-08-20
  * Last updated: 2025-08-20
@@ -13,14 +13,14 @@ export default function HotRootLayout({
   return (
     <div
       className={styles.bodyContents}
-      style={{ '--baseColor': '#3da3fc' } as React.CSSProperties}
+      style={{ '--baseColor': '#ff558b' } as React.CSSProperties}
     >
       {children}
     </div>
   );
 }
 /* =======================================
- * 神戸ホットポイント（閉店対応）
+ * 神戸ホットポイントスタイル（閉店対応）
  * URL: src/app/hot/layout.tsx
  *  * Created: 2025-08-20
  * Last updated: 2026-01-15

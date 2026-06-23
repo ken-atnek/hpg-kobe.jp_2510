@@ -136,6 +136,7 @@
             }
         }
         .boxPhotoDiary {
+            display: none;
             &::before {
                 background: url("../assets/images/objects/photo-diary-hot.webp")
                     no-repeat center center / contain;
@@ -167,6 +168,38 @@
             }
         }
         .boxPhotoDiary {
+            &::before {
+                background: url("../assets/images/objects/photo-diary-villa.webp")
+                    no-repeat center center / contain;
+            }
+            .wrapTitle {
+                @include contents-title(#000000);
+            }
+            .titleObject {
+                &::before {
+                    filter: grayscale(29%) hue-rotate(318deg) saturate(103%)
+                        drop-shadow(0.5rem 0.5rem 0.5rem rgb(1 1 1 / 30%));
+                }
+            }
+        }
+    }
+    &.kbStyle {
+        .itemLogo {
+            width: 100%;
+            margin-bottom: 1em;
+            @include sp {
+                width: 40vw;
+                margin-bottom: unset;
+            }
+            svg {
+                width: 100%;
+                @include svg-villa;
+                stroke: unset;
+                fill: $shop-style;
+            }
+        }
+        .boxPhotoDiary {
+            display: none;
             &::before {
                 background: url("../assets/images/objects/photo-diary-villa.webp")
                     no-repeat center center / contain;
