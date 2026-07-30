@@ -136,7 +136,7 @@
             }
         }
         .boxPhotoDiary {
-            display: none;
+            // display: none;
             &::before {
                 background: url("../assets/images/objects/photo-diary-hot.webp")
                     no-repeat center center / contain;
