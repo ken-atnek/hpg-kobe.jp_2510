@@ -22,14 +22,14 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 
 const BlockPickUp = () => {
-  // villa の全件（SPのSwiperはこれを使う）
-  const [villaCasts, setVillaCasts] = useState<CastDetail[]>([]);
+  // hot の全件（SPのSwiperはこれを使う）
+  const [hotCasts, setHotCasts] = useState<CastDetail[]>([]);
 
   // PC左右の表示インデックス
   const [leftIndex, setLeftIndex] = useState(0);
   const [rightIndex, setRightIndex] = useState(0);
 
-  // データ取得（villaのみ）
+  // データ取得（hotのみ）
   useEffect(() => {
     let cancelled = false;
 
@@ -49,13 +49,13 @@ const BlockPickUp = () => {
         const data: CastDetail[] = await response.json();
         if (cancelled) return;
 
-        const villaAll = data.filter((item) => item.shopId === 'villa');
-        setVillaCasts(villaAll);
+        const hotAll = data.filter((item) => item.shopId === 'hot');
+        setHotCasts(hotAll);
 
         // PCの初期表示（先頭＆最後）
-        if (villaAll.length > 0) {
+        if (hotAll.length > 0) {
           setLeftIndex(0);
-          setRightIndex(villaAll.length - 1);
+          setRightIndex(hotAll.length - 1);
         } else {
           setLeftIndex(0);
           setRightIndex(0);
@@ -74,7 +74,7 @@ const BlockPickUp = () => {
 
   // PC版のインターバル処理（左：先頭→ / 右：最後←）
   useEffect(() => {
-    const len = villaCasts.length;
+    const len = hotCasts.length;
     if (len === 0) return;
 
     const interval = setInterval(() => {
@@ -85,12 +85,12 @@ const BlockPickUp = () => {
     return () => {
       clearInterval(interval);
     };
-  }, [villaCasts]);
+  }, [hotCasts]);
 
   // SP用：画像が無いキャストを除外（JSON順のまま）
   const filteredCasts = useMemo(
-    () => villaCasts.filter((cast) => cast.castImage && cast.castImage !== ''),
-    [villaCasts]
+    () => hotCasts.filter((cast) => cast.castImage && cast.castImage !== ''),
+    [hotCasts]
   );
 
   let visibleCasts: CastDetail[] = [];
@@ -148,7 +148,7 @@ const BlockPickUp = () => {
   ) => (
     <Link
       key={`${cast.castId}-${keySuffix}`}
-      href={`/villa/profile/?id=${cast.castId}`}
+      href={`/hot/profile/?id=${cast.castId}`}
       className={`${styles.wrapLink} ${styles.fadeItem} ${
         isActive ? styles.isActive : ''
       }`}
@@ -188,7 +188,7 @@ const BlockPickUp = () => {
         {/* 左枠（先頭から進む） */}
         <li>
           <div className={styles.fadeStage}>
-            {villaCasts.map((cast, idx) =>
+            {hotCasts.map((cast, idx) =>
               renderPcCard(cast, idx === leftIndex, 'L')
             )}
           </div>
@@ -197,7 +197,7 @@ const BlockPickUp = () => {
         {/* 右枠（最後から戻る） */}
         <li>
           <div className={styles.fadeStage}>
-            {villaCasts.map((cast, idx) =>
+            {hotCasts.map((cast, idx) =>
               renderPcCard(cast, idx === rightIndex, 'R')
             )}
           </div>

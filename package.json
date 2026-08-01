@@ -3,11 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "cross-env NODE_OPTIONS=\"--no-warnings --no-deprecation\" next dev",
-    "build": "cross-env NODE_OPTIONS=\"--no-warnings --no-deprecation\" next build && rimraf out/404.html out/404 out/data out/backend out/cast out/movie out/images",
+    "dev": "next dev",
+    "build": "next build && rimraf out/404.html out/404 out/data out/backend out/cast out/movie out/images",
+    "build:prod": "cross-env NEXT_PUBLIC_IS_REAL_PROD=true NEXT_PUBLIC_METADATA_BASE=https://www.hpg-kobe.jp/ next build && rimraf out/404.html out/404 out/data out/backend out/cast out/movie out/images",
     "start": "next start",
-    "lint": "next lint",
-    "lint:style": "stylelint \"src/**/*.scss\" --fix"
+    "lint": "eslint .",
+    "lint:style": "stylelint \"src/**/*.scss\"",
+    "lint:style:fix": "stylelint \"src/**/*.scss\" --fix"
   },
   "dependencies": {
     "clsx": "^2.1.1",

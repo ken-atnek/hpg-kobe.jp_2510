@@ -13,14 +13,14 @@ import styles from '@/styles/AreaTop.module.scss';
 import type { CastDetail } from '@/types/CastDetails';
 
 const BlockNewFace = () => {
-  // villa 全件
-  const [villaCasts, setVillaCasts] = useState<CastDetail[]>([]);
+  // hot 全件
+  const [hotCasts, setHotCasts] = useState<CastDetail[]>([]);
 
   // PC 左右インデックス
   const [leftIndex, setLeftIndex] = useState(0);
   const [rightIndex, setRightIndex] = useState(0);
 
-  // データ取得（villaのみ）
+  // データ取得（hotのみ）
   useEffect(() => {
     let cancelled = false;
 
@@ -40,12 +40,12 @@ const BlockNewFace = () => {
         const data: CastDetail[] = await response.json();
         if (cancelled) return;
 
-        const villaAll = data.filter((item) => item.shopId === 'villa');
-        setVillaCasts(villaAll);
+        const hotAll = data.filter((item) => item.shopId === 'hot');
+        setHotCasts(hotAll);
 
-        if (villaAll.length > 0) {
+        if (hotAll.length > 0) {
           setLeftIndex(0);
-          setRightIndex(villaAll.length - 1);
+          setRightIndex(hotAll.length - 1);
         } else {
           setLeftIndex(0);
           setRightIndex(0);
@@ -64,7 +64,7 @@ const BlockNewFace = () => {
 
   // PC 切替インターバル（6秒）
   useEffect(() => {
-    const len = villaCasts.length;
+    const len = hotCasts.length;
     if (len === 0) return;
 
     const interval = setInterval(() => {
@@ -75,7 +75,7 @@ const BlockNewFace = () => {
     return () => {
       clearInterval(interval);
     };
-  }, [villaCasts]);
+  }, [hotCasts]);
 
   // PC用カード（フェード対応）
   const renderCard = (
@@ -85,7 +85,7 @@ const BlockNewFace = () => {
   ) => (
     <Link
       key={`${cast.castId}-${keySuffix}`}
-      href={`/villa/profile/?id=${cast.castId}`}
+      href={`/hot/profile/?id=${cast.castId}`}
       className={`${styles.wrapLink} ${styles.fadeItem} ${
         isActive ? styles.isActive : ''
       }`}
@@ -97,7 +97,7 @@ const BlockNewFace = () => {
           src={
             cast.castImage && cast.castImage !== ''
               ? cast.castImage
-              : `/images/cast/villa/no-image.webp`
+              : `/images/cast/hot/no-image.webp`
           }
           alt={cast.castName}
           width={120}
@@ -123,18 +123,18 @@ const BlockNewFace = () => {
   return (
     <ul className={styles.blockNewFace}>
       {/* 左枠（先頭から進む） */}
-      <li className={styles.villa}>
+      <li className={styles.hot}>
         <div className={styles.fadeStage}>
-          {villaCasts.map((cast, idx) =>
+          {hotCasts.map((cast, idx) =>
             renderCard(cast, idx === leftIndex, 'L')
           )}
         </div>
       </li>
 
       {/* 右枠（最後から戻る） */}
-      <li className={styles.villa}>
+      <li className={styles.hot}>
         <div className={styles.fadeStage}>
-          {villaCasts.map((cast, idx) =>
+          {hotCasts.map((cast, idx) =>
             renderCard(cast, idx === rightIndex, 'R')
           )}
         </div>

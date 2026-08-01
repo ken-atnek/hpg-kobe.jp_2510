@@ -34,7 +34,7 @@ export default function LayoutWrapperMain({
         <main className={styles.shopMainContainer}>
           <ShopLeft
             shop="hot"
-            photoDiaryUrl="https://blogparts.cityheaven.net/widget/?shopId=1800&mode=2&type=14&limitedKind=0&num=9&col=3&color=2&fontsize=12"
+            photoDiaryUrl="https://blogparts.cityheaven.net/widget/?shopId=1684&mode=2&type=14&limitedKind=0&num=12&col=3&color=2&fontsize=12&width=340"
           />
           {children}
         </main>

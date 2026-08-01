@@ -6,11 +6,11 @@
  * ======================================= */
 
 import '@/styles/globals.scss';
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import SvgDefs from '@/components/SvgDefs';
 import { Noto_Sans_JP, Roboto } from 'next/font/google';
 import { Bebas_Neue, Reenie_Beanie } from 'next/font/google';
-import { isRealProduction } from '@/lib/env';
+import { isRealProduction, metadataBase } from '@/lib/env';
 import Script from 'next/script';
 const bebasNeue = Bebas_Neue({
   subsets: ['latin'],
@@ -33,16 +33,24 @@ const roboto = Roboto({
   display: 'swap',
 });
 
-// 本番のみ metadataBase を設定
-const metadataBase = isRealProduction
-  ? new URL(process.env.NEXT_PUBLIC_METADATA_BASE || 'https://www.hpg-kobe.jp/')
-  : undefined;
+const siteTitle = '神戸ホットポイントグループ';
+const siteName = '神戸ホットポイントグループ';
+const siteDescription =
+  '神戸ホットポイント、神戸ヴィラ、神戸スタイルのキャスト情報、出勤情報、リアルタイム情報を掲載する公式サイトです。';
 
 export const metadata: Metadata = {
+  title: {
+    default: siteTitle,
+    template: `%s | ${siteName}`,
+  },
+  description: siteDescription,
   ...(isRealProduction && {
     metadataBase,
     openGraph: {
-      url: metadataBase?.toString(),
+      title: siteTitle,
+      description: siteDescription,
+      siteName,
+      locale: 'ja_JP',
       type: 'website',
       images: [
         {
@@ -52,6 +60,11 @@ export const metadata: Metadata = {
           alt: '神戸ホットポイントグループのOGP画像',
         },
       ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: siteTitle,
+      description: siteDescription,
     },
   }),
   robots: isRealProduction ? 'index, follow' : 'noindex, nofollow',
@@ -73,6 +86,13 @@ export const metadata: Metadata = {
   },
 };
 
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+};
+
 export default function RootLayout({
   children,
 }: {
@@ -88,10 +108,6 @@ export default function RootLayout({
         <meta
           name="format-detection"
           content="telephone=no, address=no, email=no"
-        />
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
         />
         {/* Google tag (gtag.js) */}
         <Script

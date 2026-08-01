@@ -15,6 +15,11 @@ export const generateMetadata = (): Metadata => {
     description: isRealProduction
       ? '神戸 風俗のホットポイントグループは２０年以上連続、エリアシェアＮｏ.１の三宮の風俗店（ファッションヘルス）です。神戸・三宮でトップクラスの美女達と熱いお時間をお過ごしください。'
       : undefined,
+    ...(isRealProduction && {
+      alternates: {
+        canonical: '/',
+      },
+    }),
   };
 };
 
