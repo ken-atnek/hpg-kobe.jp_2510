@@ -218,3 +218,8 @@
         }
     }
 }
+.hideOnSp {
+    @include sp {
+        display: none;
+    }
+}

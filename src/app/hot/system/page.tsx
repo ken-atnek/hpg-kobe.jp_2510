@@ -22,7 +22,7 @@ export const metadata: Metadata = {
 };
 export default function HotSystem() {
   return (
-    <LayoutWrapperMain>
+    <LayoutWrapperMain hideShopLeftOnSp>
       <SystemMain />
     </LayoutWrapperMain>
   );

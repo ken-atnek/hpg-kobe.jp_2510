@@ -14,9 +14,10 @@ import { getStoreClass, getLogoHref } from '@/lib/shopUtils';
 type ShopLeftProps = {
   photoDiaryUrl?: string;
   shop: string;
+  hideOnSp?: boolean;
 };
 
-const ShopLeft = ({ photoDiaryUrl, shop }: ShopLeftProps) => {
+const ShopLeft = ({ photoDiaryUrl, shop, hideOnSp = false }: ShopLeftProps) => {
   const activeStoreClass = getStoreClass(shop);
   const logoHref = getLogoHref(shop);
   const storeId = getStoreClass(shop); // 'kbHot' など
@@ -32,7 +33,11 @@ const ShopLeft = ({ photoDiaryUrl, shop }: ShopLeftProps) => {
 
   return (
     <section
-      className={clsx(styles.containerShopLeft, styles[activeStoreClass])}
+      className={clsx(
+        styles.containerShopLeft,
+        styles[activeStoreClass],
+        hideOnSp && styles.hideOnSp
+      )}
     >
       <div className={styles.boxHead}>
         <div className={styles.itemLogo}>

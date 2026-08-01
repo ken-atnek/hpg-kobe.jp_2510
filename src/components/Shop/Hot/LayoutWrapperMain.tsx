@@ -14,8 +14,10 @@ import ShopLeft from '@/components/common/ShopLeft';
 import { navMenu } from '@/data/hot/navMenuData';
 export default function LayoutWrapperMain({
   children,
+  hideShopLeftOnSp = false,
 }: {
   children: React.ReactNode;
+  hideShopLeftOnSp?: boolean;
 }) {
   const activeStoreClass = 'kbHot';
   return (
@@ -34,6 +36,7 @@ export default function LayoutWrapperMain({
         <main className={styles.shopMainContainer}>
           <ShopLeft
             shop="hot"
+            hideOnSp={hideShopLeftOnSp}
             photoDiaryUrl="https://blogparts.cityheaven.net/widget/?shopId=1684&mode=2&type=14&limitedKind=0&num=12&col=3&color=2&fontsize=12&width=340"
           />
           {children}
