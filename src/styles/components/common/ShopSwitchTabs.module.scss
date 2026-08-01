@@ -54,11 +54,23 @@
         &.kbVilla {
             --shop-color: #{$shop-color-villa-number};
         }
+        &.kbStyle {
+            --shop-color: #{$shop-color-style-number};
+        }
     }
     &.realtime {
         position: absolute;
         right: 0;
         top: 0;
+        @include sp {
+            padding-top: 2vw;
+            width: 100%;
+            gap: 0 0.6em;
+            padding-left: 0.2em;
+            a {
+                font-size: 0.8em;
+            }
+        }
     }
     &.cast {
         z-index: 3;
@@ -69,6 +81,22 @@
         justify-content: flex-end;
         @include sp {
             padding-top: 2vw;
+            width: 100%;
+            gap: 0 0.6em;
+            a {
+                font-size: 0.8em;
+            }
+        }
+    }
+    &.schedule {
+        @include sp {
+            padding-top: 2vw;
+            width: 100%;
+            padding-left: 0.2em;
+            gap: 0 0.6em;
+            a {
+                font-size: 0.8em;
+            }
         }
     }
 }
