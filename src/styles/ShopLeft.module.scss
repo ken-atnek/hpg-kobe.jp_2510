@@ -56,8 +56,10 @@
         font-size: inherit;
         padding-top: 8em;
         padding-bottom: 1em;
+        margin-top: 3rem;
         @include sp {
             padding: 24vw 2vw 4vw;
+            margin-top: unset;
         }
         .wrapTitle {
             display: none;
@@ -87,7 +89,7 @@
             font-size: inherit;
             iframe {
                 width: 100%;
-                aspect-ratio: 0.88;
+                aspect-ratio: 1/1.5;
             }
         }
     }
@@ -214,5 +216,10 @@
                 }
             }
         }
+    }
+}
+.hideOnSp {
+    @include sp {
+        display: none;
     }
 }

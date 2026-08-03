@@ -15,6 +15,11 @@ export const metadata: Metadata = {
   description: isRealProduction
     ? '神戸ホットポイントの出勤情報。出勤中のキャスト、待ち時間、キャンセル待ち状況を即時更新。三宮エリアで最も新鮮な情報をお届け。'
     : undefined,
+  ...(isRealProduction && {
+    alternates: {
+      canonical: '/style/weekly-schedule/',
+    },
+  }),
 };
 export default function HotWeeklySchedule() {
   return (

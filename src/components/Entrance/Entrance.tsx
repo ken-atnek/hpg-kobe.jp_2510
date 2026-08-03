@@ -7,7 +7,6 @@
  * ======================================= */
 'use client';
 import styles from '@/styles/Entrance.module.scss';
-import { useRouter } from 'next/navigation';
 import { usePathname } from 'next/navigation';
 import { setAgeVerifiedAsync, type AgeScope } from '@/lib/age';
 import EntranceCastList from '@/components/Entrance/CastList';
@@ -108,7 +107,6 @@ export default function Entrance({
   backPath: string;
   excludeStoreId?: string;
 }) {
-  const router = useRouter();
   const pathname = usePathname();
   const shop = getShopFromPath(pathname);
   const activeStoreClass = getStoreClass(shop);
@@ -129,7 +127,7 @@ export default function Entrance({
               setAgeVerifiedAsync('villa'),
               setAgeVerifiedAsync('global'),
             ]);
-            router.replace(backPath);
+            window.location.assign(new URL(backPath, window.location.origin));
           }}
         >
           yes

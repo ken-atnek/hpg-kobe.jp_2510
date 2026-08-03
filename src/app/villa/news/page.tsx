@@ -14,6 +14,11 @@ export const metadata: Metadata = {
   description: isRealProduction
     ? 'ホットポイントヴィラの料金システムをご案内。コース料金・指名料・延長・割引情報に加え、最寄駅からのアクセスマップも掲載。'
     : undefined,
+  ...(isRealProduction && {
+    alternates: {
+      canonical: '/villa/news/',
+    },
+  }),
 };
 
 export default function VillaNews() {
