@@ -46,6 +46,13 @@ export const navMenu = [
     target: true,
   },
   {
+    id: 'navEvent',
+    href: 'https://www.cityheaven.net/hyogo/A2802/A280201/koubehp/reviews/?of=y',
+    label: '口コミ',
+    labelEn: 'reviews',
+    target: true,
+  },
+  {
     id: 'navSystem',
     href: '/hot/system/',
     label: 'システム',

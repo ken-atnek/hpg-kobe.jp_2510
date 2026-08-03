@@ -346,6 +346,13 @@
                     }
                 }
             }
+            a {
+                @include sp {
+                    &.navSystem {
+                        grid-column: span 2;
+                    }
+                }
+            }
         }
     }
     &.kbVilla {
