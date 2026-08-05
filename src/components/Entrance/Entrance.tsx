@@ -143,6 +143,42 @@ export default function Entrance({
         >
           no
         </a>
+        {shop === 'hot' && (
+          <div className={styles.banHeaven}>
+            <a
+              href="https://www.cityheaven.net/hyogo/A2802/A280201/koubehp/?of=y2"
+              target="_blank"
+              rel="noopener noreferrer" // セキュリティ対策
+            >
+              <Image
+                src="https://img.cityheaven.net/img/kikaku/hy_memberdiary/wp-content/uploads/2023/09/HN遷移バナー_オフィシャル用.png"
+                alt="ヘブンネット公式サイトへ" // alt属性追加
+                width={600} // 適切なサイズ指定
+                height={100} // 適切なサイズ指定
+                style={{ width: '100%', height: 'auto' }} // レスポンシブ対応
+                loading="lazy" // 遅延読み込み
+              />
+            </a>
+            <a
+              href="https://yoasobi-heaven.com/en/hyogo/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Image
+                src="https://yoasobi-heaven.com/img/renewal/linklist/bn_yoasobi-heaven_200x40.jpg"
+                alt="ガールズヘブン求人サイトへ"
+                width={200}
+                height={400}
+                style={{
+                  width: '200px',
+                  height: 'auto',
+                  alignSelf: 'center',
+                }}
+                loading="lazy"
+              />
+            </a>
+          </div>
+        )}
         {shop === 'villa' && (
           <div className={styles.banHeaven}>
             <a
@@ -159,7 +195,6 @@ export default function Entrance({
                 loading="lazy" // 遅延読み込み
               />
             </a>
-
             <a
               href="https://www.girlsheaven-job.net/hyogo/ma-45/sa-460/koube_hp_part3/?of=y"
               target="_blank"
