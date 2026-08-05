@@ -92,6 +92,9 @@
         gap: 0 1.4em;
         margin-top: 2em;
         grid-template-rows: 1fr auto auto;
+        &:has(li:only-child) {
+            grid-template-columns: 1fr;
+        }
         @include sp {
             margin-top: 2vw;
             gap: 0 1vw;

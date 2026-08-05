@@ -51,7 +51,7 @@ export default function AreaTop() {
           <h2>news</h2>
           <BlockTelop />
         </section>
-        <ContainerShopList />
+        <ContainerShopList onlyHot />
         <section className={styles.containerContents}>
           <article className={styles.innerContainerContents}>
             <div className={styles.boxLeftBan}>

@@ -13,9 +13,17 @@ import clsx from 'clsx';
 
 type ContainerShopListProps = {
   activeStoreClass?: string;
+  onlyHot?: boolean;
 };
 
-const ContainerShopList = ({ activeStoreClass }: ContainerShopListProps) => {
+const ContainerShopList = ({
+  activeStoreClass,
+  onlyHot = false,
+}: ContainerShopListProps) => {
+  const displayShops = onlyHot
+    ? Shops.filter((shop) => shop.storeId === 'kbHot')
+    : Shops;
+
   return (
     <section
       className={clsx(
@@ -28,7 +36,7 @@ const ContainerShopList = ({ activeStoreClass }: ContainerShopListProps) => {
         <span>page top</span>
       </a>
       <ul>
-        {Shops.map(
+        {displayShops.map(
           (
             shopItem // shop → shopItem に変数名変更（重複回避）
           ) => (
